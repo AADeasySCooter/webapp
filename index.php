@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,14 +75,13 @@
                         // L'utilisateur est connecté
 
                         echo '<li class = "nav-item px-2 py-2">
-                                <a class = "nav-link text-uppercase text-dark" href = "#header">profile</a>
+                                <a class = "nav-link text-uppercase text-dark" href = "profile.php">profile</a>
                             </li>';
                         echo '<li class = "nav-item px-2 py-2">
                                     <a class = "nav-link text-uppercase text-dark" href = "#header">Disconection</a>
                              </li>';
 
                     }else{
-                       
                     }
                     
                     ?>
@@ -91,7 +93,11 @@
             </div>
         </div>
     </nav>
+    
+
     <!-- end of navbar -->
+     <!-- Visible only if logged in -->
+    
 
     <!-- header -->
     <header id = "header" class = "vh-100 carousel slide" data-bs-ride = "carousel" style = "padding-top: 104px;">
@@ -115,6 +121,7 @@
             <span class = "carousel-control-next-icon"></span>
         </button>
     </header>
+    <?php var_dump($_SESSION['email']); ?>
     <!-- end of header -->
 
     <!-- collection -->

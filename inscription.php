@@ -1,3 +1,7 @@
+<?php 
+
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,7 +75,7 @@
                         // L'utilisateur est connecté
 
                         echo '<li class = "nav-item px-2 py-2">
-                                <a class = "nav-link text-uppercase text-dark" href = "#header">profile</a>
+                                <a class = "nav-link text-uppercase text-dark" href = "profile.php">profile</a>
                             </li>';
                         echo '<li class = "nav-item px-2 py-2">
                                     <a class = "nav-link text-uppercase text-dark" href = "#header">Disconection</a>
@@ -110,21 +114,19 @@
 
 							<div class="mb-3">
 							<label class="form-label">Firstname</label>
-								<input type="text" name="Firstname" class="form-control" placeholder="Firstname " >
+								<input type="text" name="firstname" class="form-control" placeholder="firstname " >
 							</div>
                             <label class="form-label">Lastname</label>
-								<input type="text" name="Lastname" class="form-control" placeholder="Lastname " >
+								<input type="text" name="lastname" class="form-control" placeholder="lastname " >
 							</div>
 							<div class="mb-3">
 							<label class="form-label">email</label>
-								<input type="email" name="email" class="form-control" placeholder="Votre email" value="<?php echo isset($_COOKIE['email']) ? $_COOKIE['email'] : ''; ?>">
+								<input type="email" name="email" class="form-control" placeholder="your email" value="<?php echo isset($_COOKIE['email']) ? $_COOKIE['email'] : ''; ?>">
 							</div>
 							<div class="mb-3">
 							<label class="form-label">password</label>
 								<input type="password" name="password" class="form-control" placeholder="Votre mot de passe">
 							</div>
-							<div class="g-recaptcha" data-sitekey="6LdzzmwfAAAAAJsAajlJQ2rbE3JXH6eK799uLz0l"></div>
-								<input type="file" name="image" class="btn btn-outline-light" accept="image/gif, image/png, image/jpeg">
 								<input type="submit" class="btn btn-primary" value="S'inscrire" >
 							</form>
 

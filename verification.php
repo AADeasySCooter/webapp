@@ -1,6 +1,5 @@
 <?php
 
-// Les informations reçues du formulaire se trouvent dans $_POST
 //var_dump($_POST);
 
 
@@ -32,9 +31,9 @@ if(isset($_POST['email']) && !empty($_POST['email'])){
 
 
 // Si email ou password vide > redirection vers le formulaire
-if(!isset($_POST['email']) || empty($_POST['email']) || !isset($_POST['password']) || empty($_POST['password']) || !isset($_POST['username']) || empty($_POST['username'])){
+if(!isset($_POST['email']) || empty($_POST['email']) || !isset($_POST['password']) || empty($_POST['password'])){
 	// Rediriger vers la page connexion avec une erreur
-	header('location:connexion.php?message=Vous devez remplir les 3 champs.&type=danger');
+	header('location:connexion.php?message=Vous devez remplir les 2 champs.&type=danger');
 	exit;
 }
 
@@ -45,9 +44,7 @@ if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
 	exit;
 }
 
-// Vérifier dans la base de données si le compte existe
 
-// Connexion à la base de données
 include('includes/db.php');
 
 // Sélectionner l'utilisateur avec cet email et ce mot de passe
@@ -58,11 +55,10 @@ $req->execute([
 	'password' => hash('sha256', $_POST['password'])  // Même méthode de hachge que lors de la création de compte
 ]);
 
-$reponse = $req->fetch(); // renvoie la premiere ligne de résultat ou false si aucun résultat
+$reponse = $req->fetch();
 
 if($reponse === false){
-	// Pas de user trouvé
-	// Rediriger vers la page connexion avec une erreur
+
 	header('location:connexion.php?message=Identifiants incorrects.&type=danger');
 	exit;
 }else{

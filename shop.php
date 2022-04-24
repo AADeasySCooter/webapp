@@ -1,4 +1,7 @@
-<?php include('includes/db.php');
+<?php 
+ 
+session_start();
+include('includes/db.php');
 
 $getProduct = $bdd->query("SELECT * FROM product ORDER BY created_at DESC LIMIT 20");
 

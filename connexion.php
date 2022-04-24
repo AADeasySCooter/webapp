@@ -1,3 +1,7 @@
+<?php 
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,19 +69,22 @@
                     <li class = "nav-item px-2 py-2 border-0">
                         <a class = "nav-link text-uppercase text-dark" href = "connexion.php">sign up/in</a>
                     </li>
-
+                    
                         <?php
+                       
                     if(isset($_SESSION['email'])){
                         // L'utilisateur est connecté
+                        
 
                         echo '<li class = "nav-item px-2 py-2">
-                                <a class = "nav-link text-uppercase text-dark" href = "#header">profile</a>
+                                <a class = "nav-link text-uppercase text-dark" href = "profile.php">profile</a>
                             </li>';
                         echo '<li class = "nav-item px-2 py-2">
                                     <a class = "nav-link text-uppercase text-dark" href = "#header">Disconection</a>
                                 </li>';
 
                     }else{
+                       
                        
                     }
                     
@@ -94,6 +101,7 @@
 
     
 	<body>
+        
 
     <section id = "collection" class = "py-5">
         <div class = "container">
@@ -112,7 +120,7 @@
                         <div class="row">
 					
                     <div class="course-col">
-                           <form method="post" action="verification.php" enctype="multipart/form-data" class="form1">
+                           <form  method="post" action="verification.php" enctype="multipart/form-data" class="form1">
 
                            
                            <div class="mb-3">
