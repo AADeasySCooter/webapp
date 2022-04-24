@@ -1,3 +1,11 @@
+<?php include('includes/db.php');
+
+$getProduct = $bdd->query("SELECT * FROM product ORDER BY created_at DESC LIMIT 20");
+
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -106,109 +114,12 @@
                 </div>-->
 
                 <div class = "collection-list mt-4 row gx-0 gy-3">
-                    <div class = "col-md-6 col-lg-4 col-xl-3 p-2 best">
-                        <div class = "collection-img position-relative">
-                            <img src = "images/c_formal_gray_shirt.png" class = "w-100">
-                        </div>
-                        <div class = "text-center">
-                            <div class = "rating mt-3">
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                            </div>
-                            <p class = "text-capitalize my-1">gray shirt</p>
-                            <span class = "fw-bold">$ 45.50</span>
-                        </div>
-                    </div>
+                   
 
-                    <div class = "col-md-6 col-lg-4 col-xl-3 p-2 feat">
-                        <div class = "collection-img position-relative">
-                            <img src = "images/c_pant_girl.png" class = "w-100">
-                        </div>
-                        <div class = "text-center">
-                            <div class = "rating mt-3">
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                            </div>
-                            <p class = "text-capitalize my-1">gray shirt</p>
-                            <span class = "fw-bold">$ 45.50</span>
-                        </div>
-                    </div>
-
-                    <div class = "col-md-6 col-lg-4 col-xl-3 p-2 new">
-                        <div class = "collection-img position-relative">
-                            <img src = "images/c_polo-shirt.png" class = "w-100">
-                        </div>
-                        <div class = "text-center">
-                            <div class = "rating mt-3">
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                            </div>
-                            <p class = "text-capitalize my-1">gray shirt</p>
-                            <span class = "fw-bold">$ 45.50</span>
-                        </div>
-                    </div>
-
-                    <div class = "col-md-6 col-lg-4 col-xl-3 p-2 best">
-                        <div class = "collection-img position-relative">
-                            <img src = "images/c_shirt-girl.png" class = "w-100">
-                        </div>
-                        <div class = "text-center">
-                            <div class = "rating mt-3">
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                            </div>
-                            <p class = "text-capitalize my-1">gray shirt</p>
-                            <span class = "fw-bold">$ 45.50</span>
-                        </div>
-                    </div>
-
-                    <div class = "col-md-6 col-lg-4 col-xl-3 p-2 feat">
-                        <div class = "collection-img position-relative">
-                            <img src = "images/c_t-shirt_men.png" class = "w-100">
-                        </div>
-                        <div class = "text-center">
-                            <div class = "rating mt-3">
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                            </div>
-                            <p class = "text-capitalize my-1">gray shirt</p>
-                            <span class = "fw-bold">$ 45.50</span>
-                        </div>
-                    </div>
-
-                    <div class = "col-md-6 col-lg-4 col-xl-3 p-2 new">
-                        <div class = "collection-img position-relative">
-                            <img src = "images/c_tunic-shirt_girl.png" class = "w-100">
-                        </div>
-                        <div class = "text-center">
-                            <div class = "rating mt-3">
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                            </div>
-                            <p class = "text-capitalize my-1">gray shirt</p>
-                            <span class = "fw-bold">$ 45.50</span>
-                        </div>
-                    </div>
-
-                    <div class = "col-md-6 col-lg-4 col-xl-3 p-2 best">
+          
+                        
+                       
+                    <!--<div class = "col-md-6 col-lg-4 col-xl-3 p-2 best">
                         <div class = "collection-img position-relative">
                             <img src = "images/c_undershirt.png" class = "w-100">
                         </div>
@@ -223,24 +134,29 @@
                             <p class = "text-capitalize my-1">gray shirt</p>
                             <span class = "fw-bold">$ 45.50</span>
                         </div>
-                    </div>
-
-                    <div class = "col-md-6 col-lg-4 col-xl-3 p-2 feat">
-                        <div class = "collection-img position-relative">
-                            <img src = "images/c_western-shirt.png" class = "w-100">
-                        </div>
-                        <div class = "text-center">
-                            <div class = "rating mt-3">
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                            </div>
-                            <p class = "text-capitalize my-1">gray shirt</p>
-                            <span class = "fw-bold">$ 45.50</span>
-                        </div>
-                    </div>
+                    </div>-->
+                    <?php 
+                                $getProduct = $bdd->query("SELECT * FROM product ORDER BY created_at DESC LIMIT 10");
+                                while($product = $getProduct->fetch()){ ?>
+                                    <div class = "col-md-6 col-lg-4 col-xl-3 p-2 feat">
+                                        <div class = "collection-img position-relative">
+                                        <?php echo '<img src="images/' . $product['product_image'] . '" alt="Image du produit" class = "w-100"  >' ?>
+                                        </div>
+                                        <div class = "text-center">
+                                                
+                                            <div class = "rating mt-3">
+                                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                            </div>
+                                            <p class = "text-capitalize my-1"><?= $product['product_name'] ;?></p>
+                                            <span class = "fw-bold">€ <?=  $product['product_price'] ;?></span>
+                                        </div>
+                                    </div>
+                              <?php
+                                } ?>
                 </div>
             </div>
         </div>
