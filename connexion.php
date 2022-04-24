@@ -50,42 +50,37 @@ session_start();
             <div class = "collapse navbar-collapse order-lg-1" id = "navMenu">
                 <ul class = "navbar-nav mx-auto text-center">
 
-                <li class = "nav-item px-2 py-2">
-                        <a class = "nav-link text-uppercase text-dark" href = "index.php">home</a>
-                    </li>
-                    <li class = "nav-item px-2 py-2">
-                        <a class = "nav-link text-uppercase text-dark" href = "#collection">collection</a>
-                    </li>
-                    <li class = "nav-item px-2 py-2 border-0">
-                        <a class = "nav-link text-uppercase text-dark" href = "shop.php">shop</a>
-                    </li>
-                    
-                    <li class = "nav-item px-2 py-2">
-                        <a class = "nav-link text-uppercase text-dark" href = "#blogs">blogs</a>
-                    </li>
-                    <li class = "nav-item px-2 py-2">
-                        <a class = "nav-link text-uppercase text-dark" href = "#about">about us</a>
-                    </li>
-                    <li class = "nav-item px-2 py-2 border-0">
-                        <a class = "nav-link text-uppercase text-dark" href = "connexion.php">sign up/in</a>
-                    </li>
-                    
-                        <?php
-                       
+                <?php
                     if(isset($_SESSION['email'])){
                         // L'utilisateur est connecté
-                        
-
+                        echo '<li class = "nav-item px-2 py-2">
+                                <a class = "nav-link text-uppercase text-dark" href = "index.php">home</a>
+                            </li>';
+                        echo '<li class = "nav-item px-2 py-2">
+                                    <a class = "nav-link text-uppercase text-dark" href = "shop.php">shop</a>
+                             </li>';
                         echo '<li class = "nav-item px-2 py-2">
                                 <a class = "nav-link text-uppercase text-dark" href = "profile.php">profile</a>
                             </li>';
                         echo '<li class = "nav-item px-2 py-2">
                                     <a class = "nav-link text-uppercase text-dark" href = "#header">Disconection</a>
-                                </li>';
+                             </li>';
+                         
 
                     }else{
-                       
-                       
+                        ?>
+                        <li class = "nav-item px-2 py-2">
+                        <a class = "nav-link text-uppercase text-dark" href = "index.php">home</a>
+                    </li>
+                   
+                    <li class = "nav-item px-2 py-2 border-0">
+                        <a class = "nav-link text-uppercase text-dark" href = "shop.php">shop</a>
+                    </li>
+                   
+                    <li class = "nav-item px-2 py-2 border-0">
+                        <a class = "nav-link text-uppercase text-dark" href = "connexion.php">sign up/in</a>
+                    </li>
+                    <?php
                     }
                     
                     ?>
@@ -120,21 +115,36 @@ session_start();
                         <div class="row">
 					
                     <div class="course-col">
-                           <form  method="post" action="verification.php" enctype="multipart/form-data" class="form1">
+                             <?php
+                            if(isset($_SESSION['email'])){
+                                // L'utilisateur est connecté
+                                
+
+                                echo 'already logged';
+                                
+
+                            }else{
+                                ?>
+                                 <form  method="post" action="verification.php" enctype="multipart/form-data" class="form1">
+                                    <div class="mb-3">
+                                    <label class="form-label">Votre email</label>
+                                        <input type="email" name="email" class="form-control" placeholder="Votre email" value="<?php echo isset($_COOKIE['email']) ? $_COOKIE['email'] : ''; ?>">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label class="form-label">Votre mot de passe</label>
+                                        <input type="password" name="password" class="form-control" placeholder="Votre mot de passe">
+                                    </div>
+                                    <div class="g-recaptcha" data-sitekey="6LdzzmwfAAAAAJsAajlJQ2rbE3JXH6eK799uLz0l"></div>
+                                        <input type="submit" class="btn btn-primary" value="sign in" >
+                                        <a href="inscription.php">sign up</a>
+                                    </form>
+                            <?php 
+
+                            }
+                            
+                            ?>
 
                            
-                           <div class="mb-3">
-                           <label class="form-label">Votre email</label>
-                               <input type="email" name="email" class="form-control" placeholder="Votre email" value="<?php echo isset($_COOKIE['email']) ? $_COOKIE['email'] : ''; ?>">
-                           </div>
-                           <div class="mb-3">
-                           <label class="form-label">Votre mot de passe</label>
-                               <input type="password" name="password" class="form-control" placeholder="Votre mot de passe">
-                           </div>
-                           <div class="g-recaptcha" data-sitekey="6LdzzmwfAAAAAJsAajlJQ2rbE3JXH6eK799uLz0l"></div>
-                               <input type="submit" class="btn btn-primary" value="sign in" >
-                               <a href="inscription.php">sign up</a>
-                           </form>
 
                       </div>
                

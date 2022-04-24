@@ -50,39 +50,37 @@ session_start();
             <div class = "collapse navbar-collapse order-lg-1" id = "navMenu">
                 <ul class = "navbar-nav mx-auto text-center">
 
-                <li class = "nav-item px-2 py-2">
-                        <a class = "nav-link text-uppercase text-dark" href = "index.php">home</a>
-                    </li>
-                    <li class = "nav-item px-2 py-2">
-                        <a class = "nav-link text-uppercase text-dark" href = "#collection">collection</a>
-                    </li>
-                    <li class = "nav-item px-2 py-2 border-0">
-                        <a class = "nav-link text-uppercase text-dark" href = "shop.php">shop</a>
-                    </li>
-                    
-                    <li class = "nav-item px-2 py-2">
-                        <a class = "nav-link text-uppercase text-dark" href = "#blogs">blogs</a>
-                    </li>
-                    <li class = "nav-item px-2 py-2">
-                        <a class = "nav-link text-uppercase text-dark" href = "#about">about us</a>
-                    </li>
-                    <li class = "nav-item px-2 py-2 border-0">
-                        <a class = "nav-link text-uppercase text-dark" href = "connexion.php">sign up/in</a>
-                    </li>
-
-                        <?php
+                <?php
                     if(isset($_SESSION['email'])){
                         // L'utilisateur est connecté
-
+                        echo '<li class = "nav-item px-2 py-2">
+                                <a class = "nav-link text-uppercase text-dark" href = "index.php">home</a>
+                            </li>';
+                        echo '<li class = "nav-item px-2 py-2">
+                                    <a class = "nav-link text-uppercase text-dark" href = "shop.php">shop</a>
+                             </li>';
                         echo '<li class = "nav-item px-2 py-2">
                                 <a class = "nav-link text-uppercase text-dark" href = "profile.php">profile</a>
                             </li>';
                         echo '<li class = "nav-item px-2 py-2">
                                     <a class = "nav-link text-uppercase text-dark" href = "#header">Disconection</a>
-                                </li>';
+                             </li>';
+                         
 
                     }else{
-                       
+                        ?>
+                        <li class = "nav-item px-2 py-2">
+                        <a class = "nav-link text-uppercase text-dark" href = "index.php">home</a>
+                    </li>
+                   
+                    <li class = "nav-item px-2 py-2 border-0">
+                        <a class = "nav-link text-uppercase text-dark" href = "shop.php">shop</a>
+                    </li>
+                   
+                    <li class = "nav-item px-2 py-2 border-0">
+                        <a class = "nav-link text-uppercase text-dark" href = "connexion.php">sign up/in</a>
+                    </li>
+                    <?php
                     }
                     
                     ?>
