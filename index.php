@@ -1,5 +1,8 @@
 <?php 
 session_start();
+include('includes/db.php');
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -123,6 +126,13 @@ session_start();
         </button>
     </header>
     <?php var_dump($_SESSION['email']); ?>
+    <?php  
+
+    
+ $ses_sql=mysql_query("select email from retailerregister where email='$user_check'", $connection);
+    
+    
+     ?>
     <!-- end of header -->
 
     <!-- collection -->
