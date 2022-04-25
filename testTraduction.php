@@ -1,5 +1,5 @@
 <?php
-    include "config.php";
+    include "config_traduction.php";
 ?>
 <!doctype html>
 <html lang="en">
