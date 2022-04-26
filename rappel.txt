@@ -1,0 +1,1 @@
+use redirect for customer want acces to "Admin" with url to redicrect to 404 file

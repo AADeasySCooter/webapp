@@ -60,7 +60,7 @@
 
 
                                         echo '<li class = "nav-item px-2 py-2">
-                                                <a class = "nav-link text-uppercase text-dark" href = "">Admin Pannel</a>
+                                                <a class = "nav-link text-uppercase text-dark" href = "Adminpage.php">Admin Pannel</a>
                                         </li>';
                                 
                                    
