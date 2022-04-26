@@ -129,7 +129,7 @@ include('includes/db.php');
                
                <div class = "row g-3">
                 <div class = "card border-0 col-md-6 col-lg-4 bg-transparent my-3">
-                   <?php echo '<img src="images/' . $article['image'] . '" alt="Image du produit"  >' ?>
+                   <?php echo '<img src="images/' . $article['image'] . '" alt="Image du produit" style="height:200px;width:200px;" >' ?>
                     <div class = "card-body px-0">
                         <h4 class = "card-title"><?= $article['title'] ;?></h4>
                         <p class = "card-text mt-3 text-muted"><?= $article['description'] ;?></p>
