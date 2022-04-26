@@ -5,7 +5,6 @@
  
 include('includes/db.php');
 if(isset($_SESSION['email'])){
-    $getid =  trim($_SESSION['email']);
     $recupProfil =$bdd->prepare("SELECT * FROM users WHERE email= '".$_SESSION['email']."'");     
     $recupProfil->execute();
     $voirProfil =$recupProfil->fetch();
@@ -14,12 +13,15 @@ if(isset($_SESSION['email'])){
 
 
         header('location : profile.php');
+
+        
+        
    
    }
 
 
 
-}else{
+    }else{
    echo"Aucun id trouvé";
    header("Location: index.php");
 
@@ -46,8 +48,27 @@ if(isset($_SESSION['email'])){
                nom  : <?= $voirProfil['lastname'] ?>
            </div> 
            <div>
-               role : <?= $voirProfil['role_id'] ?>
+               role : <?php if (isset($_SESSION['email'])){
+                                    $getid =  trim($_SESSION['email']);
+                                    $recupProfil =$bdd->prepare("SELECT * FROM users WHERE email= '".$_SESSION['email']."'");     
+                                    $recupProfil->execute();
+                                    $voirProfil =$recupProfil->fetch();
+                                    if(isset($voirProfil['role_id']) == 3){
+
+
+                                        echo ' ADMINISTRATOR';
+                                    }else if(isset($voirProfil['role_id']) == 2){
+                                        echo ' ADMINISTRATOR';
+                                    }else{
+
+                                    }
+                                
+                                   
+                                
+                                }
+                ?>
               </div>
+              
               <div>
                email : <?= $voirProfil['email'] ?>
               </div>

@@ -49,6 +49,25 @@
                         echo '<li class = "nav-item px-2 py-2">
                                     <a class = "nav-link text-uppercase text-dark" href = "deconnexion.php">Disconection</a>
                              </li>';
+
+                             
+                                if (isset($_SESSION['email'])){
+                                    $getid =  trim($_SESSION['email']);
+                                    $recupProfil =$bdd->prepare("SELECT * FROM users WHERE email= '".$_SESSION['email']."'");     
+                                    $recupProfil->execute();
+                                    $voirProfil =$recupProfil->fetch();
+                                    if(isset($voirProfil['role_id']) == 3){
+
+
+                                        echo '<li class = "nav-item px-2 py-2">
+                                                <a class = "nav-link text-uppercase text-dark" href = "">Admin Pannel</a>
+                                        </li>';
+                                
+                                   
+                                
+                                }
+                                }
+                      
                          
 
                     }else{
@@ -68,6 +87,7 @@
                     }
                     
                     ?>
+                      
 
 
 
