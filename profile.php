@@ -1,11 +1,13 @@
 <?php 
+    include('includes/head.php');
+    include('includes/header.php');
+
  
-session_start();
 include('includes/db.php');
-if(isset($_GET['id']) AND !empty($_GET['id'])){
-    $getid =  trim($_GET['id']);
-    $recupProfil = $bdd->prepare('SELECT * FROM utilisateurs WHERE id = ?');
-    $recupProfil->execute(array($getid));
+if(isset($_SESSION['email'])){
+    $getid =  trim($_SESSION['email']);
+    $recupProfil =$bdd->prepare("SELECT * FROM users WHERE email= '".$_SESSION['email']."'");     
+    $recupProfil->execute();
     $voirProfil =$recupProfil->fetch();
 
     if(!isset($voirProfil['id'])){
@@ -19,7 +21,7 @@ if(isset($_GET['id']) AND !empty($_GET['id'])){
 
 }else{
    echo"Aucun id trouvé";
-   header("Location: indexx.php");
+   header("Location: index.php");
 
 }
 
@@ -35,16 +37,16 @@ if(isset($_GET['id']) AND !empty($_GET['id'])){
     <title>Profil de <?= $voirProfil['email'] ?></title>
 </head>
 <body>
-    <div class="container">
+    <div class="container"></br></br></br></br></br></br></br></br>
      <div class="row">
            <div>
-               nom : <?= $voirProfil['nom'] ?>
+                prenom: <?= $voirProfil['firstname'] ?>
            </div>
            <div>
-               prenom : <?= $voirProfil['prenom'] ?>
+               nom  : <?= $voirProfil['lastname'] ?>
            </div> 
            <div>
-               age : <?= $voirProfil['age'] ?>
+               role : <?= $voirProfil['role_id'] ?>
               </div>
               <div>
                email : <?= $voirProfil['email'] ?>
