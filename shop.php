@@ -114,51 +114,46 @@ $getProduct = $bdd->query("SELECT * FROM product ORDER BY created_at DESC LIMIT 
                     <button type = "button" class = "btn m-2 text-dark" data-filter = ".new">New Arrival</button>
                 </div>-->
 
-                <div class = "collection-list mt-4 row gx-0 gy-3">
+            <div class = "collection-list mt-4 row gx-0 gy-3">
+                
                    
-
-          
-                        
-                       
-                    <!--<div class = "col-md-6 col-lg-4 col-xl-3 p-2 best">
-                        <div class = "collection-img position-relative">
-                            <img src = "images/c_undershirt.png" class = "w-100">
-                        </div>
-                        <div class = "text-center">
-                            <div class = "rating mt-3">
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                            </div>
-                            <p class = "text-capitalize my-1">gray shirt</p>
-                            <span class = "fw-bold">$ 45.50</span>
-                        </div>
-                    </div>-->
-                    <?php 
-                                $getProduct = $bdd->query("SELECT * FROM product ORDER BY created_at DESC LIMIT 10");
-                                while($product = $getProduct->fetch()){ ?>
-                                    <div class = "col-md-6 col-lg-4 col-xl-3 p-2 feat">
-                                        <div class = "collection-img position-relative">
-                                        <?php echo '<img src="images/' . $product['product_image'] . '" alt="Image du produit" class = "w-100"  >' ?>
-                                        </div>
-                                        <div class = "text-center">
-                                                
-                                            <div class = "rating mt-3">
-                                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                            </div>
-                                            <p class = "text-capitalize my-1"><?= $product['product_name'] ;?></p>
-                                            <span class = "fw-bold">€ <?=  $product['product_price'] ;?></span>
-                                        </div>
+                <?php 
+                            $getProduct = $bdd->query("SELECT * FROM product ORDER BY created_at DESC LIMIT 8");
+                            while($product = $getProduct->fetch()){ ?>
+                                <div class = "col-md-6 col-lg-4 col-xl-3 p-2 feat">
+                                <div class="card mb-2">
+                                    <div class = "collection-img position-relative">
+                                    <?php echo '<img src="images/' . $product['product_image'] . '" alt="Image du produit" class = "w-100"  >' ?>
                                     </div>
-                              <?php
-                                } ?>
-                </div>
+                                    <div class = "text-center">
+                                            
+                                        <div class = "rating mt-3">
+                                            <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                            <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                            <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                            <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                            <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                        </div>
+                                        <p class = "text-capitalize my-1"><?= $product['product_name'] ;?></p>
+                                        <span class = "fw-bold">€ <?=  $product['product_price'] ;?></span>
+                                         <div class="col-md-6">
+                                            <button type="button"
+                                                class="btn btn-primary btn-sm btn-block"
+                                                id="addToCart-1" onclick="addToCart(1)">
+                                                <span class="glyphicon glyphicon-shopping-cart"
+                                                    aria-hidden="true"></span> ADD TO CART
+                                            </button>
+                                         </div>
+                                    </div>
+                                </div>
+                                </div>
+                          <?php
+                            } ?>
+
+                            
+            </div>
+
+    
             </div>
         </div>
     </section>
