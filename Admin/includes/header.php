@@ -80,7 +80,7 @@
               </div>
             </li>
             <li>
-              <a href="#" class="nav-link px-3 active">
+              <a href="index.php" class="nav-link px-3 active">
                 <span class="me-2"><i class="bi bi-speedometer2"></i></span>
                 <span>Dashboard</span>
               </a>
@@ -92,19 +92,118 @@
               </div>
             </li>
             <li>
+              <a href="#" class="nav-link px-3">
+                <!--<span class="me-2"><i class="bi bi-graph-up"></i></span>-->
+                <span>Home</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link px-3">
+                <!--<span class="me-2"><i class="bi bi-book-fill"></i></span>-->
+                <span>Pages</span>
+              </a>
+            </li>
+            <li>
+              <a href="addProduct.php" class="nav-link px-3">
+                <!--<span class="me-2"><i class="bi bi-book-fill"></i></span>-->
+                <span>Add product</span>
+              </a>
+            </li>
+            
+            <li>
               <a
                 class="nav-link px-3 sidebar-link"
                 data-bs-toggle="collapse"
-                href="#layouts"
+                href="#Article"
               >
                 <span class="me-2"><i class="bi bi-layout-split"></i></span>
-                <span>Layouts</span>
+                <span>Articles</span>
                 <span class="ms-auto">
                   <span class="right-icon">
                     <i class="bi bi-chevron-down"></i>
                   </span>
                 </span>
               </a>
+              <div class="collapse" id="Article">
+                <ul class="navbar-nav ps-3">
+                  <li>
+                    <a href="addArticle.php" class="nav-link px-3">
+                      <span class="me-2"
+                        ><i class="bi bi-speedometer2"></i
+                      ></span>
+                      <span>Add article</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="editArticle.php" class="nav-link px-3">
+                      <span class="me-2"
+                        ><i class="bi bi-speedometer2"></i
+                      ></span>
+                      <span>Edit article</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="addArticle.php" class="nav-link px-3">
+                      <span class="me-2"
+                        ><i class="bi bi-speedometer2"></i
+                      ></span>
+                      <span>Delete article</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li>
+              <a
+                class="nav-link px-3 sidebar-link"
+                data-bs-toggle="collapse"
+                href="#Product"
+              >
+                <span class="me-2"><i class="bi bi-layout-split"></i></span>
+                <span>Products</span>
+                <span class="ms-auto">
+                  <span class="right-icon">
+                    <i class="bi bi-chevron-down"></i>
+                  </span>
+                </span>
+              </a>
+              <div class="collapse" id="Product">
+                <ul class="navbar-nav ps-3">
+                  <li>
+                    <a href="addProduct.php" class="nav-link px-3">
+                      <span class="me-2"
+                        ><i class="bi bi-speedometer2"></i
+                      ></span>
+                      <span>Add Product</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="editProduct.php" class="nav-link px-3">
+                      <span class="me-2"
+                        ><i class="bi bi-speedometer2"></i
+                      ></span>
+                      <span>Edit Product</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="addArticle.php" class="nav-link px-3">
+                      <span class="me-2"
+                        ><i class="bi bi-speedometer2"></i
+                      ></span>
+                      <span>Delete Product</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+           
+           
+            
+          </ul>
+        </nav>
+      </div>
+    </div>
 
               <script src="./js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>

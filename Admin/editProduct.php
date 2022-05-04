@@ -1,18 +1,15 @@
-<?php
-include('includes/head.php');
-include('includes/header.php');
-?>
+<?php 
+ include('includes/db.php');
+ include('includes/head.php');
+ include('includes/header.php');
 
-<!DOCTYPE html>
+ ?>
+ <!DOCTYPE html>
 
-<main class="mt-5 pt-3">
+ <main class="mt-5 pt-3">
      <div class="container-fluid">
          <!--add div here-->
-        <div class="row">
-          <div class="col-md-12">
-            <h4>Dashboard</h4>
-          </div>
-        </div>
+        
         <div class="row">
                 <div class="col-md-12 mb-3">
                     <div class="card">
@@ -36,15 +33,15 @@ include('includes/header.php');
                             </tr>
                             </thead>
                             <tbody>
-                            <?php   $getProduct = $bdd->query("SELECT * FROM users "); 
+                            <?php   $getProduct = $bdd->query("SELECT * FROM product ORDER BY created_at "); 
                             
                             while($product = $getProduct->fetch()){ ?>
                             <tr>
                             
 
                                 <td><?= $product['id'] ;?></td>
-                                <td><?= $product['firstname'] ;?></td>
-                                <td><?= $product['email'] ;?></td>
+                                <td><?= $product['product_name'] ;?></td>
+                                <td><?= $product['created_at'] ;?></td>
                                 <td>61</td>
                                
                             

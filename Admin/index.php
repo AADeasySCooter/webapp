@@ -6,38 +6,7 @@ include('includes/header.php');
 <!DOCTYPE html>
 
   
-              <div class="collapse" id="layouts">
-                <ul class="navbar-nav ps-3">
-                  <li>
-                    <a href="#" class="nav-link px-3">
-                      <span class="me-2"
-                        ><i class="bi bi-speedometer2"></i
-                      ></span>
-                      <span>Dashboard</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li>
-              <a href="#" class="nav-link px-3">
-                <!--<span class="me-2"><i class="bi bi-graph-up"></i></span>-->
-                <span>Home</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link px-3">
-                <!--<span class="me-2"><i class="bi bi-book-fill"></i></span>-->
-                <span>Pages</span>
-              </a>
-            </li>
-           
-           
-            
-          </ul>
-        </nav>
-      </div>
-    </div>
+              
     <!-- offcanvas -->
     <main class="mt-5 pt-3">
       <div class="container-fluid">
@@ -50,8 +19,9 @@ include('includes/header.php');
           <div class="col-md-3 mb-3">
             <div class="card bg-primary text-white h-100">
               <div class="card-body py-5">Users</div>
-              <div class="card-footer d-flex"><a href="usersAll.php" background-color="white">View Details</a>
-                
+              <div class="card-footer d-flex">
+                <a href="usersAll.php" style="color:white; text-decoration: none;">
+                View Details</a>  
                 <span class="ms-auto">
                   <i class="bi bi-chevron-right"></i>
                 </span>
@@ -62,7 +32,8 @@ include('includes/header.php');
             <div class="card bg-warning text-dark h-100">
               <div class="card-body py-5">Users none confirmation</div>
               <div class="card-footer d-flex">
-                View Details
+              <a href="usersAll.php" style="color:white; text-decoration: none;">
+                View Details</a>
                 <span class="ms-auto">
                   <i class="bi bi-chevron-right"></i>
                 </span>
@@ -73,7 +44,8 @@ include('includes/header.php');
             <div class="card bg-success text-white h-100">
               <div class="card-body py-5">Users connected</div>
               <div class="card-footer d-flex">
-                View Details
+              <a href="usersCon.php" style="color:white; text-decoration: none;">
+                View Details</a>
                 <span class="ms-auto">
                   <i class="bi bi-chevron-right"></i>
                 </span>
@@ -84,7 +56,8 @@ include('includes/header.php');
             <div class="card bg-danger text-white h-100">
               <div class="card-body py-5">User blocked</div>
               <div class="card-footer d-flex">
-                View Details
+              <a href="usersBlo.php" style="color:white; text-decoration: none;">
+                View Details</a>
                 <span class="ms-auto">
                   <i class="bi bi-chevron-right"></i>
                 </span>
@@ -97,7 +70,7 @@ include('includes/header.php');
           <div class="col-md-12 mb-3">
             <div class="card">
               <div class="card-header">
-                <span><i class="bi bi-table me-2"></i></span> Data Table
+                <span><i class="bi bi-table me-2"></i></span> Users order
               </div>
               <div class="card-body">
                 <div class="table-responsive">
