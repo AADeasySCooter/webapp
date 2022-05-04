@@ -23,8 +23,8 @@ include('includes/head.php');
 <style>
     body {
     background: #2E95EF;
-    background-image: -moz-radial-gradient(center 45deg,circle cover, #9BD1FF, #2E95EF);
-    background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%,800, from(#9BD1FF), to(#2E95EF));
+    background-image: -moz-radial-gradient(center 45deg,circle cover, #e5345b, #2E95EF);
+    background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%,800, from(#e5345b), to(#2E95EF));
     padding-top: 15%;
 }
 .img-error{
