@@ -80,7 +80,7 @@
               </div>
             </li>
             <li>
-              <a href="index.php" class="nav-link px-3 active">
+              <a href="iindex.php" class="nav-link px-3 active">
                 <span class="me-2"><i class="bi bi-speedometer2"></i></span>
                 <span>Dashboard</span>
               </a>

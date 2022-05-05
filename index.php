@@ -1,4 +1,5 @@
 <?php 
+
 include('includes/head.php');
 include('includes/header.php');
 include('includes/db.php');
@@ -156,18 +157,24 @@ include('includes/db.php');
     <!-- about us -->
     <section id = "about" class = "py-5">
         <div class = "container">
+        <?php 
+                $getArticle = $bdd->query("SELECT * FROM About");
+                while($about = $getArticle->fetch()){ ?>
+
             <div class = "row gy-lg-5 align-items-center">
                 <div class = "col-lg-6 order-lg-1 text-center text-lg-start">
                     <div class = "title pt-3 pb-5">
-                        <h2 class = "position-relative d-inline-block ms-4">About Us</h2>
+                        <h2 class = "position-relative d-inline-block ms-4"><?= $about['title'] ;?></h2>
                     </div>
-                    <p class = "lead text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, ipsam.</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem fuga blanditiis, modi exercitationem quae quam eveniet! Minus labore voluptatibus corporis recusandae accusantium velit, nemo, nobis, nulla ullam pariatur totam quos.</p>
+                    <p class = "lead text-muted"><?= $about['description'] ;?></p>
+                    <p><?= $about['description2'] ;?></p>
                 </div>
                 <div class = "col-lg-6 order-lg-0">
-                    <img src = "images/about_us.jpg" alt = "" class = "img-fluid">
+                    <?php echo '<img src="images/' . $about['image'] . '" alt="Image du produit" class = "img-fluid"  >' ?>
                 </div>
             </div>
+            <?php
+                 } ?>
         </div>
     </section>
     <!-- end of about us -->
