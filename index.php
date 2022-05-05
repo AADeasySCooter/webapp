@@ -52,7 +52,7 @@ include('includes/db.php');
                 
                    
                 <?php 
-                            var_dump($_SERVER);
+                            
                             $getProduct = $bdd->query("SELECT * FROM product ORDER BY created_at DESC LIMIT 4");
                             while($product = $getProduct->fetch()){ ?>
                                 <div class = "col-md-6 col-lg-4 col-xl-3 p-2 feat">

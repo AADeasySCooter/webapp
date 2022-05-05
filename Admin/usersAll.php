@@ -39,16 +39,24 @@ include('includes/header.php');
                             <?php   $getProduct = $bdd->query("SELECT * FROM users "); 
                             
                             while($product = $getProduct->fetch()){ ?>
+                            
                             <tr>
                             
 
                                 <td><?= $product['id'] ;?></td>
                                 <td><?= $product['firstname'] ;?></td>
                                 <td><?= $product['email'] ;?></td>
-                                <td>61</td>
+                                <td>
+                                    <form  method="post" action="verification.php" enctype="multipart/form-data" class="form1">
+                                       <input type="submit" class="btn btn-danger" value="Blocked" >
+                                    </form> 
+                                </td>    
+                                
                                
                             
                             </tr>
+                                    
+                                
                             <?php
                                 
                             } ?>

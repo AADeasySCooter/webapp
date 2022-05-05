@@ -92,7 +92,7 @@
               </div>
             </li>
             <li>
-              <a href="#" class="nav-link px-3">
+              <a href="homeAdmin.php" class="nav-link px-3">
                 <!--<span class="me-2"><i class="bi bi-graph-up"></i></span>-->
                 <span>Home</span>
               </a>
