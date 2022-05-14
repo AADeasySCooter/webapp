@@ -47,16 +47,15 @@
                                 <a class = "nav-link text-uppercase text-dark" href = "profile.php">profile</a>
                             </li>';
                         echo '<li class = "nav-item px-2 py-2">
-                                    <a class = "nav-link text-uppercase text-dark" href = "deconnexion.php">Disconection</a>
+                                    <a class = "nav-link text-uppercase text-dark" href = "deconnexion.php">Disconect</a>
                              </li>';
 
                              
                                 if (isset($_SESSION['email'])){
-                                    $getid =  trim($_SESSION['email']);
                                     $recupProfil =$bdd->prepare("SELECT * FROM users WHERE email= '".$_SESSION['email']."'");     
                                     $recupProfil->execute();
                                     $voirProfil =$recupProfil->fetch();
-                                    if(isset($voirProfil['role_id']) == 3){
+                                    if($voirProfil["role_id"] == 3){
 
 
                                         echo '<li class = "nav-item px-2 py-2">
@@ -65,7 +64,7 @@
                                 
                                    
                                 
-                                }
+                                    };
                                 }
                       
                          
@@ -96,6 +95,7 @@
             </div>
         </div>
     </nav>
+   
     <script src = "js/jquery-3.6.0.js"></script>
     <!-- isotope js -->
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>

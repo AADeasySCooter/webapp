@@ -52,6 +52,12 @@ $reponse = $req->execute([
 if($reponse){
 
 	header('location:index.php?message=Compte créé avec succès.&type=success');
+		// Ouvrir une session utilisateur
+		session_start();
+
+		// Mettre dans la session un paramètre email
+		$_SESSION['email'] = $_POST['email'];
+	
 	exit;
 }else{
 	header('location:inscription.php?message=Erreur lors de la création du compte.&type=danger');

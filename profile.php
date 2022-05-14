@@ -42,17 +42,17 @@ if(isset($_SESSION['email'])){
            </div> 
            <div>
                 <?php if (isset($_SESSION['email'])){
-                                    $getid =  trim($_SESSION['email']);
                                     $recupProfil =$bdd->prepare("SELECT * FROM users WHERE email= '".$_SESSION['email']."'");     
                                     $recupProfil->execute();
                                     $voirProfil =$recupProfil->fetch();
-                                    if(isset($voirProfil['role_id']) == 3){
+                                    if($voirProfil["role_id"] == 3){
 
 
                                         echo ' role : ADMINISTRATOR';
-                                    }else if(isset($voirProfil['role_id']) == 2){
+                                    }else if($voirProfil["role_id"] == 2){
                                         echo ' role : EDITOR';
                                     }else{
+
 
                                     }
                                 
@@ -66,6 +66,7 @@ if(isset($_SESSION['email'])){
                email : <?= $voirProfil['email'] ?>
               </div>
               <br><br>
+             
               </div>    
            </div>
      </div>

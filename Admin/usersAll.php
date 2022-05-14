@@ -1,6 +1,11 @@
 <?php
 include('includes/head.php');
 include('includes/header.php');
+include('includes/db.php');
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +42,8 @@ include('includes/header.php');
                             </thead>
                             <tbody>
                             <?php   $getProduct = $bdd->query("SELECT * FROM users "); 
+
+                    
                             
                             while($product = $getProduct->fetch()){ ?>
                             
@@ -46,11 +53,9 @@ include('includes/header.php');
                                 <td><?= $product['id'] ;?></td>
                                 <td><?= $product['firstname'] ;?></td>
                                 <td><?= $product['email'] ;?></td>
-                                <td>
-                                    <form  method="post" action="verification.php" enctype="multipart/form-data" class="form1">
-                                       <input type="submit" class="btn btn-danger" value="Blocked" >
-                                    </form> 
-                                </td>    
+                                <td> <a type="submit" class="btn btn-primary" href="updateUser.php?id=<?=$product['id'] ;?>" target="_blank"> UPDATE </td>
+                                <td> <a type="submit" class="btn btn-danger" href="DeleteUser.php?id=<?=$product['id'] ;?>" target="_blank"> UPDATE </td>
+                                 
                                 
                                
                             
@@ -58,6 +63,7 @@ include('includes/header.php');
                                     
                                 
                             <?php
+
                                 
                             } ?>
                             </tbody>

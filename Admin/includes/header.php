@@ -98,6 +98,12 @@
               </a>
             </li>
             <li>
+              <a href="E_ditArticle.php" class="nav-link px-3">
+                <!--<span class="me-2"><i class="bi bi-graph-up"></i></span>-->
+                <span>Edit article</span>
+              </a>
+            </li>
+            <li>
               <a href="#" class="nav-link px-3">
                 <!--<span class="me-2"><i class="bi bi-book-fill"></i></span>-->
                 <span>Pages</span>
