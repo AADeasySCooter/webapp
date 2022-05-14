@@ -57,9 +57,7 @@ include('includes/db.php');
                                                 <span class="glyphicon glyphicon-shopping-cart"
                                                     aria-hidden="true"></span> ADD TO CART
                                             </button>
-                                            <div class="mb-3">
-                                            <input type="submit"  name="EditProduct" value="Edit product">
-                                           </div>
+                                           
                                          </div>
                                     </div>
                                 </div>
