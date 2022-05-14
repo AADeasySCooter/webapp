@@ -4,8 +4,6 @@ include('includes/header.php');
 include('includes/db.php');
 
 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +52,7 @@ include('includes/db.php');
                                 <td><?= $product['firstname'] ;?></td>
                                 <td><?= $product['email'] ;?></td>
                                 <td> <a type="submit" class="btn btn-primary" href="updateUser.php?id=<?=$product['id'] ;?>" target="_blank"> UPDATE </td>
-                                <td> <a type="submit" class="btn btn-danger" href="DeleteUser.php?id=<?=$product['id'] ;?>" target="_blank"> UPDATE </td>
+                                <td> <a type="submit" class="btn btn-danger" href="DeleteUser.php?id=<?=$product['id'] ;?>" target="_blank"> DELETE </td>
                                  
                                 
                                

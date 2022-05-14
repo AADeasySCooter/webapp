@@ -59,7 +59,8 @@
                                 <br>
                                 <input label="test" type="number" name="status" value="<?= $response['status'] ;?>">
                                 <br>
-                                <input type="submit" name="submit" value="submit" class="btn btn">
+                                <input type="submit" class="btn btn-secondary" name="submit" value="submit" class="btn btn">
+                                <a href="usersAll.php" class="btn btn-primary">Users</a>
 
                                 </form>
                           
