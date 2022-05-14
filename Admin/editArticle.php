@@ -42,7 +42,8 @@
                                 <td><?= $product['id'] ;?></td>
                                 <td><?= $product['title'] ;?></td>
                                 <td><?= $product['date_create'] ;?></td>
-                                <td>61</td>
+                                <td> <a type="submit" class="btn btn-primary" href="updateArticle.php?id=<?=$product['id'] ;?>" target="_blank"> UPDATE </td>
+                                <td> <a type="submit" class="btn btn-danger" href="DeleteArticle.php?id=<?=$product['id'] ;?>" target="_blank"> DELETE </td>
                                
                             
                             </tr>
