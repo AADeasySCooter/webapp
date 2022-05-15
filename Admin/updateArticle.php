@@ -55,7 +55,7 @@
                                 <input type="file" name="image" value="<?= $response['image'] ;?>">        
                                 <br>
                                 <input type="submit" class="btn btn-secondary" name="submit" value="submit" class="btn btn">
-                                <a href="articleAll.php" class="btn btn-primary">Article</a>
+                                <a href="editArticle.php" class="btn btn-primary">Article</a>
 
                                 </form>
                           

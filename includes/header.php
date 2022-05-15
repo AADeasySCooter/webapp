@@ -2,7 +2,7 @@
 <!-- navbar -->
 <nav class = "navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
         <div class = "container">
-            <a class = "navbar-brand d-flex justify-content-between align-items-center order-lg-0" href = "index.html">
+            <a class = "navbar-brand d-flex justify-content-between align-items-center order-lg-0" href = "./">
                 <img src = "images/Logo_EASYSCOOTER-removebg-preview.png" alt = "site icon">
                 <span class = "text-uppercase fw-lighter ms-2">Elect-track</span>
             </a>
@@ -16,9 +16,7 @@
                     <i class = "fa fa-heart"></i>
                     <span class = "position-absolute top-0 start-100 translate-middle badge bg-primary">2</span>
                 </button>  -->
-                <button type = "button" class = "btn position-relative">
-                    <i class = "fa fa-search"></i>
-                </button>
+               
             </div>
 
             <button class = "navbar-toggler border-0" type = "button" data-bs-toggle = "collapse" data-bs-target = "#navMenu">

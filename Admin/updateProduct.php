@@ -33,8 +33,6 @@
                 $response = $result->fetch();
 
 
-
-
  ?>
           </div>
         </div>
