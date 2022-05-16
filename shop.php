@@ -3,6 +3,12 @@
  include('includes/header.php');
 include('includes/db.php');
 
+if(isset($_POST['addCard']))
+{    
+        
+}
+
+
 
 
 
@@ -19,6 +25,7 @@ include('includes/db.php');
             <div class = "title text-center">
                 <h2 class = "position-relative d-inline-block"> Collection</h2>
             </div>
+           
 
             <!--<div class = "row g-0">
                 <div class = "d-flex flex-wrap justify-content-center mt-5 filter-button-group">
@@ -33,8 +40,14 @@ include('includes/db.php');
                    
                 <?php 
                             $getProduct = $bdd->query("SELECT * FROM product ORDER BY created_at DESC LIMIT 8");
-                            while($product = $getProduct->fetch()){ ?>
+                            while($product = $getProduct->fetch()){  
+                                $pid = ($product[0]);
+
+                                 $_SESSION['PID']  = $pid;
+                                 var_dump($product);?>
                                 <div class = "col-md-6 col-lg-4 col-xl-3 p-2 feat">
+                                <form method="post" >
+
                                 <div class="card mb-2">
                                     <div class = "collection-img position-relative">
                                     <?php echo '<img src="images/' . $product['product_image'] . '" alt="Image du produit" class = "w-100"  >' ?>
@@ -51,16 +64,25 @@ include('includes/db.php');
                                         <p class = "text-capitalize my-1"><?= $product['product_name'] ;?></p>
                                         <span class = "fw-bold">€ <?=  $product['product_price'] ;?></span>
                                          <div class="col-md-6">
-                                            <button type="button"
+                                        <!--<div class="cart-action">
+                                             <input type="text" class="product-quantity" name="quantity" value="1" size="2" />
+                                             <input type="submit" value="Add to Cart" class="btnAddAction" /></div>
+		                                 </div>-->
+                                            <!--<button type="button"
                                                 class="btn btn-primary btn-sm btn-block"
                                                 id="addToCart-1" onclick="addToCart(1)">
                                                 <span class="glyphicon glyphicon-shopping-cart"
                                                     aria-hidden="true"></span> ADD TO CART
-                                            </button>
-                                           
+                                            </button>-->
+                                            
+                                            <a href='card.php?id=<?= $product['id'] ;?>'>Add to Cart</a>
+                                            <input type="submit" name="addCard"value="Add to Cart" class="btn btn-primary btn-sm btn-block" />
                                          </div>
+                                         
                                     </div>
                                 </div>
+                                
+                                </form>
                                 </div>
                           <?php
                             } ?>
