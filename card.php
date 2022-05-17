@@ -20,7 +20,7 @@ include('includes/db.php');
                              <th width = "5%">Action</th>
 
                          </tr>
-                         <?php
+                         <?php /*
                             if(empty($_SESSION["shopping_card"])){ 
 
                                 $total = 0;
@@ -48,7 +48,7 @@ include('includes/db.php');
                                 <?php
                             }
 
-                         ?>
+                         */ ?>
 
                      </table>
                    </div>
