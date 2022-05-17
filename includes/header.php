@@ -102,3 +102,32 @@
     <script src = "bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
     <!-- custom js -->
     <script src = "js/script.js"></script>
+     <!--for top button-->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+
+    <style>
+    #scrollUp
+    {
+    position: fixed;
+    bottom : 10px;
+    right: -100px;
+    opacity: 0.5;
+    }
+    </style>
+        <script>
+                    jQuery(function(){
+                        $(function () {
+                            $(window).scroll(function () {
+                                if ($(this).scrollTop() > 200 ) { 
+                                    $('#scrollUp').css('right','10px');
+                                } else { 
+                                    $('#scrollUp').removeAttr( 'style' );
+                                }
+        
+                            });
+                        });
+                    });
+        </script>
+
+
+    

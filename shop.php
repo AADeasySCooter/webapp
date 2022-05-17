@@ -3,10 +3,7 @@
  include('includes/header.php');
 include('includes/db.php');
 
-if(isset($_POST['addCard']))
-{    
-        
-}
+
 
 
 
@@ -41,9 +38,6 @@ if(isset($_POST['addCard']))
                 <?php 
                             $getProduct = $bdd->query("SELECT * FROM product ORDER BY created_at DESC LIMIT 8");
                             while($product = $getProduct->fetch()){  
-                                $pid = ($product[0]);
-
-                                 $_SESSION['PID']  = $pid;
                                  var_dump($product);?>
                                 <div class = "col-md-6 col-lg-4 col-xl-3 p-2 feat">
                                 <form method="post" >
@@ -74,9 +68,19 @@ if(isset($_POST['addCard']))
                                                 <span class="glyphicon glyphicon-shopping-cart"
                                                     aria-hidden="true"></span> ADD TO CART
                                             </button>-->
-                                            
-                                            <a href='card.php?id=<?= $product['id'] ;?>'>Add to Cart</a>
-                                            <input type="submit" name="addCard"value="Add to Cart" class="btn btn-primary btn-sm btn-block" />
+
+                                            <input type="submit" name="addCard" value="Add to Cart" class="btn btn-primary btn-sm btn-block" />
+                                            <?php 
+
+                                            if(isset($_POST['addCard']))
+                                            {   
+                                                $getid = $product['id'];
+                                                
+                                                var_dump($getid);
+                                                    
+                                            }
+
+                                            ?>
                                          </div>
                                          
                                     </div>
@@ -86,6 +90,7 @@ if(isset($_POST['addCard']))
                                 </div>
                           <?php
                             } ?>
+                           
 
                             
             </div>

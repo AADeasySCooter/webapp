@@ -262,6 +262,9 @@ include('includes/db.php');
                 </div>
             </div>
         </div>
+        <div id="scrollUp">
+        <a href="#top"><img src="images/to_top.png"/></a>
+        </div>
     </footer>
     <!-- end of footer -->
 
