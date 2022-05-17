@@ -191,10 +191,14 @@ include('includes/db.php');
                 </div>
 
                 <p class = "text-center text-muted">put your email if you want to receive some reduce</p>
+                <fom method="post"  action="sendMail.php" enctype="multipart/form-data" >
                 <div class = "input-group mb-3 mt-3">
-                    <input type = "text" class = "form-control" placeholder="Enter Your Email ...">
-                    <button class = "btn btn-primary" type = "submit">Subscribe</button>
+                    
+                    <input type = "text" name="eemail" class = "form-control" placeholder="Enter Your Email ...">
+                    <input type="submit" class = "btn btn-primary" name="sendemail" >
+                    
                 </div>
+                </fom>
             </div>
         </div>
     </section>

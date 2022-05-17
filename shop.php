@@ -38,9 +38,9 @@ include('includes/db.php');
                 <?php 
                             $getProduct = $bdd->query("SELECT * FROM product ORDER BY created_at DESC LIMIT 8");
                             while($product = $getProduct->fetch()){  
-                                 var_dump($product);?>
+                                 ?>
                                 <div class = "col-md-6 col-lg-4 col-xl-3 p-2 feat">
-                                <form method="post" >
+                                <form method="post" action="shop.php?action=add&id=<?php echo $product["id"]; ?>" >
 
                                 <div class="card mb-2">
                                     <div class = "collection-img position-relative">
@@ -68,18 +68,15 @@ include('includes/db.php');
                                                 <span class="glyphicon glyphicon-shopping-cart"
                                                     aria-hidden="true"></span> ADD TO CART
                                             </button>-->
-
+                                            <!--<input  type="text"  class="form-control" name="quantity" value="1"/>-->
                                             <input type="submit" name="addCard" value="Add to Cart" class="btn btn-primary btn-sm btn-block" />
+                                            <input type="hidden"   name="hidden_image" value="<?=  $product['product_image'] ;?>"/>
+                                            <input type="hidden" name="hidden_name" value="<?= $product['product_name'] ;?>" />
+                                            <input  type="hidden"   name="hidden_description" value="<?=  $product['product_description'] ;?>"/>
+                                            <input type="hidden" name="hidden_price" value="<?=  $product['product_price'] ;?>"  />
                                             <?php 
 
-                                            if(isset($_POST['addCard']))
-                                            {   
-                                                $getid = $product['id'];
-                                                
-                                                var_dump($getid);
-                                                    
-                                            }
-
+                                            
                                             ?>
                                          </div>
                                          
@@ -94,6 +91,53 @@ include('includes/db.php');
 
                             
             </div>
+
+            <section id = "about" class = "py-5">
+        <div class = "container">
+       <div class="table-responsive">
+                     <table class = "table table-bordered">
+                         <tr>
+                             <th width = "40%">Product Name</th>
+                             <th width = "10%">Quantity</th>
+                             <th width = "20%">Price</th>
+                             <th width = "15%">Total</th>
+                             <th width = "5%">Action</th>
+
+                         </tr>
+                         <?php
+                            if(empty($_SESSION["shopping_card"])){ 
+
+                                $total = 0;
+                                foreach($_SESSION["shopping_card"] as $key => $values){
+                                    ?> 
+                                        <tr>
+                                            <td><?= $values['product_name'] ;?></td>
+                                            <td><?= $values['product_quantity'] ;?></td>
+                                            <td><?= $values['product_price'] ;?></td>
+                                            <td><?= number_format($values['product_name'] * $values['product_price'], 2)  ;?></td>
+                                            <td><a href="card.php?action=deleted&id=<?= $values['id'] ;?>"></a></td>
+
+
+                                        </tr>
+                                    
+                                    <?php
+                                            $total = $total + ($values["product_quantity"] * $values["product_price"]);
+
+                                }
+                                ?>
+                                            <td colspan ="3" align="right" >Total</td>
+                                            <td align='right'><?= number_format($total, 2)  ;?> </td>
+                                            <td><?= $values['product_price'] ;?></td>
+                                
+                                <?php
+                            }
+
+                         ?>
+
+                     </table>
+                   </div>
+        </div>
+    </section>
 
     
             </div>
