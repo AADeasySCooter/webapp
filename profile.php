@@ -1,31 +1,10 @@
 <?php 
     include('includes/head.php');
     include('includes/header.php');
+    include('includes/db.php');
 
  
-include('includes/db.php');
-if(isset($_SESSION['email'])){
-    $recupProfil =$bdd->prepare("SELECT * FROM users WHERE email= '".$_SESSION['email']."'");     
-    $recupProfil->execute();
-    $voirProfil =$recupProfil->fetch();
 
-    if(!isset($voirProfil['id'])){
-
-
-        header('location : profile.php');
-
-        
-        
-   
-   }
-
-
-
-    }else{
-   echo"Aucun id trouvé";
-   header("Location: index.php");
-
-}
 
 
 ?>
@@ -33,18 +12,29 @@ if(isset($_SESSION['email'])){
 <!DOCTYPE html>
 
     <div class="container"></br></br></br></br></br></br></br></br>
+
+
      <div class="row">
+           
            <div>
-                prenom: <?= $voirProfil['firstname'] ?>
-           </div>
-           <div>
-               nom  : <?= $voirProfil['lastname'] ?>
-           </div> 
-           <div>
-                <?php if (isset($_SESSION['email'])){
+                <?php
+                
+                 if (isset($_SESSION['email'])){
                                     $recupProfil =$bdd->prepare("SELECT * FROM users WHERE email= '".$_SESSION['email']."'");     
                                     $recupProfil->execute();
                                     $voirProfil =$recupProfil->fetch();
+                                    ?>
+                                    <div>
+                                       prenom: <?= $voirProfil['firstname'] ?>
+                                    </div>
+                                    <div>
+                                        nom  : <?= $voirProfil['lastname'] ?>
+                                    </div> 
+                                    <div>
+                                        email : <?= $voirProfil['email'] ?>
+                                     </div>
+                                    <?php
+
                                     if($voirProfil["role_id"] == 3){
 
 
@@ -58,13 +48,15 @@ if(isset($_SESSION['email'])){
                                 
                                    
                                 
+                                }else{
+                                    $link_address = 'connexion.php';
+                                    echo "<a href='".$link_address."'>PLEASE SIGN IN BEFORE</a>";
+
                                 }
                 ?>
               </div>
               
-              <div>
-               email : <?= $voirProfil['email'] ?>
-              </div>
+              
               <br><br>
              
               </div>    

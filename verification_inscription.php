@@ -8,14 +8,14 @@ if(isset($_POST['email']) && !empty($_POST['email'])){
 // redirection vers le formulaire
 if(!isset($_POST['email']) || empty($_POST['email']) || !isset($_POST['password']) || empty($_POST['password']) || !isset($_POST['firstname']) || empty($_POST['firstname']) || !isset($_POST['lastname']) || empty($_POST['lastname'])){
 	// Rediriger vers la page inscription avec une erreur
-	header('location:inscription.php?message=Vous devez remplir les 4 champs.&type=danger');
+	header('location:inscription.php?message=You must fill in the 4 fields.&type=danger');
 	exit;
 }
 
 //  > redirection vers le formulaire
 if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
 	// Rediriger vers la page inscription avec une erreur
-	header('location:inscription.php?message=Email invalide.&type=danger');
+	header('location:inscription.php?message=Email invalid.&type=danger');
 	exit;
 }
 
@@ -30,7 +30,7 @@ $result = $req->fetch();
 
 if($result !== false){
 	// Rediriger vers la page inscription avec une erreur
-	header('location:inscription.php?message=Email déjà utilisé.&type=danger');
+	header('location:inscription.php?message=Email already use.&type=danger');
 	exit;
 }
 
@@ -51,7 +51,7 @@ $reponse = $req->execute([
 
 if($reponse){
 
-	header('location:index.php?message=Compte créé avec succès.&type=success');
+	header('location:index.php?message=Account created successfully.&type=success');
 		// Ouvrir une session utilisateur
 		session_start();
 
@@ -60,7 +60,7 @@ if($reponse){
 	
 	exit;
 }else{
-	header('location:inscription.php?message=Erreur lors de la création du compte.&type=danger');
+	header('location:inscription.php?message=Error creating account.&type=danger');
 	exit;
 }
 

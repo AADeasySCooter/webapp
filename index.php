@@ -118,8 +118,7 @@ include('includes/db.php');
         </div>
     </section>
     <!-- end of blogs -->
-
-    <!-- blogs -->
+  <!-- blogs -->
     <section id = "blogs" class = "py-5">
         <div class = "container">
             <div class = "title text-center py-5">

@@ -1,9 +1,7 @@
 <?php
 
-//var_dump($_POST);
 
 
-// Si l'email n'est pas vide, enregistrer cet email dans un cookie
 
 if(isset($_POST['email']) && !empty($_POST['email'])){
 	setcookie('email', $_POST['email'], time() + (24 * 60 * 60));
@@ -33,14 +31,14 @@ if(isset($_POST['email']) && !empty($_POST['email'])){
 // Si email ou password vide > redirection vers le formulaire
 if(!isset($_POST['email']) || empty($_POST['email']) || !isset($_POST['password']) || empty($_POST['password'])){
 	// Rediriger vers la page connexion avec une erreur
-	header('location:connexion.php?message=Vous devez remplir les 2 champs.&type=danger');
+	header('location:connexion.php?message=You must fill in both fields.&type=danger');
 	exit;
 }
 
 // Si email invalide > redirection vers le formulaire
 if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
 	// Rediriger vers la page connexion avec une erreur
-	header('location:connexion.php?message=Email invalide.&type=danger');
+	header('location:connexion.php?message=Email invalid.&type=danger');
 	exit;
 }
 
