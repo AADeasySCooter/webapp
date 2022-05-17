@@ -64,11 +64,11 @@ include('includes/db.php');
                                     <div class = "text-center">
                                             
                                         <div class = "rating mt-3">
-                                            <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                            <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                            <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                            <span class = "text-primary"><i class = "fas fa-star"></i></span>
-                                            <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                            <span class = "text-primary"><i class = "fas fa-star" style = "color:#dc3545"></i></span>
+                                            <span class = "text-primary"><i class = "fas fa-star" style = "color:#dc3545"></i></span>
+                                            <span class = "text-primary"><i class = "fas fa-star" style = "color:#dc3545"></i></span>
+                                            <span class = "text-primary"><i class = "fas fa-star" style = "color:#dc3545"></i></span>
+                                            <span class = "text-primary"><i class = "fas fa-star" style = "color:#dc3545"></i></span>
                                         </div>
                                         <p class = "text-capitalize my-1"><?= $product['product_name'] ;?></p>
                                         <span class = "fw-bold">€ <?=  $product['product_price'] ;?></span>

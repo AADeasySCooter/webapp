@@ -33,6 +33,19 @@
                                     <div>
                                         email : <?= $voirProfil['email'] ?>
                                      </div>
+                                     <?php
+                                     echo " 
+                                       
+
+                                     <br><br><br><br>
+                                     <div id='box'>
+                                          <h1>Attention!</h1>
+                                          <p>You are going to delete this user permanently.</p>
+                                          <a class='close' href='DeleteUser.php?id=".$voirProfil['id']."' title='".$voirProfil['id']."'>Delete</a> 
+                                     </div>     
+                                     "
+                                     
+                                     ?>
                                     <?php
 
                                     if($voirProfil["role_id"] == 3){
