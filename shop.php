@@ -10,6 +10,7 @@ include('includes/db.php');
 
 
 
+
 ?>
 <!DOCTYPE html>
 
@@ -33,6 +34,8 @@ include('includes/db.php');
                 </div>-->
 
             <div class = "collection-list mt-4 row gx-0 gy-3">
+
+                    
                 
                    
                 <?php 
@@ -40,7 +43,7 @@ include('includes/db.php');
                             while($product = $getProduct->fetch()){  
                                  ?>
                                 <div class = "col-md-6 col-lg-4 col-xl-3 p-2 feat">
-                                <form method="post" action="shop.php?action=add&id=<?php echo $product["id"]; ?>" >
+                                <form class="product-form">
 
                                 <div class="card mb-2">
                                     <div class = "collection-img position-relative">
@@ -69,11 +72,24 @@ include('includes/db.php');
                                                     aria-hidden="true"></span> ADD TO CART
                                             </button>-->
                                             <!--<input  type="text"  class="form-control" name="quantity" value="1"/>-->
-                                            <input type="submit" name="addCard" value="Add to Cart" class="btn btn-primary btn-sm btn-block" />
-                                            <input type="hidden"   name="hidden_image" value="<?=  $product['product_image'] ;?>"/>
-                                            <input type="hidden" name="hidden_name" value="<?= $product['product_name'] ;?>" />
-                                            <input  type="hidden"   name="hidden_description" value="<?=  $product['product_description'] ;?>"/>
-                                            <input type="hidden" name="hidden_price" value="<?=  $product['product_price'] ;?>"  />
+
+                                            
+                                            <div>
+                                            Qty :
+                                            <select name="product_qty">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            </select>
+                                            </div>
+
+
+                                            <input name="product_code" type="hidden" value="<?php echo $product["product_code"]; ?>">
+                                            <button  class="btn btn-primary btn-sm btn-block" type="submit">Add to Cart</button>
+                                           
+
                                             <?php 
 
                                             
@@ -97,4 +113,7 @@ include('includes/db.php');
     
             </div>
         </div>
+        <?php 
+        var_dump($_SESSION);
+        ?>
     </section>

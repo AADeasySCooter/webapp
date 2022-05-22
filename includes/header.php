@@ -7,12 +7,27 @@
                 <span class = "text-uppercase fw-lighter ms-2">Elect-track</span>
             </a>
 
+
+              
+
             <div class = "order-lg-2 nav-btns">
                 <button onclick="window.location.href='card.php'" type = "button" class = "btn position-relative">
-                    <i class = "fa fa-shopping-cart"></i>
+                    <i class = "fa fa-shopping-cart" >      
+                    <span class="cart-item" id="cart-container"><?php 
+                    if(isset($_SESSION["products"])){
+                        echo count($_SESSION["products"]); 
+                    } else {
+                        echo 0; 
+                    }
+                    ?></span>
+                
+                    </i>
+
                     
                    <!-- <span class = "position-absolute top-0 start-100 translate-middle badge bg-primary">5</span> -->
                 </button>
+
+                
                 <!-- <button type = "button" class = "btn position-relative">
                     <i class = "fa fa-heart"></i>
                     <span class = "position-absolute top-0 start-100 translate-middle badge bg-primary">2</span>

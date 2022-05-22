@@ -43,7 +43,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                                <a href="articleAll.php" class="btn btn-primary">Articles</a>
+                                <a href="editArticle.php" class="btn btn-primary">Articles</a>
                           
                         </div>
                     </div>

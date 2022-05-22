@@ -25,10 +25,10 @@
                                     $voirProfil =$recupProfil->fetch();
                                     ?>
                                     <div>
-                                       prenom: <?= $voirProfil['firstname'] ?>
+                                       Firstname: <?= $voirProfil['firstname'] ?>
                                     </div>
                                     <div>
-                                        nom  : <?= $voirProfil['lastname'] ?>
+                                        Lastname  : <?= $voirProfil['lastname'] ?>
                                     </div> 
                                     <div>
                                         email : <?= $voirProfil['email'] ?>
