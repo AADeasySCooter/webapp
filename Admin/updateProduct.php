@@ -18,11 +18,13 @@
                     $product_name = $_POST['product_name'];
                     $product_description = $_POST['product_description'];
                     $product_price = $_POST['product_price'];
+                    $product_code = $_POST['product_code'];
                     $product_image = $_POST['product_image'];
                     
           
                     $radmin = $bdd->query( "UPDATE product set product_name = '$product_name' , product_description = '$product_description'
                     , product_price = '$product_price',
+                    product_code = '$product_code',
                     product_image = '$product_image'
                     WHERE id = '$idd'  " );
                     $message[] = 'product update ';
@@ -50,6 +52,8 @@
                                 <input type="text" name="product_description" value="<?= $response['product_description'] ;?>">
                                 <br>
                                 <input type="number" name="product_price" value="<?= $response['product_price'] ;?>">
+                                <br>
+                                <input type="text" name="product_code" value="<?= $response['product_code'] ;?>">
                                 <br>
                                 <input type="file" name="product_image" value="<?= $response['product_image'] ;?>">        
                                 <br>

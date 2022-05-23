@@ -1,5 +1,5 @@
 <?php
-$currency = '&#8377; ';
+$currency = '€';
 // Connexion à la base de données
 
 
@@ -9,6 +9,7 @@ try{
 catch(Exception $e){
     die('Erreur : ' . $e->getMessage());
 }
+
 
 
 $servername = "localhost";

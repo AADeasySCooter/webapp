@@ -13,6 +13,7 @@ $(document).ready(function() {
             window.location.reload();
         });
     }
+
     // add item to cart
     $(".product-form").submit(function(e) {
         var form_data = $(this).serialize();
@@ -29,6 +30,7 @@ $(document).ready(function() {
         })
         e.preventDefault();
     });
+
     //Remove items from cart
     $("#shopping-cart-results").on('click', 'a.remove-item', function(e) {
         e.preventDefault();

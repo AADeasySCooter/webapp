@@ -31,7 +31,7 @@
                                 <th>Name</th>
                                 <th>price</th>
                                 <th>Description</th>
-                                <th>Date</th>
+                                <th>Code</th>
                                 <th>Actions</th>
                                 
                             </tr>
@@ -47,7 +47,7 @@
                                 <td data-target="product_name"><?= $product['product_name'] ;?></td>
                                 <td data-target="product_price"><?= $product['product_price'] ;?></td>
                                 <td data-target="product_description"><?= $product['product_description'] ;?></td>
-                                <td data-target="created_at">><?= $product['created_at'] ;?></td>
+                                <td data-target="product_code">><?= $product['product_code'] ;?></td>
                                 <td> <a type="submit" class="btn btn-primary" href="updateProduct.php?id=<?=$product['id'] ;?>" target="_blank"> UPDATE </td>
                                 <td> <a type="submit" class="btn btn-danger" href="DeleteProduct.php?id=<?=$product['id'] ;?>" target="_blank"> DELETE </td>
                                
