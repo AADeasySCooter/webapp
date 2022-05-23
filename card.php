@@ -7,7 +7,7 @@ include('includes/db.php');
 
 ?>
 
-    <!-- about us --><br><br><br><br>
+   <br><br><br><br>
     <section id = "about" class = "py-5">
         <div class = "container">
        <div class="table-responsive">
