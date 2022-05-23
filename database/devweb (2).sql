@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: May 05, 2022 at 12:57 PM
+-- Generation Time: May 23, 2022 at 12:08 PM
 -- Server version: 5.7.34
 -- PHP Version: 8.0.8
 
@@ -62,8 +62,7 @@ CREATE TABLE `articles` (
 --
 
 INSERT INTO `articles` (`id`, `title`, `description`, `date_create`, `autor`, `image`) VALUES
-(1, 'test', 'Footballeur professionnel à Brest, formé aux Girondins, Paul Lasne publie le 1er février “MurMures”, suite de courts textes sensibles et poétiques écrits pendant le confinement.\nQuel a été le cheminement jusqu’au livre ? Le confinement en a-t-il été le déclic ?\n\nC’est clairement le confinement qui a permis à ce livre de voir le jour. Le déclenchement de l’écriture, c’est un moment assez ordinaire. Je revenais d’aller faire les courses juste avant l’annonce du Président et j’ai senti là-bas une ambiance anxiogène, assez inhabituelle. J’ai eu envie de le retranscrire sur le papier car ça m’arrive parfois d’avoir envie d’écrire des choses spontanément. Je l’ai lu à mon épouse, elle a trouvé ça plutôt sympa et elle m’a encouragé à continuer.\n\nVous aviez donc au fond de vous, l’envie d’écrire ?\n\nJe pense que cette occasion avec le confinement, le fait que tout ce qui s’arrête d’un coup - les entraînements et tout le reste - a été pour moi l’occasion de partir sur un terrain de jeu un peu différent, que j’appréciais depuis plusieurs années. Ça m’a permis de m’y...\n\n', '2022-04-26 11:09:45', 'gavin', 'logo_project.jpg'),
-(2, 'test', 'Footballeur professionnel à Brest, formé aux Girondins, Paul Lasne publie le 1er février “MurMures”, suite de courts textes sensibles et poétiques écrits pendant le confinement.\n', '2022-04-26 11:09:49', 'gavin', 'logo_project.jpg');
+(2, 'testt', 'Footballeur professionnel à Brest, formé aux Girondins, Paul Lasne publie le 1er février “MurMures”, suite de courts textes sensibles et poétiques écrits pendant le confinement..', '2022-04-26 11:09:49', 'gavin', 'ducati-urban-e-mobility-trottinette-electrique-pro-i-evo-urbaanews.jpeg');
 
 -- --------------------------------------------------------
 
@@ -99,24 +98,40 @@ CREATE TABLE `product` (
   `product_description` varchar(255) DEFAULT NULL,
   `product_price` int(11) DEFAULT NULL,
   `product_image` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `product_code` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`id`, `product_name`, `product_description`, `product_price`, `product_image`, `created_at`) VALUES
-(1, 'test', 'test', 12333, 'liberté.jpeg', '2022-04-18 16:18:21'),
-(2, 'test', 'test', 123, 'liberté.jpeg', '2022-04-18 16:18:21'),
-(3, 'test', 'test', 123, 'liberté.jpeg', '2022-04-18 16:18:21'),
-(4, 'test', 'test', 2, 'liberté.jpeg', '2022-04-18 16:18:21'),
-(5, 'test', 'test', 2, 'liberté.jpeg', '2022-04-18 16:18:21'),
-(6, 'test', 'test', 2, 'liberté.jpeg', '2022-04-18 16:18:21'),
-(7, 'test', 'test', 2, 'liberté.jpeg', '2022-04-18 16:18:21'),
-(8, 'test', '12', 5, 'liberté.jpeg', '2022-04-18 16:18:21'),
-(9, 'test', '12', 5, 'liberté.jpeg', '2022-04-18 16:18:21'),
-(24, 'test23333', 'testttttt', 123, 'liberté.jpeg', '2022-04-18 16:19:05');
+INSERT INTO `product` (`id`, `product_name`, `product_description`, `product_price`, `product_image`, `created_at`, `product_code`) VALUES
+(2, 'test', 'test', 123, 'liberté.jpeg', '2022-04-18 16:18:21', 'AAAA1'),
+(3, 'test', 'test', 123, 'liberté.jpeg', '2022-04-18 16:18:21', 'AAAA2'),
+(4, 'test', 'test', 2, 'liberté.jpeg', '2022-04-18 16:18:21', 'AAAA3'),
+(5, 'test', 'test', 2, 'liberté.jpeg', '2022-04-18 16:18:21', 'AAAA4'),
+(6, 'test', 'test', 2, 'liberté.jpeg', '2022-04-18 16:18:21', 'AAAA5'),
+(7, 'test', 'test', 2, 'liberté.jpeg', '2022-04-18 16:18:21', 'AAAA6'),
+(8, 'test', '12', 5, 'liberté.jpeg', '2022-04-18 16:18:21', 'AAAA7'),
+(9, 'test', '12', 5, 'liberté.jpeg', '2022-04-18 16:18:21', 'AAAA8'),
+(24, 'test23333', 'testttttt', 123, 'liberté.jpeg', '2022-04-18 16:19:05', 'AAAA9'),
+(25, 'test213', 'code bleu', 2, 'liberté.jpeg', '2022-05-23 10:22:56', 'AAA10'),
+(26, 'test', 'test2', 23, 'liberté.jpeg', '2022-05-23 10:23:08', 'AAA111');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `resetPassword`
+--
+
+CREATE TABLE `resetPassword` (
+  `id` int(11) NOT NULL,
+  `resetEmail` text NOT NULL,
+  `resetSelect` text NOT NULL,
+  `resetToken` longtext NOT NULL,
+  `resetExpire` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -174,23 +189,25 @@ CREATE TABLE `users` (
   `role_id` int(11) NOT NULL DEFAULT '1',
   `ip` varchar(20) DEFAULT NULL,
   `date_sign` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` int(11) NOT NULL DEFAULT '1'
+  `status` int(11) NOT NULL DEFAULT '1',
+  `address` varchar(255) DEFAULT NULL,
+  `number` varchar(255) DEFAULT NULL,
+  `code_postal` varchar(255) DEFAULT NULL,
+  `ville` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `firstname`, `lastname`, `password`, `username`, `role_id`, `ip`, `date_sign`, `status`) VALUES
-(1, 'audesandrine6@gmail.com', NULL, NULL, 'ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae', NULL, 1, '', '2022-04-25 00:20:15', 1),
-(2, 'audesandrine6@gdmail.com', NULL, NULL, '822e54d37dd37d83776ed8aac05e4578e8b201d8f3fa366bdc60b75228bc835f', NULL, 3, '', '2022-04-25 00:20:15', 1),
-(3, 'audesandrine65@gmail.com', NULL, NULL, '937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244', NULL, 1, '', '2022-04-25 00:20:15', 1),
-(4, 'gaperanomouloungui@myges.fr', NULL, NULL, 'ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae', NULL, 1, '', '2022-04-25 00:20:15', 1),
-(5, 'gaperanomouleoungui@myges.fr', NULL, NULL, 'ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae', NULL, 1, '', '2022-04-25 00:20:15', 1),
-(6, 'admin@admin123', NULL, NULL, 'admin123', NULL, 1, '', '2022-04-25 00:20:15', 1),
-(18, 'audesad@gmail.com', 'GAVIN', 'APERANO MOULOUNGUI', '137a531e5ae9513899625ced2dd46b6ec1e280df2b1c89699582039936cff731', NULL, 3, '::1', '2022-04-25 00:33:35', 1),
-(19, 'audesa@gmail.com', 'GAVIN', 'APERANO MOULOUNGUI', '137a531e5ae9513899625ced2dd46b6ec1e280df2b1c89699582039936cff731', NULL, 3, '::1', '2022-04-25 00:34:38', 1),
-(20, 'aude12@gmail.com', 'GAVIN', 'APERANO MOULOUNGUI', '137a531e5ae9513899625ced2dd46b6ec1e280df2b1c89699582039936cff731', NULL, 3, '::1', '2022-05-04 18:10:05', 1);
+INSERT INTO `users` (`id`, `email`, `firstname`, `lastname`, `password`, `username`, `role_id`, `ip`, `date_sign`, `status`, `address`, `number`, `code_postal`, `ville`) VALUES
+(18, 'audesad@gmail.com', 'GAVIN', 'APERANO MOULOUNGUI', '137a531e5ae9513899625ced2dd46b6ec1e280df2b1c89699582039936cff731', NULL, 3, '::1', '2022-04-25 00:33:35', 1, 'AYH', '0635963171', '91300', 'MASSY'),
+(22, 'audesan@icloud.com', 'hbfiz', 'jebr', 'be73eda70bc3e2b53e641a22606d1e66006713bdbe4d305ef2ff5b2f547c5244', NULL, 3, '::1', '2022-05-13 18:34:46', 1, NULL, NULL, NULL, NULL),
+(23, 'audesaddn@icloud.com', 'GAVINsvs', 'APERANO MOULOvUNGUI', 'decec1331842659e4448387694c54250015e73124bef178c7a5633f862b4aebd', NULL, 1, '::1', '2022-05-13 18:39:01', 1, NULL, NULL, NULL, NULL),
+(24, 'audesaddn@icFloud.com', 'GAVIN', 'APERANO MOULOUNGUI', 'bfe59019d932498ab1c4edc81a8bd52a8f6981224647891581751fb879a36bca', NULL, 3, '::1', '2022-05-13 18:39:40', 1, NULL, NULL, NULL, NULL),
+(30, 'aude6@icloud.com', 'GAVIN', 'APERANO MOULOUNGUI', '59a2489f07fb92fb96f6158a981c51cd99d995a298f72e8a368ff50e9b873a1e', NULL, 3, '::1', '2022-05-17 17:11:36', 1, NULL, NULL, NULL, NULL),
+(31, 'gavinaperano@gmail.com', 'GAVIN', 'APERANO MOULOUNGUI', 'bfe59019d932498ab1c4edc81a8bd52a8f6981224647891581751fb879a36bca', NULL, 3, '::1', '2022-05-18 19:47:55', 1, NULL, NULL, NULL, NULL),
+(32, 'gavina@gmail.com', 'GAVIN', 'APERANO MOULOUNGUI', 'bfe59019d932498ab1c4edc81a8bd52a8f6981224647891581751fb879a36bca', NULL, 3, '::1', '2022-05-23 13:16:57', 1, 'Avenue Émile Baudot', '0635963171', '91300', 'MASS');
 
 --
 -- Indexes for dumped tables
@@ -218,6 +235,12 @@ ALTER TABLE `permission`
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `resetPassword`
+--
+ALTER TABLE `resetPassword`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -258,19 +281,25 @@ ALTER TABLE `articles`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT for table `resetPassword`
+--
+ALTER TABLE `resetPassword`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
