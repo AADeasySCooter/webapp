@@ -49,7 +49,7 @@ include('includes/db.php');
                                     <td><input type="number" data-code="<?php echo $product_code; ?>" class="form-control text-center quantity" value="<?php echo $product_qty; ?>"></td>
                                     <td><?php echo $currency; echo sprintf("%01.2f", ($product_price * $product_qty)); ?></td>
                                     <td>				
-                                    <a href="#" class="btn btn-danger " data-code="<?php echo $product_code; ?>"><span class='bi bi-trash'></span></a>
+                                    <a href="#" class="btn btn-danger remove-item" data-code="<?php echo $product_code; ?>"><span class='bi bi-trash'></span></a>
                                     </td>
                                     </tr>
                                 <?php } ?>
