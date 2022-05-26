@@ -1,7 +1,7 @@
 <?php
 include('./db.php');
 
-function check_status(){
+
 
     if (isset($_SESSION['email'])){
         $recupProfil =$conn->prepare("SELECT * FROM users WHERE email= '".$_SESSION['email']."'");     
@@ -17,4 +17,4 @@ function check_status(){
     }
 
 
-}
+

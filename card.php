@@ -5,6 +5,15 @@ include('includes/header.php');
 include('includes/db.php');
 
 
+$q = "SELECT id FROM users WHERE email = '" . $_SESSION['email'] . "' ";
+$req = $bdd->prepare($q);
+$req->execute();
+$result = $req->fetch(); 
+$user_id = $result['id'];
+var_dump($user_id);
+
+
+
 ?>
 
    <br><br><br><br>
@@ -17,7 +26,7 @@ include('includes/db.php');
                             <div class="col-md-8">
                                 <h3>My Cart (<span id="cart-items-count"><?PHP if(isset($_SESSION["products"])){echo count($_SESSION["products"]); } ?></span>)</h3>			
                                 <?php		
-                                if(isset($_SESSION["products"]) && count($_SESSION["products"])>0) { 
+                                if(isset($_SESSION["products"]) && count($_SESSION["products"])>0 && isset($_SESSION["email"]) ) { 
                                 ?>
                                     <table class="table" id="shopping-cart-results">
                                     <thead>
@@ -77,7 +86,12 @@ include('includes/db.php');
                                 <?php } ?>
                                 </tr>
                                 </tfoot>			
-                                <?php		
+                                <?php
+                                }elseif(!isset($_SESSION["email"]))	{
+                                    $link_address = 'connexion.php';
+                                    echo "<a href='".$link_address."'>PLEASE SIGN IN BEFORE</a>";
+
+
                                 } else {
                                     echo "Your Cart is empty";
                                 ?>

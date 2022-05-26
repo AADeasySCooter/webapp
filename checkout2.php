@@ -5,7 +5,7 @@ include('includes/db.php');
 
 
 ?>
-
+<!DOCTYPE html>
 
 <br><br><br><br>
     <section id = "about" class = "py-5">
@@ -25,6 +25,8 @@ include('includes/db.php');
                                     <tr>
                                     <th>Delivery address</th>
                                     
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
                                     <th>&nbsp;</th>
                                     
                                     </tr>
@@ -53,8 +55,9 @@ include('includes/db.php');
                                     <th>Price</th>
                                     <th>Quantity</th>
                                     <th>Subtotal</th>
-                                    <th>Delete</th>
                                     <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                    
                                     
                                     </tr>
                                     </thead>
@@ -75,9 +78,7 @@ include('includes/db.php');
                                     <td><?php echo $product_price; ?></td>
                                     <td><input type="number" data-code="<?php echo $product_code; ?>" class="form-control text-center quantity" value="<?php echo $product_qty; ?>"></td>
                                     <td><?php echo $currency; echo sprintf("%01.2f", ($product_price * $product_qty)); ?></td>
-                                    <td>				
-                                    <a href="#" class="btn btn-danger " data-code="<?php echo $product_code; ?>"><span class='bi bi-trash'></span></a>
-                                    </td>
+                                    
                                     </tr>
                                 <?php } ?>
                                 <tfoot>
@@ -93,12 +94,58 @@ include('includes/db.php');
 
                                 <td class="text-center cart-products-total"><strong>Total <?php echo $currency.sprintf("%01.2f",$total); ?></strong></td>
 
-                                <?php
-                                   $getProduct = $bdd->query("SELECT id FROM users where email= '".$_SESSION['email']."'");
-                    
-                                    ($product = $getProduct->fetch()) ?>
+                        
 
-                                <td><a href="checkout1.php" class="btn btn-success btn-block">Payment <i class="glyphicon glyphicon-menu-right"></i></a></td>
+                                    <td>
+                                      <div id="smart-button-container">
+                                        <div style="text-align: center;">
+                                            <div id="paypal-button-container"></div>
+                                        </div>
+                                        </div>
+                                    <script src="https://www.paypal.com/sdk/js?client-id=AQ3NsNMK2ULmNXhPR8ndLJvL5yeXYqY6ibCb5GmgPZNoPpp9JJZOSvy_l_fuAGVQbV4HaYqr-BJCO8Fy&enable-funding=venmo&currency=EUR" data-sdk-integration-source="button-factory"></script>
+                                    <script>
+                                        function initPayPalButton() {
+                                        paypal.Buttons({
+                                            style: {
+                                            shape: 'rect',
+                                            color: 'gold',
+                                            layout: 'vertical',
+                                            label: 'paypal',
+                                            
+                                            },
+
+                                            createOrder: function(data, actions) {
+                                            return actions.order.create({
+                                                purchase_units: [{"amount":{"currency_code":"EUR","value": <?= $total ;?>}}]
+                                            });
+                                            },
+
+                                            onApprove: function(data, actions) {
+                                            return actions.order.capture().then(function(orderData) {
+                                                
+                                                // Full available details
+                                                console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+                                                // Show a success message within this page, e.g.
+                                                const element = document.getElementById('paypal-button-container');
+                                                element.innerHTML = '';
+                                                element.innerHTML = '<h3>Thank you for your payment!</h3>';
+
+                                                // Or go to another URL:  actions.redirect('thank_you.html');
+                                                
+                                            });
+                                            },
+
+                                            onError: function(err) {
+                                            console.log(err);
+                                            }
+                                        }).render('#paypal-button-container');
+                                        }
+                                        initPayPalButton();
+                                    </script>
+                                    </td>
+                                
+                                 <!-- <td><a href="checkout1.php" class="btn btn-success btn-block">Payment <i class="glyphicon glyphicon-menu-right"></i></a></td>-->
 
                                 
                                 <?php } ?>
@@ -124,5 +171,10 @@ include('includes/db.php');
 
                      </table>
                    </div>
+
+
+
+
+
         </div>
     </section>
