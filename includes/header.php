@@ -23,16 +23,21 @@
                 
                     </i>
                 </button>
+
+                    <form action="post" >
+                    <button onclick="window.location.href='index.php?lang=en'" type = "button" class = "btn position-relative">
+                    🇺🇸
+                    </button>
+
+                    </form>
     
-                
-                <button type = "button" class = "btn position-relative">
-                🇺🇸
-                </button>
 
 
-                <button type = "button" class = "btn position-relative">
-                🇫🇷  
-                </button>
+                    <form action="post">
+                    <button onclick="window.location.href='index.php?lang=fr'" type = "button" class = "btn position-relative">
+                    🇫🇷  
+                    </button>
+                    </form>
             
                
             </div>

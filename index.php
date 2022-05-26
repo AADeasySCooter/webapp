@@ -14,6 +14,7 @@ include('includes/db.php');
 
     <!-- end of navbar -->
      <!-- Visible only if logged in -->
+     <?php include('includes/message.php'); ?>
     
 
     <!-- header -->

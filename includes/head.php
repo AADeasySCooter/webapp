@@ -1,7 +1,6 @@
 <?php 
 session_start();
 include('includes/db.php');
-
 if (isset($_SESSION['email'])){
     $recupProfil =$bdd->prepare("SELECT * FROM users WHERE email= '".$_SESSION['email']."'");     
     $recupProfil->execute();
@@ -22,7 +21,7 @@ if (isset($_SESSION['email'])){
     <meta charset="UTF-8">
     <!-- after 3days logout user-->
     <meta http-equiv="refresh" content="260000;url=deconnexion.php" />
-    
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
