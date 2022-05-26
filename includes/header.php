@@ -13,25 +13,27 @@
             <div class = "order-lg-2 nav-btns">
                 <button onclick="window.location.href='card.php'" type = "button" class = "btn position-relative">
                     <i class = "fa fa-shopping-cart" >      
-                    <span class="cart-item" id="cart-container"><?php 
+                    <span class="position-absolute top-0 start-100 translate-middle badge bg-light bg-dark" id="cart-container"><?php 
                     if(isset($_SESSION["products"])){
                         echo count($_SESSION["products"]); 
                     } else {
-                        echo 0; 
+                       
                     }
                     ?></span>
                 
                     </i>
-
-                    
-                   <!-- <span class = "position-absolute top-0 start-100 translate-middle badge bg-primary">5</span> -->
+                </button>
+    
+                
+                <button type = "button" class = "btn position-relative">
+                🇺🇸
                 </button>
 
-                
-                <!-- <button type = "button" class = "btn position-relative">
-                    <i class = "fa fa-heart"></i>
-                    <span class = "position-absolute top-0 start-100 translate-middle badge bg-primary">2</span>
-                </button>  -->
+
+                <button type = "button" class = "btn position-relative">
+                🇫🇷  
+                </button>
+            
                
             </div>
 

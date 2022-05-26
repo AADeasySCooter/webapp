@@ -151,14 +151,7 @@ include('includes/db.php');
     </section>
     <!-- end of blogs -->
   <!-- blogs -->
-  <?php
-    $q = "SELECT id FROM users WHERE email = '" . $_SESSION['email'] . "' ";
-    $req = $bdd->prepare($q);
-    $req->execute();
-    $result = $req->fetch(); 
-    $user_id = $result['id'];
-    var_dump($user_id)
- ?>
+ 
     <section id = "blogs" class = "py-5">
         <div class = "container">
             <div class = "title text-center py-5">

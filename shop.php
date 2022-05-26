@@ -87,7 +87,11 @@ include('includes/db.php');
 
 
                                             <input name="product_code" type="hidden" value="<?php echo $product["product_code"]; ?>">
-                                            <button  class="btn btn-primary btn-sm btn-block" type="submit">Add to Cart</button>
+                                            <input name="product_image" type="hidden" value="<?php echo $product["product_image"]; ?>">
+                                            <input name="product_name" type="hidden" value="<?php echo $product["product_name"]; ?>">
+                                            <input name="product_price" type="hidden" value="<?php echo $product["product_price"]; ?>">
+                                          
+                                            <button   class="btn btn-primary btn-sm btn-block" type="submit">Add to Cart</button>
                                            
 
                                             <?php 

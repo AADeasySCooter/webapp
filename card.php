@@ -51,6 +51,9 @@ var_dump($user_id);
                                         $product_qty = $product["product_qty"];				
                                         $subtotal = ($product_price * $product_qty);
                                         $total = ($total + $subtotal);
+
+
+            
                                     ?>
                                     <tr>
                                     <td><?php echo $product_name;  ?></td>
