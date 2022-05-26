@@ -6,9 +6,8 @@
                 <img src = "images/Logo_EASYSCOOTER-removebg-preview.png" alt = "site icon">
                 <span class = "text-uppercase fw-lighter ms-2">ELECTRACKK</span>
             </a>
+            
 
-
-              
 
             <div class = "order-lg-2 nav-btns">
                 <button onclick="window.location.href='card.php'" type = "button" class = "btn position-relative">
@@ -24,22 +23,20 @@
                     </i>
                 </button>
 
-                    <form action="post" >
-                    <button onclick="window.location.href='index.php?lang=en'" type = "button" class = "btn position-relative">
-                    🇺🇸
-                    </button>
-
-                    </form>
+                    
     
 
 
-                    <form action="post">
+                    
                     <button onclick="window.location.href='index.php?lang=fr'" type = "button" class = "btn position-relative">
                     🇫🇷  
                     </button>
-                    </form>
+                    <button onclick="window.location.href='index.php?lang=fr'" type = "button" class = "btn position-relative">
+                    🇺🇸
+                    </button>
+                    
             
-               
+              
             </div>
 
             <button class = "navbar-toggler border-0" type = "button" data-bs-toggle = "collapse" data-bs-target = "#navMenu">
