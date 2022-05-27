@@ -76,17 +76,4 @@ include('includes/header.php');
 
 </html>
 
-                                    <form  method="post" action="verification.php" enctype="multipart/form-data" class="form1">
-                                        <div class="mb-3">
-                                        <label class="form-label">Email</label>
-                                            <input type="email" name="email" class="form-control" placeholder="Your email" value="<?php echo isset($_COOKIE['email']) ? $_COOKIE['email'] : ''; ?>">
-                                        </div>
-                                        <div class="mb-3">
-                                        <label class="form-label">Password</label>
-                                            <input type="password" name="password" class="form-control" placeholder="your password">
-                                        </div>
-                                            <input type="submit" class="btn btn-primary" value="sign in" >
-                                            <hr />
-                                            <a href="inscription.php">Sign up</a>
-                                            <button onclick="window.location.href='resetPassword.php'" type="button" class="btn btn-link">Reset Password</button>
-                                        </form>
+                                 
