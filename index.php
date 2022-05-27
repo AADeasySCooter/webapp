@@ -216,6 +216,147 @@ include('includes/db.php');
     </section>
     <!-- end of blogs -->
 
+    <section id = "newsletter" class = "py-5">
+           <div class = "title text-center py-5">
+                <h2 class = "position-relative d-inline-block">Pricing Plans</h2>
+            </div>
+    <div class="tab-content pricing-tab-content" id="pricing-tab-content">
+        <div class="tab-pane active" id="monthly" role="tabpanel" aria-labelledby="monthly-tab">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card pricing-card">
+                <div class="card-body">
+                  <h3 class="pricing-plan-title d-flex align-items-center">Student <span class="badge badge-pill offer-badge ml-auto">20% off</span></h3>
+                  <p class="h1 pricing-plan-original-cost"><del>$23.00</del></p>
+                  <p class="h1 pricing-plan-cost">10.99 <span class="currency">USD</span></p>
+                  <ul class="pricing-plan-features">
+                    <li>5GB file storage</li>
+                    <li>File manager</li>
+                    <li>Upgrade any time</li>
+                  </ul>
+                  <a href="#!" class="btn pricing-plan-purchase-btn">Get started</a>
+                  <div class="text-center">
+                    <a href="#!" class="pricing-plan-link">Learn more</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card pricing-card pricing-card-highlighted">
+                <div class="card-body">
+                  <h3 class="pricing-plan-title d-flex align-items-center">Team <span
+                      class="badge badge-pill offer-badge ml-auto">20% off</span></h3>
+                  <p class="h1 pricing-plan-original-cost"><del>$23.00</del></p>
+                  <p class="h1 pricing-plan-cost">10.99 <span class="currency">USD</span></p>
+                  <ul class="pricing-plan-features">
+                    <li>5GB file storage</li>
+                    <li>File manager</li>
+                    <li>Upgrade any time</li>
+                    <li>5GB file storage</li>
+                    <li>File manager</li>
+                  </ul>
+                  <a href="#!" class="btn pricing-plan-purchase-btn">Get started</a>
+                  <div class="text-center">
+                    <a href="#!" class="pricing-plan-link">Learn more</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card pricing-card">
+                <div class="card-body">
+                  <h3 class="pricing-plan-title d-flex align-items-center">Enterprise <span
+                      class="badge badge-pill offer-badge ml-auto">20% off</span></h3>
+                  <p class="h1 pricing-plan-original-cost"><del>$23.00</del></p>
+                  <p class="h1 pricing-plan-cost">10.99 <span class="currency">USD</span></p>
+                  <ul class="pricing-plan-features">
+                    <li>5GB file storage</li>
+                    <li>File manager</li>
+                    <li>Upgrade any time</li>
+                    <li>5GB file storage</li>
+                    <li>File manager</li>
+                    <li>Upgrade any time</li>
+                    <li>5GB file storage</li>                  
+                  </ul>
+                  <a href="#!" class="btn pricing-plan-purchase-btn">Get started</a>
+                  <div class="text-center">
+                    <a href="#!" class="pricing-plan-link">Learn more</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="yearly" role="tabpanel" aria-labelledby="yearly-tab">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card pricing-card">
+                <div class="card-body">
+                  <h3 class="pricing-plan-title d-flex align-items-center">Student <span
+                      class="badge badge-pill offer-badge ml-auto">20% off</span></h3>
+                  <p class="h1 pricing-plan-original-cost"><del>$23.00</del></p>
+                  <p class="h1 pricing-plan-cost">10.99 <span class="currency">USD</span></p>
+                  <ul class="pricing-plan-features">
+                    <li>5GB file storage</li>
+                    <li>File manager</li>
+                    <li>Upgrade any time</li>
+                  </ul>
+                  <a href="#!" class="btn pricing-plan-purchase-btn">Get started</a>
+                  <div class="text-center">
+                    <a href="#!" class="pricing-plan-link">Learn more</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card pricing-card pricing-card-highlighted">
+                <div class="card-body">
+                  <h3 class="pricing-plan-title d-flex align-items-center">Team <span
+                      class="badge badge-pill offer-badge ml-auto">20% off</span></h3>
+                  <p class="h1 pricing-plan-original-cost"><del>$23.00</del></p>
+                  <p class="h1 pricing-plan-cost">10.99 <span class="currency">USD</span></p>
+                  <ul class="pricing-plan-features">
+                    <li>5GB file storage</li>
+                    <li>File manager</li>
+                    <li>Upgrade any time</li>
+                    <li>5GB file storage</li>
+                    <li>File manager</li>
+                  </ul>
+                  <a href="#!" class="btn pricing-plan-purchase-btn">Get started</a>
+                  <div class="text-center">
+                    <a href="#!" class="pricing-plan-link">Learn more</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card pricing-card">
+                <div class="card-body">
+                  <h3 class="pricing-plan-title d-flex align-items-center">Enterprises <span
+                      class="badge badge-pill offer-badge ml-auto">20% off</span></h3>
+                  <p class="h1 pricing-plan-original-cost"><del>$23.00</del></p>
+                  <p class="h1 pricing-plan-cost">10.99 <span class="currency">USD</span></p>
+                  <ul class="pricing-plan-features">
+                    <li>5GB file storage</li>
+                    <li>File manager</li>
+                    <li>Upgrade any time</li>
+                    <li>5GB file storage</li>
+                    <li>File manager</li>
+                    <li>Upgrade any time</li>
+                    <li>5GB file storage</li>
+                  </ul>
+                  <a href="#!" class="btn pricing-plan-purchase-btn">Get started</a>
+                  <div class="text-center">
+                    <a href="#!" class="pricing-plan-link">Learn more</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- about us -->
     <section id = "about" class = "py-5">
         <div class = "container">
@@ -242,29 +383,7 @@ include('includes/db.php');
     <!-- end of about us -->
 
  
-    <!-- end of popular -->
 
-    <!-- newsletter -->
-    <section id = "newsletter" class = "py-5">
-        <div class = "container">
-            <div class = "d-flex flex-column align-items-center justify-content-center">
-                <div class = "title text-center pt-3 pb-5">
-                    <h2 class = "position-relative d-inline-block ms-4">Newsletter Subscription</h2>
-                </div>
-
-                <p class = "text-center text-muted">put your email if you want to receive some reduce</p>
-                <fom method="post"  action="sendMail.php" enctype="multipart/form-data" >
-                <div class = "input-group mb-3 mt-3">
-                    
-                    <input type = "text" name="eemail" class = "form-control" placeholder="Enter Your Email ...">
-                    <input type="submit" class = "btn btn-primary" name="sendemail" >
-                    
-                </div>
-                </fom>
-            </div>
-        </div>
-    </section>
-    <!-- end of newsletter -->
 
     <!-- footer -->
     <footer class = "bg-dark py-5">
