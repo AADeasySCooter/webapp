@@ -357,7 +357,7 @@ include('includes/db.php');
       </div>
     </section>
 
-    <!-- about us -->
+    <!-- about
     <section id = "about" class = "py-5">
         <div class = "container">
         <?php 
@@ -380,7 +380,7 @@ include('includes/db.php');
                  } ?>
         </div>
     </section>
-    <!-- end of about us -->
+    of about us -->
 
  
 
