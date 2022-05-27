@@ -65,7 +65,7 @@
                                 <a class = "nav-link text-uppercase text-dark" href = "profile.php">profile</a>
                             </li>';
                         echo '<li class = "nav-item px-2 py-2">
-                                    <a class = "nav-link text-uppercase text-dark" href = "deconnexion.php">Loggout</a>
+                                    <a class = "nav-link text-uppercase text-dark" href = "deconnexion.php">Logout</a>
                              </li>';
 
                              
@@ -77,7 +77,7 @@
 
 
                                         echo '<li class = "nav-item px-2 py-2">
-                                                <a class = "nav-link text-uppercase text-dark" href = "Admin/iindex.php">Admin Pannel</a>
+                                                <a class = "nav-link text-uppercase text-dark" href = "Admin/iindex.php">Admin Panel</a>
                                         </li>';
                                 
                                    

@@ -87,6 +87,7 @@ include('includes/db.php');
                                 <tr>
                                 <td><a href="shop.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Continue Shopping</a></td>
                                 <td colspan="2"></td>
+                                <td><a href="receipt.php" class="btn btn-warning"></i> Download receipt</a></td>
                                 <?php 
                                 if(isset($total)) {
                                 ?>	

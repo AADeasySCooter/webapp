@@ -47,7 +47,7 @@ include('includes/db.php');
 
                                 <div class="card mb-2">
                                     <div class = "collection-img position-relative">
-                                    <?php echo '<img src="images/' . $product['product_image'] . '" alt="Image du produit" class = "w-100"  >' ?>
+                                    <?php echo '<img src="images/' . $product['product_image'] . '" alt="Image du produit" class = "w-100"   >' ?>
                                     </div>
                                     <div class = "text-center">
                                             

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: May 23, 2022 at 12:08 PM
+-- Generation Time: May 27, 2022 at 11:52 AM
 -- Server version: 5.7.34
 -- PHP Version: 8.0.8
 
@@ -62,7 +62,44 @@ CREATE TABLE `articles` (
 --
 
 INSERT INTO `articles` (`id`, `title`, `description`, `date_create`, `autor`, `image`) VALUES
-(2, 'testt', 'Footballeur professionnel à Brest, formé aux Girondins, Paul Lasne publie le 1er février “MurMures”, suite de courts textes sensibles et poétiques écrits pendant le confinement..', '2022-04-26 11:09:49', 'gavin', 'ducati-urban-e-mobility-trottinette-electrique-pro-i-evo-urbaanews.jpeg');
+(2, 'testt', 'Footballeur professionnel à Brest, formé aux Girondins, Paul Lasne publie le 1er février “MurMures”, suite de courts textes sensibles et poétiques écrits pendant le confinement..', '2022-04-26 11:09:49', 'gavinnn', 'liberté.jpeg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_name` varchar(255) NOT NULL,
+  `product_qty` int(11) NOT NULL,
+  `product_price` int(11) NOT NULL,
+  `product_image` varchar(255) NOT NULL,
+  `product_code` varchar(255) NOT NULL,
+  `product_description` varchar(255) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `id` int(11) NOT NULL,
+  `product_id` float(10,2) NOT NULL,
+  `transaction_id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `payment_amount` float(10,2) NOT NULL,
+  `currency_code` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
+  `payment_status` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `invoice_id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `product_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `createdtime` datetime DEFAULT NULL,
+  `users_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -107,17 +144,17 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `product_name`, `product_description`, `product_price`, `product_image`, `created_at`, `product_code`) VALUES
-(2, 'test', 'test', 123, 'liberté.jpeg', '2022-04-18 16:18:21', 'AAAA1'),
-(3, 'test', 'test', 123, 'liberté.jpeg', '2022-04-18 16:18:21', 'AAAA2'),
-(4, 'test', 'test', 2, 'liberté.jpeg', '2022-04-18 16:18:21', 'AAAA3'),
-(5, 'test', 'test', 2, 'liberté.jpeg', '2022-04-18 16:18:21', 'AAAA4'),
-(6, 'test', 'test', 2, 'liberté.jpeg', '2022-04-18 16:18:21', 'AAAA5'),
-(7, 'test', 'test', 2, 'liberté.jpeg', '2022-04-18 16:18:21', 'AAAA6'),
-(8, 'test', '12', 5, 'liberté.jpeg', '2022-04-18 16:18:21', 'AAAA7'),
-(9, 'test', '12', 5, 'liberté.jpeg', '2022-04-18 16:18:21', 'AAAA8'),
-(24, 'test23333', 'testttttt', 123, 'liberté.jpeg', '2022-04-18 16:19:05', 'AAAA9'),
-(25, 'test213', 'code bleu', 2, 'liberté.jpeg', '2022-05-23 10:22:56', 'AAA10'),
-(26, 'test', 'test2', 23, 'liberté.jpeg', '2022-05-23 10:23:08', 'AAA111');
+(2, 'test', 'test', 123, 'casque-velo-trottinette-noir.jpeg', '2022-04-18 16:18:21', 'AAAA1'),
+(3, 'test', 'test', 123, 'casque-velo-trottinette-noir.jpeg', '2022-04-18 16:18:21', 'AAAA2'),
+(4, 'test', 'test', 2, 'casque-velo-trottinette-noir.jpeg', '2022-04-18 16:18:21', 'AAAA3'),
+(5, 'test', 'test', 1, 'casque-velo-trottinette-noir.jpeg', '2022-04-18 16:18:21', 'AAAA4'),
+(6, 'test', 'test', 2, 'casque-de-protection-urban-pour-trottinette-electrique-noir-tailles-s-m.jpeg', '2022-04-18 16:18:21', 'AAAA5'),
+(7, 'test', 'test', 2, 'casque-velo-trottinette-noir.jpeg', '2022-04-18 16:18:21', 'AAAA6'),
+(8, 'test', '12', 5, 'casque-velo-trottinette-noir.jpeg', '2022-04-18 16:18:21', 'AAAA7'),
+(9, 'test', '12', 5, 'casque-velo-trottinette-noir.jpeg', '2022-04-18 16:18:21', 'AAAA8'),
+(24, 'test23333', 'testttttt', 123, 'casque-de-protection-urban-pour-trottinette-electrique-noir-tailles-s-m.jpeg', '2022-04-18 16:19:05', 'AAAA9'),
+(25, 'test213', 'code bleu', 2, 'casque-de-protection-urban-pour-trottinette-electrique-noir-tailles-s-m.jpeg', '2022-05-23 10:22:56', 'AAA10'),
+(26, 'test', 'test2', 23, 'casque-de-protection-urban-pour-trottinette-electrique-noir-tailles-s-m.jpeg', '2022-05-23 10:23:08', 'AAA111');
 
 -- --------------------------------------------------------
 
@@ -201,13 +238,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `firstname`, `lastname`, `password`, `username`, `role_id`, `ip`, `date_sign`, `status`, `address`, `number`, `code_postal`, `ville`) VALUES
-(18, 'audesad@gmail.com', 'GAVIN', 'APERANO MOULOUNGUI', '137a531e5ae9513899625ced2dd46b6ec1e280df2b1c89699582039936cff731', NULL, 3, '::1', '2022-04-25 00:33:35', 1, 'AYH', '0635963171', '91300', 'MASSY'),
+(18, 'audesad@gmail.com', 'GAVIN', 'APERANO MOULOUNGUI', '5a5e0ad1454f7c3cade49bf623f9d71d956395e2e08153f7858d5561ad2d4e75', NULL, 3, '::1', '2022-04-25 00:33:35', 1, 'AYH', '0635963171', '91300', 'MASSY'),
 (22, 'audesan@icloud.com', 'hbfiz', 'jebr', 'be73eda70bc3e2b53e641a22606d1e66006713bdbe4d305ef2ff5b2f547c5244', NULL, 3, '::1', '2022-05-13 18:34:46', 1, NULL, NULL, NULL, NULL),
 (23, 'audesaddn@icloud.com', 'GAVINsvs', 'APERANO MOULOvUNGUI', 'decec1331842659e4448387694c54250015e73124bef178c7a5633f862b4aebd', NULL, 1, '::1', '2022-05-13 18:39:01', 1, NULL, NULL, NULL, NULL),
 (24, 'audesaddn@icFloud.com', 'GAVIN', 'APERANO MOULOUNGUI', 'bfe59019d932498ab1c4edc81a8bd52a8f6981224647891581751fb879a36bca', NULL, 3, '::1', '2022-05-13 18:39:40', 1, NULL, NULL, NULL, NULL),
-(30, 'aude6@icloud.com', 'GAVIN', 'APERANO MOULOUNGUI', '59a2489f07fb92fb96f6158a981c51cd99d995a298f72e8a368ff50e9b873a1e', NULL, 3, '::1', '2022-05-17 17:11:36', 1, NULL, NULL, NULL, NULL),
-(31, 'gavinaperano@gmail.com', 'GAVIN', 'APERANO MOULOUNGUI', 'bfe59019d932498ab1c4edc81a8bd52a8f6981224647891581751fb879a36bca', NULL, 3, '::1', '2022-05-18 19:47:55', 1, NULL, NULL, NULL, NULL),
-(32, 'gavina@gmail.com', 'GAVIN', 'APERANO MOULOUNGUI', 'bfe59019d932498ab1c4edc81a8bd52a8f6981224647891581751fb879a36bca', NULL, 3, '::1', '2022-05-23 13:16:57', 1, 'Avenue Émile Baudot', '0635963171', '91300', 'MASS');
+(31, 'gavinaperano@gmail.com', 'GAVIN', 'APERANO MOULOUNGUI', 'bfe59019d932498ab1c4edc81a8bd52a8f6981224647891581751fb879a36bca', NULL, 3, '::1', '2022-05-18 19:47:55', 1, 'Avenue Émile Baudot', '0635963171', '91300', 'MASSY'),
+(33, 'gavi@gmail.com', 'GAVIN', 'APERANO MOULOUNGUI', 'bfe59019d932498ab1c4edc81a8bd52a8f6981224647891581751fb879a36bca', NULL, 3, '::1', '2022-05-24 12:48:06', 1, NULL, NULL, NULL, NULL),
+(34, 'gavo@gmail.com', 'GAVIN', 'APERANO MOULOUNGUI', 'bfe59019d932498ab1c4edc81a8bd52a8f6981224647891581751fb879a36bca', NULL, 3, '::1', '2022-05-26 15:58:03', 1, 'Avenue Émile Baudot', '0635963171', '91300', 'MASSY');
 
 --
 -- Indexes for dumped tables
@@ -224,6 +261,19 @@ ALTER TABLE `About`
 --
 ALTER TABLE `articles`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idd` (`users_id`);
 
 --
 -- Indexes for table `permission`
@@ -278,6 +328,18 @@ ALTER TABLE `articles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
@@ -299,7 +361,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
