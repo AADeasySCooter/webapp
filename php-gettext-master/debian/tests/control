@@ -1,0 +1,2 @@
+Test-Command: phpunit tests
+Depends: gettext, phpunit, @

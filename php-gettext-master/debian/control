@@ -1,0 +1,29 @@
+Source: php-gettext
+Section: php
+Priority: optional
+Maintainer: Debian PHP PEAR Maintainers <pkg-php-pear@lists.alioth.debian.org>
+Uploaders: Marcelo Jorge Vieira <metal@debian.org>
+Build-Depends: debhelper-compat (= 13), phpunit
+Standards-Version: 4.6.0
+Homepage: https://launchpad.net/php-gettext/
+Vcs-Git: https://salsa.debian.org/php-team/pear/php-gettext.git
+Vcs-Browser: https://salsa.debian.org/php-team/pear/php-gettext
+Rules-Requires-Root: no
+
+Package: php-php-gettext
+Architecture: all
+Depends: ${misc:Depends}, php-pear, php-mbstring
+Description: read gettext MO files directly, without requiring anything other than PHP
+ The GNU gettext library is a widely used localization library, but in
+ order to use it with the PHP language, the system has to support the
+ desired locale, and library itself must be installed.
+ .
+ Since this is not always the case, PHP-gettext has been developed to be
+ able to read gettext MO files directly, without requiring anything other
+ than PHP.
+ .
+ Currently, it's usable if you develop most of the infrastructure for
+ choosing language on your own, because it's possible to use both
+ gettext() and ngettext() calls. In the near future, it should also be
+ fully compatible drop-in replacement for all of gettext functionality
+ written in PHP.

@@ -1,0 +1,21 @@
+From: James Valleroy <jvalleroy@mailbox.org>
+Date: Sat, 8 Jan 2022 19:11:57 -0500
+Subject: Use default_charset instead of mbstring.internal_encoding
+
+---
+ gettext.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/gettext.inc b/gettext.inc
+index c9f7dc0..423eb77 100644
+--- a/gettext.inc
++++ b/gettext.inc
+@@ -167,7 +167,7 @@ function _check_locale_and_function($function=false) {
+ function _get_codeset($domain=null) {
+     global $text_domains, $default_domain, $LC_CATEGORIES;
+     if (!isset($domain)) $domain = $default_domain;
+-    return (isset($text_domains[$domain]->codeset))? $text_domains[$domain]->codeset : ini_get('mbstring.internal_encoding');
++    return (isset($text_domains[$domain]->codeset))? $text_domains[$domain]->codeset : ini_get('default_charset');
+ }
+ 
+ /**

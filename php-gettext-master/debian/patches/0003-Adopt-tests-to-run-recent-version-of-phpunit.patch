@@ -1,0 +1,57 @@
+From: Sunil Mohan Adapa <sunil@medhas.org>
+Date: Wed, 17 Jun 2020 14:51:34 -0700
+Subject: Adopt tests to run recent version of phpunit
+
+Tests case be executed as 'make check' or as 'phpunit tests/'.
+
+Signed-off-by: Sunil Mohan Adapa <sunil@medhas.org>
+---
+ tests/LocalesTest.php | 3 ++-
+ tests/ParsingTest.php | 4 +++-
+ tests/PluralsTest.php | 3 ++-
+ 3 files changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/tests/LocalesTest.php b/tests/LocalesTest.php
+index 75ab2e8..fee758b 100644
+--- a/tests/LocalesTest.php
++++ b/tests/LocalesTest.php
+@@ -1,7 +1,8 @@
+ <?php
++use PHPUnit\Framework\TestCase;
+ require_once('gettext.inc');
+ 
+-class LocaleTest extends PHPUnit_Framework_TestCase
++class LocaleTest extends TestCase
+ {
+   public function test_setlocale()
+   {
+diff --git a/tests/ParsingTest.php b/tests/ParsingTest.php
+index 99bef84..2104f58 100644
+--- a/tests/ParsingTest.php
++++ b/tests/ParsingTest.php
+@@ -1,6 +1,8 @@
+ <?php
+ 
+-class ParsingTest extends PHPUnit_Framework_TestCase
++use PHPUnit\Framework\TestCase;
++
++class ParsingTest extends TestCase
+ {
+   public function test_extract_plural_forms_header_from_po_header()
+   {
+diff --git a/tests/PluralsTest.php b/tests/PluralsTest.php
+index 6b24d8d..e57a51c 100644
+--- a/tests/PluralsTest.php
++++ b/tests/PluralsTest.php
+@@ -70,9 +70,10 @@ in these Data Files or Software without prior written authorization of the
+ copyright holder.
+ */
+ 
++use PHPUnit\Framework\TestCase;
+ require_once('plurals.php');
+ 
+-class PluralsTest extends PHPUnit_Framework_TestCase {
++class PluralsTest extends TestCase {
+   public function evaluations_provider() {
+     return [
+       // Simple expressions

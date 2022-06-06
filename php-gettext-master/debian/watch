@@ -1,0 +1,2 @@
+version=4
+https://launchpad.net/php-gettext/+download .*/php-gettext-(.*).tar.gz

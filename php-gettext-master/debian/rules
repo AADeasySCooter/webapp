@@ -1,0 +1,10 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_install:
+	dh_install
+	# php-php-gettext: executable-not-elf-or-script
+	chmod 644 debian/php-php-gettext/usr/share/php/php-php-gettext/streams.php
+	chmod 644 debian/php-php-gettext/usr/share/php/php-php-gettext/gettext.php

@@ -1,0 +1,218 @@
+php-gettext (1.0.12-5) unstable; urgency=medium
+
+  * Team upload.
+  * Use default_charset instead of mbstring.internal_encoding
+    (Closes: #1000263)
+  * Set Standards-Version to 4.6.0
+
+ -- James Valleroy <jvalleroy@mailbox.org>  Sat, 08 Jan 2022 21:29:33 -0500
+
+php-gettext (1.0.12-4) unstable; urgency=medium
+
+  * Team upload.
+  * Add autopkgtest (Closes: #978473)
+
+ -- James Valleroy <jvalleroy@mailbox.org>  Sun, 17 Jan 2021 20:42:28 -0500
+
+php-gettext (1.0.12-3) unstable; urgency=medium
+
+  * Team upload.
+  * Adapt to recent version of PHPUnit (9) (Closes: #978378)
+  * Drop transitional package php-gettext (Closes: #940737)
+  * Add Rules-Requires-Root: no
+  * Bump debhelper compat version to 13
+  * Add upstream bug database and submit URL
+  * Update standards version to 4.5.1
+
+ -- James Valleroy <jvalleroy@mailbox.org>  Sun, 27 Dec 2020 15:56:17 -0500
+
+php-gettext (1.0.12-2) unstable; urgency=high
+
+  * Team upload.
+
+  [ Sunil Mohan Adapa ]
+  * Fix issue with plurals patch breaking localization for non-English
+    locales. Closes: #976135.
+
+ -- James Valleroy <jvalleroy@mailbox.org>  Wed, 02 Dec 2020 22:27:45 -0500
+
+php-gettext (1.0.12-1) unstable; urgency=low
+
+  * Team upload.
+
+  [ Marcelo Jorge Vieira ]
+  * d/control: Set Vcs-* to salsa.debian.org
+
+  [ James Valleroy ]
+  * Drop patch to ignore test results
+  * Apply patch to use custom parser for plural expressions (Closes: #851771)
+    - Thanks to Sunil Mohan Adapa <sunil@medhas.org> for the patch
+  * Apply patch to update test cases for recent phpunit
+    - Thanks to Sunil Mohan Adapa <sunil@medhas.org> for the patch
+  * Trim trailing whitespace.
+  * Use secure copyright file specification URI.
+  * Update watch file format version to 4.
+  * Bump debhelper from deprecated 9 to 12.
+  * Set debhelper-compat version in Build-Depends.
+  * Change priority extra to priority optional.
+  * Set upstream metadata fields: Repository, Repository-Browse.
+  * Remove Priority on php-gettext that duplicates source.
+
+ -- James Valleroy <jvalleroy@mailbox.org>  Thu, 19 Nov 2020 19:41:37 -0500
+
+php-gettext (1.0.12-0.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * New upstream release:
+    - throw an exception when select_string/ngettext
+      functions get non-numeric parameter
+      Closes: #851770 (CVE-2015-8980)
+    - do not assume mbstring functions are always there,
+      pass text through if they aren't
+    - add 'sign' rule to build system
+  * Add missing phpunit build-dependency so that tests
+    actually get run
+
+ -- Jonathan Wiltshire <jmw@debian.org>  Sun, 29 Jan 2017 15:13:07 +0000
+
+php-gettext (1.0.11-4) unstable; urgency=high
+
+  * php-php-gettext (after rename) doesn't ship the actual code
+    (Closes: #836815)
+  * Depend on php-mbstring (LP: #1600612) (Closes: #830702)
+    Thanks Richard Laager <rlaager@wiktel.com>
+  * Fix deprecated constructors to avoid warnings (Closes: #830699)
+    (LP: #1522900); Thanks Richard Laager <rlaager@wiktel.com>
+  * Remove debian/README.source (3.0 (quilt) source package)
+
+ -- Marcelo Jorge Vieira <metal@debian.org>  Sat, 10 Sep 2016 20:27:12 -0300
+
+php-gettext (1.0.11-3) unstable; urgency=medium
+
+  * Fixed debian/compat with debhelper 9
+  * Updated Standards-Version to 3.9.8 (no changes)
+  * Moving this package to pkg-php-pear team
+  * Rename the binary package to php-php-gettext
+
+ -- Marcelo Jorge Vieira <metal@debian.org>  Sat, 21 May 2016 20:28:36 -0300
+
+php-gettext (1.0.11-2) unstable; urgency=medium
+
+  * Bump debhelper to 9 and depend on php-pear instead of php5 | php5-cli.
+    Thanks Ondřej Surý <ondrej@debian.org>
+
+ -- Marcelo Jorge Vieira <metal@debian.org>  Mon, 28 Dec 2015 16:52:12 -0300
+
+php-gettext (1.0.11-1) unstable; urgency=low
+
+  * New Upstream version
+    + Using php-gettext in E_STRICT mode displays warning (Closes: #639352)
+  * Fixed watch file
+  * Minimizing rules file
+  * phpunit FTBFS, so I'm ignoring it in Makefile
+    + See #628349 and #607372 for details.
+  * Updated Standards-Version to 3.9.3
+    + Machine-readable debian/copyright version 1.0
+
+ -- Marcelo Jorge Vieira (metal) <metal@debian.org>  Thu, 08 Mar 2012 19:54:30 -0300
+
+php-gettext (1.0.10-1) unstable; urgency=low
+
+  * New Upstream version
+    - Reverted "Fixed deprecated eregi function" patch;
+    - Added phpunit as Build-Depends;
+    - Tests failed when I built php-gettext in a clean chroot;
+      To fix it, I've unset the LC_ALL variable in LocalesTest.php file.
+  * Switch to dpkg-source 3.0 (quilt) format
+
+ -- Marcelo Jorge Vieira (metal) <metal@debian.org>  Sat, 27 Mar 2010 14:47:20 -0300
+
+php-gettext (1.0.9-2) unstable; urgency=low
+
+  * Fixed deprecated eregi function; As of PHP 5.3.0,
+    the regex extension is deprecated in favor of the PCRE extension.
+  * Updated Standards-Version to 3.8.4 (no changes)
+  * Changing my email for Debian address
+  * Removed DM-Upload-Allowed field
+  * Changed VCS fields to my new account in Alioth
+
+ -- Marcelo Jorge Vieira (metal) <metal@debian.org>  Sun, 14 Mar 2010 12:27:14 -0300
+
+php-gettext (1.0.9-1) unstable; urgency=low
+
+  * New Upstream version
+    - Removed all patches, because was applied upstream
+  * Updated Standards-Version to 3.8.3
+  * Updated watch file to new upstream host
+  * Added AUTHORS in docs file
+  * Updated year and copyright holders
+  * Updated upstream-source field in copyright file
+  * Updated Homepage field in control file
+
+ -- Marcelo Jorge Vieira (metal) <metal@alucinados.com>  Wed, 30 Dec 2009 14:02:58 -0200
+
+php-gettext (1.0.7-8) unstable; urgency=low
+
+  * Changed section from 'web' to 'php'
+  * Updated Standards-Version to 3.8.1
+  * Fixes debian/rules
+      debian/rules did not provide a build-arch or build-indep neither it
+      built the same binary package by only running the binary target.
+
+ -- Marcelo Jorge Vieira (metal) <metal@alucinados.com>  Sun, 14 Jun 2009 20:40:42 -0300
+
+php-gettext (1.0.7-7) unstable; urgency=low
+
+  * Added VCS fields in control file
+  * Removing cdbs references and bumping package to debhelper 7
+  * Fixed patches headers
+  * Added quilt support
+  * Added DM-Upload-Allowed control field
+  * Added 'php5-cli or php5' as dependency
+  * Moving examples from install debhelper file to examples debhelper file
+  * Added patch to fix failures when E_STRICT is active (Closes: #518007);
+    Thanks Arthur Taylor
+  * Added patch to fix MakeFile (added clean target)
+
+ -- Marcelo Jorge Vieira (metal) <metal@alucinados.com>  Wed, 11 Mar 2009 19:20:14 -0300
+
+php-gettext (1.0.7-6) unstable; urgency=low
+
+  * Updated copyright
+  * Fixed bashism in /bin/sh script (Closes: #489639)
+  * Updated Standards-Version to 3.8.0
+
+ -- Marcelo Jorge Vieira (metal) <metal@alucinados.com>  Tue, 15 Jul 2008 14:31:54 -0300
+
+php-gettext (1.0.7-5) unstable; urgency=low
+
+  * Updated Standards-Version to 3.7.3
+  * Fixed copyright-without-copyright-notice
+
+ -- Marcelo Jorge Vieira (metal) <metal@alucinados.com>  Thu, 06 Mar 2008 20:00:07 -0300
+
+php-gettext (1.0.7-4) unstable; urgency=low
+
+  * Added watch file
+
+ -- Marcelo Jorge Vieira (metal) <metal@alucinados.com>  Tue, 23 Oct 2007 21:55:50 -0200
+
+php-gettext (1.0.7-3) unstable; urgency=low
+
+  * Removed php4 from control depends
+
+ -- Marcelo Jorge Vieira (metal) <metal@alucinados.com>  Thu, 13 Sep 2007 20:03:46 -0300
+
+php-gettext (1.0.7-2) unstable; urgency=low
+
+  * Description makes subjective claims (Closes: #377359)
+  * Added homepage link in description
+
+ -- Marcelo Jorge Vieira (metal) <metal@alucinados.com>  Wed, 25 Oct 2006 13:57:00 -0300
+
+
+php-gettext (1.0.7-1) unstable; urgency=low
+
+  * Initial release (Closes: #373274)
+
+ -- Marcelo Jorge Vieira (metal) <metal@alucinados.com>  Wed, 14 Jun 2006 13:39:41 -0300

@@ -28,10 +28,10 @@
 
 
                     
-                    <button onclick="window.location.href='index.php?lang=fr'" type = "button" class = "btn position-relative">
+                    <button onclick="window.location.href='index.php?lang=fr'" id="fr" type = "button" class = "btn position-relative">
                     🇫🇷  
                     </button>
-                    <button onclick="window.location.href='index.php?lang=fr'" type = "button" class = "btn position-relative">
+                    <button onclick="window.location.href='index.php?lang=fr'" id="en" type = "button" class = "btn position-relative">
                     🇺🇸
                     </button>
                     
@@ -55,18 +55,20 @@
                         <?php
                     if(isset($_SESSION['email'])){
                         // L'utilisateur est connecté
-                        echo '<li class = "nav-item px-2 py-2">
-                                <a class = "nav-link text-uppercase text-dark" href = "index.php">home</a>
-                            </li>';
-                        echo '<li class = "nav-item px-2 py-2">
-                                    <a class = "nav-link text-uppercase text-dark" href = "shop.php">shop</a>
-                             </li>';
-                        echo '<li class = "nav-item px-2 py-2">
-                                <a class = "nav-link text-uppercase text-dark" href = "profile.php">profile</a>
-                            </li>';
-                        echo '<li class = "nav-item px-2 py-2">
-                                    <a class = "nav-link text-uppercase text-dark" href = "deconnexion.php">Logout</a>
-                             </li>';
+                        ?>
+                        <li class = "nav-item px-2 py-2">
+                                <a class = "nav-link text-uppercase text-dark" href = "index.php"><?= _('home')?></a>
+                            </li>
+                        <li class = "nav-item px-2 py-2">
+                                    <a class = "nav-link text-uppercase text-dark" href = "shop.php"><?= _('shop')?></a>
+                             </li>
+                        <li class = "nav-item px-2 py-2">
+                                <a class = "nav-link text-uppercase text-dark" href = "profile.php"><?= _('profile')?></a>
+                            </li>
+                        <li class = "nav-item px-2 py-2">
+                                    <a class = "nav-link text-uppercase text-dark" href = "deconnexion.php"><?= _('Logout')?></a>
+                             </li>
+                        <?php
 
                              
                                 if (isset($_SESSION['email'])){
@@ -75,10 +77,12 @@
                                     $voirProfil =$recupProfil->fetch();
                                     if($voirProfil["role_id"] == 3){
 
-
-                                        echo '<li class = "nav-item px-2 py-2">
-                                                <a class = "nav-link text-uppercase text-dark" href = "Admin/iindex.php">Admin Panel</a>
-                                        </li>';
+                                        ?>
+                                         <li class = "nav-item px-2 py-2">
+                                                <a class = "nav-link text-uppercase text-dark" href = "Admin/iindex.php"><?= _('Admin Panel')?></a>
+                                        </li>
+                                        <?php
+                                        
                                 
                                    
                                 
@@ -90,15 +94,15 @@
                     }else{
                         ?>
                         <li class = "nav-item px-2 py-2">
-                        <a class = "nav-link text-uppercase text-dark" href = "index.php">home</a>
+                        <a class = "nav-link text-uppercase text-dark" href = "index.php"><?= _('home')?></a>
                     </li>
                    
                     <li class = "nav-item px-2 py-2 border-0">
-                        <a class = "nav-link text-uppercase text-dark" href = "shop.php">shop</a>
+                        <a class = "nav-link text-uppercase text-dark" href = "shop.php"><?= _('shop')?></a>
                     </li>
                    
                     <li class = "nav-item px-2 py-2 border-0">
-                        <a class = "nav-link text-uppercase text-dark" href = "connexion.php">sign up/in</a>
+                        <a class = "nav-link text-uppercase text-dark" href = "connexion.php"><?= _('sign up/in')?></a>
                     </li>
                     <?php
                     }

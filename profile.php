@@ -34,21 +34,7 @@
                                         email : <?= $voirProfil['email'] ?>
                                      </div>
                                      <?php
-                                     echo " 
-                                       
-
-                                     <br><br><br><br>
-                                     <div id='box'>
-                                          <h1>Attention!</h1>
-                                          <p>You are going to delete this user permanently.</p>
-                                          <a class='close' href='DeleteUser.php?id=".$voirProfil['id']."' title='".$voirProfil['id']."'>Delete</a> 
-                                     </div>     
-                                     "
-                                     
-                                     ?>
-                                    <?php
-
-                                    if($voirProfil["role_id"] == 3){
+                                      if($voirProfil["role_id"] == 3){
 
 
                                         echo ' role : ADMINISTRATOR';
@@ -58,6 +44,34 @@
 
 
                                     }
+                                      include('includes/message.php'); 
+
+                                     echo " 
+                                     
+                                    
+
+                                     <br><br><br><br>
+                                     
+                                     <div id='box'>
+                                          <h1>Change your data</h1>
+                                          <p>You can change rour data .</p>
+                                          <a class='link-warning' href='updateUser.php?id=".$voirProfil['id']."' title='".$voirProfil['id']."'>Update</a> 
+                                     </div> 
+                                     <hr>
+                                       
+
+                                     <br><br><br><br>
+                                     <div id='box'>
+                                          <h1>Attention!</h1>
+                                          <p>You are going to delete this user permanently.</p>
+                                          <a class='link-danger' href='DeleteUser.php?id=".$voirProfil['id']."' title='".$voirProfil['id']."'>Delete</a> 
+                                     </div>     
+                                     "
+                                     
+                                     ?>
+                                    <?php
+
+                                    
                                 
                                    
                                 

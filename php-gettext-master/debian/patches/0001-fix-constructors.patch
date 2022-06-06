@@ -1,0 +1,58 @@
+From: Debian PHP PEAR Maintainers <pkg-php-pear@lists.alioth.debian.org>
+Date: Wed, 18 Nov 2020 22:33:21 -0500
+Subject: Fix deprecated constructors
+
+Forwarded: no
+Bug-Ubuntu: https://bugs.launchpad.net/php-gettext/+bug/1522900
+Bug-Debian: http://bugs.debian.org/830699
+
+=== modified file 'gettext.php'
+---
+ gettext.php | 2 +-
+ streams.php | 6 +++---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/gettext.php b/gettext.php
+index 171d14e..edbd933 100755
+--- a/gettext.php
++++ b/gettext.php
+@@ -98,7 +98,7 @@ class gettext_reader {
+    * @param object Reader the StreamReader object
+    * @param boolean enable_cache Enable or disable caching of strings (default on)
+    */
+-  function gettext_reader($Reader, $enable_cache = true) {
++  function __construct($Reader, $enable_cache = true) {
+     // If there isn't a StreamReader, turn on short circuit mode.
+     if (! $Reader || isset($Reader->error) ) {
+       $this->short_circuit = true;
+diff --git a/streams.php b/streams.php
+index 3cdc158..00cf6cc 100644
+--- a/streams.php
++++ b/streams.php
+@@ -49,7 +49,7 @@ class StringReader {
+   var $_pos;
+   var $_str;
+ 
+-  function StringReader($str='') {
++  function __construct($str='') {
+     $this->_str = $str;
+     $this->_pos = 0;
+   }
+@@ -86,7 +86,7 @@ class FileReader {
+   var $_fd;
+   var $_length;
+ 
+-  function FileReader($filename) {
++  function __construct($filename) {
+     if (file_exists($filename)) {
+ 
+       $this->_length=filesize($filename);
+@@ -143,7 +143,7 @@ class FileReader {
+ // Preloads entire file in memory first, then creates a StringReader
+ // over it (it assumes knowledge of StringReader internals)
+ class CachedFileReader extends StringReader {
+-  function CachedFileReader($filename) {
++  function __construct($filename) {
+     if (file_exists($filename)) {
+ 
+       $length=filesize($filename);

@@ -1,0 +1,965 @@
+From: Sunil Mohan Adapa <sunil@medhas.org>
+Date: Wed, 17 Jun 2020 14:07:30 -0700
+Subject: Use custom parser for parsing plural expressions instead of eval()
+
+- A simple operator-precedence parser that prioritizes simplicity and
+readability. Avoid using eval() for evaluating plural expressions.
+  - Fixes CVE-2016-6175.
+  - Fixes upstream bug https://bugs.launchpad.net/php-gettext/+bug/1606184
+  - Fixes Debian bug https://bugs.debian.org/851771
+
+- Grammar for parsing code is same as the grammar for GNU gettext library:
+  http://git.savannah.gnu.org/cgit/gettext.git/tree/gettext-runtime/intl/plural.y
+
+- Extensive tests for various locales with help from Unicode's plurals rules.
+Tests for invalid syntax and expression parsing.
+
+Signed-off-by: Sunil Mohan Adapa <sunil@medhas.org>
+---
+ Makefile              |   4 +-
+ gettext.php           |  53 +-----
+ plurals.php           | 461 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ tests/PluralsTest.php | 351 ++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 823 insertions(+), 46 deletions(-)
+ create mode 100644 plurals.php
+ create mode 100644 tests/PluralsTest.php
+
+diff --git a/Makefile b/Makefile
+index b56394b..eda1408 100644
+--- a/Makefile
++++ b/Makefile
+@@ -5,6 +5,7 @@ DIST_FILES = \
+ 	gettext.php \
+ 	gettext.inc \
+ 	streams.php \
++	plurals.php \
+ 	AUTHORS     \
+ 	README      \
+ 	COPYING     \
+@@ -18,7 +19,8 @@ DIST_FILES = \
+ 	examples/locale/de_CH/LC_MESSAGES/messages.mo \
+ 	examples/update \
+ 	tests/LocalesTest.php \
+-	tests/ParsingTest.php
++	tests/ParsingTest.php \
++	tests/PluralsTest.php
+ 
+ check:
+ 	phpunit --verbose tests
+diff --git a/gettext.php b/gettext.php
+index edbd933..295d4b0 100755
+--- a/gettext.php
++++ b/gettext.php
+@@ -21,6 +21,8 @@
+ 
+ */
+ 
++require('plurals.php');
++
+ /**
+  * Provides a simple gettext replacement that works independently from
+  * the system's gettext abilities.
+@@ -269,41 +271,6 @@ class gettext_reader {
+     }
+   }
+ 
+-  /**
+-   * Sanitize plural form expression for use in PHP eval call.
+-   *
+-   * @access private
+-   * @return string sanitized plural form expression
+-   */
+-  function sanitize_plural_expression($expr) {
+-    // Get rid of disallowed characters.
+-    $expr = preg_replace('@[^a-zA-Z0-9_:;\(\)\?\|\&=!<>+*/\%-]@', '', $expr);
+-
+-    // Add parenthesis for tertiary '?' operator.
+-    $expr .= ';';
+-    $res = '';
+-    $p = 0;
+-    for ($i = 0; $i < strlen($expr); $i++) {
+-      $ch = $expr[$i];
+-      switch ($ch) {
+-      case '?':
+-        $res .= ' ? (';
+-        $p++;
+-        break;
+-      case ':':
+-        $res .= ') : (';
+-        break;
+-      case ';':
+-        $res .= str_repeat( ')', $p) . ';';
+-        $p = 0;
+-        break;
+-      default:
+-        $res .= $ch;
+-      }
+-    }
+-    return $res;
+-  }
+-
+   /**
+    * Parse full PO header and extract only plural forms line.
+    *
+@@ -330,14 +297,14 @@ class gettext_reader {
+     $this->load_tables();
+ 
+     // cache header field for plural forms
+-    if (! is_string($this->pluralheader)) {
++    if ($this->pluralheader === NULL) {
+       if ($this->enable_cache) {
+         $header = $this->cache_translations[""];
+       } else {
+         $header = $this->get_translation_string(0);
+       }
+       $expr = $this->extract_plural_forms_header_from_po_header($header);
+-      $this->pluralheader = $this->sanitize_plural_expression($expr);
++      $this->pluralheader = new PluralHeader($expr);
+     }
+     return $this->pluralheader;
+   }
+@@ -354,16 +321,12 @@ class gettext_reader {
+       throw new InvalidArgumentException(
+         "Select_string only accepts integers: " . $n);
+     }
+-    $string = $this->get_plural_forms();
+-    $string = str_replace('nplurals',"\$total",$string);
+-    $string = str_replace("n",$n,$string);
+-    $string = str_replace('plural',"\$plural",$string);
++    $plural_header = $this->get_plural_forms();
++    $plural = $plural_header->expression->evaluate($n);
+ 
+-    $total = 0;
+-    $plural = 0;
++    if ($plural < 0) $plural = 0;
++    if ($plural >= $plural_header->total) $plural = $plural_header->total - 1;
+ 
+-    eval("$string");
+-    if ($plural >= $total) $plural = $total - 1;
+     return $plural;
+   }
+ 
+diff --git a/plurals.php b/plurals.php
+new file mode 100644
+index 0000000..1c6ce12
+--- /dev/null
++++ b/plurals.php
+@@ -0,0 +1,461 @@
++<?php
++/*
++   Copyright (c) 2020 Sunil Mohan Adapa <sunil at medhas dot org>
++
++   Drop in replacement for native gettext.
++
++   This file is part of PHP-gettext.
++
++   PHP-gettext is free software; you can redistribute it and/or modify
++   it under the terms of the GNU General Public License as published by
++   the Free Software Foundation; either version 2 of the License, or
++   (at your option) any later version.
++
++   PHP-gettext is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++   GNU General Public License for more details.
++
++   You should have received a copy of the GNU General Public License
++   along with PHP-gettext; if not, write to the Free Software
++   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++
++*/
++
++/**
++ * Lexical analyzer for gettext plurals expression. Takes a string to parse
++ * during construction and returns a single token every time peek() or
++ * fetch_token() are called. The special string '__END__' is returned if there
++ * are no more tokens to be read. Spaces are ignored during tokenization.
++ */
++class PluralsLexer {
++  private $string;
++  private $position;
++
++  /**
++   * Constructor
++   *
++   * @param string string Contains the value gettext plurals expression to
++   * analyze.
++   */
++  public function __construct(string $string) {
++    $this->string = $string;
++    $this->position = 0;
++  }
++
++  /**
++   * Return the next token and the length to advance the read position without
++   * actually advancing the read position. Tokens for operators and variables
++   * are simple strings containing the operator or variable. If there are no
++   * more token to provide, the special value ['__END__', 0] is returned. If
++   * there was an unexpected input an Exception is raised.
++   *
++   * @access private
++   * @throws Exception If there is unexpected input in the provided string.
++   * @return array The next token and length to advance the current position.
++   */
++  private function _tokenize() {
++    $buf = $this->string;
++
++    // Consume all spaces until the next token
++    $index = $this->position;
++    while ($index < strlen($buf) && $buf[$index] == ' ') {
++      $index++;
++    }
++    $this->position = $index;
++
++    // Return special token if next of the string is reached.
++    if (strlen($buf) - $index == 0) {
++      return ['__END__', 0];
++    }
++
++    // Operators with two characters
++    $doubles = ['==', '!=', '>=', '<=', '&&', '||'];
++    $next = substr($buf, $index, 2);
++    if (in_array($next, $doubles)) {
++      return [$next, 2];
++    }
++
++    // Operators with single character or variable 'n'.
++    $singles = [
++      'n', '(', ')', '?', ':', '+', '-', '*', '/', '%', '!', '>', '<'];
++    if (in_array($buf[$index], $singles)) {
++      return [$buf[$index], 1];
++    }
++
++    // Whole number constants, return an integer.
++    $digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
++    $pos = $index;
++    while ($pos < strlen($buf) && in_array($buf[$pos], $digits)) {
++      $pos++;
++    }
++    if ($pos != $index) {
++      $length = $pos - $index;
++      return [(int)substr($buf, $index, $length), $length];
++    }
++
++    // Throw and exception for all other unexpected input in the string.
++    throw new Exception('Lexical analysis failed');
++  }
++
++  /**
++   * Return the next token without actually advancing the read position.
++   * Tokens for operators and variables are simple strings containing the
++   * operator or variable. If there are no more tokens to provide, the special
++   * value '__END__' is returned. If there was an unexpected input an
++   * Exception is raised.
++   *
++   * @throws Exception If there is unexpected input in the provided string.
++   * @return string The next token.
++   */
++  public function peek() {
++    list($token, $length) = $this->_tokenize();
++    return $token;
++  }
++
++  /**
++   * Return the next token after advancing the read position. Tokens for
++   * operators and variables are simple strings containing the operator or
++   * variable. If there are no more token to provide, the special value
++   * '__END__' is returned. If there was an unexpected input an Exception is
++   * raised.
++   *
++   * @throws Exception If there is unexpected input in the provided string.
++   * @return string The next token.
++   */
++  public function fetch_token() {
++    list($token, $length) = $this->_tokenize();
++    $this->position += $length;
++    return $token;
++  }
++}
++
++/**
++ * A parsed representation of the gettext plural expression. This is a tree
++ * containing further expressions depending on how nested the given input is.
++ * Calling the evaluate() function computes the value of the expression if the
++ * variable 'n' is set a certain value. This is used to decide which plural
++ * string translation to use based on the number items at hand.
++ */
++class PluralsExpression {
++  private $operator;
++  private $operands;
++
++  const BINARY_OPERATORS = [
++    '==', '!=', '>=', '<=', '&&', '||', '+', '-', '*', '/', '%', '>', '<'];
++  const UNARY_OPERATORS = ['!'];
++
++  /**
++   * Constructor
++   *
++   * @param string Operator for the expression.
++   * @param (int|string|PuralsExpression)[] Variable number of operands of the
++   * expression. One int operand is expected in case the operator is 'const'.
++   * One string operand with value 'n' is expected in case the operator is
++   * 'var'. For all other operators, the operands much be objects of type
++   * PluralExpression. Unary operators expect one operand, binary operators
++   * expect two operands and trinary operators expect three operands.
++   */
++  public function __construct($operator, ...$operands) {
++    $this->operator = $operator;
++    $this->operands = $operands;
++  }
++
++  /**
++   * Return a parenthesized string representation of the expression for
++   * debugging purposes.
++   *
++   * @return string A string representation of the expression.
++   */
++  public function to_string() {
++    if ($this->operator == 'const' || $this->operator == 'var') {
++      return $this->operands[0];
++    } elseif (in_array($this->operator, self::BINARY_OPERATORS)) {
++      return sprintf(
++        "(%s %s %s)", $this->operands[0]->to_string(), $this->operator,
++        $this->operands[1]->to_string());
++    } elseif (in_array($this->operator, self::UNARY_OPERATORS)) {
++      return sprintf(
++        "(%s %s)", $this->operator, $this->operands[0]->to_string());
++    } elseif ($this->operator == '?') {
++      return sprintf(
++        "(%s ? %s : %s)", $this->operands[0]->to_string(),
++        $this->operands[1]->to_string(),
++        $this->operands[2]->to_string());
++    }
++  }
++
++  /**
++   * Return the computed value of the expression if the variable 'n' is set to
++   * a certain value.
++   *
++   * @param int The value of the variable n to use when evaluating.
++   * @throws Exception If the expression has been constructed incorrectly.
++   * @return int The value of the expression after evaluation.
++   */
++  public function evaluate($n) {
++    if (!in_array($this->operator, ['const', 'var'])) {
++      $operand1 = $this->operands[0]->evaluate($n);
++    }
++    if (in_array($this->operator, self::BINARY_OPERATORS) ||
++        $this->operator == '?') {
++      $operand2 = $this->operands[1]->evaluate($n);
++    }
++    if ($this->operator == '?') {
++      $operand3 = $this->operands[2]->evaluate($n);
++    }
++
++    switch ($this->operator) {
++      case 'const':
++        return $this->operands[0];
++      case 'var':
++        return $n;
++      case '!':
++        return !($operand1);
++      case '==':
++        return $operand1 == $operand2;
++      case '!=':
++        return $operand1 != $operand2;
++      case '>=':
++        return $operand1 >= $operand2;
++      case '<=':
++        return $operand1 <= $operand2;
++      case '>':
++        return $operand1 > $operand2;
++      case '<':
++        return $operand1 < $operand2;
++      case '&&':
++        return $operand1 && $operand2;
++      case '||':
++        return $operand1 || $operand2;
++      case '+':
++        return $operand1 + $operand2;
++      case '-':
++        return $operand1 - $operand2;
++      case '*':
++        return $operand1 * $operand2;
++      case '/':
++        return (int)($operand1 / $operand2);
++      case '%':
++        return $operand1 % $operand2;
++      case '?':
++        return $operand1 ? $operand2 : $operand3;
++      default:
++        throw new Exception('Invalid expression');
++    }
++  }
++}
++
++/**
++ * A simple operator-precedence parser for gettext plural expressions. Takes a
++ * string during construction and returns a PluralsExpression tree when
++ * parse() is called.
++ */
++class PluralsParser {
++  private $lexer;
++
++  /*
++   * Operator precedence. The parsing only happens with minimum precedence of
++   * 0. However, ':' and ')' exist here to make sure that parsing does not
++   * proceed beyond them when they are not to be parsed.
++   */
++  private const PREC = [
++    ':' => -1, '?' => 0, '||' => 1, '&&' => 2, '==' => 3, '!=' => 3,
++    '>' => 4, '<' => 4, '>=' => 4, '<=' => 4, '+' => 5, '-' => 5, '*' => 6,
++    '/' => 6, '%' => 6, '!' => 7, '__END__' => -1, ')' => -1
++  ];
++
++  // List of right associative operators
++  private const RIGHT_ASSOC = ['?'];
++
++  /**
++   * Constructor
++   *
++   * @param string string the plural expression to be parsed.
++   */
++  public function __construct(string $string) {
++    $this->lexer = new PluralsLexer($string);
++  }
++
++  /**
++   * Expect a primary next for parsing and return a PluralsExpression or throw
++   * and exception otherwise. A primary can be the variable 'n', an whole
++   * number constant, a unary operator expression string with '!', or a
++   * parenthesis expression.
++   *
++   * @throws Exception If the next token is not a primary or if parenthesis
++   * expression is not closes properly with ')'.
++   * @return PluralsExpression That is constructed from the parsed primary.
++   */
++  private function _parse_primary() {
++    $token = $this->lexer->fetch_token();
++    if ($token === 'n') {
++      return new PluralsExpression('var', 'n');
++    } elseif (is_int($token)) {
++      return new PluralsExpression('const', (int)$token);
++    } elseif ($token === '!') {
++      return new PluralsExpression('!', $this->_parse_primary());
++    } elseif ($token === '(') {
++      $result = $this->_parse($this->_parse_primary(), 0);
++      if ($this->lexer->fetch_token() != ')') {
++        throw new Exception('Mismatched parenthesis');
++      }
++      return $result;
++    }
++
++    throw new Exception('Primary expected');
++  }
++
++  /**
++   * Fetch an operator from the lexical analyzer and test for it. Optionally
++   * advance the position of the lexical analyzer to next token. Raise
++   * exception if the token retrieved is not an operator.
++   *
++   * @access private
++   * @param bool peek A flag to indicate whether the position of the lexical
++   * analyzer should *not* be advanced. If false, the lexical analyzer is
++   * advanced by one token.
++   * @throws Exception If the token read is not an operator.
++   * @return string The operator that has been fetched from the lexical
++   * analyzer.
++   */
++  private function _parse_operator($peek) {
++    if ($peek) {
++      $token = $this->lexer->peek();
++    } else {
++        $token = $this->lexer->fetch_token();
++    }
++
++    if ($token !== NULL && !array_key_exists($token, self::PREC)) {
++      throw new Exception('Operator expected');
++    }
++    return $token;
++  }
++
++  /**
++   * A parsing method suitable for recursion.
++   *
++   * @access private
++   * @param ParserExpression left_side A pre-parsed left-hand side expression
++   * of the file expression to be constructed. This helps with recursion.
++   * @param int min_precedence The minimum value of precedence for the
++   * operators to be considered for parsing. Parsing will stop and current
++   * expression is returned if an operator of a lower precedence is
++   * encountered.
++   * @throws Exception If the input string does not conform to the grammar of
++   * the gettext plural expression.
++   * @return ParserExpression A complete expression after parsing.
++   */
++  private function _parse($left_side, $min_precedence) {
++    $next_token = $this->_parse_operator(true);
++
++    while (self::PREC[$next_token] >= $min_precedence) {
++      $operator = $this->_parse_operator(false);
++      $right_side = $this->_parse_primary();
++
++      $next_token = $this->_parse_operator(true);
++
++      /*
++       * Consume (recursively) into right hand side all expressions of higher
++       * precedence.
++       */
++      while ((self::PREC[$operator] < self::PREC[$next_token]) ||
++             ((self::PREC[$operator] == self::PREC[$next_token]) &&
++              in_array($operator, self::RIGHT_ASSOC))) {
++        $right_side = $this->_parse(
++            $right_side, self::PREC[$next_token]);
++        $next_token = $this->_parse_operator(true);
++      }
++
++      if ($operator != '?') {
++        /*
++         * Handling for all binary operators. Consume into left hand side all
++         * expressions of equal precedence.
++         */
++        $left_side = new PluralsExpression($operator, $left_side, $right_side);
++      } else {
++        // Special handling for (a ? b : c) expression
++        $operator = $this->lexer->fetch_token();
++        if ($operator != ':') {
++          throw new Exception('Invalid ? expression');
++        }
++
++        $right_side2 = $this->_parse(
++          $this->_parse_primary(), self::PREC[$operator] + 1);
++        $next_token = $this->_parse_operator(true);
++        $left_side = new PluralsExpression(
++            '?', $left_side, $right_side, $right_side2);
++      }
++    }
++    return $left_side;
++  }
++
++ /**
++   * A simple implementation of an operator-precedence parser. See:
++   * https://en.wikipedia.org/wiki/Operator-precedence_parser for an analysis
++   * of the algorithm.
++   *
++   * @throws Exception If the input string does not conform to the grammar of
++   * the gettext plural expression.
++   * @return ParserExpression A complete expression after parsing.
++   */
++  public function parse() {
++    $expression = $this->_parse($this->_parse_primary(), 0);
++    // Special handling for an extra ')' at the end.
++    if ($this->lexer->peek() != '__END__') {
++      throw new Exception('Could not parse completely');
++    }
++    return $expression;
++  }
++}
++
++/**
++ * Provides a class to parse the value of the 'Plural-Forms:' header in the
++ * gettext translation files. Holds the expression tree and the number of
++ * plurals after parsing. Parsing happens during construction which takes as
++ * its only argument the string to parse. Error during parsing are silently
++ * suppressed and the fallback behavior is used with the value for Germanic
++ * languages as follows: "nplurals=2; plural=n == 1 ? 0 : 1;".
++ */
++class PluralHeader {
++  public $total;
++  public $expression;
++
++  /**
++   * Constructor
++   *
++   * @param string The value of the Plural-Forms: header as seen in .po files.
++   */
++  function __construct($string) {
++    try {
++      list($total, $expression) = $this->parse($string);
++    } catch (Exception $e) {
++      $string = "nplurals=2; plural=n == 1 ? 0 : 1;";
++      list($total, $expression) = $this->parse($string);
++    }
++    $this->total = $total;
++    $this->expression = $expression;
++  }
++
++  /**
++   * Return the number of plural forms and the parsed expression tree.
++   *
++   * @access private
++   * @param string string The value of the Plural-Forms: header.
++   * @throws Exception If the string could not be parsed.
++   * @return array The number of plural forms and parsed expression tree.
++   */
++  private function parse($string) {
++    $regex = "/^\s*nplurals\s*=\s*(\d+)\s*;\s*plural\s*=([^;]+);/i";
++    if (preg_match($regex, $string, $matches)) {
++      $total = (int)$matches[1];
++      $expression_string = $matches[2];
++    } else {
++      throw new Exception('Invalid header value');
++    }
++
++    $parser = new PluralsParser($expression_string);
++    $expression = $parser->parse();
++    return [$total, $expression];
++  }
++}
+diff --git a/tests/PluralsTest.php b/tests/PluralsTest.php
+new file mode 100644
+index 0000000..6b24d8d
+--- /dev/null
++++ b/tests/PluralsTest.php
+@@ -0,0 +1,351 @@
++<?php
++/*
++   Copyright (c) 2020 Sunil Mohan Adapa <sunil at medhas dot org>
++
++   Drop in replacement for native gettext.
++
++   This file is part of PHP-gettext.
++
++   PHP-gettext is free software; you can redistribute it and/or modify
++   it under the terms of the GNU General Public License as published by
++   the Free Software Foundation; either version 2 of the License, or
++   (at your option) any later version.
++
++   PHP-gettext is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++   GNU General Public License for more details.
++
++   You should have received a copy of the GNU General Public License
++   along with PHP-gettext; if not, write to the Free Software
++   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++
++*/
++
++/*
++Unicode plural data for various languages is under the Unicode License
++Agreement taken from:
++https://unicode-org.github.io/cldr-staging/charts/37/supplemental/language_plural_rules.html
++
++UNICODE, INC. LICENSE AGREEMENT - DATA FILES AND SOFTWARE
++
++See Terms of Use for definitions of Unicode Inc.'s Data Files and Software.
++
++NOTICE TO USER: Carefully read the following legal agreement. BY DOWNLOADING,
++INSTALLING, COPYING OR OTHERWISE USING UNICODE INC.'S DATA FILES ("DATA
++FILES"), AND/OR SOFTWARE ("SOFTWARE"), YOU UNEQUIVOCALLY ACCEPT, AND AGREE TO
++BE BOUND BY, ALL OF THE TERMS AND CONDITIONS OF THIS AGREEMENT. IF YOU DO NOT
++AGREE, DO NOT DOWNLOAD, INSTALL, COPY, DISTRIBUTE OR USE THE DATA FILES OR
++SOFTWARE.
++
++COPYRIGHT AND PERMISSION NOTICE
++
++Copyright © 1991-2020 Unicode, Inc. All rights reserved. Distributed under the
++Terms of Use in https://www.unicode.org/copyright.html.
++
++Permission is hereby granted, free of charge, to any person obtaining a copy
++of the Unicode data files and any associated documentation (the "Data Files")
++or Unicode software and any associated documentation (the "Software") to deal
++in the Data Files or Software without restriction, including without
++limitation the rights to use, copy, modify, merge, publish, distribute, and/or
++sell copies of the Data Files or Software, and to permit persons to whom the
++Data Files or Software are furnished to do so, provided that either (a) this
++copyright and permission notice appear with all copies of the Data Files or
++Software, or (b) this copyright and permission notice appear in associated
++Documentation.
++
++THE DATA FILES AND SOFTWARE ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
++KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
++MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF THIRD
++PARTY RIGHTS. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR HOLDERS INCLUDED IN
++THIS NOTICE BE LIABLE FOR ANY CLAIM, OR ANY SPECIAL INDIRECT OR CONSEQUENTIAL
++DAMAGES, OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
++PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS
++ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THE
++DATA FILES OR SOFTWARE.
++
++Except as contained in this notice, the name of a copyright holder shall not
++be used in advertising or otherwise to promote the sale, use or other dealings
++in these Data Files or Software without prior written authorization of the
++copyright holder.
++*/
++
++require_once('plurals.php');
++
++class PluralsTest extends PHPUnit_Framework_TestCase {
++  public function evaluations_provider() {
++    return [
++      // Simple expressions
++      ["1", [0 => 1, 1 => 1, 2 => 1]],
++      ["n", [0 => 0, 1 => 1, 2 => 2]],
++      ["!n", [0 => 1, 1 => 0, 2 => 0]],
++      ["n == 1", [0 => 0, 1 => 1, 2 => 0]],
++      ["n != 1", [0 => 1, 1 => 0, 2 => 1]],
++      ["n > 1", [0 => 0, 1 => 0, 2 => 1]],
++      ["n < 1", [0 => 1, 1 => 0, 2 => 0]],
++      ["n >= 1", [0 => 0, 1 => 1, 2 => 1]],
++      ["n <= 1", [0 => 1, 1 => 1, 2 => 0]],
++      ["n && 1", [0 => 0, 1 => 1]],
++      ["n && 0", [0 => 0, 1 => 0]],
++      ["n || 1", [0 => 1, 1 => 1]],
++      ["n || 0", [0 => 0, 1 => 1]],
++      ["n + 1", [0 => 1, 1 => 2, 2 => 3]],
++      ["n - 1", [0 => -1, 1 => 0, 2 => 1]],
++      ["n * 2", [0 => 0, 1 => 2, 2 => 4]],
++      ["n / 2", [0 => 0, 1 => 0, 2 => 1]],
++      ["n % 3", [0 => 0, 1 => 1, 2 => 2, 3 => 0, 4 => 1]],
++      ["n ? 1 : 2", [0 => 2, 1 => 1]],
++      ["n == 1 ? 0 : n == 2 ? 1 : 2", [0 => 2, 1 => 0, 2 => 1, 3 => 2]],
++      // Bambara, Burmese, Cantonese, Chinese, Dzongkha, Igbo, Indonesian,
++      // Japanese, Javanese, Kabuverdianu, Khmer, Korean, Koyraboro Senni,
++      // Lakota, Lao, Lojban, Makonde, Malay, N’Ko, Osage, Root, Sakha, Sango,
++      // Sichuan Yi, Sundanese, Thai, Tibetan, Tongan, Vietnamese, Wolof,
++      // Yoruba
++      ["0", [0 => 0, 1 => 0, 2 => 0]],
++      // Cebuano, Filipino, Tagalog
++      ["(n % 10 == 4) || (n % 10 == 6) || (n % 10 == 9) ? 1 : 0",
++       [0 => 0, 1 => 0, 2 => 0, 3 => 0, 5 => 0, 7 => 0, 8 => 0, 10 => 0,
++        11 => 0, 12 => 0, 13 => 0, 15 => 0, 17 => 0, 18 => 0, 20 => 0, 21 => 0,
++        100 => 0, 1000 => 0, 10000 => 0, 100000 => 0, 1000000 => 0, 4 => 1,
++        6 => 1, 9 => 1, 14 => 1, 16 => 1, 19 => 1, 24 => 1, 26 => 1, 104 => 1,
++        1004 => 1]],
++      // Central Atlas Tamazight
++      ["((n == 0) || (n == 1) || (n >= 11 && n <= 99)) ? 0 : 1",
++       [0 => 0, 1 => 0, 11 => 0, 12 => 0, 98 => 0, 99 => 0, 2 => 1, 3 => 1,
++        8 => 1, 9 => 1, 100 => 1, 101 => 1, 102 => 1, 111 => 1, 199 => 1]],
++      // Icelandic, Macedonian
++      ["(n % 10 == 1) && (n % 100 != 11) ? 0 : 1",
++       [1 => 0, 21 => 0, 31 => 0, 101 => 0, 121 => 0, 1001 => 0, 0 => 1,
++        2 => 1, 10 => 1, 11 => 1, 111 => 1, 1000 => 1, 1011 => 1]],
++      // Akan, Amharic, Armenian, Assamese, Bangla, Bhojpuri, French, Fulah,
++      // Gujarati, Gun, Hindi, Kabyle, Kannada, Lingala, Malagasy, Nigerian
++      // Pidgin, Northern Sotho, Persian, Portuguese, Punjabi, Sinhala,
++      // Tigrinya, Walloon, Zulu
++      ["(n == 0) || (n == 1) ? 0 : 1",
++       [0 => 0, 1 => 0, 2 => 1, 3 => 1, 10 => 1, 100 => 1, 1000 => 1]],
++      // Afrikaans, Albanian, Aragonese, Asturian, Asu, Azerbaijani, Basque,
++      // Bemba, Bena, Bodo, Bulgarian, Catalan, Central Kurdish, Chechen,
++      // Cherokee, Chiga, Danish, Divehi, Dutch, English, Esperanto, Estonian,
++      // European Portuguese, Ewe, Faroese, Finnish, Friulian, Galician,
++      // Ganda, Georgian, German, Greek, Hausa, Hawaiian, Hungarian, Ido,
++      // Interlingua, Italian, Jju, Kako, Kalaallisut, Kashmiri, Kazakh,
++      // Kurdish, Kyrgyz, Luxembourgish, Machame, Malayalam, Marathi, Masai,
++      // Metaʼ, Mongolian, Nahuatl, Nepali, Ngiemboon, Ngomba, North Ndebele,
++      // Norwegian, Norwegian Bokmål, Norwegian Nynorsk, Nyanja, Nyankole,
++      // Odia, Oromo, Ossetic, Papiamento, Pashto, Romansh, Rombo, Rwa, Saho,
++      // Samburu, Sardinian, Sena, Shambala, Shona, Sicilian, Sindhi, Soga,
++      // Somali, South Ndebele, Southern Kurdish, Southern Sotho, Spanish,
++      // Swahili, Swati, Swedish, Swiss German, Syriac, Tamil, Telugu, Teso,
++      // Tigre, Tsonga, Tswana, Turkish, Turkmen, Tyap, Urdu, Uyghur, Uzbek,
++      // Venda, Volapük, Vunjo, Walser, Western Frisian, Xhosa, Yiddish
++      ["(n != 1)", [0 => 1, 2 => 1, 3 => 1, 10 => 1, 100 => 1, 1 => 0]],
++      // Latvian, Prussian
++      ["n%10==1 && n%100!=11 ? 1 : (n % 10 == 0 || (n % 100 >= 11 && n % 100 <= 19)) ? 0 : 2",
++       [0 => 0, 10 => 0, 11 => 0, 12 => 0, 19 => 0, 20 => 0, 30 => 0,
++        100 => 0, 110 => 0, 111 => 0, 119 => 0, 120 => 0, 1 => 1, 21 => 1,
++        31 => 1, 101 => 1, 121 => 1, 2 => 2, 3 => 2, 22 => 2, 29 => 2,
++        102 => 2, 109 => 2, 122 => 2]],
++      // Colognian, Langi
++      ["n == 0 ? 0 : n == 1 ? 1 : 2",
++       [0 => 0, 1 => 1, 2 => 2, 3 => 2, 10 => 2, 100 => 2, 1000 => 2]],
++      // Inari Sami, Inuktitut, Lule Sami, Nama, Northern Sami, Sami languages
++      // [Other]], Santali, Skolt Sami, Southern Sami
++      ["(n == 1) ? 0 : (n == 2) ? 1 : 2",
++       [0 => 2, 1 => 0, 2 => 1, 3 => 2, 100 => 2, 1000 => 2]],
++      // Belarusian, Russian, Ukrainian
++      ["n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2",
++       [1 => 0, 21 => 0, 31 => 0, 41 => 0, 101 => 0, 1001 => 0, 2 => 1,
++        3 => 1, 4 => 1, 22 => 1, 24 => 1, 32 => 1, 102 => 1, 1002 => 1, 0 => 2,
++        5 => 2, 11 => 2, 12 => 2, 13 => 2, 14 => 2, 15 => 2, 20 => 2, 25 => 2,
++        100 => 2, 111 => 2, 1000 => 2]],
++      // Polish
++      ["n == 1 ? 0 : (n % 10 >= 2) && (n % 10 <= 4) && ((n % 100 < 12) || (n % 100 > 14)) ? 1 : 2",
++       [1 => 0, 2 => 1, 3 => 1, 4 => 1, 22 => 1, 23 => 1, 24 => 1, 32 => 1,
++        33 => 1, 34 => 1, 102 => 1, 103 => 1, 104 => 1, 122 => 1, 123 => 1,
++        124 => 1, 5 => 2, 6 => 2, 11 => 2, 12 => 2, 13 => 2, 20 => 2, 21 => 2,
++        30 => 2, 31 => 2, 100 => 2, 101 => 2, 105 => 2, 111 => 2, 112 => 2,
++        113 => 2, 121 => 2]],
++      // Lithuanian
++      ["(n % 10 == 1) && (n % 100 != 11) ? 0 : ((n % 10 >= 2) && (n % 10 <= 9) && ((n % 100 < 11) || (n % 100 > 19))) ? 1 : 2",
++       [1 => 0, 21 => 0, 31 => 0, 91 => 0, 101 => 0, 121 => 0, 2 => 1, 3 => 1,
++        9 => 1, 22 => 1, 23 => 1, 29 => 1, 102 => 1, 103 => 1, 109 => 1,
++        122 => 1, 129 => 1, 0 => 2, 10 => 2, 11 => 2, 19 => 2, 20 => 2,
++        30 => 2, 40 => 2, 110 => 2, 111 => 2, 119 => 2, 120 => 2]],
++      // Bosnian, Croatian, Serbian, Serbo-Croatian
++      ["(n % 10 == 1) && (n % 100 != 11) ? 0 : (n % 10 >= 2) && (n % 10 <= 4) && ((n % 100 < 12) || (n % 100 > 14)) ? 1 : 2",
++       [1 => 0, 21 => 0, 31 => 0, 91 => 0, 101 => 0, 121 => 0, 2 => 1, 3 => 1,
++        4 => 1, 22 => 1, 23 => 1, 24 => 1, 102 => 1, 103 => 1, 104 => 1,
++        122 => 1, 124 => 1, 5 => 2, 6 => 2, 10 => 2, 11 => 2, 12 => 2, 13 => 2,
++        14 => 2, 20 => 2, 25 => 2, 30 => 2, 100 => 2, 105 => 2, 110 => 2,
++        111 => 2, 112 => 2, 113 => 2, 114 => 2, 120 => 2, 125 => 2, 130 => 2]],
++      // Tachelhit
++      ["n <= 1 ? 0 : (n >= 2 && n <= 10) ? 1 : 2",
++       [0 => 0, 1 => 0, 2 => 1, 3 => 1, 4 => 1, 9 => 1, 10 => 1, 11 => 2,
++        12 => 2, 99 => 2, 100 => 2, 101 => 2, 102 => 2, 110 => 2]],
++      // Moldavian, Romanian
++      ["(n == 1 ? 0 : ((n == 0) || ((n % 100 >=2) && (n % 100 <= 19))) ? 1 : 2)",
++       [1 => 0, 0 => 1, 2 => 1, 3 => 1, 10 => 1, 11 => 1, 19 => 1, 102 => 1,
++        119 => 1, 20 => 2, 21 => 2, 100 => 2, 101 => 2, 120 => 2, 121 => 2]],
++      // Czech, Slovak
++      ["n == 1 ? 0 : (n >= 2) && (n <= 4) ? 1 : 2",
++       [1 => 0, 2 => 1, 3 => 1, 4 => 1, 0 => 2, 5 => 2, 10 => 2, 11 => 2,
++        100 => 2]],
++      // Manx
++      ["n % 10 == 1 ? 0 : n % 10 == 2 ? 1 : n % 20 == 0 ? 2 : 3",
++       [1 => 0, 11 => 0, 21 => 0, 31 => 0, 2 => 1, 12 => 1, 22 => 1, 32 => 1,
++        0 => 2, 20 => 2, 40 => 2, 60 => 2, 3 => 3, 10 => 3, 13 => 3, 19 => 3,
++        23 => 3, 30 => 3]],
++      // Scottish Gaelic
++      ["(n == 1) || (n == 11) ? 0 : (n == 2) || (n == 12) ? 1 : (n >= 3) && (n <= 19) ? 2 : 3",
++       [1 => 0, 11 => 0, 2 => 1, 12 => 1, 3 => 2, 4 => 2, 9 => 2, 10 => 2,
++        13 => 2, 14 => 2, 19 => 2, 0 => 3, 20 => 3, 21 => 3, 100 => 3,
++        101 => 3, 102 => 3, 111 => 3]],
++      // Breton
++      ["(n % 10 == 1) && (n % 100 != 11) && (n % 100 != 71) && (n % 100 != 91) ? 0 : (n % 10 == 2) && (n % 100 != 12) && (n % 100 != 72) && (n % 100 != 92) ? 1 : ((n % 10 == 3) || (n % 10 == 4) || (n % 10 == 9)) && ((n % 100 < 10) || (n % 100 > 19)) && ((n % 100 < 70) || (n % 100 > 79)) && ((n % 100 < 90) || (n % 100 > 99)) ? 2 : (n != 0) && (n % 1000000 == 0) ? 3 : 4",
++       [1 => 0, 21 => 0, 31 => 0, 61 => 0, 81 => 0, 101 => 0, 121 => 0,
++        2 => 1, 22 => 1, 32 => 1, 62 => 1, 82 => 1, 102 => 1, 122 => 1, 3 => 2,
++        4 => 2, 9 => 2, 23 => 2, 24 => 2, 29 => 2, 63 => 2, 64 => 2, 69 => 2,
++        83 => 2, 84 => 2, 89 => 2, 103 => 2, 104 => 2, 109 => 2, 123 => 2,
++        124 => 2, 129 => 2, 1000000 => 3, 2000000 => 3, 0 => 4, 5 => 4, 8 => 4,
++        10 => 4, 11 => 4, 12 => 4, 13 => 4, 14 => 4, 19 => 4, 20 => 4, 25 => 4,
++        28 => 4, 30 => 4, 71 => 4, 72 => 4, 73 => 4, 74 => 4, 79 => 4, 80 => 4,
++        105 => 4, 108 => 4, 110 => 4, 111 => 4, 112 => 4, 113 => 4, 114 => 4,
++        119 => 4]],
++      // Lower Sorbian, Slovenian, Upper Sorbian
++      ["n % 100 == 1 ? 0 : n % 100 == 2 ? 1 : (n % 100 == 3) || (n % 100 == 4) ? 2 : 3",
++       [1 => 0, 101 => 0, 201 => 0, 2 => 1, 102 => 1, 202 => 1, 3 => 2,
++        4 => 2, 103 => 2, 104 => 2, 203 => 2, 204 => 2, 0 => 3, 5 => 3,
++        100 => 3, 105 => 3, 200 => 3, 205 => 3]],
++      // Hebrew
++      ["n == 1 ? 0 : n == 2 ? 1 : (n % 10 == 0) && (n > 10) ? 2 : 3",
++       [1 => 0, 2 => 1, 20 => 2, 30 => 2, 40 => 2, 50 => 2, 100 => 2,
++        0 => 3, 3 => 3, 4 => 3, 10 => 3, 11 => 3, 19 => 3, 21 => 3, 29 => 3,
++        101 => 3, 102 => 3, 109 => 3, 111 => 3, 119 => 3]],
++      // Maltese
++      ["n == 1 ? 0 : (n == 0) || ((n % 100 >= 2) && (n % 100 <= 10)) ? 1 : (n % 100 >= 11) && (n % 100 <= 19) ? 2 : 3 ",
++       [1 => 0, 0 => 1, 2 => 1, 3 => 1, 9 => 1, 10 => 1, 102 => 1, 103 => 1,
++        110 => 1, 11 => 2, 12 => 2, 18 => 2, 19 => 2, 111 => 2, 119 => 2,
++        20 => 3, 21 => 3, 100 => 3, 101 => 3, 120 => 3, 121 => 3]],
++      // Irish
++      ["n == 1 ? 0 : n == 2 ? 1 : (n >= 3) && (n <= 6) ? 2 : (n >= 7) && (n <= 10) ? 3 : 4",
++       [1 => 0, 2 => 1, 3 => 2, 4 => 2, 5 => 2, 6 => 2, 7 => 3, 8 => 3,
++        9 => 3, 10 => 3, 0 => 4, 11 => 4, 12 => 4, 100 => 4, 101 => 4,
++        102 => 4, 110 => 4]],
++      // Arabic, Najdi Arabic
++      ["n == 0 ? 0 : n == 1 ? 1 : n == 2 ? 2 : (n % 100 >=3) && (n % 100 <= 10) ? 3 : (n % 100 >= 3) ? 4 : 5",
++       [0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 3, 9 => 3, 10 => 3, 103 => 3,
++        104 => 3, 109 => 3, 110 => 3, 11 => 4, 12 => 4, 13 => 4, 98 => 4,
++        99 => 4, 111 => 4, 112 => 4, 113 => 4, 100 => 5, 101 => 5, 102 => 5,
++        200 => 5]],
++      // Welsh
++      ["n == 0 ? 0 : n == 1 ? 1 : n == 2 ? 2 : n == 3 ? 3 : n == 6 ? 4 : 5",
++       [0 => 0, 1 => 1, 2 => 2, 3 => 3, 6 => 4, 4 => 5, 5 => 5, 7 => 5,
++        10 => 5, 100 => 5]],
++      // Cornish
++      ["n == 0 ? 0 : n == 1 ? 1 : (n % 20 == 2) ? 2 : (n % 20 == 3) ? 3 : (n % 20 == 1) ? 4 : 5",
++       [0 => 0, 1 => 1, 2 => 2, 22 => 2, 42 => 2, 102 => 2, 3 => 3, 23 => 3,
++        43 => 3, 103 => 3, 21 => 4, 41 => 4, 101 => 4, 4 => 5, 10 => 5,
++        11 => 5, 12 => 5, 13 => 5, 20 => 5, 24 => 5, 40 => 5, 104 => 5,
++        120 => 5]]
++    ];
++  }
++
++  /**
++   * @dataProvider evaluations_provider
++   */
++  public function test_evaluations($expression_string, $value_tests) {
++    $parser = new PluralsParser($expression_string);
++    $expression = $parser->parse();
++    foreach ($value_tests as $input => $expected_output) {
++      $output = $expression->evaluate($input);
++      $this->assertEquals($output, $expected_output);
++    }
++  }
++
++  public function expressions_provider() {
++    return [
++      ['1 + !n', '(1 + (! n))'],
++      ['1 + 2 + 3 + 4 + 500', '((((1 + 2) + 3) + 4) + 500)'],
++      ['1 + (2 + (3 + 4))', '(1 + (2 + (3 + 4)))'],
++      ['1 || 2 && 3', '(1 || (2 && 3))'],
++      ['1 == 2 != 3', '((1 == 2) != 3)'],
++      ['1 <= 2 + 3', '(1 <= (2 + 3))'],
++      ['1 - 2 % 3', '(1 - (2 % 3))'],
++      ['1 - !2 % 3', '(1 - ((! 2) % 3))'],
++      ['1 + 2 * 3 / 1', '(1 + ((2 * 3) / 1))'],
++      ['1 + 2 * 3 + 1', '((1 + (2 * 3)) + 1)'],
++      ['n%10==1 && n%100!=11', '(((n % 10) == 1) && ((n % 100) != 11))'],
++      ['n ? 1 + 2 : 3 * 4', '(n ? (1 + 2) : (3 * 4))'],
++      ['n == 1 ? n < 10 ? 1 * 1 : 1 * 2 : 1 * 3',
++        '((n == 1) ? ((n < 10) ? (1 * 1) : (1 * 2)) : (1 * 3))'],
++    ];
++  }
++
++  /**
++   * @dataProvider expressions_provider
++   */
++  public function test_expressions($expression_string, $expected_output) {
++    $parser = new PluralsParser($expression_string);
++    $expression = $parser->parse();
++    $output = $expression->to_string();
++    $this->assertEquals($output, $expected_output);
++  }
++
++  public function syntax_provider() {
++    return [
++      ["(0", 'Mismatched parenthesis'],
++      ["(((0) + 1)", 'Mismatched parenthesis'],
++      ["(((0) + 1) + 2", 'Mismatched parenthesis'],
++      ["0) + 1", 'Could not parse completely'],
++      ["a", 'Lexical analysis failed'],
++      ["a ? 1 : 0", 'Lexical analysis failed'],
++      ["1 + ", 'Primary expected'],
++      ["1 + +", 'Primary expected'],
++      ["1 + ! +", 'Primary expected'],
++      ["1 ? 2 :", 'Primary expected'],
++      ["1 ( 2", 'Operator expected'],
++      ["1 n", 'Operator expected'],
++      ["1 ? 2", 'Invalid ? expression'],
++    ];
++  }
++
++  /**
++   * @dataProvider syntax_provider
++   */
++  function test_syntax($expression_string, $expected_output) {
++    $this->expectExceptionMessage($expected_output);
++    $parser = new PluralsParser($expression_string);
++    $parser->parse();
++  }
++
++  function header_provider() {
++    return [
++        // Valid
++        ["nplurals=1; plural=0;", 1, "0"],
++        ["  nplurals  =  1  ;  plural  =  0  ;  ", 1, "0"],
++        ["nplurals=4; plural=(n == 1) || (n == 11) ? 0 : (n == 2) || (n == 12) ? 1 : (n >= 3) && (n <= 19) ? 2 : 3;",
++         4,
++         "(((n == 1) || (n == 11)) ? 0 : (((n == 2) || (n == 12)) ? 1 : (((n >= 3) && (n <= 19)) ? 2 : 3)))"],
++        // Invalid
++        ["badvalue", 2, "((n == 1) ? 0 : 1)"],
++        ["badvalue=1", 2, "((n == 1) ? 0 : 1)"],
++        ["nplurals=n", 2, "((n == 1) ? 0 : 1)"],
++        ["nplurals=1;", 2, "((n == 1) ? 0 : 1)"],
++        ["nplurals=1 plural=0", 2, "((n == 1) ? 0 : 1)"],
++        ["nplurals=1; badvalue;", 2, "((n == 1) ? 0 : 1)"],
++        ["nplurals=1; badvalue=0;", 2, "((n == 1) ? 0 : 1)"],
++        ["nplurals=1; plural=0", 2, "((n == 1) ? 0 : 1)"],
++        ["badvalue=1; plural=badvalue;", 2, "((n == 1) ? 0 : 1)"],
++        ["nplurals=1; plural=exit();", 2, "((n == 1) ? 0 : 1)"],
++    ];
++  }
++
++  /**
++   * @dataProvider header_provider
++   */
++  function test_header($header_value, $expected_total, $expected_expression) {
++    $header = new PluralHeader($header_value);
++    $this->assertEquals($header->total, $expected_total);
++    $this->assertEquals($header->expression->to_string(), $expected_expression);
++  }
++}

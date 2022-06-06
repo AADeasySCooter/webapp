@@ -1,0 +1,25 @@
+From: James Valleroy <jvalleroy@mailbox.org>
+Date: Sun, 27 Dec 2020 11:09:03 -0500
+Subject: Adapt to recent version of PHPUnit (9)
+
+---
+ tests/ParsingTest.php | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/tests/ParsingTest.php b/tests/ParsingTest.php
+index 2104f58..d718fe3 100644
+--- a/tests/ParsingTest.php
++++ b/tests/ParsingTest.php
+@@ -38,11 +38,9 @@ class ParsingTest extends TestCase
+       ));
+   }
+ 
+-  /**
+-   * @expectedException InvalidArgumentException
+-   */
+   public function test_select_string_disallows_nonint_numbers()
+   {
++    $this->expectException('InvalidArgumentException');
+     $pofile_data = ''
+       ."msgid \"\"\n"
+       ."msgstr \"\"\n"
