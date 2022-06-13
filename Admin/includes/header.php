@@ -115,6 +115,12 @@
                 <span>Add product</span>
               </a>
             </li>
+            <li>
+                    <a href="payment.php" class="nav-link px-3">
+                   
+                      <span>All payment</span>
+                    </a>
+                  </li>
             
             <li>
               <a
@@ -132,6 +138,7 @@
               </a>
               <div class="collapse" id="Article">
                 <ul class="navbar-nav ps-3">
+                
                   <li>
                     <a href="addArticle.php" class="nav-link px-3">
                       <span class="me-2"

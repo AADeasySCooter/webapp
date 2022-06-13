@@ -39,7 +39,6 @@ if (isset($_SESSION['email'])){
 
     <script type="text/javascript" src="js/cart.js"></script>
     
-    <script src="./tr.js"></script>
     <link rel="stylesheet" href="assets/css/pricing-plan.css">
 
 </head>
