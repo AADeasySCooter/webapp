@@ -114,11 +114,11 @@ if (isset($_SESSION['email'])){
                                 <tr>
                                 <td><a href="shop.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Continue Shopping</a></td>
                                 <td colspan="2"></td>
-                                <td>
+                                <!--<td>
                                     <form method="POST" action="pdf.php">
                                     <button name="pdf_gen" href="receipt.php" class="btn btn-warning"></i> Download receipt</button>
                                     </form>
-                                </td>
+                                </td>-->
                                 <?php 
                                 if(isset($total)) {
                                 ?>	

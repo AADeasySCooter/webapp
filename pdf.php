@@ -9,7 +9,7 @@ class PDF extends FPDF
 function Header()
 {
     // Logo
-    $this->Image('./images/Logo_EASYSCOOTER-removebg-preview.png',10,6,30);
+    $this->Image('./images/Logo_EASYSCOOTER-removebg-preview.png',10,1,30);
     // Arial bold 15
     $this->SetFont('Arial','B',15);
     // Move to the right
@@ -47,12 +47,12 @@ $pdf->SetFont('Times','',12);
                 
             
         <?php
-        $pdf->Cell(0,10,$product['lastname'],0,1);
-        $pdf->Cell(0,10,$product['firstname'],0,1);
-        $pdf->Cell(0,10,$product['number'],0,1);
-        $pdf->Cell(0,10,$product['address'],0,1);
-        $pdf->Cell(0,10,$product['code_postal'],0,1);
-        $pdf->Cell(0,10,$product['ville'],0,1);
+        $pdf->Cell(0,5,$product['lastname'],0,1);
+        $pdf->Cell(0,5,$product['firstname'],0,1);
+        $pdf->Cell(0,5,$product['number'],0,1);
+        $pdf->Cell(0,5,utf8_decode($product['address']),0,1);
+        $pdf->Cell(0,5,$product['code_postal'],0,1);
+        $pdf->Cell(0,5,$product['ville'],0,1);
         }
 $pdf->Output();
 
