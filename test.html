@@ -2,44 +2,196 @@
 <html lang="en">
 
 <head>
-    <title>Basic Scene</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="author" content="WebXR Academy">
-    <link type="text/css" rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r126/three.js" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
+  <title>Basic Scene</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="author" content="WebXR Academy">
+  <link type="text/css" rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r126/three.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
 
 </head>
 
 <body>
-    <script type="module">
+  <script type="module">
 
-        import { ARButton } from 'https://unpkg.com/three@0.126.0/examples/jsm/webxr/ARButton.js'; console.log(ARButton); let camera, scene, renderer; let mesh, mesh3; let loader; let model; // console.log(THREE); init(); animate(); function init() { const container
-        = document.createElement('div'); document.body.appendChild(container); // All three.js scenes need three things: a scene, a camera, and a renderer // For more info read: https://threejs.org/docs/#manual/en/introduction/Creating-a-scene // #1 create
-        the scene, although there's nothing in it just yet scene = new THREE.Scene; console.log(scene); // #2 create the camera // From documentation: https://threejs.org/docs/#api/en/cameras/PerspectiveCamera // PerspectiveCamera( fov : Number, aspect
-        : Number, near : Number, far : Number ) // fov — Camera frustum vertical field of view. // aspect — Camera frustum aspect ratio. // near — Camera frustum near plane. // far — Camera frustum far plane. camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight,
-        0.01, 40); console.log(camera); // #3 Pick a three.js renderer // Documentation: https://threejs.org/docs/#api/en/renderers/WebGLRenderer renderer = new THREE.WebGLRenderer({antialias: true, alpha: true}); renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(window.innerWidth, window.innerHeight); renderer.xr.enabled = true; container.appendChild(renderer.domElement); // Everything hereafter is optional things we want to add to the scene // Add a light to the cene // Documentation:
-        https://threejs.org/docs/index.html#api/en/lights/HemisphereLight // HemisphereLight( skyColor : Integer, groundColor : Integer, intensity : Float ) // skyColor - (optional) hexadecimal color of the sky. Default is 0xffffff. // groundColor - (optional)
-        hexadecimal color of the ground. Default is 0xffffff. // intensity - (optional) numeric value of the light's strength/intensity. Default is 1. const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1); light.position.set(.5, 1, .25); scene.add(light);
-        console.log(light); // specify a model URL const modelURL = 'https://raw.githubusercontent.com/immersive-web/webxr-samples/main/media/gltf/space/space.gltf'; // create a GLTF loader object. GLTF is a 3D model format usually called the "JPEG of
-        3D" because it is // fast and efficient to use, which is ideal for the web loader = new THREE.GLTFLoader(); console.log(loader); // learn about other types of 3D model formats you can use here: // https://threejs.org/docs/#manual/en/introduction/Loading-3D-models
-        // loader (model url, onload callback, onProgress callback, onError callback) loader.load( modelURL, // gets called once when the model has finished loading function (gltf){ model = gltf.scene; console.log(model); model.position.y = 5; scene.add(model);
-        }, // optional function for showing progress function(xhr){ console.log(xhr); }, // optional function for logging errors if there are error on loading function(error){ console.log(error); } ) // Add a polyhedron shape to the scene // Documentation:
-        https://threejs.org/docs/#api/en/geometries/IcosahedronGeometry // IcosahedronGeometry(radius : Float, detail : Integer) // radius — Default is 1. // detail — Default is 0. Setting this to a value greater than 0 adds more vertices making it no
-        longer an icosahedron. When detail is greater than 1, it's effectively a sphere. const geometry = new THREE.IcosahedronGeometry(.1, 1) const material = new THREE.MeshPhongMaterial({ color: new THREE.Color("rgb(226,35,213)"), shininess: 6, flatShading:
-        true, transparent: 1, opacity: 0.8 }); mesh = new THREE.Mesh(geometry, material); scene.add(mesh); mesh.position.set(.2, 0,-0.5); // // CUBE // const geometry2 = new THREE.BoxGeometry(.3, .3, .3); //1, 1, 1 // const material2 = new THREE.MeshBasicMaterial({color
-        : 0xe06666}); // const cubeMesh = new THREE.Mesh(geometry2, material2); // scene.add(cubeMesh); // 0 ,0 ,0 // cubeMesh.position.z = -1; // cubeMesh.position.y = .5; // TORUS const geometry3 = new THREE.TorusGeometry(.15, .05, 12, 50); const material3
-        = new THREE.MeshBasicMaterial({ color: new THREE.Color("rgb(253, 253, 150)") }); mesh3 = new THREE.Mesh(geometry3, material3); scene.add(mesh3); mesh3.position.set(-.2, 0, -.5); // add the AR butoon to the body of the DOM const button = ARButton.createButton(renderer);
-        console.log(button); document.body.appendChild(button); window.addEventListener('resize', onWindowResize, false); } function onWindowResize() { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth,
-        window.innerHeight); } function animate(){ renderer.setAnimationLoop(render); } // render function called on a loop every time the screen is refreshed // which typically means 60 times a second (60 frames per second) function render(){ rotateObjects();
-        rotateModel(); renderer.render(scene, camera); } let degrees = 0; function rotateModel(){ if(model !== undefined){ degrees = degrees + 0.2; model.rotation.y = THREE.Math.degToRad(degrees); } } function rotateObjects(){ // rotate the polyhedron
-        on y // rotation units are in radians (here's a recommended video on Euler angles: https://www.youtube.com/watch?v=q0jgqeS_ACM) mesh.rotation.y = mesh.rotation.y - 0.01; //console.log(mesh.rotation); // rotate the torus on x mesh3.rotation.x =
-        mesh3.rotation.x - 0.01; }
+    import { ARButton } from 'https://unpkg.com/three@0.126.0/examples/jsm/webxr/ARButton.js';
+    console.log(ARButton);
+
+    let camera, scene, renderer;
+    let mesh, mesh3;
+    let loader;
+    let model;
+
+    // console.log(THREE);
+    init();
+    animate();
+
+    function init() {
+      const container = document.createElement('div');
+      document.body.appendChild(container);
+
+      // All three.js scenes need three things: a scene, a camera, and a renderer
+      // For more info read: https://threejs.org/docs/#manual/en/introduction/Creating-a-scene
+
+      // #1 create the scene, although there's nothing in it just yet
+      scene = new THREE.Scene;
+      console.log(scene);
+
+      // #2 create the camera
+      // From documentation: https://threejs.org/docs/#api/en/cameras/PerspectiveCamera
+      // PerspectiveCamera( fov : Number, aspect : Number, near : Number, far : Number )
+      // fov — Camera frustum vertical field of view.
+      // aspect — Camera frustum aspect ratio.
+      // near — Camera frustum near plane.
+      // far — Camera frustum far plane.
+      camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.01, 40);
+      console.log(camera);
+
+      // #3 Pick a three.js renderer
+      // Documentation: https://threejs.org/docs/#api/en/renderers/WebGLRenderer
+      renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.xr.enabled = true;
+      container.appendChild(renderer.domElement);
 
 
-    </script>
+      // Everything hereafter is optional things we want to add to the scene
+
+      // Add a light to the cene
+      // Documentation: https://threejs.org/docs/index.html#api/en/lights/HemisphereLight
+      // HemisphereLight( skyColor : Integer, groundColor : Integer, intensity : Float )
+      // skyColor - (optional) hexadecimal color of the sky. Default is 0xffffff.
+      // groundColor - (optional) hexadecimal color of the ground. Default is 0xffffff.
+      // intensity - (optional) numeric value of the light's strength/intensity. Default is 1.
+      const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
+      light.position.set(.5, 1, .25);
+      scene.add(light);
+      console.log(light);
+
+
+      // specify a model URL
+      const modelURL = 'https://raw.githubusercontent.com/immersive-web/webxr-samples/main/media/gltf/space/space.gltf';
+      
+      // create a GLTF loader object. GLTF is a 3D model format usually called the "JPEG of 3D" because it is
+      // fast and efficient to use, which is ideal for the web
+      loader = new THREE.GLTFLoader();
+      console.log(loader);
+      // learn about other types of 3D model formats you can use here: 
+      // https://threejs.org/docs/#manual/en/introduction/Loading-3D-models
+      // loader (model url, onload callback, onProgress callback, onError callback)
+      loader.load(
+        modelURL, 
+
+        // gets called once when the model has finished loading
+        function (gltf){
+          model = gltf.scene;
+          console.log(model);
+          model.position.y = 5;
+          scene.add(model);
+        },
+        // optional function for showing progress
+        function(xhr){
+          console.log(xhr);
+        },
+        // optional function for logging errors if there are error on loading
+        function(error){
+          console.log(error);
+        }
+        )
+
+
+
+      // Add a polyhedron shape to the scene
+      // Documentation: https://threejs.org/docs/#api/en/geometries/IcosahedronGeometry
+      // IcosahedronGeometry(radius : Float, detail : Integer)
+      // radius — Default is 1.
+      // detail — Default is 0. Setting this to a value greater than 0 adds more vertices making it no longer an icosahedron. When detail is greater than 1, it's effectively a sphere.
+      const geometry = new THREE.IcosahedronGeometry(.1, 1)
+      const material = new THREE.MeshPhongMaterial({ 
+        color: new THREE.Color("rgb(226,35,213)"),
+        shininess: 6,
+        flatShading: true,
+        transparent: 1,
+        opacity: 0.8
+      });
+      mesh = new THREE.Mesh(geometry, material);
+      scene.add(mesh);
+      mesh.position.set(.2, 0,-0.5);
+
+
+
+      // // CUBE
+      // const geometry2 = new THREE.BoxGeometry(.3, .3, .3); //1, 1, 1 
+      // const material2 = new THREE.MeshBasicMaterial({color : 0xe06666});
+      // const cubeMesh = new THREE.Mesh(geometry2, material2);
+      // scene.add(cubeMesh); // 0 ,0 ,0
+      // cubeMesh.position.z = -1;
+      // cubeMesh.position.y = .5;
+
+
+
+      // TORUS
+      const geometry3 = new THREE.TorusGeometry(.15, .05, 12, 50);
+      const material3 = new THREE.MeshBasicMaterial({
+        color: new THREE.Color("rgb(253, 253, 150)")
+      });
+      mesh3 = new THREE.Mesh(geometry3, material3);
+      scene.add(mesh3);
+      mesh3.position.set(-.2, 0, -.5);
+
+      // add the AR butoon to the body of the DOM
+      const button = ARButton.createButton(renderer);
+      console.log(button);
+      document.body.appendChild(button);
+
+      window.addEventListener('resize', onWindowResize, false);
+    }
+
+    function onWindowResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    function animate(){
+      renderer.setAnimationLoop(render);
+    }
+
+    // render function called on a loop every time the screen is refreshed
+    // which typically means 60 times a second (60 frames per second)
+    function render(){
+     
+      rotateObjects();
+      rotateModel();
+      renderer.render(scene, camera);
+    }
+
+    let degrees = 0;
+
+    function rotateModel(){
+      if(model !== undefined){
+        degrees = degrees + 0.2;
+        model.rotation.y = THREE.Math.degToRad(degrees);
+
+      }
+    }
+
+
+    function rotateObjects(){
+      // rotate the polyhedron on y
+      // rotation units are in radians (here's a recommended video on Euler angles: https://www.youtube.com/watch?v=q0jgqeS_ACM)
+      mesh.rotation.y = mesh.rotation.y - 0.01;
+      //console.log(mesh.rotation);
+      
+      // rotate the torus on x
+      mesh3.rotation.x = mesh3.rotation.x - 0.01;
+    }
+
+
+  </script>
 </body>
 
 </html>
