@@ -51,22 +51,22 @@ if(isset($_POST['addProduct']))
             <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data"> <!-- ?php $_SERVER['PHP_SELF' -->
             <h3>Add new product</h3>
             <div class="mb-3">
-            <input type="text" placeholder="entrer le nom du produit" name="product_name">
+            <input type="text " class="form-control" placeholder="entrer le nom du produit" name="product_name">
             </div>
             <div class="mb-3">
-            <input type="number" step="any"  placeholder="entrer la prix du produit" name="product_price" >
+            <input type="number"  class="form-control"step="any"  placeholder="entrer la prix du produit" name="product_price" >
             </div>
             <div class="mb-3">
-            <input type="text" placeholder="entrer le code du produit" name="product_code" >
+            <input type="text" class="form-control" placeholder="entrer le code du produit" name="product_code" >
             </div>
             <div class="mb-3">
-         <textarea name="product_description" placeholder="Entrer la description du produit"  rows="5" cols="33" ></textarea>
+         <textarea name="product_description" class="form-control" placeholder="Entrer la description du produit"  rows="5" cols="33" ></textarea>
             </div>
             <div class="mb-3">
-            <input type="file" placeholder="entrer l'image du produit" name="product_image">
+            <input type="file" class="form-control" placeholder="entrer l'image du produit" name="product_image">
             </div>
             <div class="mb-3">
-           <input type="submit"  name="addProduct" value="ajouter un produit">
+           <input type="submit" class="form-control"  name="addProduct" value="ajouter un produit">
             </div>
             </form>
         </div>
