@@ -29,7 +29,6 @@ if(isset($_POST['addArticle']))
 ?>
 <!DOCTYPE html>
        
-
     <?php 
     if(isset($message)){
         foreach($message as $message ){
@@ -38,30 +37,46 @@ if(isset($_POST['addArticle']))
     }
     ?>
 
-  <main class="mt-5 pt-3">
+  <main>
+  <div class="container">
+
+      <div class="div-center">
+
+         <section id="course" class="course">
+  
+
         <div class="row">
 			 <div class="course-col">
+                 <br> <br> <br> 
 
-            <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data"> <!-- ?php $_SERVER['PHP_SELF' -->
-            <h3>Add new product</h3>
-            <div class="mb-3">
-            <input type="text" placeholder="title" name="title">
-            </div>
-            <div class="mb-3">
-            <input type="text" placeholder="description" name="description" style="height:200px;font-size:14pt;">
-            </div>
-            <div class="mb-3">
-            <input type="text" placeholder="autor" name="autor">
-            </div>
-           
-            <div class="mb-3">
-            <input type="file" placeholder="entrer l'image du produit" name="image">
-            </div>
-            <div class="mb-3">
-           <input type="submit"  name="addArticle" value="ajouter un produit">
-            </div>
-            </form>
+                    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data"> <!-- ?php $_SERVER['PHP_SELF' -->
+                    <h3>Add new Article</h3>
+                        <div class="mb-3">
+                            <input type="text"  class="form-control"placeholder="title" name="title">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text"  class="form-control" placeholder="description" name="description" style="height:200px;font-size:14pt;">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text"  class="form-control" placeholder="autor" name="autor">
+                        </div>
+                    
+                        <div class="mb-3">
+                            <input type="file"  class="form-control" placeholder="entrer l'image du produit" name="image">
+                        </div>
+                        <div class="mb-3">
+                            <input type="submit" class="btn btn-primary" name="addArticle" value="ajouter un produit">
+                        </div>
+                    </form>
+
+                    
+             </div>
         </div>
+
+     </section>
+    </div>
+</div>
+
 </main>
 </body>
 </html>

@@ -51,7 +51,7 @@
                                 <br>
                                 <input type="text" name="product_description" value="<?= $response['product_description'] ;?>">
                                 <br>
-                                <input type="number" name="product_price" value="<?= $response['product_price'] ;?>">
+                                <input type="number" step="any" name="product_price" value="<?= $response['product_price'] ;?>">
                                 <br>
                                 <input type="text" name="product_code" value="<?= $response['product_code'] ;?>">
                                 <br>

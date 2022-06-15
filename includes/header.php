@@ -62,6 +62,9 @@
                         <li class = "nav-item px-2 py-2">
                                     <a class = "nav-link text-uppercase text-dark" href = "shop.php"><?= _('shop')?></a>
                              </li>
+                         <li class = "nav-item px-2 py-2">
+                                    <a class = "nav-link text-uppercase text-dark" href = "trot.php"><?= _('scooter')?></a>
+                             </li>     
                         <li class = "nav-item px-2 py-2">
                                 <a class = "nav-link text-uppercase text-dark" href = "profile.php"><?= _('profile')?></a>
                             </li>

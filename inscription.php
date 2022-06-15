@@ -24,7 +24,7 @@ include('includes/header.php');
                             <div class = "title text-center">
                             <h2 class = "position-relative d-inline-block"> Register</h2>
                             </div>
-                        <?php include('includes/message.php'); ?>
+                         <?php include('includes/message.php'); ?>
 
                         
                                 <form method="post" action="verification_inscription.php" enctype="multipart/form-data" class="form1">

@@ -54,7 +54,7 @@ if(isset($_POST['addProduct']))
             <input type="text" placeholder="entrer le nom du produit" name="product_name">
             </div>
             <div class="mb-3">
-            <input type="number" placeholder="entrer la prix du produit" name="product_price" >
+            <input type="number" step="any"  placeholder="entrer la prix du produit" name="product_price" >
             </div>
             <div class="mb-3">
             <input type="text" placeholder="entrer le code du produit" name="product_code" >

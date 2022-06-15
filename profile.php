@@ -61,11 +61,22 @@
                                        
 
                                      <br><br><br><br>
-                                     <div id='box'>
-                                          <h1>Attention!</h1>
-                                          <p>You are going to delete this user permanently.</p>
-                                          <a class='link-danger' href='DeleteUser.php?id=".$voirProfil['id']."' title='".$voirProfil['id']."'>Delete</a> 
-                                     </div>   
+                                    <p>
+                                        <button class='btn btn-primary' type='button' data-bs-toggle='collapse' data-bs-target='#collapseExample' aria-expanded='false' aria-controls='collapseExample'>
+                                        Delete your account
+                                        </button>
+                                    </p>
+                                 <div class='collapse' id='collapseExample'>
+                                   <div class='card card-body'>
+                                            <div id='box'>
+                                                <h1>Attention!</h1>
+                                                <p>You are going to delete this user permanently.</p>
+                                                <a class='link-danger' href='DeleteUser.php?id=".$voirProfil['id']."' title='".$voirProfil['id']."'>Delete</a> 
+                                            </div>   
+
+                                   </div>
+                                 </div>
+                                           
                                      <hr>
                                        
 
