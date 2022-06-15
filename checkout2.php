@@ -129,35 +129,40 @@ if (isset($_SESSION['email'])){
                         
 
                                     <td>
+
                                       <div id="smart-button-container">
                                         <div style="text-align: center;">
-                                            <div id="paypal-button-container" onclick="myAjax()">
+                                            <div id="paypal-button-container">
 
-                                            <!-- <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
+                                            <!--<form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
                                             <input type="submit" class="btn btn-secondary" name="submit" value="submit" class="btn btn">
-                                            
-                                                </form>
-                                             -->
+                                            </form> -->
+
                                             </div>
                                         </div>
                                         </div>
+                                        
 
                                       
                                     <script src="https://www.paypal.com/sdk/js?client-id=AQ3NsNMK2ULmNXhPR8ndLJvL5yeXYqY6ibCb5GmgPZNoPpp9JJZOSvy_l_fuAGVQbV4HaYqr-BJCO8Fy&enable-funding=venmo&currency=EUR" data-sdk-integration-source="button-factory"></script>
                                     <script>
 
-                                    function myAjax() {
-                                        $.ajax({
-                                            type: "POST",
-                                            url: 'your_url/ajax.php',
-                                            data:{action:'call_this'},
-                                            success:function(html) {
-                                                alert(html);
-                                            }
-
+                                    $("#smart-button-container").click(function(e) {
+                                            var form_data = $(this).serialize();
+                                            $.ajax({
+                                                url: "sve.php",
+                                                type: "POST",
+                                                dataType: "json",
+                                                data: form_data
+                                            }).done(function(data) {
+                                                $("#cart-container").html(data.products);
+                                            })
+                                            e.preventDefault();
+                                            window.location.reload();
                                         });
-                                    }
+                                      
 
+                                         
 
                                         function initPayPalButton() {
 
@@ -170,7 +175,6 @@ if (isset($_SESSION['email'])){
                                             label: 'paypal',
                                             
                                             },
-                                            
                                             
                              
                                             
@@ -203,8 +207,17 @@ if (isset($_SESSION['email'])){
 
                                                 element.innerHTML = '';
                                                 element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                                               
 
+
+                                                $.ajax({
+                                                        type: 'POST',
+                                                        url: 'sve.php',
+                                                        success: function(data) {
+                                                            //success code
+                                                        }
+                                                        });
+
+ 
 
                                                 // Or go to another URL:  actions.redirect('thank_you.html');
                                                 

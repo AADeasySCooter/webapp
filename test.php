@@ -18,7 +18,7 @@ include('includes/db.php');
                 <div class="row">
                     
                     <div class="course-col">
-                                               <form name="frm" >
+                                               <form name="frm" method="post" action="sve.php">
                                                 <input type="submit" class="btn btn-secondary" name="submit" value="submit" class="btn btn">
                                                 </form>
 
