@@ -6,28 +6,6 @@ include('includes/db.php');
 
 
 
-if (isset($_SESSION['email'])){
-    $recupProfil =$bdd->prepare("SELECT * FROM users WHERE email= '".$_SESSION['email']."'");     
-    $recupProfil->execute();
-    $voirProfil =$recupProfil->fetch();
-    $user_id = $voirProfil['id'];
-
-    if(count($_POST)>0)  {
-        $user_id = $voirProfil['id'];
-        $product = $_SESSION['product'];
-
-
-        /* foreach($product_ as $key => $value) {
-            $product_[$key]=$value->__toString();
-        } */
-    
-        $radmin = $bdd->exec( "INSERT INTO cart (user_id )   VALUES ($user_id )   ;" );
-        $message[] = 'ok ';
-
-    }}
-
-
-
 
 
 
@@ -134,9 +112,9 @@ if (isset($_SESSION['email'])){
                                         <div style="text-align: center;">
                                             <div id="paypal-button-container">
 
-                                            <!--<form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
+                                            <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
                                             <input type="submit" class="btn btn-secondary" name="submit" value="submit" class="btn btn">
-                                            </form> -->
+                                            </form> 
 
                                             </div>
                                         </div>

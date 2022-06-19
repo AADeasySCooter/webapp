@@ -210,6 +210,50 @@
                 </ul>
               </div>
             </li>
+
+            <li>
+              <a
+                class="nav-link px-3 sidebar-link"
+                data-bs-toggle="collapse"
+                href="#scooter"
+              >
+                <span class="me-2"><i class="bi bi-layout-split"></i></span>
+                <span>Scooter</span>
+                <span class="ms-auto">
+                  <span class="right-icon">
+                    <i class="bi bi-chevron-down"></i>
+                  </span>
+                </span>
+              </a>
+              <div class="collapse" id="scooter">
+                <ul class="navbar-nav ps-3">
+                  <li>
+                    <a href="addScooter.php" class="nav-link px-3">
+                      <span class="me-2"
+                        ><i class="bi bi-speedometer2"></i
+                      ></span>
+                      <span>Add Scooter</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="editScooter.php" class="nav-link px-3">
+                      <span class="me-2"
+                        ><i class="bi bi-speedometer2"></i
+                      ></span>
+                      <span>Edit Scooter</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="DeleteScooter.php" class="nav-link px-3">
+                      <span class="me-2"
+                        ><i class="bi bi-speedometer2"></i
+                      ></span>
+                      <span>Delete Scooter</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
            
            
             
