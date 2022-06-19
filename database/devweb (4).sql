@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: May 27, 2022 at 11:52 AM
+-- Generation Time: Jun 19, 2022 at 04:52 PM
 -- Server version: 5.7.34
 -- PHP Version: 8.0.8
 
@@ -73,14 +73,21 @@ INSERT INTO `articles` (`id`, `title`, `description`, `date_create`, `autor`, `i
 CREATE TABLE `cart` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `product_name` varchar(255) NOT NULL,
-  `product_qty` int(11) NOT NULL,
-  `product_price` int(11) NOT NULL,
-  `product_image` varchar(255) NOT NULL,
-  `product_code` varchar(255) NOT NULL,
-  `product_description` varchar(255) NOT NULL,
+  `product_name` varchar(255) DEFAULT NULL,
+  `product_qty` int(11) DEFAULT NULL,
+  `product_price` int(11) DEFAULT NULL,
+  `product_image` varchar(255) DEFAULT NULL,
+  `product_code` varchar(255) DEFAULT NULL,
+  `product_description` text,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `user_id`, `product_name`, `product_qty`, `product_price`, `product_image`, `product_code`, `product_description`, `date`) VALUES
+(155, 31, NULL, NULL, NULL, NULL, NULL, NULL, '2022-06-19 16:46:06');
 
 -- --------------------------------------------------------
 
@@ -133,7 +140,7 @@ CREATE TABLE `product` (
   `id` int(11) NOT NULL,
   `product_name` varchar(255) DEFAULT NULL,
   `product_description` varchar(255) DEFAULT NULL,
-  `product_price` int(11) DEFAULT NULL,
+  `product_price` float DEFAULT NULL,
   `product_image` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `product_code` varchar(255) NOT NULL
@@ -146,14 +153,14 @@ CREATE TABLE `product` (
 INSERT INTO `product` (`id`, `product_name`, `product_description`, `product_price`, `product_image`, `created_at`, `product_code`) VALUES
 (2, 'test', 'test', 123, 'casque-velo-trottinette-noir.jpeg', '2022-04-18 16:18:21', 'AAAA1'),
 (3, 'test', 'test', 123, 'casque-velo-trottinette-noir.jpeg', '2022-04-18 16:18:21', 'AAAA2'),
-(4, 'test', 'test', 2, 'casque-velo-trottinette-noir.jpeg', '2022-04-18 16:18:21', 'AAAA3'),
+(4, 'test', 'test', 2, 'casque-blanc.jpeg', '2022-04-18 16:18:21', 'AAAA3'),
 (5, 'test', 'test', 1, 'casque-velo-trottinette-noir.jpeg', '2022-04-18 16:18:21', 'AAAA4'),
 (6, 'test', 'test', 2, 'casque-de-protection-urban-pour-trottinette-electrique-noir-tailles-s-m.jpeg', '2022-04-18 16:18:21', 'AAAA5'),
 (7, 'test', 'test', 2, 'casque-velo-trottinette-noir.jpeg', '2022-04-18 16:18:21', 'AAAA6'),
 (8, 'test', '12', 5, 'casque-velo-trottinette-noir.jpeg', '2022-04-18 16:18:21', 'AAAA7'),
 (9, 'test', '12', 5, 'casque-velo-trottinette-noir.jpeg', '2022-04-18 16:18:21', 'AAAA8'),
 (24, 'test23333', 'testttttt', 123, 'casque-de-protection-urban-pour-trottinette-electrique-noir-tailles-s-m.jpeg', '2022-04-18 16:19:05', 'AAAA9'),
-(25, 'test213', 'code bleu', 2, 'casque-de-protection-urban-pour-trottinette-electrique-noir-tailles-s-m.jpeg', '2022-05-23 10:22:56', 'AAA10'),
+(25, 'test213', 'code bleu', 0.01, 'casque-velo-trottinette-noir.jpeg', '2022-05-23 10:22:56', 'AAA10'),
 (26, 'test', 'test2', 23, 'casque-de-protection-urban-pour-trottinette-electrique-noir-tailles-s-m.jpeg', '2022-05-23 10:23:08', 'AAA111');
 
 -- --------------------------------------------------------
@@ -213,6 +220,29 @@ INSERT INTO `roles_prem` (`role_id`, `perm_mod`, `perm_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `scooter`
+--
+
+CREATE TABLE `scooter` (
+  `id` int(11) NOT NULL,
+  `scooter_name` varchar(255) NOT NULL,
+  `scooter_image` varchar(255) NOT NULL,
+  `scooter_status` int(11) NOT NULL DEFAULT '1',
+  `scooter_code` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `scooter`
+--
+
+INSERT INTO `scooter` (`id`, `scooter_name`, `scooter_image`, `scooter_status`, `scooter_code`, `created_at`) VALUES
+(1, 'scooter_1', 'trottinette-electrique-blaster.jpeg', 1, 'BBBB1', '2022-06-19 18:02:49'),
+(2, 'scooter_2', 'trottinette-electrique-blaster.jpeg', 3, 'BBBB2', '2022-06-19 18:12:04');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -242,7 +272,7 @@ INSERT INTO `users` (`id`, `email`, `firstname`, `lastname`, `password`, `userna
 (22, 'audesan@icloud.com', 'hbfiz', 'jebr', 'be73eda70bc3e2b53e641a22606d1e66006713bdbe4d305ef2ff5b2f547c5244', NULL, 3, '::1', '2022-05-13 18:34:46', 1, NULL, NULL, NULL, NULL),
 (23, 'audesaddn@icloud.com', 'GAVINsvs', 'APERANO MOULOvUNGUI', 'decec1331842659e4448387694c54250015e73124bef178c7a5633f862b4aebd', NULL, 1, '::1', '2022-05-13 18:39:01', 1, NULL, NULL, NULL, NULL),
 (24, 'audesaddn@icFloud.com', 'GAVIN', 'APERANO MOULOUNGUI', 'bfe59019d932498ab1c4edc81a8bd52a8f6981224647891581751fb879a36bca', NULL, 3, '::1', '2022-05-13 18:39:40', 1, NULL, NULL, NULL, NULL),
-(31, 'gavinaperano@gmail.com', 'GAVIN', 'APERANO MOULOUNGUI', 'bfe59019d932498ab1c4edc81a8bd52a8f6981224647891581751fb879a36bca', NULL, 3, '::1', '2022-05-18 19:47:55', 1, 'Avenue Émile Baudot', '0635963171', '91300', 'MASSY'),
+(31, 'aude1@gmail.com', 'GAVIN', 'APERANO MOULOUNGUI', 'bfe59019d932498ab1c4edc81a8bd52a8f6981224647891581751fb879a36bca', NULL, 3, '::1', '2022-05-18 19:47:55', 1, 'Avenue Émile Baudot', '0635963171', '91300', 'MASSY'),
 (33, 'gavi@gmail.com', 'GAVIN', 'APERANO MOULOUNGUI', 'bfe59019d932498ab1c4edc81a8bd52a8f6981224647891581751fb879a36bca', NULL, 3, '::1', '2022-05-24 12:48:06', 1, NULL, NULL, NULL, NULL),
 (34, 'gavo@gmail.com', 'GAVIN', 'APERANO MOULOUNGUI', 'bfe59019d932498ab1c4edc81a8bd52a8f6981224647891581751fb879a36bca', NULL, 3, '::1', '2022-05-26 15:58:03', 1, 'Avenue Émile Baudot', '0635963171', '91300', 'MASSY');
 
@@ -306,6 +336,12 @@ ALTER TABLE `roles_prem`
   ADD PRIMARY KEY (`role_id`,`perm_mod`,`perm_id`);
 
 --
+-- Indexes for table `scooter`
+--
+ALTER TABLE `scooter`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -331,13 +367,13 @@ ALTER TABLE `articles`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -356,6 +392,12 @@ ALTER TABLE `resetPassword`
 --
 ALTER TABLE `roles`
   MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `scooter`
+--
+ALTER TABLE `scooter`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`

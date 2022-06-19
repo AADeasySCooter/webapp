@@ -76,8 +76,10 @@ include('includes/db.php');
                                             <!--  afficher un boutton vert si status = 1 -->
 
                                             <?php if($scooter["scooter_status"] == 1){ ?>
+                                
 
                                             <button  class="btn btn-primary  " type="submit">Use</button>
+
                                             <button  class="btn btn-success  " type="submit">Available🟢</button>
                                             <?php }else{ ?>
                                             <button  class="btn btn-danger  " type="submit">Not Available 🔴</button>
