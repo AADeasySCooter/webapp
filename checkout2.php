@@ -6,42 +6,37 @@ include('includes/db.php');
 
 
 
-if (isset($_SESSION['email'])){
     $recupProfil =$bdd->prepare("SELECT * FROM users WHERE email= '".$_SESSION['email']."'");     
     $recupProfil->execute();
     $voirProfil =$recupProfil->fetch();
     $user_id = $voirProfil['id'];
-    $product = $_SESSION['product'];
+    
+    
 
+//tant qu'il y'a des produits dans le panier on les insère dans la base de données
+    if(isset($_SESSION["products"]) && count($_SESSION["products"])>0 && isset($_SESSION["email"]) ) {
+        foreach($_SESSION["products"] as $key => $value) {
+            $product[$key]=$value;
 
-        /* foreach($product_ as $key => $value) {
-            $product_[$key]=$value->__toString();
-        } */
+            $succes = $bdd->exec( "INSERT INTO cart (user_id, product_description)   VALUES ($user_id, '".implode(',',$value)."')   ;" );
+
+        }
         
-     
-      //convertir  $product en string et tout mettre dans la base de données
-        $product_ = json_decode($product);
         
-
-
-
-
+        if($succes){
+            http_response_code(201);
+        }else{
+            http_response_code(500);
+        }
+        
+        //inserer la liste de valeur dans $product dans la base de données
+        
+    }//else here
 
 
 
     
-    
-
-        $message[] = 'ok ';
-
-
-
-    }
-
-
-
-
-
+  
 
 ?>
 
@@ -288,9 +283,36 @@ if (isset($_SESSION['email'])){
 
         </div>
         <?php 
-        var_dump($product);
+        //var_dump($product);
         echo "$user_id";
+        $total_product = count($_SESSION["products"]);
+        
+  
+        
+       
+        var_dump(json_encode(array('products'=>$total_product)));
 
-        var_dump($product_);
+
+
+        var_dump($total_product);
+
+
+        $product = $_SESSION['product'];
+        //afficher tous les élement en session un par un
+        foreach((array)$total_product as $key => $value) {
+        $product[$key]=$value->__toString();
+            var_dump($value);
+        }
+
+
+                                    
+
+
+
+
+
+
+
+
         ?>
     </section>

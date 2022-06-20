@@ -7,6 +7,8 @@ include('includes/db.php');
 
 //add card product with session
 
+ 
+
 if(isset($_POST["product_code"])) {
 	foreach($_POST as $key => $value){
 		$product[$key] = filter_var($value, FILTER_SANITIZE_STRING);

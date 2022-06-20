@@ -40,20 +40,36 @@ $pdf->SetFont('Times','',12);
 
 
 
-    $getProduct = $bdd->query("SELECT * FROM users where email ='".$_SESSION['email']."'"); 
-    while($product = $getProduct->fetch()){ ?>
+    $getUsers = $bdd->query("SELECT * FROM users where email ='".$_SESSION['email']."'"); 
+    while($Users = $getUsers->fetch()){ ?>
                             
        
                 
             
         <?php
-        $pdf->Cell(0,5,$product['lastname'],0,1);
-        $pdf->Cell(0,5,$product['firstname'],0,1);
-        $pdf->Cell(0,5,$product['number'],0,1);
-        $pdf->Cell(0,5,utf8_decode($product['address']),0,1);
-        $pdf->Cell(0,5,$product['code_postal'],0,1);
-        $pdf->Cell(0,5,$product['ville'],0,1);
+        $pdf->Cell(0,5,$Users['lastname'],0,1);
+        $pdf->Cell(0,5,$Users['firstname'],0,1);
+        $pdf->Cell(0,5,$Users['number'],0,1);
+        $pdf->Cell(0,5,utf8_decode($Users['address']),0,1);
+        $pdf->Cell(0,5,$Users['code_postal'],0,1);
+        $pdf->Cell(0,5,$Users['ville'],0,1);
+        
+
+        
+        //recuperer toute dans cart ou user_id = $user_id et l'id de la table cart est unique 
+
+
+        $getPay = $bdd->query("SELECT * FROM cart where user_id ='".$Users['id']."'");
+        while($Pay = $getPay->fetch()){ ?>
+                                
+       
+                
+            
+        <?php
+        $pdf->Cell(0,5,$Pay['product_description'],0,1);
         }
+    }
+    
 $pdf->Output();
 
 
