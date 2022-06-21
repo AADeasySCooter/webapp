@@ -22,7 +22,7 @@ include('includes/header.php');
                                         <label class="form-label">Email</label>
                                             <input type="email" name="email" class="form-control" placeholder="Your email" >
                                         </div>
-                                            <button type="submit" name="reset-password" class="btn btn-primary" >Reset password</button>
+                                            <input type="submit" name="reset-password" class="btn btn-primary" >Reset password
                                         
                                 </form>
                             

@@ -96,15 +96,19 @@
                                         $user_id = $voirProfil['id'];}
 
                                        $getProduct = $bdd->query("SELECT * FROM cart where user_id =$user_id "); 
-                                       while($product = $getProduct->fetch()){ ?>
+                                       while($product = $getProduct->fetch()){
+                                           $id_product = $product['id'];
+                                           
+                                           ?>
                                        
                                             
                                             <tr>
-                                                <td><?= $product['id'] ;?></td>  
+                                                <td><?= $id_product;?></td>  
                                                 
                                                 <td> 
                                                 <form method="POST" action="pdf.php">
-                                                    <button name="pdf_gen" href="receipt.php" class="btn btn-warning"></i> Download receipt</button>
+                                                    <input type="hidden" name="id" value="<?= $id_product ;?>">
+                                                    <input type="submit" name="pdf_gen" class="btn btn-warning" placeholder="Download receipt">
                                                  </form>
                                                 </td>
 

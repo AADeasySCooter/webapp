@@ -53,23 +53,41 @@ $pdf->SetFont('Times','',12);
         $pdf->Cell(0,5,utf8_decode($Users['address']),0,1);
         $pdf->Cell(0,5,$Users['code_postal'],0,1);
         $pdf->Cell(0,5,$Users['ville'],0,1);
-        
+        //recuperer toute les info de cart quand son id est egale a l'id du pdf 
 
-        
-        //recuperer toute dans cart ou user_id = $user_id et l'id de la table cart est unique 
+        if(count($_POST)>0)  {      
+                      //recuperer l'id envoyer en post dans le champ hidden
 
+            $getId = $bdd->query("SELECT * FROM cart where id ='".$_POST['id']."'");
+            while($id = $getId->fetch()){ 
 
-        $getPay = $bdd->query("SELECT * FROM cart where user_id ='".$Users['id']."'");
-        while($Pay = $getPay->fetch()){ ?>
-                                
-       
                 
-            
-        <?php
-        $pdf->Cell(0,5,$Pay['product_description'],0,1);
+                ?>
+                                    
+           
+                    
+                
+            <?php
+            $pdf->Cell(0,5,$id['product_description'],0,1);
+            }
         }
+           
+        
+        
+
+
+          
+
+
+        
     }
     
+    
+
+
+
+    
+
 $pdf->Output();
 
 
