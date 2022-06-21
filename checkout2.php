@@ -4,34 +4,7 @@ include('includes/header.php');
 include('includes/db.php');
 include('reduc.php');
 
-    $recupProfil =$bdd->prepare("SELECT * FROM users WHERE email= '".$_SESSION['email']."'");     
-    $recupProfil->execute();
-    $voirProfil =$recupProfil->fetch();
-    $user_id = $voirProfil['id'];
-    
-    
-    //tant qu'il y'a des produits dans le panier on les insère dans la base de données
-    if(isset($_SESSION["products"]) && count($_SESSION["products"])>0 && isset($_SESSION["email"]) ) {
-        foreach($_SESSION["products"] as $key => $value) {
-            $product[$key]=$value;
-
-
-        }
-        $succes = $bdd->exec( "INSERT INTO cart (user_id, product_description)   VALUES ($user_id, '".implode(',',$value)."')   ;" );
-        //supprimer la dernière ligne valeurs inserées dans la base de données dans la table cart
-
-        
-        
-        if($succes){
-            //$try =$bdd->exec( "DELETE FROM cart WHERE id = (SELECT MAX(id) FROM cart) ;" );
-            http_response_code(201);
-        }else{
-            http_response_code(500);
-        }
-        
-        //inserer la liste de valeur dans $product dans la base de données
-        
-    }//else here
+   
 
 
 
@@ -88,10 +61,10 @@ include('reduc.php');
                                             <th>Point of reduce</th>
                                         </thead>
                                         <tbody>
-                                            <form action="reduc.php" method="post">
+                                            <form >
                                                 <tr>
                                                 <td>
-                                                    <input type="number" name="reduc" placeholder="Enter your point of reduce">
+                                                    <input id ="quantity" type="number" name="reduc" placeholder="Enter your point of reduce">
                                                 </td>
                                                 <td>
                                                     <input type="submit" value="Apply" name="Apply">
@@ -99,8 +72,28 @@ include('reduc.php');
                                                 </tr>
                                             </form>
 
-                                        
+                                        </tbody>
                                     </table>
+                                    <script>
+                                        //faire un POST pour le formulaire Point de reduction quand on clique sur le bouton
+                                        $('#quantity').on('change', function(){
+                                            var quantity = $(this).val();
+                                            var id = $(this).data('code');
+                                            $.ajax({
+                                                url: 'reduc.php',
+                                                type: 'POST',
+                                                data: {
+                                                    quantity: quantity,
+                                                    id: id
+                                                },
+                                                success: function(data){
+                                                    location.reload();
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                    
+
        
                                     <table class="table" id="shopping-cart-results">
                                     <thead>
@@ -151,7 +144,8 @@ include('reduc.php');
 
                                     //appliquer la reduction sur le total si reduction est supérieur à 0
                                     if($reduction > 0){
-                                        $total = $total - $reduction;
+
+                                        $total = ($total - $reduction) ;
                                     }
 
                                 ?>	
@@ -167,9 +161,9 @@ include('reduc.php');
                                         <div style="text-align: center;">
                                             <div id="paypal-button-container">
 
-                                            <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
+                                            <!--<form action="<?php // $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
                                             <input type="submit" class="btn btn-secondary" name="submit" value="submit" class="btn btn">
-                                            </form> 
+                                            </form> -->
 
                                             </div>
                                         </div>
@@ -178,7 +172,10 @@ include('reduc.php');
 
                                       
                                     <script src="https://www.paypal.com/sdk/js?client-id=AQ3NsNMK2ULmNXhPR8ndLJvL5yeXYqY6ibCb5GmgPZNoPpp9JJZOSvy_l_fuAGVQbV4HaYqr-BJCO8Fy&enable-funding=venmo&currency=EUR" data-sdk-integration-source="button-factory"></script>
-                                    <script>
+
+
+
+                                   <script>
 
                                     $("#smart-button-container").click(function(e) {
                                             var form_data = $(this).serialize();
@@ -321,6 +318,8 @@ include('reduc.php');
 
 
         var_dump($total_product);
+
+        var_dump($montant) ;
 
 
 

@@ -45,6 +45,7 @@ if($date_creation < 3){
 
         
     }
+
     
     if(isset($_POST['Apply'])) {
        //recuperer le montant saisi par l'utilisateur et on le soustrait a son nombre de points
@@ -52,10 +53,10 @@ if($date_creation < 3){
         $recupProfil->execute();
         $voirProfil =$recupProfil->fetch();
         $user_id = $voirProfil['id'];
-        $points = $voirProfil['point'];
-        $montant = $_POST['reduc'];
-        $points = $points - $montant;   
-        $updatePoints = $bdd->prepare("UPDATE users SET point = $points WHERE id = $user_id");
+        $points_use = $voirProfil['point_use'];
+        $montant = $_POST['reduc']; 
+        $points_use = $points_use + $montant;
+        $updatePoints = $bdd->prepare("UPDATE users SET point_use = $points_use WHERE id = $user_id");
         $updatePoints->execute();
 
     }
