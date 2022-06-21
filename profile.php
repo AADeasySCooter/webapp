@@ -2,8 +2,9 @@
     include('includes/head.php');
     include('includes/header.php');
     include('includes/db.php');
+    include('reduc.php')
 
- 
+
 
 
 
@@ -32,6 +33,9 @@
                                     </div> 
                                     <div>
                                         email : <?= $voirProfil['email'] ?>
+                                     </div>
+                                     <div>
+                                        point : <?= $voirProfil['point'] ?>
                                      </div>
                                      <?php
                                       if($voirProfil["role_id"] == 3){
@@ -122,6 +126,7 @@
                                 }else{
                                     $link_address = 'connexion.php';
                                     echo "<a href='".$link_address."'>PLEASE SIGN IN BEFORE</a>";
+
 
                                 }
                 ?>

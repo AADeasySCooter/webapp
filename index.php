@@ -5,6 +5,7 @@ include('includes/header.php');
 include('includes/db.php');
 
 
+
 ?>
 <!DOCTYPE html>
 
@@ -234,7 +235,7 @@ include('includes/db.php');
                     <li>File manager</li>
                     <li>Upgrade any time</li>
                   </ul>
-                  <a href="#!" class="btn pricing-plan-purchase-btn">Get started</a>
+                  <a href="offer1.php" class="btn pricing-plan-purchase-btn">Get started</a>
                   <div class="text-center">
                     <a href="#!" class="pricing-plan-link">Learn more</a>
                   </div>
@@ -255,7 +256,7 @@ include('includes/db.php');
                     <li>5GB file storage</li>
                     <li>File manager</li>
                   </ul>
-                  <a href="#!" class="btn pricing-plan-purchase-btn">Get started</a>
+                  <a href="offer2.php" class="btn pricing-plan-purchase-btn">Get started</a>
                   <div class="text-center">
                     <a href="#!" class="pricing-plan-link">Learn more</a>
                   </div>
@@ -278,7 +279,7 @@ include('includes/db.php');
                     <li>Upgrade any time</li>
                     <li>5GB file storage</li>                  
                   </ul>
-                  <a href="#!" class="btn pricing-plan-purchase-btn">Get started</a>
+                  <a href="offer3.php" class="btn pricing-plan-purchase-btn">Get started</a>
                   <div class="text-center">
                     <a href="#!" class="pricing-plan-link">Learn more</a>
                   </div>
@@ -287,7 +288,7 @@ include('includes/db.php');
             </div>
           </div>
         </div>
-        <div class="tab-pane" id="yearly" role="tabpanel" aria-labelledby="yearly-tab">
+        <!--<div class="tab-pane" id="yearly" role="tabpanel" aria-labelledby="yearly-tab">
           <div class="row">
             <div class="col-md-4">
               <div class="card pricing-card">
@@ -301,7 +302,7 @@ include('includes/db.php');
                     <li>File manager</li>
                     <li>Upgrade any time</li>
                   </ul>
-                  <a href="#!" class="btn pricing-plan-purchase-btn">Get started</a>
+                  <a href="offer2.php" class="btn pricing-plan-purchase-btn">Get started</a>
                   <div class="text-center">
                     <a href="#!" class="pricing-plan-link">Learn more</a>
                   </div>
@@ -322,7 +323,7 @@ include('includes/db.php');
                     <li>5GB file storage</li>
                     <li>File manager</li>
                   </ul>
-                  <a href="#!" class="btn pricing-plan-purchase-btn">Get started</a>
+                  <a href="offer2.php" class="btn pricing-plan-purchase-btn">Get started</a>
                   <div class="text-center">
                     <a href="#!" class="pricing-plan-link">Learn more</a>
                   </div>
@@ -345,7 +346,7 @@ include('includes/db.php');
                     <li>Upgrade any time</li>
                     <li>5GB file storage</li>
                   </ul>
-                  <a href="#!" class="btn pricing-plan-purchase-btn">Get started</a>
+                  <a href="offer3.php" class="btn pricing-plan-purchase-btn">Ge started</a>
                   <div class="text-center">
                     <a href="#!" class="pricing-plan-link">Learn more</a>
                   </div>
@@ -353,7 +354,7 @@ include('includes/db.php');
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
       </div>
     </section>
 
@@ -385,9 +386,6 @@ include('includes/db.php');
         </div>
     </section>
     of about us -->
-
- 
-
 
     <!-- footer -->
     <footer class = "bg-dark py-5">

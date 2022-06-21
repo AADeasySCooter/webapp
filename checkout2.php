@@ -2,9 +2,7 @@
 include('includes/head.php');
 include('includes/header.php');
 include('includes/db.php');
-
-
-
+include('reduc.php');
 
     $recupProfil =$bdd->prepare("SELECT * FROM users WHERE email= '".$_SESSION['email']."'");     
     $recupProfil->execute();
@@ -12,18 +10,20 @@ include('includes/db.php');
     $user_id = $voirProfil['id'];
     
     
-
-//tant qu'il y'a des produits dans le panier on les insère dans la base de données
+    //tant qu'il y'a des produits dans le panier on les insère dans la base de données
     if(isset($_SESSION["products"]) && count($_SESSION["products"])>0 && isset($_SESSION["email"]) ) {
         foreach($_SESSION["products"] as $key => $value) {
             $product[$key]=$value;
 
-            $succes = $bdd->exec( "INSERT INTO cart (user_id, product_description)   VALUES ($user_id, '".implode(',',$value)."')   ;" );
 
         }
+        $succes = $bdd->exec( "INSERT INTO cart (user_id, product_description)   VALUES ($user_id, '".implode(',',$value)."')   ;" );
+        //supprimer la dernière ligne valeurs inserées dans la base de données dans la table cart
+
         
         
         if($succes){
+            //$try =$bdd->exec( "DELETE FROM cart WHERE id = (SELECT MAX(id) FROM cart) ;" );
             http_response_code(201);
         }else{
             http_response_code(500);
@@ -80,7 +80,27 @@ include('includes/db.php');
 
                                    
                                     </tr>
-                                </table>             
+                                </table>
+                                
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                            <th>Point of reduce</th>
+                                        </thead>
+                                        <tbody>
+                                            <form action="reduc.php" method="post">
+                                                <tr>
+                                                <td>
+                                                    <input type="number" name="reduc" placeholder="Enter your point of reduce">
+                                                </td>
+                                                <td>
+                                                    <input type="submit" value="Apply" name="Apply">
+                                                </td>
+                                                </tr>
+                                            </form>
+
+                                        
+                                    </table>
        
                                     <table class="table" id="shopping-cart-results">
                                     <thead>
@@ -128,10 +148,16 @@ include('includes/db.php');
                                 </td>-->
                                 <?php 
                                 if(isset($total)) {
+
+                                    //appliquer la reduction sur le total si reduction est supérieur à 0
+                                    if($reduction > 0){
+                                        $total = $total - $reduction;
+                                    }
+
                                 ?>	
                                       
 
-                                <td class="text-center cart-products-total"><strong>Total <?php echo $currency.sprintf("%01.2f",$total); ?></strong></td>
+                                <td class="text-center cart-products-total"><spans><spans> <?php if($reduction>0){echo "You have an Reduction of : ".$reduction."€";}  ?> </span></spans></br><strong>Total <?php echo $currency.sprintf("%01.2f",$total); ?></strong></td>
 
                         
 
@@ -295,22 +321,6 @@ include('includes/db.php');
 
 
         var_dump($total_product);
-
-
-        $product = $_SESSION['product'];
-        //afficher tous les élement en session un par un
-        foreach((array)$total_product as $key => $value) {
-        $product[$key]=$value->__toString();
-            var_dump($value);
-        }
-
-
-                                    
-
-
-
-
-
 
 
 

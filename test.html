@@ -2,196 +2,60 @@
 <html lang="en">
 
 <head>
-  <title>Basic Scene</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <meta name="author" content="WebXR Academy">
-  <link type="text/css" rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r126/three.js" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
-
+    <title>three.js webgl - geometry - minecraft</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="main.css">
+    <style>
+        body {
+            background-color: #bfd1e5;
+            color: #61443e;
+        }
+        
+        a {
+            color: #a06851;
+        }
+    </style>
 </head>
 
 <body>
-  <script type="module">
 
-    import { ARButton } from 'https://unpkg.com/three@0.126.0/examples/jsm/webxr/ARButton.js';
-    console.log(ARButton);
+    <div id="container"></div>
+    <div id="info"><a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - <a href="http://www.minecraft.net/" target="_blank" rel="noopener">minecraft</a> demo. featuring <a href="http://painterlypack.net/" target="_blank" rel="noopener">painterly pack</a><br
+        />(left click: forward, right click: backward)</div>
 
-    let camera, scene, renderer;
-    let mesh, mesh3;
-    let loader;
-    let model;
+    <!-- Import maps polyfill -->
+    <!-- Remove this when import maps will be widely supported -->
+    <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
 
-    // console.log(THREE);
-    init();
-    animate();
+    <script type="importmap">
+        { "imports": { "three": "../build/three.module.js" } }
+    </script>
 
-    function init() {
-      const container = document.createElement('div');
-      document.body.appendChild(container);
+    <script type="module">
 
-      // All three.js scenes need three things: a scene, a camera, and a renderer
-      // For more info read: https://threejs.org/docs/#manual/en/introduction/Creating-a-scene
+        import * as THREE from 'three'; import Stats from './jsm/libs/stats.module.js'; import { FirstPersonControls } from './jsm/controls/FirstPersonControls.js'; import { ImprovedNoise } from './jsm/math/ImprovedNoise.js'; import * as BufferGeometryUtils from
+        './jsm/utils/BufferGeometryUtils.js'; let container, stats; let camera, controls, scene, renderer; const worldWidth = 128, worldDepth = 128; const worldHalfWidth = worldWidth / 2; const worldHalfDepth = worldDepth / 2; const data = generateHeight(
+        worldWidth, worldDepth ); const clock = new THREE.Clock(); init(); animate(); function init() { container = document.getElementById( 'container' ); camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 20000 ); camera.position.y
+        = getY( worldHalfWidth, worldHalfDepth ) * 100 + 100; scene = new THREE.Scene(); scene.background = new THREE.Color( 0xbfd1e5 ); // sides const matrix = new THREE.Matrix4(); const pxGeometry = new THREE.PlaneGeometry( 100, 100 ); pxGeometry.attributes.uv.array[
+        1 ] = 0.5; pxGeometry.attributes.uv.array[ 3 ] = 0.5; pxGeometry.rotateY( Math.PI / 2 ); pxGeometry.translate( 50, 0, 0 ); const nxGeometry = new THREE.PlaneGeometry( 100, 100 ); nxGeometry.attributes.uv.array[ 1 ] = 0.5; nxGeometry.attributes.uv.array[
+        3 ] = 0.5; nxGeometry.rotateY( - Math.PI / 2 ); nxGeometry.translate( - 50, 0, 0 ); const pyGeometry = new THREE.PlaneGeometry( 100, 100 ); pyGeometry.attributes.uv.array[ 5 ] = 0.5; pyGeometry.attributes.uv.array[ 7 ] = 0.5; pyGeometry.rotateX(
+        - Math.PI / 2 ); pyGeometry.translate( 0, 50, 0 ); const pzGeometry = new THREE.PlaneGeometry( 100, 100 ); pzGeometry.attributes.uv.array[ 1 ] = 0.5; pzGeometry.attributes.uv.array[ 3 ] = 0.5; pzGeometry.translate( 0, 0, 50 ); const nzGeometry
+        = new THREE.PlaneGeometry( 100, 100 ); nzGeometry.attributes.uv.array[ 1 ] = 0.5; nzGeometry.attributes.uv.array[ 3 ] = 0.5; nzGeometry.rotateY( Math.PI ); nzGeometry.translate( 0, 0, - 50 ); // const geometries = []; for ( let z = 0; z
+        <
+            worldDepth; z ++ ) { for ( let x=0 ; x < worldWidth; x ++ ) { const h=g etY( x, z ); matrix.makeTranslation( x * 100 - worldHalfWidth * 100, h * 100, z * 100 - worldHalfDepth * 100 ); const px=g etY( x + 1, z ); const nx=g etY( x - 1, z ); const
+            pz=g etY( x, z + 1 ); const nz=g etY( x, z - 1 ); geometries.push( pyGeometry.clone().applyMatrix4( matrix ) ); if ( ( px !==h && px !==h + 1 ) || x===0 ) { geometries.push( pxGeometry.clone().applyMatrix4( matrix ) ); } if ( ( nx !==h && nx !==h
+            + 1 ) || x===w orldWidth - 1 ) { geometries.push( nxGeometry.clone().applyMatrix4( matrix ) ); } if ( ( pz !==h && pz !==h + 1 ) || z===w orldDepth - 1 ) { geometries.push( pzGeometry.clone().applyMatrix4( matrix ) ); } if ( ( nz !==h && nz !==h
+            + 1 ) || z===0 ) { geometries.push( nzGeometry.clone().applyMatrix4( matrix ) ); } } } const geometry=B ufferGeometryUtils.mergeBufferGeometries( geometries ); geometry.computeBoundingSphere(); const texture=n ew THREE.TextureLoader().load(
+            'textures/minecraft/atlas.png' ); texture.magFilter=T HREE.NearestFilter; const mesh=n ew THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { map: texture, side: THREE.DoubleSide } ) ); scene.add( mesh ); const ambientLight=n ew THREE.AmbientLight( 0xcccccc ); scene.add(
+            ambientLight ); const directionalLight=n ew THREE.DirectionalLight( 0xffffff, 2 ); directionalLight.position.set( 1, 1, 0.5 ).normalize(); scene.add( directionalLight ); renderer=n ew THREE.WebGLRenderer( { antialias: true } ); renderer.setPixelRatio(
+            window.devicePixelRatio ); renderer.setSize( window.innerWidth, window.innerHeight ); container.appendChild( renderer.domElement ); controls=n ew FirstPersonControls( camera, renderer.domElement ); controls.movementSpeed=1 000; controls.lookSpeed=0
+            .125; controls.lookVertical=t rue; stats=n ew Stats(); container.appendChild( stats.dom ); // window.addEventListener( 'resize', onWindowResize ); } function onWindowResize() { camera.aspect=w indow.innerWidth / window.innerHeight; camera.updateProjectionMatrix();
+            renderer.setSize( window.innerWidth, window.innerHeight ); controls.handleResize(); } function generateHeight( width, height ) { const data=[ ], perlin=n ew ImprovedNoise(), size=w idth * height, z=M ath.random() * 100; let quality=2 ; for ( let
+            j=0 ; j < 4; j ++ ) { if ( j===0 ) for ( let i=0 ; i < size; i ++ ) data[ i ]=0 ; for ( let i=0 ; i < size; i ++ ) { const x=i % width, y=( i / width ) | 0; data[ i ] +=p erlin.noise( x / quality, y / quality, z ) * quality; } quality *=4 ; }
+            return data; } function getY( x, z ) { return ( data[ x + z * worldWidth ] * 0.15 ) | 0; } // function animate() { requestAnimationFrame( animate ); render(); stats.update(); } function render() { controls.update( clock.getDelta() ); renderer.render(
+            scene, camera ); } </script>
 
-      // #1 create the scene, although there's nothing in it just yet
-      scene = new THREE.Scene;
-      console.log(scene);
-
-      // #2 create the camera
-      // From documentation: https://threejs.org/docs/#api/en/cameras/PerspectiveCamera
-      // PerspectiveCamera( fov : Number, aspect : Number, near : Number, far : Number )
-      // fov — Camera frustum vertical field of view.
-      // aspect — Camera frustum aspect ratio.
-      // near — Camera frustum near plane.
-      // far — Camera frustum far plane.
-      camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.01, 40);
-      console.log(camera);
-
-      // #3 Pick a three.js renderer
-      // Documentation: https://threejs.org/docs/#api/en/renderers/WebGLRenderer
-      renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.xr.enabled = true;
-      container.appendChild(renderer.domElement);
-
-
-      // Everything hereafter is optional things we want to add to the scene
-
-      // Add a light to the cene
-      // Documentation: https://threejs.org/docs/index.html#api/en/lights/HemisphereLight
-      // HemisphereLight( skyColor : Integer, groundColor : Integer, intensity : Float )
-      // skyColor - (optional) hexadecimal color of the sky. Default is 0xffffff.
-      // groundColor - (optional) hexadecimal color of the ground. Default is 0xffffff.
-      // intensity - (optional) numeric value of the light's strength/intensity. Default is 1.
-      const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
-      light.position.set(.5, 1, .25);
-      scene.add(light);
-      console.log(light);
-
-
-      // specify a model URL
-      const modelURL = 'https://raw.githubusercontent.com/immersive-web/webxr-samples/main/media/gltf/space/space.gltf';
-      
-      // create a GLTF loader object. GLTF is a 3D model format usually called the "JPEG of 3D" because it is
-      // fast and efficient to use, which is ideal for the web
-      loader = new THREE.GLTFLoader();
-      console.log(loader);
-      // learn about other types of 3D model formats you can use here: 
-      // https://threejs.org/docs/#manual/en/introduction/Loading-3D-models
-      // loader (model url, onload callback, onProgress callback, onError callback)
-      loader.load(
-        modelURL, 
-
-        // gets called once when the model has finished loading
-        function (gltf){
-          model = gltf.scene;
-          console.log(model);
-          model.position.y = 5;
-          scene.add(model);
-        },
-        // optional function for showing progress
-        function(xhr){
-          console.log(xhr);
-        },
-        // optional function for logging errors if there are error on loading
-        function(error){
-          console.log(error);
-        }
-        )
-
-
-
-      // Add a polyhedron shape to the scene
-      // Documentation: https://threejs.org/docs/#api/en/geometries/IcosahedronGeometry
-      // IcosahedronGeometry(radius : Float, detail : Integer)
-      // radius — Default is 1.
-      // detail — Default is 0. Setting this to a value greater than 0 adds more vertices making it no longer an icosahedron. When detail is greater than 1, it's effectively a sphere.
-      const geometry = new THREE.IcosahedronGeometry(.1, 1)
-      const material = new THREE.MeshPhongMaterial({ 
-        color: new THREE.Color("rgb(226,35,213)"),
-        shininess: 6,
-        flatShading: true,
-        transparent: 1,
-        opacity: 0.8
-      });
-      mesh = new THREE.Mesh(geometry, material);
-      scene.add(mesh);
-      mesh.position.set(.2, 0,-0.5);
-
-
-
-      // // CUBE
-      // const geometry2 = new THREE.BoxGeometry(.3, .3, .3); //1, 1, 1 
-      // const material2 = new THREE.MeshBasicMaterial({color : 0xe06666});
-      // const cubeMesh = new THREE.Mesh(geometry2, material2);
-      // scene.add(cubeMesh); // 0 ,0 ,0
-      // cubeMesh.position.z = -1;
-      // cubeMesh.position.y = .5;
-
-
-
-      // TORUS
-      const geometry3 = new THREE.TorusGeometry(.15, .05, 12, 50);
-      const material3 = new THREE.MeshBasicMaterial({
-        color: new THREE.Color("rgb(253, 253, 150)")
-      });
-      mesh3 = new THREE.Mesh(geometry3, material3);
-      scene.add(mesh3);
-      mesh3.position.set(-.2, 0, -.5);
-
-      // add the AR butoon to the body of the DOM
-      const button = ARButton.createButton(renderer);
-      console.log(button);
-      document.body.appendChild(button);
-
-      window.addEventListener('resize', onWindowResize, false);
-    }
-
-    function onWindowResize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-
-    function animate(){
-      renderer.setAnimationLoop(render);
-    }
-
-    // render function called on a loop every time the screen is refreshed
-    // which typically means 60 times a second (60 frames per second)
-    function render(){
-     
-      rotateObjects();
-      rotateModel();
-      renderer.render(scene, camera);
-    }
-
-    let degrees = 0;
-
-    function rotateModel(){
-      if(model !== undefined){
-        degrees = degrees + 0.2;
-        model.rotation.y = THREE.Math.degToRad(degrees);
-
-      }
-    }
-
-
-    function rotateObjects(){
-      // rotate the polyhedron on y
-      // rotation units are in radians (here's a recommended video on Euler angles: https://www.youtube.com/watch?v=q0jgqeS_ACM)
-      mesh.rotation.y = mesh.rotation.y - 0.01;
-      //console.log(mesh.rotation);
-      
-      // rotate the torus on x
-      mesh3.rotation.x = mesh3.rotation.x - 0.01;
-    }
-
-
-  </script>
 </body>
 
 </html>
