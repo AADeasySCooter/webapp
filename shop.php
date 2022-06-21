@@ -47,7 +47,11 @@ include('includes/db.php');
 
                                 <div class="card mb-2">
                                     <div class = "collection-img position-relative">
-                                    <?php echo '<img src="images/' . $product['product_image'] . '" alt="Image du produit" class = "w-100"   >' ?>
+                                    <?php  $image = $product['product_image'];
+                                    echo " <a href='show_product.php?id=".$product['id']."' >
+                                               <img src=' images/$image' alt='Image du produit' class = 'w-100'   >
+                                              </a> "
+                                               ?>
                                     </div>
                                     <div class = "text-center">
                                             

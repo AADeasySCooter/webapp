@@ -229,7 +229,6 @@ include('includes/db.php');
                 <div class="card-body">
                   <h3 class="pricing-plan-title d-flex align-items-center">Student <span class="badge badge-pill offer-badge ml-auto">20% off</span></h3>
                   <p class="h1 pricing-plan-original-cost"><del>$23.00</del></p>
-                  <p class="h1 pricing-plan-cost">10.99 <span class="currency">USD</span></p>
                   <ul class="pricing-plan-features">
                     <li>5GB file storage</li>
                     <li>File manager</li>
@@ -248,7 +247,6 @@ include('includes/db.php');
                   <h3 class="pricing-plan-title d-flex align-items-center">Team <span
                       class="badge badge-pill offer-badge ml-auto">20% off</span></h3>
                   <p class="h1 pricing-plan-original-cost"><del>$23.00</del></p>
-                  <p class="h1 pricing-plan-cost">10.99 <span class="currency">USD</span></p>
                   <ul class="pricing-plan-features">
                     <li>5GB file storage</li>
                     <li>File manager</li>
@@ -269,7 +267,6 @@ include('includes/db.php');
                   <h3 class="pricing-plan-title d-flex align-items-center">Enterprise <span
                       class="badge badge-pill offer-badge ml-auto">20% off</span></h3>
                   <p class="h1 pricing-plan-original-cost"><del>$23.00</del></p>
-                  <p class="h1 pricing-plan-cost">10.99 <span class="currency">USD</span></p>
                   <ul class="pricing-plan-features">
                     <li>5GB file storage</li>
                     <li>File manager</li>
