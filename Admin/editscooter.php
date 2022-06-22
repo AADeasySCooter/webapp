@@ -47,6 +47,7 @@
                                 <td data-target="scooter_status"><?= $scooter['scooter_status'] ;?></td>
                                 <td data-target="scooter_code">><?= $scooter['scooter_code'] ;?></td>
                                 <td> <a type="submit" class="btn btn-primary" href="updatescooter.php?id=<?=$scooter['id'] ;?>" target="_blank"> UPDATE </td>
+                                <td> <a type="submit" class="btn btn-secondary" href="statuscooter.php?id=<?=$scooter['id'] ;?>" target="_blank"> STATUS </td>
                                 <td> <a type="submit" class="btn btn-danger" href="Deletescooter.php?id=<?=$scooter['id'] ;?>" target="_blank"> DELETE </td>
                                
                                
