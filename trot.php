@@ -43,7 +43,7 @@ include('includes/db.php');
                             while($scooter = $getscooter->fetch()){  
                                  ?>
                                 <div class = "col-md-6 col-lg-4 col-xl-3 p-2 feat">
-                                <form class="product-form">
+                                <form class="scooter-form">
 
                                 <div class="card mb-2">
                                     <div class = "collection-img position-relative">

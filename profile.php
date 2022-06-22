@@ -108,7 +108,7 @@
                                                 <td> 
                                                 <form method="POST" action="pdf.php">
                                                     <input type="hidden" name="id" value="<?= $id_product ;?>">
-                                                    <input type="submit" name="pdf_gen" class="btn btn-warning" placeholder="Download receipt">
+                                                    <input type="submit" name="pdf_gen" class="btn btn-warning" value="Download receipt">
                                                  </form>
                                                 </td>
 
