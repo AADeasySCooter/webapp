@@ -50,7 +50,7 @@ if(isset($_POST['addArticle']))
                  <br> <br> <br> 
 
                     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data"> <!-- ?php $_SERVER['PHP_SELF' -->
-                    <h3>Add new Article</h3>
+                    <h3>Add new Plan</h3>
                         <div class="mb-3">
                             <input type="text"  class="form-control"placeholder="title" name="title">
                         </div>

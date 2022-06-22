@@ -28,7 +28,7 @@ include('includes/header.php');
               </div>
             </div>
           </div>
-          <div class="col-md-3 mb-3">
+          <!-- <div class="col-md-3 mb-3">
             <div class="card bg-warning text-dark h-100">
               <div class="card-body py-5">Users none confirmation</div>
               <div class="card-footer d-flex">
@@ -39,7 +39,7 @@ include('includes/header.php');
                 </span>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="col-md-3 mb-3">
             <div class="card bg-success text-white h-100">
               <div class="card-body py-5">Users connected</div>
@@ -66,7 +66,7 @@ include('includes/header.php');
           </div>
         </div>
        
-        <div class="row">
+       <!-- <div class="row">
           <div class="col-md-12 mb-3">
             <div class="card">
               <div class="card-header">
@@ -115,7 +115,7 @@ include('includes/header.php');
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </main>
   </body>
 </html>
