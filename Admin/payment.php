@@ -51,15 +51,24 @@
                               $get = $bdd->query("SELECT * FROM users where id =  '" . $product['user_id'] . "' "); 
 
                               while($pro = $get->fetch()){
+                                  $productid = $product['id'];
 
 
                               ?>
                             <tr>
                             
 
-                                <td><?= $product['id'] ;?></td>
+                                <td><?= $productid ;?></td>
                                 <td><?= $product['user_id'] ;?></td>
-                                <td><?= $pro['firstname'] ;?></td>
+                                <td><?= $pro['firstname'] ;?></td>                                                
+                                                <td> 
+                                                <form method="POST" action="pdf.php">
+                                                    <input type="hidden" name="id" value="<?= $productid ;?>">
+                                                    <input type="submit" name="pdf_gen" class="btn btn-warning" value="Download receipt">
+                                                 </form>
+                                                </td>
+
+                                         
                                
                                
                             
