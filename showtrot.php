@@ -79,8 +79,45 @@ include('includes/db.php');
 
             
 
+
             <div id="test" style="display: none ;">
+
+
+
+            <?php
+            $getProduct = $bdd->query("SELECT * FROM plan ORDER BY created_at DESC ");
+                            while($plan = $getProduct->fetch()){  
+                                 ?>
+            <section id = "newsletter" class = "py-5">
+          
+            <div class="tab-content pricing-tab-content" id="pricing-tab-content">
+                <div class="tab-pane active" id="monthly" role="tabpanel" aria-labelledby="monthly-tab">
+                <div class="row">
+                    <div class="col-md-4">
+                    <div class="card pricing-card">
+                        <div class="card-body">
+                        <h3 class="pricing-plan-title d-flex align-items-center"><?=  $plan['plan_title'] ;?> <!--<span class="badge badge-pill offer-badge ml-auto">20% off</span>--></h3>
+                        <p class="h1 pricing-plan-original-cost">€<?=  $plan['plan_price'] ;?></p>
+                        <ul class="pricing-plan-features">
+                            <li><?=  $plan['plan_description'] ;?></li>
+                        </ul>
+                        <a href="offer1.php" class="btn pricing-plan-purchase-btn">Get started</a>
+                       
+                        </div>
+                    </div>
+                    </div>
+                 
+                 </div>
+                </div>
+                </div>
             </div>
+            </section>
+
+            <?php } ?>
+            
+
+
+     
 
 
 
@@ -104,7 +141,8 @@ include('includes/db.php');
             var code_input = $('input[name="code_input"]').val();
             var id = $('input[name="id"]').val();
             if(code == code_input){
-   
+                //afficher la div test
+                $('#test').show();
                 
             }else{
                 //ajouter un message dans la div  class="col-md-3" et afficher le message d'erreur en rouge qui s'éfface au bout de 3 secondes

@@ -4,23 +4,21 @@
   include('includes/header.php');
  
 
-if(isset($_POST['addArticle']))
+if(isset($_POST['addPlan']))
 {
-    $Article_title = $_POST['title'];
-    $Article_description = $_POST['description'];
-    $Article_autor = $_POST['autor'];
-    $Article_image = $_FILES['image']['name'];
-    $Article_image_tmp_name = $_FILES['image']['tmp_name'];
-    $Article_image_folder = 'images/'.$Article_image;
+    $Plan_title = $_POST['plan_title'];
+    $Plan_description = $_POST['plan_description'];
+    $Plan_price = $_POST['plan_price'];
+ 
 
 
-        if(empty($Article_title) || empty($Article_description) || empty($Article_autor) || empty($Article_image))  {
+        if(empty($Plan_title) || empty($Plan_description) || empty($Plan_price) )  {
 
             $message[] = 'tous les champs doivent etre remplis';
         }else{
-            $insertProduct = $bdd->prepare('INSERT INTO articles(title, description,  autor, image) VALUES(? ,? ,?, ?)');
-            $insertProduct->execute(array($Article_title, $Article_description,$Article_autor,$Article_image));
-            $message[] = 'article ajouter ';
+            $insertProduct = $bdd->prepare('INSERT INTO plan(plan_title, plan_description,  plan_price) VALUES(? ,? ,?)');
+            $insertProduct->execute(array($Plan_title, $Plan_description,$Plan_price));
+            $message[] = 'Plan ajouter ';
 
         }
 
@@ -29,13 +27,7 @@ if(isset($_POST['addArticle']))
 ?>
 <!DOCTYPE html>
        
-    <?php 
-    if(isset($message)){
-        foreach($message as $message ){
-            echo'<span class="message">'.$message.'</span>';
-        }
-    }
-    ?>
+   
 
   <main>
   <div class="container">
@@ -43,7 +35,13 @@ if(isset($_POST['addArticle']))
       <div class="div-center">
 
          <section id="course" class="course">
-  
+         <?php 
+    if(isset($message)){
+        foreach($message as $message ){
+            echo'<span class="message">'.$message.'</span>';
+        }
+    }
+    ?>
 
         <div class="row">
 			 <div class="course-col">
@@ -52,20 +50,16 @@ if(isset($_POST['addArticle']))
                     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data"> <!-- ?php $_SERVER['PHP_SELF' -->
                     <h3>Add new Plan</h3>
                         <div class="mb-3">
-                            <input type="text"  class="form-control"placeholder="title" name="title">
+                            <input type="text"  class="form-control"placeholder="title" name="plan_title">
                         </div>
                         <div class="mb-3">
-                            <input type="text"  class="form-control" placeholder="description" name="description" style="height:200px;font-size:14pt;">
+                            <input type="text"  class="form-control" placeholder="description" name="plan_description" style="height:200px;font-size:14pt;">
                         </div>
                         <div class="mb-3">
-                            <input type="text"  class="form-control" placeholder="autor" name="autor">
-                        </div>
-                    
-                        <div class="mb-3">
-                            <input type="file"  class="form-control" placeholder="entrer l'image du produit" name="image">
+                        <input type="number"  class="form-control"step="any"  placeholder="entrer le prix du plan" name="plan_price" >
                         </div>
                         <div class="mb-3">
-                            <input type="submit" class="btn btn-primary" name="addArticle" value="ajouter un produit">
+                            <input type="submit" class="btn btn-primary" name="addPlan" value="ajouter le plan">
                         </div>
                     </form>
 
