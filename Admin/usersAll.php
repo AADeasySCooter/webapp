@@ -20,7 +20,7 @@ include('includes/db.php');
                 <div class="col-md-12 mb-3">
                     <div class="card">
                     <div class="card-header">
-                        <span><i class="bi bi-table me-2"></i></span> Products
+                        <span><i class="bi bi-table me-2"></i></span> USERS
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

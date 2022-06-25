@@ -59,6 +59,9 @@
                         <li class = "nav-item px-2 py-2">
                                 <a class = "nav-link text-uppercase text-dark" href = "index.php"><?= _('home')?></a>
                             </li>
+                            <li class = "nav-item px-2 py-2 border-0">
+                                <a class = "nav-link text-uppercase text-dark" href = "webgl.html"><?= _('game')?></a>
+                            </li>
                         <li class = "nav-item px-2 py-2">
                                     <a class = "nav-link text-uppercase text-dark" href = "shop.php"><?= _('shop')?></a>
                              </li>
@@ -102,6 +105,9 @@
                    
                     <li class = "nav-item px-2 py-2 border-0">
                         <a class = "nav-link text-uppercase text-dark" href = "shop.php"><?= _('shop')?></a>
+                    </li>
+                    <li class = "nav-item px-2 py-2 border-0">
+                        <a class = "nav-link text-uppercase text-dark" href = "webgl.html"><?= _('game')?></a>
                     </li>
                    
                     <li class = "nav-item px-2 py-2 border-0">
