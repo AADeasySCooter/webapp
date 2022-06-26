@@ -177,7 +177,7 @@ include('reduc.php');
 
                                    <script>
 
-                                    $("#smart-button-container").click(function(e) {
+                                   /*  $("#smart-button-container").click(function(e) {
                                             var form_data = $(this).serialize();
                                             $.ajax({
                                                 url: "sve.php",
@@ -189,7 +189,7 @@ include('reduc.php');
                                             })
                                             e.preventDefault();
                                             window.location.reload();
-                                        });
+                                        }); */
                                       
 
                                          
@@ -268,9 +268,7 @@ include('reduc.php');
                                         initPayPalButton();
                         
                                     </script>
-                                     <script>
-                                            
-                                      </script>
+                                  
                                     </td>
                                 
                                  <!-- <td><a href="checkout1.php" class="btn btn-success btn-block">Payment <i class="glyphicon glyphicon-menu-right"></i></a></td>-->

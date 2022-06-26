@@ -101,7 +101,11 @@ include('includes/db.php');
                         <ul class="pricing-plan-features">
                             <li><?=  $plan['plan_description'] ;?></li>
                         </ul>
-                        <a href="offer1.php" class="btn pricing-plan-purchase-btn">Get started</a>
+                        <?php 
+                        //ouvrir une autre page avec le id du produit
+                        echo" <a href='offer1.php?id=".$scooter['id']."' class='btn btn-info'> Get started</a> ";
+
+                        ?>
                        
                         </div>
                     </div>
