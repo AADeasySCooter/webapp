@@ -4,6 +4,8 @@
   include('includes/header.php');
  
 
+    
+
 if(isset($_POST['addPlan']))
 {
     $Plan_title = $_POST['plan_title'];
@@ -16,8 +18,8 @@ if(isset($_POST['addPlan']))
 
             $message[] = 'tous les champs doivent etre remplis';
         }else{
-            $insertProduct = $bdd->prepare('INSERT INTO plan(plan_title, plan_description,  plan_price) VALUES(? ,? ,?)');
-            $insertProduct->execute(array($Plan_title, $Plan_description,$Plan_price));
+            $insertProduct = $bdd->prepare('INSERT INTO plan(plan_title, plan_description,  plan_price ) VALUES(? ,? ,?)');
+            $insertProduct->execute(array($Plan_title, $Plan_description,$Plan_price ));
             $message[] = 'Plan ajouter ';
 
         }
@@ -58,6 +60,8 @@ if(isset($_POST['addPlan']))
                         <div class="mb-3">
                         <input type="number"  class="form-control"step="any"  placeholder="entrer le prix du plan" name="plan_price" >
                         </div>
+                    
+
                         <div class="mb-3">
                             <input type="submit" class="btn btn-primary" name="addPlan" value="ajouter le plan">
                         </div>
@@ -65,6 +69,7 @@ if(isset($_POST['addPlan']))
 
                     
              </div>
+        
         </div>
 
      </section>
