@@ -3,13 +3,6 @@ include('includes/head.php');
 include('includes/header.php');
 include('includes/db.php');
 
-//recuperer l'email dans la session et reuperer l'id de l'utilisateur par rapport a l'email
-$q = "SELECT * FROM users WHERE email= '".$_SESSION['email']."'";
-$result = $bdd->prepare($q);
-$result->execute();
-$voirProfil =$result->fetch();
-$user_id = $voirProfil['id'];
-
 
 ?>
 <br><br><br><br><br>
@@ -23,7 +16,7 @@ $user_id = $voirProfil['id'];
                 if(isset($_GET['id']) && !empty($_GET['id'])){
 
                     //recuperer toute les donners de la table product
-                    $q = 'SELECT * FROM plan WHERE id = :id;';
+                    $q = 'SELECT * FROM scooter WHERE id = :id;';
                     $stmt = $bdd->prepare($q);
                     $statuss = $stmt->execute(
                         array(
@@ -40,6 +33,23 @@ $user_id = $voirProfil['id'];
                 }
 
 
+                //calculer le temps de la location en faisant la difference entre le temps actuel et le temps de la location(take_at)
+                $date1 = date($plan['take_at']);
+                $date2 = date('H:i:s', strtotime(' + 2 hours'));
+                //convertir le temps en seconde
+                $date1 = strtotime($date1);
+                $date2 = strtotime($date2);
+                //calculer la différence entre les deux temps
+                $diff = $date2 - $date1;
+                // pour 60 secondes on rajoute 0.25 pour le prix de la location  et calculer le prix total
+                $prix = ($diff/60) * 0.25;
+                $prix = (int)$prix;
+
+                $test= 0.01;
+
+
+
+
 
  ?>
 
@@ -51,6 +61,7 @@ $user_id = $voirProfil['id'];
     <div class="container">
         <div class="row">
             <div class="course-col">
+                
                 <h4>payment methode </h4>
                                      <div id="smart-button-container">
                                         <div style="text-align: center;">
@@ -67,6 +78,15 @@ $user_id = $voirProfil['id'];
             </div>
         </div>
     </div>
+                <?php 
+                 var_dump($date1);
+                 var_dump($date2);
+                 var_dump($diff);
+                 var_dump($prix);
+
+
+
+                ?>
 
                                      
                                         
@@ -104,7 +124,7 @@ $user_id = $voirProfil['id'];
                                                 
 
                                             return actions.order.create({
-                                                purchase_units: [{"amount":{"currency_code":"EUR","value": <?= $plan['plan_price'] ;?>}}]
+                                                purchase_units: [{"amount":{"currency_code":"EUR","value": <?= $test ;?>}}]
                                             });
                                             },
 
@@ -124,19 +144,21 @@ $user_id = $voirProfil['id'];
 
                                                 element.innerHTML = '';
                                                 element.innerHTML = '<h3>Thank you for your payment! you have unluck the scooter !!</h3>';
-                                                //envoyer l'id de la trottinette a la page sve_plan.php et le user_id  avec un post en ajax
-                                                $.ajax({
-                                                    type: "POST",
-                                                    url: "sve_plan.php",
-                                                    data: {
-                                                        "id": <?= $_GET['id'] ;?>,
-                                                        "user_id": <?= $user_id ;?>
-                                                    },
-                                                    success: () => {
-                                                        console.log("data");
-                                                    }
+                                                //envoyer l'id de la trottinette a la page sve_plan.php  avec un post en ajax
+                                                $.post('lv_plan.php',{id:<?= $plan['id'] ;?>},function(data){
+                                                    console.log(data);
                                                 });
 
+
+                                                $.ajax({
+                                                        type: 'POST',
+                                                        url: 'lv_plan.php',
+                                                        success: function(data) {
+                                                            
+
+                                                            //success code
+                                                        }
+                                                        });
 
                                                 // Or go to another URL:  actions.redirect('thank_you.html');
                                                 
@@ -146,7 +168,7 @@ $user_id = $voirProfil['id'];
                                             
 
                                             onError: function(err) {
-
+                                                
                                             console.log(err);
                                             },
 

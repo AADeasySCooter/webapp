@@ -3,8 +3,15 @@
  include('includes/header.php');
 include('includes/db.php');
 
-//si le code dans le formulaire est différent de celui dans la base de données alors on affiche un message d'erreur
+//recuperer l'email dans la session et reuperer l'id de l'utilisateur par rapport a l'email
+$q = "SELECT * FROM users WHERE email= '".$_SESSION['email']."'";
+$result = $bdd->prepare($q);
+$result->execute();
+$voirProfil =$result->fetch();
+$user_id = $voirProfil['id'];
 
+
+//si le temps est supérieurs au temps 
 
 
 
@@ -54,17 +61,30 @@ include('includes/db.php');
                 <p>You can use the code of the scooter for unlock it</p>
                 <p>CODE:</p> 
 
-                <form>
-                    <div class="form-group">
-                        <input type="text" name="code_input" class="form-control" id="Input1" aria-describedby="code" placeholder="Enter code">
-                        <input type="hidden" name="id" value="<?php echo $scooter['id']; ?>">
-                        <input type="hidden" name="code" value="<?php echo $scooter['scooter_code']; ?>">
-                    </div>
-                    <div id="alert" style="display: none ;">
-                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
 
+                <?php 
+                         if($scooter['user_id'] == $user_id){ 
+                             
+                            echo" <a href='leave1.php?id=".$scooter['id']."&user_id=$user_id' class='btn btn-danger'> Leave</a> ";
+
+
+                         }else{
+                             ?>
+                              <form>
+                                <div class="form-group">
+                                    <input type="text" name="code_input" class="form-control" id="Input1" aria-describedby="code" placeholder="Enter code">
+                                    <input type="hidden" name="id" value="<?php echo $scooter['id']; ?>">
+                                    <input type="hidden" name="code" value="<?php echo $scooter['scooter_code']; ?>">
+                                </div>
+                                <div id="alert" style="display: none ;">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                             <?php
+
+                         } ?>
+                   
+          
 
                 <p>Status:  <?php  if ($scooter['scooter_status'] == 1) { 
                     echo 'Available';
@@ -76,11 +96,13 @@ include('includes/db.php');
                 <a href="trot.php" class="btn btn-primary">Back to scooter</a>
             </div>
             <!--cache la div avec l'id test -->
+            
 
             
 
 
             <div id="test" style="display: none ;">
+            <div id="testt" style="display: none ;">
 
 
 
@@ -103,13 +125,14 @@ include('includes/db.php');
                         </ul>
                         <?php 
                         //ouvrir une autre page avec le id du produit
-                        echo" <a href='offer1.php?id=".$scooter['id']."' class='btn btn-info'> Get started</a> ";
+                        echo" <a href='offer1.php?id=".$scooter['id']."&user_id=$user_id' class='btn btn-info'> Get started</a> ";
 
                         ?>
                        
                         </div>
                     </div>
                     </div>
+                  
                  
                  </div>
                 </div>
@@ -147,6 +170,7 @@ include('includes/db.php');
             if(code == code_input){
                 //afficher la div test
                 $('#test').show();
+                $('#testt').show();
                 
             }else{
                 //ajouter un message dans la div  class="col-md-3" et afficher le message d'erreur en rouge qui s'éfface au bout de 3 secondes

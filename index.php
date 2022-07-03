@@ -216,6 +216,20 @@ include('includes/db.php');
         </div>
     </section>
 
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="course-col">
+            <!--afficher la carte de lyon avec du javascript-->
+                 <div class="lyon">
+                 </div>
+          </div>
+        </div>
+      </div>
+
+                 
+    </section>
+
 
 
 
