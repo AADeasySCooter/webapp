@@ -73,11 +73,11 @@ include('includes/db.php');
                                 <input type="text" name="number" class="form-control" placeholder="number " value="<?= $response['number'] ;?>" required>
                             </div>
                             <div class="mb-2">
-                            <label class="form-label">code postal</label>
+                            <label class="form-label">Zip</label>
                                 <input type="text" name="code_postal" class="form-control" placeholder="code" value="<?= $response['code_postal'] ;?>" required>
                             </div>
                             <div class="mb-2">
-                            <label class="form-label">ville</label>
+                            <label class="form-label">city</label>
                                 <input type="text" name="ville" class="form-control" placeholder="ville" value="<?= $response['ville'] ;?>" required>
                             </div>                            
                             

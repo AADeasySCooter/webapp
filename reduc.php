@@ -13,7 +13,7 @@ $date_creation = time() - $date_creation;
 $date_creation = $date_creation / (60 * 60 * 24);
 $date_creation = round($date_creation);
 if($date_creation < 3){
-    $reduction = 0.1;
+    $reduction = 0;
 }else{
     $reduction = 2;
 }

@@ -41,4 +41,7 @@ if (isset($_SESSION['email'])){
     
     <link rel="stylesheet" href="assets/css/pricing-plan.css">
 
+
+
+
 </head>

@@ -87,7 +87,9 @@ body {
 /* header */
 
 #header {
-    background: url(../images/ducati-urban-e-mobility-trottinette-electrique-pro-i-evo-urbaanews.jpeg) top/cover no-repeat;
+    background: url(../images/ducati-urban-e-mobility-trottinette-electrique-pro-i-evo-urbaanews.jpeg) top;
+    background-repeat: contain;
+    background-size: auto;
 }
 
 .carousel-inner h1 {

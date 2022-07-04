@@ -19,6 +19,7 @@ include('includes/db.php');
     
 
     <!-- header -->
+    <br><br><br><br>
     <header id = "header" class = "vh-100 carousel slide" data-bs-ride = "carousel" style = "padding-top: 104px;">
         <div class = "container h-100 d-flex align-items-center carousel-inner">
             <div class = "text-center carousel-item active">
@@ -141,78 +142,120 @@ include('includes/db.php');
     <section class="vh-40" style="background-color: #4B515D;">
   <div class="container py-5 h-100">
 
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-md-8 col-lg-6 col-xl-4">
+        <?php 
 
-        <div class="card" style="color: #4B515D; border-radius: 35px;">
-          <div class="card-body p-4">
+        $getWeather = $conn->query("SELECT * FROM weather_report");
+          $weather = $getWeather->fetch();
+           $weather_id = $weather['id_geolocation'];
+            $weather_temp = $weather['temp'];
+            $weather_desc = $weather['description'];
+            $weather_pressure = $weather['pressure'];
+            $weather_humidity = $weather['humidity'];
+            $weather_wind_speed = $weather['wind_speed'];
 
-            <div class="d-flex">
-              <h6 class="flex-grow-1">Warsaw</h6>
-              <h6>15:07</h6>
-            </div>
+           ?>
 
-            <div class="d-flex flex-column text-center mt-5 mb-4">
-              <h6 class="display-4 mb-0 font-weight-bold" style="color: #1C2331;"> 13°C </h6>
-              <span class="small" style="color: #868B94">Stormy</span>
-            </div>
+            <div class="row d-flex justify-content-center align-items-center h-100">
+              <div class="col-md-8 col-lg-6 col-xl-4">
 
-            <div class="d-flex align-items-center">
-              <div class="flex-grow-1" style="font-size: 1rem;">
-                <div><i class="fas fa-wind fa-fw" style="color: #868B94;"></i> <span class="ms-1"> 40 km/h
-                  </span></div>
-                <div><i class="fas fa-tint fa-fw" style="color: #868B94;"></i> <span class="ms-1"> 84% </span>
+                <div class="card" style="color: #4B515D; border-radius: 35px;">
+                  <div class="card-body p-4">
+
+                    <div class="d-flex">
+                      <h6 class="flex-grow-1"> <?= $weather_desc ; ?> </h6>
+                      <h6> 12:69</h6>
+                    </div>
+
+                    <div class="d-flex flex-column text-center mt-5 mb-4">
+                      <h6 class="display-4 mb-0 font-weight-bold" style="color: #1C2331;"> <?= $weather_temp ?>°C </h6>
+                      <span class="small" style="color: #868B94"><?= $weather_desc ; ?></span>
+                    </div>
+
+                    <div class="d-flex align-items-center">
+                      <div class="flex-grow-1" style="font-size: 1rem;">
+                        <div><i class="fas fa-wind fa-fw" style="color: #868B94;"></i> <span class="ms-1"> <?= $weather_wind_speed; ?> m/s</span></div>
+                        <div><i class="fas fa-tint fa-fw" style="color: #868B94;"></i> <span class="ms-1"> <?= $weather_humidity ?> %</span>
+                        </div>
+                        <div><i class="fas fa-sun fa-fw" style="color: #868B94;"></i> <span class="ms-1"> 0.2h </span>
+                        </div>
+                      </div>
+                      <div>
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp"
+                          width="100px">
+                      </div>
+                    </div>
+
+                  </div>
                 </div>
-                <div><i class="fas fa-sun fa-fw" style="color: #868B94;"></i> <span class="ms-1"> 0.2h </span>
-                </div>
-              </div>
-              <div>
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp"
-                  width="100px">
+
               </div>
             </div>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
 
   </div>
 </section>
     <!-- end of blogs -->
   <!-- blogs -->
+  <!-- Scrollable modal -->
+      <!-- Vertically centered scrollable modal -->
+ <!-- Button trigger modal
+     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+      </button>  -->
+
+      <!-- Modal -->
+      <!-- 
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>  -->
  
     <section id = "blogs" class = "py-5">
         <div class = "container">
             <div class = "title text-center py-5">
                 <h2 class = "position-relative d-inline-block">Article</h2>
             </div>
-            <?php 
-                $getArticle = $bdd->query("SELECT * FROM articles ORDER BY date_create DESC LIMIT 1");
-                while($article = $getArticle->fetch()){ ?>
-               
-               <div class = "row g-3">
-                <div class = "card border-0 col-md-6 col-lg-4 bg-transparent my-3">
-                   <?php echo '<img src="images/' . $article['image'] . '" alt="Image du produit" style="height:200px;width:200px;" >' ?>
-                    <div class = "card-body px-0">
-                        <h4 class = "card-title"><?= $article['title'] ;?></h4>
-                        <p class = "card-text mt-3 text-muted"><?= $article['description'] ;?></p>
-                        <p class = "card-text">
-                            <small class = "text-muted">
-                                <span class = "fw-bold">Author: </span><?= $article['autor'] ;?>
-                            </small>
-                        </p>
-                        <a href = "#" class = "btn">Read More</a>
-                    </div>
-                </div>
 
+            <div class = "collection-list mt-5 row gx-0 gy-3">
+
+                <?php 
+                    $getArticle = $bdd->query("SELECT * FROM articles ORDER BY date_create DESC");
+                    while($article = $getArticle->fetch()){ ?>
+                  
+                  <div class = "col-md-6 ">
+                      <div class="mb-2">
+                        <div class = "card border-0 col-md-6 col-lg-4 bg-transparent my-3">
+                          <?php echo '<img src="images/' . $article['image'] . '" alt="Image du produit" style="height:200px;width:200px;" >' ?>
+                            <div class = "card-body px-0">
+                                <h4 class = "card-title"><?= $article['title'] ;?></h4>
+                                <p class = "card-text mt-3 text-muted"><?= $article['description'] ;?></p>
+                                <p class = "card-text">
+                                    <small class = "text-muted">
+                                        <span class = "fw-bold">Author: </span><?= $article['autor'] ;?>
+                                    </small>
+                                </p>
+                                <!--<a href = "#" class = "btn">Read More</a> -->
+                            </div>
+                      </div>
+                  </div>
+
+
+                </div>
+                    <?php
+                    } ?>
 
             </div>
-                <?php
-                 } ?>
-
-            
         </div>
     </section>
 
@@ -328,10 +371,12 @@ include('includes/db.php');
     </footer>
     <!-- end of footer -->
 
+<?php
 
-                  <?php 
-                  var_dump($_COOKIE);
-                  ?>
+//select  all in wheater_report table
+
+var_dump($weather);
+    ?>
 
 </body>
 </html>

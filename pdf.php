@@ -68,9 +68,22 @@ $pdf->SetFont('Times','',12);
                     
                 
             <?php
-            $pdf->Cell(0,5,$id['product_description'],0,1);
+            $pdf->Cell(1,5,$id['product_description'],0,1);
+            //recuperer le huit charactere de la description de la carte et le chercher dans la table product
+            $getProduct = $bdd->query("SELECT * FROM product where product_code ='".substr($id['product_description'],2,6)."'");
+            
+            //recuperer le prix du produit et l'afficher dans le pdf
+            while($product = $getProduct->fetch()){ 
+                $pdf->Cell(1,5,$product['product_name']  ,0,1);
+                $pdf->Cell(1,5,$product['product_price']  ,0,1);
+
+
+
+
+        
             }
         }
+    }
            
         
         

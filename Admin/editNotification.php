@@ -14,7 +14,7 @@
                 <div class="col-md-12 mb-3">
                     <div class="card">
                     <div class="card-header">
-                        <span><i class="bi bi-table me-2"></i></span> Article
+                        <span><i class="bi bi-table me-2"></i></span> Notification
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -26,14 +26,14 @@
                             <thead>
                             <tr>
                                 <th>id</th>
-                                <th>Name</th>
-                                <th>Date</th>
+                                <th>title</th>
+                                <th>Description</th>
                                 <th>Actions</th>
                                 
                             </tr>
                             </thead>
                             <tbody>
-                            <?php   $getProduct = $bdd->query("SELECT * FROM articles "); 
+                            <?php   $getProduct = $bdd->query("SELECT * FROM notification "); 
                             
                             while($product = $getProduct->fetch()){ ?>
                             <tr>
@@ -41,9 +41,9 @@
 
                                 <td><?= $product['id'] ;?></td>
                                 <td><?= $product['title'] ;?></td>
-                                <td><?= $product['date_create'] ;?></td>
-                                <td> <a type="submit" class="btn btn-primary" href="updateArticle.php?id=<?=$product['id'] ;?>" target="_blank"> UPDATE </td>
-                                <td> <a type="submit" class="btn btn-danger" href="DeleteArticle.php?id=<?=$product['id'] ;?>" target="_blank"> DELETE </td>
+                                <td><?= $product['description'] ;?></td>
+                                <td> <a type="submit" class="btn btn-primary" href="updateNotificatio.php?id=<?=$product['id'] ;?>" target="_blank"> UPDATE </td>
+                                <td> <a type="submit" class="btn btn-danger" href="DeleteNotification.php?id=<?=$product['id'] ;?>" target="_blank"> DELETE </td>
                                
                             
                             </tr>

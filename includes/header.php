@@ -4,7 +4,7 @@
 <nav class = "navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
         <div class = "container">
             <a class = "navbar-brand d-flex justify-content-between align-items-center order-lg-0" href = "./">
-                <img src = "images/Logo_EASYSCOOTER-removebg-preview.png" alt = "site icon">
+                <img src = "images/Logo_EASYSCOOTER-removebg-preview.png" height="100%" alt = "site icon">
                 <span class = "text-uppercase fw-lighter ms-2">ELECTRACKK</span>
             </a>
             
@@ -162,19 +162,32 @@
                         });
                     });
         </script>
-
         <script>
-            //cliquer sur le button avec l'id fr met dans un cookie la langue fr
-            $("#fr").click(function(){
-                document.cookie = "lang=fr";
+          
+                
+
+            //demander d'activer les notifications push sur le navigateur
+            window.addEventListener('load', function() {
+                if (Notification.permission === 'default') {
+                    Notification.requestPermission();
+                }
             });
-             //cliquer sur le button avec l'id en met dans un cookie la langue en
-            $("#en").click(function(){
-                document.cookie = "lang=en";
-            });
+            //si l'utilisateur accepte les notifications push, on les active
+            if (Notification.permission === 'granted') {
+                //afficher la notification au milieu de la page
+
+                var notification = new Notification('Bienvenue sur le site de la marque "Trot"', {
+                    body: "Vous pouvez désormais commander des vélos sur notre site",
+                    icon: 'https://img.icons8.com/material-outlined/24/000000/alarm.png'
+                });
+
+               
+            }       
+            
+            //afficher une notification en bas de l'écran
+
+
 
 
         </script>
-
-
     

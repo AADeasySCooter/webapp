@@ -21,7 +21,24 @@ if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
-//postgres
+//connexion a la base de données postgresql
+
+$host = 'localhost';
+$dbname = 'postgres';
+$username = 'postgres';
+$password = '';
+
+$dsn = "pgsql:host=$host;port=5432;dbname=$dbname;user=$username;password=$password";
+
+try{
+ $conn = new PDO($dsn);
+ 
+ if($conn){
+  echo "Connecté à $dbname avec succès!";
+ }
+}catch (PDOException $e){
+ echo $e->getMessage();
+}
 
 
 
