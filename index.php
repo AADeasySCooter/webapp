@@ -329,7 +329,9 @@ include('includes/db.php');
     <!-- end of footer -->
 
 
-
+                  <?php 
+                  var_dump($_COOKIE);
+                  ?>
 
 </body>
 </html>

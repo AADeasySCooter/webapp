@@ -1,3 +1,4 @@
+
 <body>
 <!-- navbar -->
 <nav class = "navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
@@ -28,10 +29,10 @@
 
 
                     
-                    <button onclick="window.location.href='index.php?lang=fr'" id="fr" type = "button" class = "btn position-relative">
+                    <button onclick="window.location.href=''" id="fr" type = "button" class = "btn position-relative">
                     🇫🇷  
                     </button>
-                    <button onclick="window.location.href='index.php?lang=fr'" id="en" type = "button" class = "btn position-relative">
+                    <button onclick="window.location.href=''" id="en" type = "button" class = "btn position-relative">
                     🇺🇸
                     </button>
                     
@@ -160,6 +161,19 @@
                             });
                         });
                     });
+        </script>
+
+        <script>
+            //cliquer sur le button avec l'id fr met dans un cookie la langue fr
+            $("#fr").click(function(){
+                document.cookie = "lang=fr";
+            });
+             //cliquer sur le button avec l'id en met dans un cookie la langue en
+            $("#en").click(function(){
+                document.cookie = "lang=en";
+            });
+
+
         </script>
 
 

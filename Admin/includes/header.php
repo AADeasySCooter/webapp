@@ -290,6 +290,51 @@
                 </ul>
               </div>
             </li>
+
+            <li>
+              <a
+                class="nav-link px-3 sidebar-link"
+                data-bs-toggle="collapse"
+                href="#Notification"
+              >
+                <span class="me-2"><i class="bi bi-layout-split"></i></span>
+                <span>Notfification push </span>
+                <span class="ms-auto">
+                  <span class="right-icon">
+                    <i class="bi bi-chevron-down"></i>
+                  </span>
+                </span>
+              </a>
+              <div class="collapse" id="Notification">
+                <ul class="navbar-nav ps-3">
+                
+                  <li>
+                    <a href="addNotification.php" class="nav-link px-3">
+                      <span class="me-2"
+                        ><i class="bi bi-speedometer2"></i
+                      ></span>
+                      <span>Add message</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="editNotification.php" class="nav-link px-3">
+                      <span class="me-2"
+                        ><i class="bi bi-speedometer2"></i
+                      ></span>
+                      <span>Edit message</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="addNotification.php" class="nav-link px-3">
+                      <span class="me-2"
+                        ><i class="bi bi-speedometer2"></i
+                      ></span>
+                      <span>Delete message</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
            
            
             
