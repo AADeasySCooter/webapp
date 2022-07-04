@@ -85,7 +85,7 @@
                                        
 
                                      <br><br><br><br>  
-                                     <h1>Download your recipe!</h1>
+                                     <h1>Download your receipt!</h1>
                                      <p>there are all your payments here.</p>
 
                                      ";

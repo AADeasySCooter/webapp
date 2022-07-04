@@ -34,7 +34,7 @@ try{
  $conn = new PDO($dsn);
  
  if($conn){
-  echo "Connecté à $dbname avec succès!";
+  echo "";
  }
 }catch (PDOException $e){
  echo $e->getMessage();
