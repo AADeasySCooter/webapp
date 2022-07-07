@@ -45,6 +45,7 @@ include('includes/db.php');
                                 <div class = "col-md-6 col-lg-4 col-xl-3 p-2 feat">
                                 <form class="product-form">
 
+    
                                 <div class="card mb-2">
                                     <div class = "collection-img position-relative">
                                     <?php  $image = $product['product_image'];
@@ -95,7 +96,7 @@ include('includes/db.php');
                                             <input name="product_name" type="hidden" value="<?php echo $product["product_name"]; ?>">
                                             <input name="product_price" type="hidden" value="<?php echo $product["product_price"]; ?>">
                                           
-                                            <button   class="btn btn-primary btn-sm btn-block" type="submit">Add to Cart</button>
+                                            <button   class="btn btn-primary btn-sm btn-block"  type="submit">Add to Cart</button>
                                            
 
                                             <?php 

@@ -30,16 +30,3 @@ jQuery(function() {
         });
     });
 });
-
-
-
-
-
-//cliquer sur le button avec l'id fr met dans un cookie la langue fr
-$("#fr").click(function() {
-    document.cookie = "lang=fr";
-});
-//cliquer sur le button avec l'id en met dans un cookie la langue en
-$("#en").click(function() {
-    document.cookie = "lang=en";
-});

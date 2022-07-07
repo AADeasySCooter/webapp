@@ -146,7 +146,7 @@ include('includes/db.php');
 
         <?php 
 
-        $getWeather = $conn->query("SELECT * FROM weather_report");
+        $getWeather = $connn->query("SELECT * FROM weather_report");
           $weather = $getWeather->fetch();
           //recuperer le temps actuelle et lui rajouter  2h
           $current_time = date('H:i', strtotime(' + 2 hours'));

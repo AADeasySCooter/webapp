@@ -26,9 +26,9 @@
                     </i>
                 </button>
 
-                <button onclick="window.location.href='notification.php'" type = "button" class = "btn position-relative">
+                 <button onclick="window.location.href='notification.php'" type = "button" class = "btn position-relative">
                      <i class = "fa fa-bell" >
-                    <span class="position-absolute top-0 start-100 translate-middle badge bg-light bg-dark" id="cart-container"><?php 
+                    <span class="position-absolute top-0 start-100 translate-middle badge bg-light bg-dark" id=""><?php 
                    /*  if(isset($_SESSION["products"])){
                         echo count($_SESSION["products"]); 
                     } else {
@@ -147,15 +147,11 @@
         </div>
     </nav>
    
-    <script src = "js/jquery-3.6.0.js"></script>
     <!-- isotope js -->
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
     <!-- bootstrap js -->
-    <script src = "bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
     <!-- custom js -->
     <script src = "js/script.js"></script>
-     <!--for top button-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
     <style>
@@ -181,34 +177,4 @@
                         });
                     });
         </script>
-        <script>
-            //quand on appuie sur le bouton avec l'id notification, on affiche la liste des notifications en haut de la page
-            $('#notification').click(function(){
-                $('#notificationList').toggle();
-            });
-
-        </script>
-        <script>
-            function showNotification() {
-            Notification.requestPermission(function(result) {
-                if (result === 'granted') {
-                navigator.serviceWorker.ready.then(function(registration) {
-                    registration.showNotification('Vibration Sample', {
-                    body: 'Buzz! Buzz!',
-                    icon: 'https://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
-                    vibrate: [200, 100, 200, 100, 200, 100, 200],
-                    tag: 'vibration-sample'
-                    });
-                });
-                }
-            });
-            }
-          
-        
-            
-
-
-
-
-        </script>
-    
+  

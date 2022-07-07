@@ -2,9 +2,6 @@
 session_start();
 include('includes/db.php');
 
-
-
-
 //add card product with session
 
  
