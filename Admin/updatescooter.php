@@ -19,10 +19,13 @@
                     $scooter_status = $_POST['scooter_status'];
                     $scooter_code = $_POST['scooter_code'];
                     $scooter_image = $_POST['scooter_image'];
+                    $scooter_lat = $_POST['scooter_lat'];
+                    $scooter_long = $_POST['scooter_long'];
                     
           
                     $radmin = $bdd->query( "UPDATE scooter set scooter_name = '$scooter_name' , scooter_status = '$scooter_status'
-                    ,
+                    , lat = '$scooter_lat',
+                    lon = '$scooter_long',
                     scooter_code = '$scooter_code',
                     scooter_image = '$scooter_image'
                     WHERE id = '$idd'  " );
@@ -52,6 +55,10 @@
                                 
                                 <br>
                                 <input type="text" name="scooter_code" value="<?= $response['scooter_code'] ;?>">
+                                <br>
+                                <input type="number" step="any" name="scooter_lat" value="<?= $response['lat'] ;?>">
+                                <br>
+                                <input type="number" step="any" name="scooter_long" value="<?= $response['lon'] ;?>">
                                 <br>
                                 <input type="file" name="scooter_image" value="<?= $response['scooter_image'] ;?>">        
                                 <br>

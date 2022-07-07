@@ -1,5 +1,7 @@
 
 <body>
+  
+
 <!-- navbar -->
 <nav class = "navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
         <div class = "container">
@@ -24,9 +26,24 @@
                     </i>
                 </button>
 
+                <button onclick="window.location.href='notification.php'" type = "button" class = "btn position-relative">
+                     <i class = "fa fa-bell" >
+                    <span class="position-absolute top-0 start-100 translate-middle badge bg-light bg-dark" id="cart-container"><?php 
+                   /*  if(isset($_SESSION["products"])){
+                        echo count($_SESSION["products"]); 
+                    } else {
+                       
+                    } */
+                    ?></span>
+                
+                    </i>
+                </button>
+               
                     
-    
 
+                       <span>
+
+                        </span>
 
                     
                     <button onclick="window.location.href=''" id="fr" type = "button" class = "btn position-relative">
@@ -35,10 +52,14 @@
                     <button onclick="window.location.href=''" id="en" type = "button" class = "btn position-relative">
                     🇺🇸
                     </button>
+
+                        
+
                     
             
               
             </div>
+            
 
             <button class = "navbar-toggler border-0" type = "button" data-bs-toggle = "collapse" data-bs-target = "#navMenu">
                 <span class = "navbar-toggler-icon"></span>
@@ -49,9 +70,7 @@
 
             <div class = "collapse navbar-collapse order-lg-1" id = "navMenu">
                 <ul class = "navbar-nav mx-auto text-center">
-
-                    
-                    
+    
 
                         <?php
                     if(isset($_SESSION['email'])){
@@ -163,28 +182,30 @@
                     });
         </script>
         <script>
-          
-                
+            //quand on appuie sur le bouton avec l'id notification, on affiche la liste des notifications en haut de la page
+            $('#notification').click(function(){
+                $('#notificationList').toggle();
+            });
 
-            //demander d'activer les notifications push sur le navigateur
-            window.addEventListener('load', function() {
-                if (Notification.permission === 'default') {
-                    Notification.requestPermission();
+        </script>
+        <script>
+            function showNotification() {
+            Notification.requestPermission(function(result) {
+                if (result === 'granted') {
+                navigator.serviceWorker.ready.then(function(registration) {
+                    registration.showNotification('Vibration Sample', {
+                    body: 'Buzz! Buzz!',
+                    icon: 'https://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
+                    vibrate: [200, 100, 200, 100, 200, 100, 200],
+                    tag: 'vibration-sample'
+                    });
+                });
                 }
             });
-            //si l'utilisateur accepte les notifications push, on les active
-            if (Notification.permission === 'granted') {
-                //afficher la notification au milieu de la page
-
-                var notification = new Notification('Bienvenue sur le site de la marque "Trot"', {
-                    body: "Vous pouvez désormais commander des vélos sur notre site",
-                    icon: 'https://img.icons8.com/material-outlined/24/000000/alarm.png'
-                });
-
-               
-            }       
+            }
+          
+        
             
-            //afficher une notification en bas de l'écran
 
 
 

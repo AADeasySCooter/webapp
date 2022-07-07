@@ -7,18 +7,20 @@ if(isset($_POST['addScooter']))
 {
     $scooter_name = $_POST['scooter_name'];
     $scooter_code = $_POST['scooter_code'];
+    $scooter_lat = $_POST['scooter_lat'];
+    $scooter_long = $_POST['scooter_long'];
     $scooter_image = $_FILES['scooter_image']['name'];
     $scooter_image_tmp_name = $_FILES['scooter_image']['tmp_name'];
     $scooter_image_folder = 'image/'.$scooter_image;
 
 
-        if(empty($scooter_name)  || empty($scooter_code)  || empty($scooter_image))  {
+        if(empty($scooter_name)  || empty($scooter_code) || empty($scooter_lat)  || empty($scooter_long)  || empty($scooter_image) )  {
 
             $message[] = 'tous les champs doivent etre remplis';
         }else{
-            $insertscooter = $bdd->prepare('INSERT INTO scooter(scooter_name,  scooter_code , scooter_image) VALUES(? ,? ,?)');
-            $insertscooter->execute(array($scooter_name,  $scooter_code, $scooter_image));
-            $message[] = 'article ajouter ';
+            $insertscooter = $bdd->prepare('INSERT INTO scooter(scooter_name,  scooter_code, lat, lon , scooter_image ) VALUES(? ,? ,? ,?, ?)');
+            $insertscooter->execute(array($scooter_name,  $scooter_code, $scooter_lat , $scooter_long, $scooter_image));
+            $message[] = 'scooter ajouter ';
 
         }
 
@@ -53,6 +55,12 @@ if(isset($_POST['addScooter']))
             </div>
             <div class="mb-3">
             <input type="text" class="form-control" placeholder="entrer le code du scooter" name="scooter_code" >
+            </div>
+            <div class="mb-3">
+            <input type="number"  class="form-control"step="any"  placeholder="latitude" name="scooter_lat" >
+            </div>
+            <div class="mb-3">
+            <input type="number"  class="form-control"step="any"  placeholder="longitude" name="scooter_long" >
             </div>
             <div class="mb-3">
             <input type="file" class="form-control" placeholder="entrer l'image du scooter" name="scooter_image">

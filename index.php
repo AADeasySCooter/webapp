@@ -9,6 +9,8 @@ include('includes/db.php');
 ?>
 <!DOCTYPE html>
 
+
+
     <!-- navbar -->
     
     
@@ -146,6 +148,8 @@ include('includes/db.php');
 
         $getWeather = $conn->query("SELECT * FROM weather_report");
           $weather = $getWeather->fetch();
+          //recuperer le temps actuelle et lui rajouter  2h
+          $current_time = date('H:i', strtotime(' + 2 hours'));
            $weather_id = $weather['id_geolocation'];
             $weather_temp = $weather['temp'];
             $weather_desc = $weather['description'];
@@ -163,7 +167,7 @@ include('includes/db.php');
 
                     <div class="d-flex">
                       <h6 class="flex-grow-1"> <?= $weather_desc ; ?> </h6>
-                      <h6> 12:69</h6>
+                      <h6> <?= $current_time ; ?></h6>
                     </div>
 
                     <div class="d-flex flex-column text-center mt-5 mb-4">
@@ -375,8 +379,9 @@ include('includes/db.php');
 
 //select  all in wheater_report table
 
-var_dump($weather);
-    ?>
+/* var_dump($weather);
+ */    ?>
 
 </body>
 </html>
+
