@@ -156,7 +156,50 @@ $user_id = $voirProfil['id'];
 
    
     </div>
+
+    
+                 <div class="lyon">
+                 <?php
+                 //recuperer lat et lon dans la base de donner par rapport à l'id du scooter
+                    $q = 'SELECT * FROM scooter WHERE id = :id;';   
+                    $stmt = $bdd->prepare($q);
+                    $statuss = $stmt->execute(
+                        array(
+                            'id'=>$_GET['id']
+                        ));
+                    if($statuss){
+                        $scooter = $stmt->fetch();
+                    }
+                    $lat = $scooter['lat'];
+                    $lon = $scooter['lon'];
+                    
+                ?>
+
+            <iframe width="100%" height="100%" src="https://maps.google.com/maps?q=<?php echo $lat ;?>,<?php echo $lon; ?>&output=embed"></iframe>
+
+                 </div>
+
+                 <style>
+                     /*afficher tout ce qu'il y'a dans la div lyon à droite avec bootsrap*/
+                        .lyon{
+                            /*a gauche */
+                            float: left;
+                            width: 50%;
+                            height: 100%;
+                            position: absolute;
+                            top: 0;
+                            left: 50%;
+                            right: 0;
+                            bottom: 0;
+                        }
+                 </style>
+        
+
+                 
+    </section>
     </main>
+
+  
 
     <script>
 
