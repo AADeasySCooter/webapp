@@ -30,6 +30,18 @@ function addArticle($title, $description, $autor, $image){
   return $statuss;
 }
 
+//supprimer un article
+function deleteArticle($id){
+  global $bdd;
+  $q = 'DELETE FROM articles WHERE id = :id';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+          'id'=>$id
+      ));
+  return $statuss;
+}
+
 function getArticles(){
   global $bdd;
   $q = 'SELECT * FROM articles ';
