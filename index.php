@@ -198,33 +198,7 @@ include('includes/function.php');
 
   </div>
 </section>
-    <!-- end of blogs -->
-  <!-- blogs -->
-  <!-- Scrollable modal -->
-      <!-- Vertically centered scrollable modal -->
- <!-- Button trigger modal
-     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Launch demo modal
-      </button>  -->
-
-      <!-- Modal -->
-      <!-- 
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              ...
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>  -->
+  
  
     <section id = "blogs" class = "py-5">
         <div class = "container">
@@ -295,8 +269,9 @@ include('includes/function.php');
     <section id = "about" class = "py-5">
         <div class = "container">
         <?php 
-                $getArticle = $bdd->query("SELECT * FROM About");
-                while($about = $getArticle->fetch()){ ?>
+                 $about = getAbout();
+                {
+               ?>
 
             <div class = "row gy-lg-5 align-items-center">
                 <div class = "col-lg-6 order-lg-1 text-center text-lg-start">
@@ -384,12 +359,6 @@ include('includes/function.php');
     </footer>
     <!-- end of footer -->
 
-<?php
-
-//select  all in wheater_report table
-
- var_dump($weather_report);
-   ?>
 
 </body>
 </html>

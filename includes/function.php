@@ -103,3 +103,14 @@ function getScootersByStatus($status){
 
 
 
+//recuperer tous les informations de la table about 
+function getAbout(){
+  global $bdd;
+  $q = 'SELECT * FROM about';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute();
+  if($statuss){
+      $about = $stmt->fetch();
+  }
+  return $about;
+}
