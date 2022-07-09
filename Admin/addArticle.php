@@ -2,7 +2,7 @@
   include('includes/db.php');
   include('includes/head.php');
   include('includes/header.php');
- 
+
 
 if(isset($_POST['addArticle']))
 {
@@ -16,10 +16,10 @@ if(isset($_POST['addArticle']))
 
         if(empty($Article_title) || empty($Article_description) || empty($Article_autor) || empty($Article_image))  {
 
-            $message[] = 'tous les champs doivent etre remplis';
+            $message[] = '-------------------------------------tous les champs doivent etre remplis';
         }else{
-            $insertProduct = $bdd->prepare('INSERT INTO articles(title, description,  autor, image) VALUES(? ,? ,?, ?)');
-            $insertProduct->execute(array($Article_title, $Article_description,$Article_autor,$Article_image));
+            addArticle($Article_title, $Article_description, $Article_autor, $Article_image);
+            //$insertProduct->execute(array($Article_title, $Article_description,$Article_autor,$Article_image));
             $message[] = 'article ajouter ';
 
         }
@@ -28,8 +28,12 @@ if(isset($_POST['addArticle']))
 
 ?>
 <!DOCTYPE html>
-       
+<br><br>  
+<br><br>  
+<br><br>  
+
     <?php 
+    
     if(isset($message)){
         foreach($message as $message ){
             echo'<span class="message">'.$message.'</span>';
