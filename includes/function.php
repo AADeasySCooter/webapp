@@ -86,6 +86,18 @@ function getScootersByStatus($status){
     return $product;
   }
 
+  //récuperer tous les produits de la table product
+  function getAllProduct(){
+    global $bdd;
+    $q = 'SELECT * FROM product';
+    $stmt = $bdd->prepare($q);
+    $statuss = $stmt->execute();
+    if($statuss){
+        $product = $stmt->fetchAll();
+    }
+    return $product;
+  }
+
   //recuperer tous les articles   ORDER BY date_create DESC
   function getArticle(){
     global $bdd;
@@ -114,3 +126,4 @@ function getAbout(){
   }
   return $about;
 }
+

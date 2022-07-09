@@ -2,6 +2,8 @@
  include('includes/head.php');
  include('includes/header.php');
 include('includes/db.php');
+include('includes/function.php');
+
 
 
 
@@ -38,9 +40,9 @@ include('includes/db.php');
                     
                 
                    
-                <?php 
-                            $getProduct = $bdd->query("SELECT * FROM product ORDER BY created_at DESC ");
-                            while($product = $getProduct->fetch()){  
+                <?php       
+                            $products = getAllProduct();
+                            foreach($products as $product){  
                                  ?>
                                 <div class = "col-md-6 col-lg-4 col-xl-3 p-2 feat">
                                 <form class="product-form">
@@ -122,7 +124,5 @@ include('includes/db.php');
     
             </div>
         </div>
-        <?php 
-        var_dump($_SESSION);
-        ?>
+       
     </section>
