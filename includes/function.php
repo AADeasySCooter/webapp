@@ -1,6 +1,7 @@
 <?php
 include('db.php');
 
+
 function getScooters(){
   global $bdd;
   $q = 'SELECT * FROM scooter ';
@@ -50,6 +51,36 @@ function getScootersByStatus($status){
         $user = $stmt->fetch();
     }
     return $user['id'];
+  }
+  //creer une fonction qui récupère toute les donners de la table cart  where user_id =$user_id
+  function getCart(){
+    global $bdd;
+    $user_id = user_id();
+    $q = 'SELECT * FROM cart WHERE user_id = :user_id';
+    $stmt = $bdd->prepare($q);
+    $statuss = $stmt->execute(
+        array(
+            'user_id'=>$user_id
+        ));
+    if($statuss){
+        $cart = $stmt->fetchAll();
+    }
+    return $cart;
+  }
+
+  //creer un fonction qui récuperer toute les données de la table users avec l'id de l'utilisateur
+  function getUserById($id){
+    global $bdd;
+    $q = 'SELECT * FROM users WHERE id= :id';
+    $stmt = $bdd->prepare($q);
+    $statuss = $stmt->execute(
+        array(
+            'id'=>$id
+        ));
+    if($statuss){
+        $user = $stmt->fetch();
+    }
+    return $user;
   }
 
   function deleteUser($id){
