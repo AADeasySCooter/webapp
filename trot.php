@@ -3,18 +3,15 @@
  include('includes/head.php');
  include('includes/header.php');
 include('includes/db.php');
+include('includes/function.php');
+
 
 
   //afficher la date d'aujourd'hui et l'heure actuelle
   $time = date('H:i:s' , strtotime(' + 2 hours'));
   $date_time =  ' ' . $time;
 
-//recuperer l'email dans la session et reuperer l'id de l'utilisateur par rapport a l'email
-$q = "SELECT * FROM users WHERE email= '".$_SESSION['email']."'";
-$result = $bdd->prepare($q);
-$result->execute();
-$voirProfil =$result->fetch();
-$user_id = $voirProfil['id'];
+    $user_id = user_id();
 
 ?>
 
@@ -44,14 +41,8 @@ $user_id = $voirProfil['id'];
                 
                    
                 <?php 
-                            $getscooter = $bdd->query("SELECT * FROM scooter ORDER BY created_at DESC ");
-                            while($scooter = $getscooter->fetch()){  
-
-                               
-                                
-
-
-
+                            $scooters = getAllScooters();
+                            foreach($scooters as $scooter){  
                                  ?>
                                 <div class = "col-md-6 col-lg-4 col-xl-3 p-2 feat">
                                 <form class="scooter-form" name="form1" method="post" action="trot.php">
@@ -153,15 +144,7 @@ $user_id = $voirProfil['id'];
     
             </div>
         </div>
-        <?php 
-        var_dump($_SESSION);
-        echo count($_POST);
-        var_dump($date_time);
-
-
-    
-
-        ?>
+   
 
     </section>
 

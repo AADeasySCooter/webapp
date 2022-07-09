@@ -3,7 +3,18 @@ include('db.php');
 
 function getScooters(){
   global $bdd;
-  $q = 'SELECT * FROM scooter';
+  $q = 'SELECT * FROM scooter ';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute();
+  if($statuss){
+      $scooter = $stmt->fetchAll();
+  }
+  return $scooter;
+}
+
+function getAllScooters(){
+  global $bdd;
+  $q = 'SELECT * FROM scooter ORDER BY created_at DESC ';
   $stmt = $bdd->prepare($q);
   $statuss = $stmt->execute();
   if($statuss){
@@ -13,7 +24,6 @@ function getScooters(){
 }
 
 
-//scooter en fonction du status 
 function getScootersByStatus($status){
   global $bdd;
   $q = 'SELECT * FROM scooter WHERE scooter_status = :status';
@@ -42,7 +52,6 @@ function getScootersByStatus($status){
     return $user['id'];
   }
 
- //supprime l'utilisateur et le redirige 
   function deleteUser($id){
       global $bdd;
       $q = 'DELETE FROM users WHERE id = :id;';
@@ -62,7 +71,6 @@ function getScootersByStatus($status){
       }
   }
 
-  //creer une fonction qui recupère toute les donnée de la table  weather_report
   function getWeatherReport(){
     global $connn;
     $q = 'SELECT * FROM weather_report';
@@ -74,7 +82,6 @@ function getScootersByStatus($status){
     return $weather_report;
   }
 
-  //récupère tous les product  (4)  
   function getProduct(){
     global $bdd;
     $q = 'SELECT * FROM product ORDER BY created_at DESC LIMIT 4';
@@ -86,7 +93,6 @@ function getScootersByStatus($status){
     return $product;
   }
 
-  //récuperer tous les produits de la table product
   function getAllProduct(){
     global $bdd;
     $q = 'SELECT * FROM product';
@@ -98,7 +104,6 @@ function getScootersByStatus($status){
     return $product;
   }
 
-  //recuperer tous les articles   ORDER BY date_create DESC
   function getArticle(){
     global $bdd;
     $q = 'SELECT * FROM articles ORDER BY date_create DESC';
@@ -115,7 +120,6 @@ function getScootersByStatus($status){
 
 
 
-//recuperer tous les informations de la table about 
 function getAbout(){
   global $bdd;
   $q = 'SELECT * FROM about';
