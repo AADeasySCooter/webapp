@@ -1,6 +1,7 @@
 <?php
 include('db.php');
 
+
 function getUserRole(){
   global $bdd;
   $q = 'SELECT * FROM users WHERE email= :email';
@@ -29,7 +30,6 @@ function addArticle($title, $description, $autor, $image){
   return $statuss;
 }
 
-//creer une fonction qui recupere toute les articles
 function getArticles(){
   global $bdd;
   $q = 'SELECT * FROM articles ';
@@ -39,4 +39,35 @@ function getArticles(){
       $articles = $stmt->fetchAll();
   }
   return $articles;
+}
+ 
+
+function getArticleById($id){
+  global $bdd;
+  $q = 'SELECT * FROM articles WHERE id= :id';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+          'id'=>$id
+      ));
+  if($statuss){
+      $article = $stmt->fetch();
+  }
+  return $article;
+}
+
+//creer un fonction pour update un article
+function updateArticle($id, $title, $description, $autor, $image){
+  global $bdd;
+  $q = 'UPDATE articles SET title = :title, description = :description, autor = :autor, image = :image WHERE id = :id';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+          'id'=>$id,
+          'title'=>$title,
+          'description'=>$description,
+          'autor'=>$autor,
+          'image'=>$image
+      ));
+  return $statuss;
 }

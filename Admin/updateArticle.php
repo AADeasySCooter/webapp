@@ -14,22 +14,19 @@
             include('includes/db.php');
 
                 if(count($_POST)>0)  {
-                    $idd = $_GET['id'];
-                    $title = $_POST['title'];
+                  $id = $_GET['id'];
+                   $title = $_POST['title'];
                     $description = $_POST['description'];
                     $autor = $_POST['autor'];
                     $image = $_POST['image'];
-          
-                    $radmin = $bdd->query( "UPDATE articles set title = '$title' , description = '$description'
-                    , autor = '$autor',
-                     image = '$image'
-                    WHERE id = '$idd'  " );
+
+                    updateArticle($id,$title,$description,$autor,$image);
                     $message[] = 'article update ';
 
                 }
                 $id = $_GET['id'];
-                $result = $bdd->query( "SELECT * FROM articles WHERE id = $id " ) ;
-                $response = $result->fetch();
+                $response = getArticleById($id);
+              
 
 
 
@@ -66,8 +63,6 @@
                 
         </div>
 
-      <?php var_dump($response); 
-      ?>
     </div>
     </main>
     
