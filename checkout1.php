@@ -3,8 +3,6 @@ include('includes/head.php');
 include('includes/header.php');
 include('includes/db.php');
 
-
-
     if(count($_POST)>0)  {
         $idd = $_GET['id'];
         $address = $_POST['address'];

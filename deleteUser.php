@@ -10,8 +10,15 @@
             <?php
        
             include('includes/db.php');
+            include('includes/function.php');
 
-            if(isset($_GET['id']) && !empty($_GET['id'])){
+            $id = $_GET['id'];
+            deleteUser($id);
+
+
+
+
+           /*  if(isset($_GET['id']) && !empty($_GET['id'])){
 
                 $q = 'DELETE FROM users WHERE id = :id;';
                 $stmt = $bdd->prepare($q);
@@ -28,7 +35,7 @@
             }else{
                 echo'User not deleted error id ';
             
-            }
+            } */
 
 
 

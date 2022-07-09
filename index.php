@@ -3,6 +3,8 @@
 include('includes/head.php');
 include('includes/header.php');
 include('includes/db.php');
+include('includes/function.php');
+
 
 
 
@@ -58,9 +60,8 @@ include('includes/db.php');
                 
                    
                 <?php 
-                            
-                            $getProduct = $bdd->query("SELECT * FROM product ORDER BY created_at DESC LIMIT 4");
-                            while($product = $getProduct->fetch()){ ?>
+                            $products = getProduct();
+                            foreach( $products as $product){ ?>
                                 <div class = "col-md-6 col-lg-4 col-xl-3 p-2 feat">
                                 <form class="product-form">
 
@@ -145,17 +146,17 @@ include('includes/db.php');
   <div class="container py-5 h-100">
 
         <?php 
-
-        $getWeather = $connn->query("SELECT * FROM weather_report");
-          $weather = $getWeather->fetch();
+         /*      $getWeather = $connn->query("SELECT * FROM weather_report");
+          $weather = $getWeather->fetch(); */
           //recuperer le temps actuelle et lui rajouter  2h
+          $weather_report = getWeatherReport();
           $current_time = date('H:i', strtotime(' + 2 hours'));
-           $weather_id = $weather['id_geolocation'];
-            $weather_temp = $weather['temp'];
-            $weather_desc = $weather['description'];
-            $weather_pressure = $weather['pressure'];
-            $weather_humidity = $weather['humidity'];
-            $weather_wind_speed = $weather['wind_speed'];
+           $weather_id = $weather_report['id_geolocation'];
+            $weather_temp = $weather_report['temp'];
+            $weather_desc = $weather_report['description'];
+            $weather_pressure = $weather_report['pressure'];
+            $weather_humidity = $weather_report['humidity'];
+            $weather_wind_speed = $weather_report['wind_speed'];
 
            ?>
 
@@ -234,8 +235,10 @@ include('includes/db.php');
             <div class = "collection-list mt-5 row gx-0 gy-3">
 
                 <?php 
-                    $getArticle = $bdd->query("SELECT * FROM articles ORDER BY date_create DESC");
-                    while($article = $getArticle->fetch()){ ?>
+                
+                $Articles = getArticle();
+                foreach( $Articles as $article){
+                   ?>
                   
                   <div class = "col-md-6 ">
                       <div class="mb-2">
@@ -267,9 +270,15 @@ include('includes/db.php');
       <div class="container">
         <div class="row">
           <div class="course-col">
+              <?php
+            
+
+
+
+              
+              ?>
             <!--afficher la carte de lyon avec du javascript-->
-                 <div class="lyon">
-                 </div>
+                 
           </div>
         </div>
       </div>
@@ -379,8 +388,8 @@ include('includes/db.php');
 
 //select  all in wheater_report table
 
-/* var_dump($weather);
- */    ?>
+ var_dump($weather_report);
+   ?>
 
 </body>
 </html>

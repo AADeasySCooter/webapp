@@ -161,15 +161,7 @@ $user_id = $voirProfil['id'];
                  <div class="lyon">
                  <?php
                  //recuperer lat et lon dans la base de donner par rapport à l'id du scooter
-                    $q = 'SELECT * FROM scooter WHERE id = :id;';   
-                    $stmt = $bdd->prepare($q);
-                    $statuss = $stmt->execute(
-                        array(
-                            'id'=>$_GET['id']
-                        ));
-                    if($statuss){
-                        $scooter = $stmt->fetch();
-                    }
+                   
                     $lat = $scooter['lat'];
                     $lon = $scooter['lon'];
                     
@@ -198,6 +190,7 @@ $user_id = $voirProfil['id'];
                  
     </section>
     </main>
+ 
 
   
 

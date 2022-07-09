@@ -3,14 +3,26 @@
 include('includes/head.php');
 include('includes/header.php');
 include('includes/db.php');
+include "includes/function.php";
+
+//si l'utilisateur est connecté do  $user_id = user_id(); sinon $user_id = 0;
+if(isset($_SESSION['email'])){
+    $user_id = user_id();
+}else{
+    $user_id = 0;
+}
 
 
-$q = "SELECT id FROM users WHERE email = '" . $_SESSION['email'] . "' ";
+/* $q = "SELECT id FROM users WHERE email = '" . $_SESSION['email'] . "' ";
 $req = $bdd->prepare($q);
 $req->execute();
 $result = $req->fetch(); 
 $user_id = $result['id'];
-var_dump($user_id);
+var_dump($user_id); */
+
+
+
+
 
 
 

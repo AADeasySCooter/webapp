@@ -1,0 +1,8 @@
+let x=-475+475
+let y=50 
+let z=-475
+const wall = new THREE.BoxGeometry( 1000, 100, 50 );
+const material = new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load( '../three.js/examples/textures/brick_bump.jpg' ) } );
+const cube = new THREE.Mesh( wall, material );
+cube.position.set(x,y,z)
+scene.add( cube );
