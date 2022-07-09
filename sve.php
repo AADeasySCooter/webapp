@@ -2,18 +2,14 @@
 include('includes/head.php');
 include('includes/header.php');
 include('includes/db.php');
+include('includes/function.php');
 
 
 
-    if (isset($_SESSION['email'])){
-        $recupProfil =$bdd->prepare("SELECT * FROM users WHERE email= '".$_SESSION['email']."'");     
-        $recupProfil->execute();
-        $voirProfil =$recupProfil->fetch();
-        $user_id = $voirProfil['id'];
+
+        $user_id = user_id();
         $product = $_SESSION['product'];
         
-
-
             if(isset($_SESSION["products"]) && count($_SESSION["products"])>0 && isset($_SESSION["email"]) ) {
                 foreach($_SESSION["products"] as $key => $value) {
                     $product[$key]=$value;
@@ -34,7 +30,7 @@ include('includes/db.php');
         }//else here
 
 
-        }    //inserer 
+           //inserer 
                 
 
 
