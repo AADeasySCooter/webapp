@@ -33,9 +33,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php   $getProduct = $bdd->query("SELECT * FROM articles "); 
-                            
-                            while($product = $getProduct->fetch()){ ?>
+                            <?php  
+                             $products = getArticles();
+                             foreach($products as $product){ ?>
                             <tr>
                             
 

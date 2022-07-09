@@ -15,7 +15,6 @@ function getUserRole(){
   return $user['role_id'];
 };
 
-//creer une fonction qui ajoute un article dans la base de données quand on post un formulaire
 function addArticle($title, $description, $autor, $image){
   global $bdd;
   $q = 'INSERT INTO articles (title, description , autor , image) VALUES (:title , :description , :autor , :image)';
@@ -28,4 +27,16 @@ function addArticle($title, $description, $autor, $image){
           'image'=>$image
       ));
   return $statuss;
+}
+
+//creer une fonction qui recupere toute les articles
+function getArticles(){
+  global $bdd;
+  $q = 'SELECT * FROM articles ';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute();
+  if($statuss){
+      $articles = $stmt->fetchAll();
+  }
+  return $articles;
 }
