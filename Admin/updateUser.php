@@ -14,8 +14,9 @@
             include('includes/db.php');
 
                 if(count($_POST)>0)  {
-                    $idd = $_GET['id'];
-                    $email = $_POST['email'];
+                   $id = $_GET['id'];
+                   updateUser($id,$_POST['email'],$_POST['firstname'],$_POST['lastname'],$_POST['role_id'],$_POST['status']);
+                 /*   $email = $_POST['email'];
                     $firstname = $_POST['firstname'];
                     $lastname = $_POST['lastname'];
                     $role_id = $_POST['role_id'];
@@ -23,7 +24,7 @@
                     $radmin = $bdd->query( "UPDATE users set email = '$email' , firstname = '$firstname'
                     , lastname = '$lastname',
                      role_id = '$role_id' ,  status = '$status'
-                    WHERE id = '$idd'  " );
+                    WHERE id = '$id'  " ); */
                     $message[] = 'data update ';
 
                 }
@@ -52,8 +53,6 @@
                                 <br>
                                 <input type="text" name="lastname" value="<?= $response['lastname'] ;?>">
                                 <br>
-                                <input type="text" name="username" value="<?= $response['username'] ;?>">
-                                <br>
                                 <input type="number" name="role_id" value="<?= $response['role_id'] ;?>">
                                 
                                 <br>
@@ -71,8 +70,6 @@
                 
         </div>
 
-      <?php var_dump($response); 
-      ?>
     </div>
     </main>
     

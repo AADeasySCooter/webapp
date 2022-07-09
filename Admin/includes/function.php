@@ -1,6 +1,33 @@
 <?php
 include('db.php');
 
+function getUsers(){
+  global $bdd;
+  $q = 'SELECT * FROM users ';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute();
+  if($statuss){
+      $users = $stmt->fetchAll();
+  }
+  return $users;
+}
+//creer une fonction pour update un user avec un id
+function updateUser($id, $email, $firstname, $lastname, $role_id , $status){
+  global $bdd;
+  $q = 'UPDATE users SET email = :email, firstname = :firstname, lastname = :lastname, role_id = :role_id , status = :status  WHERE id = :id';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+          'id'=>$id,
+          'email'=>$email,
+          'firstname'=>$firstname,
+          'lastname'=>$lastname,
+          'role_id'=>$role_id,
+          'status'=>$status
+      ));
+  return $statuss;
+}
+
 
 function getUserRole(){
   global $bdd;

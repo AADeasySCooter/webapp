@@ -35,32 +35,31 @@
           </div>
         </div>
         <div class="row">
-                <div class="col-md-12 mb-3">
-                    <div class="card">
-                    <div class="card-header">
-                        <span><i class="bi bi-table me-2"></i></span> users
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
+                <div class="course-col">
+                
+                        
                                 <form name="frmUser" method="post" action=""> 
-                                <input type="text" name="title" value="<?= $response['title'] ;?>">
-                                <br>
-                                <input type="text" name="description" value="<?= $response['description'] ;?>">
-                                <br>
-                                <input type="text" name="autor" value="<?= $response['autor'] ;?>">
-                                <br>
-                                <input type="file" name="image" value="<?= $response['image'] ;?>">        
-                                <br>
-                                <input type="submit" class="btn btn-secondary" name="submit" value="submit" class="btn btn">
-                                <a href="editArticle.php" class="btn btn-primary">Article</a>
+                                <div class="mb-3">
+                                <input  class="form-control" type="text" name="title" value="<?= $response['title'] ;?>">
+                                </div>
+                                <div class="mb-3">
+                                <input type="text" class="form-control" name="description" value="<?= $response['description'] ;?>">
+                                </div>
+                                <div class="mb-3">
+                                <input type="text" class="form-control"name="autor" value="<?= $response['autor'] ;?>">
+                                </div>
+                                <div class="mb-3">
+                                <input type="file"class="form-control" name="image" value="<?= $response['image'] ;?>">        
+                                </div>
+                                <div class="mb-3">
+                                <input type="submit" class="btn btn-primary"  name="submit" value="submit" class="btn btn">
+                                <a href="editArticle.php" class="btn btn-secondary">Article</a>
+                                </div>
 
                                 </form>
                           
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                
+                   
+     
         </div>
 
     </div>

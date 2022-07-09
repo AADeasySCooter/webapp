@@ -39,12 +39,10 @@ include('includes/db.php');
                             </tr>
                             </thead>
                             <tbody>
-                            <?php   $getProduct = $bdd->query("SELECT * FROM users "); 
+                            <?php  
+                                $products = getUsers();
+                                foreach($products as $product){ ?>
 
-                    
-                            
-                            while($product = $getProduct->fetch()){ ?>
-                            
                             <tr>
                             
 
