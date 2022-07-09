@@ -2,17 +2,13 @@
 session_start();
  
 include('includes/db.php');
-
-if (isset($_SESSION['email'])){
-  $recupProfil =$bdd->prepare("SELECT * FROM users WHERE email= '".$_SESSION['email']."'");     
-  $recupProfil->execute();
-  $voirProfil =$recupProfil->fetch();
-  if($voirProfil["role_id"] != 3){
+include('includes/function.php');
+$user_role = getUserRole();
+  if($user_role != 3){
     header("Location: ../error.php");
 
-
   };
-}
+
   
 ?>
 <!DOCTYPE html>

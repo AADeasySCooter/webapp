@@ -52,7 +52,10 @@ function getScootersByStatus($status){
     }
     return $user['id'];
   }
-  //creer une fonction qui récupère toute les donners de la table cart  where user_id =$user_id
+
+
+
+
   function getCart(){
     global $bdd;
     $user_id = user_id();
