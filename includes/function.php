@@ -189,7 +189,6 @@ function getAbout(){
   return $about;
 }
 
-//recuperer toutes les données de la table plan whereid = :id
 function getPlanById($id){
   global $bdd;
   $q = 'SELECT * FROM plan WHERE id= :id';
@@ -202,6 +201,21 @@ function getPlanById($id){
       $plan = $stmt->fetch();
   }
   return $plan;
+}
+
+
+//creer une fonction update le status de la trot à 1 enlever le user_id et done_at et take_at
+function updateStatus($id){
+  global $bdd;
+  $q = 'UPDATE scooter SET scooter_status= 1 , user_id= 0 , done_at= NULL, take_at= NULL WHERE id= :id';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+          'id'=>$id
+      ));
+
+  return $statuss;
+
 }
 
 

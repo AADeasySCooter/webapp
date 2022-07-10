@@ -143,7 +143,7 @@ include('includes/db.php');
                                                 const element = document.getElementById('paypal-button-container');
 
                                                 element.innerHTML = '';
-                                                element.innerHTML = '<h3>Thank you for your payment! you have unluck the scooter !!</h3>';
+                                                element.innerHTML = '<h3>Thank you for your payment!</h3>';
                                                 //envoyer l'id de la trottinette a la page sve_plan.php  avec un post en ajax
                                                 $.post('lv_plan.php',{id:<?= $plan['id'] ;?>},function(data){
                                                     console.log(data);
