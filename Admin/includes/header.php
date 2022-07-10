@@ -237,7 +237,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="editScooter.php" class="nav-link px-3">
+                    <a href="editPlan.php" class="nav-link px-3">
                       <span class="me-2"
                         ><i class="bi bi-speedometer2"></i
                       ></span>

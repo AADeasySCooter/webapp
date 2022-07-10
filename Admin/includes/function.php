@@ -170,7 +170,6 @@ function deleteProduct($id){
   return $statuss;
 }
 
-//creer une fonction pour ajouter un scooter
 function addScooter($name, $code, $lat, $long, $image){
   global $bdd;
   $q = 'INSERT INTO scooter (scooter_name,  scooter_code, lat, lon , scooter_image) VALUES (:scooter_name , :scooter_code, :lat  , :lon, :scooter_image)';
@@ -186,7 +185,6 @@ function addScooter($name, $code, $lat, $long, $image){
   return $statuss;
 }
 
-//creer une fonction pour update un scooter
 function updateScooter($id, $name, $status, $code, $lat, $lon, $image){
   global $bdd;
   $q = 'UPDATE scooter SET scooter_name = :scooter_name, scooter_status = :scooter_status , scooter_code = :scooter_code, lat = :lat, lon = :lon, scooter_image = :scooter_image WHERE id = :id';
@@ -204,7 +202,6 @@ function updateScooter($id, $name, $status, $code, $lat, $lon, $image){
   return $statuss;
 }
 
-//creer une fonction pour recupere un scooter par son id
 function getScooterById($id){
   global $bdd;
   $q = 'SELECT * FROM scooter WHERE id= :id';
@@ -231,7 +228,6 @@ function deleteScooter($id){
   return $statuss;
 }
 
-//creer une fonction pour ajouter un plan 
 function addPlan($title, $description, $price){
   global $bdd;
   $q = 'INSERT INTO plan (plan_title, plan_description,  plan_price) VALUES (:plan_title , :plan_description, :plan_price )';
@@ -242,6 +238,45 @@ function addPlan($title, $description, $price){
             'plan_description'=>$description,
             'plan_price'=>$price
            
+      ));
+  return $statuss;
+}
+
+function deletePlan($id){
+  global $bdd;
+  $q = 'DELETE FROM plan WHERE id = :id';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+          'id'=>$id
+      ));
+  return $statuss;
+}
+
+function getPlanById($id){
+  global $bdd;
+  $q = 'SELECT * FROM plan WHERE id= :id';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+          'id'=>$id
+      ));
+  if($statuss){
+      $plan = $stmt->fetch();
+  }
+  return $plan;
+}
+
+function updatePlan($id, $title, $description, $price){
+  global $bdd;
+  $q = 'UPDATE plan SET plan_title = :plan_title, plan_description = :plan_description, plan_price = :plan_price WHERE id = :id';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+          'id'=>$id,
+          'plan_title'=>$title,
+          'plan_description'=>$description,
+          'plan_price'=>$price
       ));
   return $statuss;
 }
