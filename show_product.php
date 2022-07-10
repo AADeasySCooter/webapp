@@ -2,6 +2,7 @@
  include('includes/head.php');
  include('includes/header.php');
 include('includes/db.php');
+include('includes/function.php');
 
 
 
@@ -15,7 +16,10 @@ include('includes/db.php');
         <div class="row">
           <div class="col-md-12">
             <?php
-                if(isset($_GET['id']) && !empty($_GET['id'])){
+            include('includes/message.php');
+                $id = $_GET['id'];
+                $product = getProductById($id);
+            /*     if(isset($_GET['id']) && !empty($_GET['id'])){
 
                     //recuperer toute les donners de la table product
                     $q = 'SELECT * FROM product WHERE id = :id;';
@@ -32,7 +36,7 @@ include('includes/db.php');
                     echo'Product not found error id ';
                 
                 
-                }
+                } */
 
 
 

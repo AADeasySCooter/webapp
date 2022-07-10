@@ -232,6 +232,21 @@ function updateStatus($id){
 
 }
 
+//getProductById
+function getProductById($id){
+  global $bdd;
+  $q = 'SELECT * FROM product WHERE id= :id';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+          'id'=>$id
+      ));
+  if($statuss){
+      $product = $stmt->fetch();
+  }
+  return $product;
+}
+
 function getScooterById($id){
   global $bdd;
   $q = 'SELECT * FROM users WHERE id= :id';

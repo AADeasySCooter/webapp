@@ -7,12 +7,6 @@ include('includes/function.php');
 $user_id = user_id();
 
 
-//si le temps est supérieurs au temps 
-
-
-
-
-
 
 ?>
 
