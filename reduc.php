@@ -63,4 +63,23 @@ if($date_creation > 3){
 
     }
 
+    $products = getCart();
+    count($products);
+    $count = count($products);
+    $count = $count / 10;
+    //arrondi si 0,5 to 1 et sinon si 0,4 to 0
+    $count = round($count);
+    //rajouter 25 points de fidélité  * $count
+
+    $user_id = user_id();
+    $voirProfil = getUserById($user_id);
+    $points = $voirProfil['point'];
+    $points = $points + ($count * 25);
+    addPoint($user_id,$points);
+
+  
+  
+
+
+
 ?>
