@@ -14,8 +14,8 @@
             include('includes/db.php');
 
                 if(count($_POST)>0)  {
-                  $id = $_GET['id'];
-                   $title = $_POST['title'];
+                   $id = $_GET['id'];
+                    $title = $_POST['title'];
                     $description = $_POST['description'];
                     $autor = $_POST['autor'];
                     $image = $_POST['image'];

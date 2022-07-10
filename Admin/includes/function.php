@@ -114,7 +114,7 @@ function updateArticle($id, $title, $description, $autor, $image){
 //creer une fonction pour ajouter un product 
 function addProduct($name, $description, $price, $image, $code){
   global $bdd;
-  $q = 'INSERT INTO product (product_name,  product_price, product_description, product_image, product_code) VALUES (:product_name , :product_price , :product_description , :product_image, :product_code)';
+  $q = 'INSERT INTO product (product_name, product_description,  product_price , product_image, product_code) VALUES (:product_name , :product_description, :product_price  , :product_image, :product_code)';
   $stmt = $bdd->prepare($q);
   $statuss = $stmt->execute(
       array(
@@ -125,4 +125,35 @@ function addProduct($name, $description, $price, $image, $code){
             'product_code'=>$code
       ));
   return $statuss;
+}
+
+//creer une fonction update un product avec un id
+function updateProduct($id, $name, $description, $price, $image, $code){
+  global $bdd;
+  $q = 'UPDATE product SET product_name = :product_name, product_description = :product_description, product_price = :product_price, product_image = :product_image, product_code = :product_code WHERE id = :id';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+          'id'=>$id,
+          'product_name'=>$name,
+          'product_description'=>$description,
+          'product_price'=>$price,
+          'product_image'=>$image,
+          'product_code'=>$code
+      ));
+  return $statuss;
+}
+//creer une fonction qui récupère un product avec un id
+function getProductById($id){
+  global $bdd;
+  $q = 'SELECT * FROM product WHERE id= :id';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+          'id'=>$id
+      ));
+  if($statuss){
+      $product = $stmt->fetch();
+  }
+  return $product;
 }
