@@ -110,3 +110,19 @@ function updateArticle($id, $title, $description, $autor, $image){
       ));
   return $statuss;
 }
+
+//creer une fonction pour ajouter un product 
+function addProduct($name, $description, $price, $image, $code){
+  global $bdd;
+  $q = 'INSERT INTO product (product_name,  product_price, product_description, product_image, product_code) VALUES (:product_name , :product_price , :product_description , :product_image, :product_code)';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+            'product_name'=>$name,
+            'product_description'=>$description,
+            'product_price'=>$price,
+            'product_image'=>$image,
+            'product_code'=>$code
+      ));
+  return $statuss;
+}

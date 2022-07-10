@@ -28,9 +28,7 @@ if(isset($_POST['addArticle']))
 
 ?>
 <!DOCTYPE html>
-<br><br>  
-<br><br>  
-<br><br>  
+
 
     <?php 
     

@@ -91,30 +91,8 @@
                 Interface
               </div>
             </li>
-            <li>
-              <a href="homeAdmin.php" class="nav-link px-3">
-                <!--<span class="me-2"><i class="bi bi-graph-up"></i></span>-->
-                <span>Home</span>
-              </a>
-            </li>
-            <li>
-              <a href="E_ditArticle.php" class="nav-link px-3">
-                <!--<span class="me-2"><i class="bi bi-graph-up"></i></span>-->
-                <span>Edit article</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link px-3">
-                <!--<span class="me-2"><i class="bi bi-book-fill"></i></span>-->
-                <span>Pages</span>
-              </a>
-            </li>
-            <li>
-              <a href="addProduct.php" class="nav-link px-3">
-                <!--<span class="me-2"><i class="bi bi-book-fill"></i></span>-->
-                <span>Add product</span>
-              </a>
-            </li>
+       
+       
             <li>
                     <a href="payment.php" class="nav-link px-3">
                    

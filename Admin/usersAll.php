@@ -27,14 +27,13 @@ include('includes/db.php');
                         <table
                             id="example"
                             class="table table-striped data-table"
-                            style="width: 100%"
-                        >
+                            style="width: 100%" >
                             <thead>
                             <tr>
-                                <th>id</th>
-                                <th>Name</th>
-                                <th>Date</th>
-                                <th>Actions</th>
+                                <th scope="col">id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Actions</th>
                                 
                             </tr>
                             </thead>
@@ -46,7 +45,7 @@ include('includes/db.php');
                             <tr>
                             
 
-                                <td><?= $product['id'] ;?></td>
+                                <th scope="row"><?= $product['id'] ;?></th>
                                 <td><?= $product['firstname'] ;?></td>
                                 <td><?= $product['email'] ;?></td>
                                 <td> <a type="submit" class="btn btn-primary" href="updateUser.php?id=<?=$product['id'] ;?>" target="_blank"> UPDATE </td>

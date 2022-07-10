@@ -14,12 +14,12 @@ if(isset($_POST['addProduct']))
     $product_image_folder = 'image/'.$product_image;
 
 
+
         if(empty($product_name) || empty($product_price) || empty($product_description)|| empty($product_code)  || empty($product_image))  {
 
             $message[] = 'tous les champs doivent etre remplis';
         }else{
-            $insertProduct = $bdd->prepare('INSERT INTO product(product_name,  product_price, product_description, product_image, product_code) VALUES(? ,? ,?, ?, ?)');
-            $insertProduct->execute(array($product_name, $product_price,$product_description,$product_image, $product_code));
+            addProduct($product_name, $product_description, $product_price, $product_image, $product_code);
             $message[] = 'article ajouter ';
 
         }
@@ -30,19 +30,20 @@ if(isset($_POST['addProduct']))
 <!DOCTYPE html>
          
 
-    <?php 
-    if(isset($message)){
-        foreach($message as $message ){
-            echo'<span class="message">'.$message.'</span>';
-        }
-    }
-    ?>
+  
     <main class="mt-5 pt-3">
      <div class="container-fluid">
          <!--add div here-->
         <div class="row">
           <div class="col-md-12">
             <h4>Dashboard</h4>
+            <?php 
+            if(isset($message)){
+                foreach($message as $message ){
+                    echo'<span class="message">'.$message.'</span>';
+                }
+            }
+            ?>
           </div>
         </div>
         <div class="row">
