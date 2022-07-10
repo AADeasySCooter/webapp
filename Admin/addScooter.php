@@ -18,8 +18,7 @@ if(isset($_POST['addScooter']))
 
             $message[] = 'tous les champs doivent etre remplis';
         }else{
-            $insertscooter = $bdd->prepare('INSERT INTO scooter(scooter_name,  scooter_code, lat, lon , scooter_image ) VALUES(? ,? ,? ,?, ?)');
-            $insertscooter->execute(array($scooter_name,  $scooter_code, $scooter_lat , $scooter_long, $scooter_image));
+            addScooter($scooter_name, $scooter_code, $scooter_lat, $scooter_long, $scooter_image);
             $message[] = 'scooter ajouter ';
 
         }
@@ -30,19 +29,22 @@ if(isset($_POST['addScooter']))
 <!DOCTYPE html>
          
 
-    <?php 
-    if(isset($message)){
-        foreach($message as $message ){
-            echo'<span class="message">'.$message.'</span>';
-        }
-    }
-    ?>
+    
     <main class="mt-5 pt-3">
      <div class="container-fluid">
          <!--add div here-->
         <div class="row">
           <div class="col-md-12">
             <h4>Dashboard</h4>
+            <?php 
+            if(isset($message)){
+                foreach($message as $message ){
+                    echo'<div class="alert alert-dark"" role="alert">
+                    '.$message.'
+                    </div>';
+                }
+            }
+            ?>
           </div>
         </div>
         <div class="row">

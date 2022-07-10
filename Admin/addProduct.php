@@ -40,8 +40,9 @@ if(isset($_POST['addProduct']))
             <?php 
             if(isset($message)){
                 foreach($message as $message ){
-                    echo'<span class="message">'.$message.'</span>';
-                }
+                    echo'<div class="alert alert-dark"" role="alert">
+                    '.$message.'
+                    </div>';                }
             }
             ?>
           </div>

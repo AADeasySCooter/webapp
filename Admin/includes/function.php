@@ -169,3 +169,19 @@ function deleteProduct($id){
       ));
   return $statuss;
 }
+
+//creer une fonction pour ajouter un scooter
+function addScooter($name, $code, $lat, $long, $image){
+  global $bdd;
+  $q = 'INSERT INTO scooter (scooter_name,  scooter_code, lat, lon , scooter_image) VALUES (:scooter_name , :scooter_code, :lat  , :lon, :scooter_image)';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+            'scooter_name'=>$name,
+            'scooter_code'=>$code,
+            'lat'=>$lat,
+            'lon'=>$long,
+            'scooter_image'=>$image,
+      ));
+  return $statuss;
+}

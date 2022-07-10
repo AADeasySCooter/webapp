@@ -16,7 +16,7 @@ if(isset($_POST['addArticle']))
 
         if(empty($Article_title) || empty($Article_description) || empty($Article_autor) || empty($Article_image))  {
 
-            $message[] = '-------------------------------------tous les champs doivent etre remplis';
+            $message[] = 'tous les champs doivent etre remplis';
         }else{
             addArticle($Article_title, $Article_description, $Article_autor, $Article_image);
             //$insertProduct->execute(array($Article_title, $Article_description,$Article_autor,$Article_image));
@@ -30,14 +30,7 @@ if(isset($_POST['addArticle']))
 <!DOCTYPE html>
 
 
-    <?php 
-    
-    if(isset($message)){
-        foreach($message as $message ){
-            echo'<span class="message">'.$message.'</span>';
-        }
-    }
-    ?>
+  
 
   <main>
   <div class="container">
@@ -45,12 +38,21 @@ if(isset($_POST['addArticle']))
       <div class="div-center">
 
          <section id="course" class="course">
+             
   
 
         <div class="row">
 			 <div class="course-col">
                  <br> <br> <br> 
-
+                 <?php 
+    
+    if(isset($message)){
+        foreach($message as $message ){
+            echo'<div class="alert alert-dark"" role="alert">
+            '.$message.'
+            </div>';        }
+    }
+    ?>
                     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data"> <!-- ?php $_SERVER['PHP_SELF' -->
                     <h3>Add new Article</h3>
                         <div class="mb-3">

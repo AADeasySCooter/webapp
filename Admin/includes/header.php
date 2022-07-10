@@ -288,14 +288,8 @@
                       <span>Edit message</span>
                     </a>
                   </li>
-                  <li>
-                    <a href="addNotification.php" class="nav-link px-3">
-                      <span class="me-2"
-                        ><i class="bi bi-speedometer2"></i
-                      ></span>
-                      <span>Delete message</span>
-                    </a>
-                  </li>
+              
+                  
                 </ul>
               </div>
             </li>
