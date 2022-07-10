@@ -22,26 +22,6 @@ $user_id = user_id();
                $scooter = getAllScootersByID($id);
 
 
-              /*   if(isset($_GET['id']) && !empty($_GET['id'])){
-
-                    //recuperer toute les donners de la table product
-                    $q = 'SELECT * FROM scooter WHERE id = :id;';
-                    $stmt = $bdd->prepare($q);
-                    $statuss = $stmt->execute(
-                        array(
-                            'id'=>$_GET['id']
-                        ));
-                    if($statuss){
-                        $scooter = $stmt->fetch();
-                    }
-                }else{
-                    
-                    echo'Scooter not found error id ';
-                
-                
-                } */
-
-
 
  ?>
             <!--afficher l'image du produit à gauche -->

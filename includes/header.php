@@ -96,6 +96,9 @@
                         <li class = "nav-item px-2 py-2">
                                     <a class = "nav-link text-uppercase text-dark" href = "deconnexion.php"><?= _('Logout')?></a>
                              </li>
+                         <li class = "nav-item px-2 py-2">
+                                    <a class = "nav-link text-uppercase text-dark" href = "contact.php"><?= _('contact')?></a>
+                             </li>
                         <?php
 
                              
