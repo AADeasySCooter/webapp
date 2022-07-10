@@ -27,10 +27,11 @@ if(isset($_POST['addNotification']))
 <!DOCTYPE html>
        
     <?php 
-    if(isset($message)){
+     if(isset($message)){
         foreach($message as $message ){
-            echo'<span class="message">'.$message.'</span>';
-        }
+            echo'<div class="alert alert-dark"" role="alert">
+            '.$message.'
+            </div>';        }
     }
     ?>
 

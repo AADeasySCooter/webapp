@@ -220,7 +220,6 @@ function getScooterById($id){
 }
 
 
-//creer une fonction pour supprimer un scooter par son id
 function deleteScooter($id){
   global $bdd;
   $q = 'DELETE FROM scooter WHERE id = :id';
@@ -228,6 +227,21 @@ function deleteScooter($id){
   $statuss = $stmt->execute(
       array(
           'id'=>$id
+      ));
+  return $statuss;
+}
+
+//creer une fonction pour ajouter un plan 
+function addPlan($title, $description, $price){
+  global $bdd;
+  $q = 'INSERT INTO plan (plan_title, plan_description,  plan_price) VALUES (:plan_title , :plan_description, :plan_price )';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+            'plan_title'=>$title,
+            'plan_description'=>$description,
+            'plan_price'=>$price
+           
       ));
   return $statuss;
 }

@@ -18,8 +18,7 @@ if(isset($_POST['addPlan']))
 
             $message[] = 'tous les champs doivent etre remplis';
         }else{
-            $insertProduct = $bdd->prepare('INSERT INTO plan(plan_title, plan_description,  plan_price ) VALUES(? ,? ,?)');
-            $insertProduct->execute(array($Plan_title, $Plan_description,$Plan_price ));
+            addPlan($Plan_title, $Plan_description, $Plan_price);
             $message[] = 'Plan ajouter ';
 
         }
@@ -37,17 +36,19 @@ if(isset($_POST['addPlan']))
       <div class="div-center">
 
          <section id="course" class="course">
-         <?php 
-    if(isset($message)){
-        foreach($message as $message ){
-            echo'<span class="message">'.$message.'</span>';
-        }
-    }
-    ?>
+         
 
         <div class="row">
 			 <div class="course-col">
                  <br> <br> <br> 
+                 <?php 
+                if(isset($message)){
+                    foreach($message as $message ){
+                        echo'<div class="alert alert-dark"" role="alert">
+                        '.$message.'
+                        </div>';        }
+                }
+                ?>
 
                     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data"> <!-- ?php $_SERVER['PHP_SELF' -->
                     <h3>Add new Plan</h3>
