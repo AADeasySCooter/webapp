@@ -4,7 +4,6 @@
     include('includes/head.php');
     include('includes/header.php');
     include('includes/db.php');
-    include('includes/function.php');
     include('reduc.php');
     $user_id = user_id();
     $user = getUserById($user_id);

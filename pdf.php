@@ -30,6 +30,21 @@ function Footer()
     // Page number
     $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
 }
+function BasicTable($header, $data)
+{
+    // Header
+    foreach($header as $col)
+        $this->Cell(40,7,$col,1);
+    $this->Ln();
+    // Data
+    foreach($data as $row)
+    {
+        foreach($row as $col)
+            $this->Cell(40,6,$col,1);
+        $this->Ln();
+    }
+}
+
 }
 
 // Instanciation of inherited class
@@ -84,6 +99,10 @@ $pdf->SetFont('Times','',12);
             }
         }
     }
+
+    
+
+
            
         
         

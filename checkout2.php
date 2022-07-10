@@ -317,7 +317,6 @@ include('reduc.php');
 
         var_dump($total_product);
 
-        var_dump($montant) ;
 
 
 

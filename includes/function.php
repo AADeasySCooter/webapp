@@ -2,29 +2,6 @@
 include('db.php');
 
 
-/* function translate($langue){
-    if($langue == 'fr'){
-        $text = str_replace('home', 'Accueil', $text);
-        $text = str_replace('About', 'A propos', $text);
-        $text = str_replace('Contact', 'Contact', $text);
-        $text = str_replace('Login', 'Connexion', $text);
-        $text = str_replace('Register', 'Inscription', $text);
-        $text = str_replace('Logout', 'Déconnexion', $text);
-        $text = str_replace('Shop', 'Boutique', $text);
-        $text = str_replace('Game', 'Jeu', $text);
-        $text = str_replace('Sign up', 'Inscription', $text);
-        $text = str_replace('Sign in', 'Connexion', $text);
-        $text = str_replace('Sign out', 'Déconnexion', $text);
-        $text = str_replace('Cart', 'Panier', $text);
-        $text = str_replace('Checkout', 'Paiement', $text);
-        
-
-        return $text;
-    }else{
-        return 'en';
-    }
-} */
-
 
 function getScooters(){
   global $bdd;
@@ -107,6 +84,21 @@ function getScootersByStatus($status){
     if($statuss){
         $cart = $stmt->fetchAll();
     }
+    return $cart;
+  }
+
+  function getCartByUserID($user_id){
+    global $bdd;
+    $q = 'SELECT * FROM cart WHERE user_id = :user_id';
+    $stmt = $bdd->prepare($q);
+    $statuss = $stmt->execute(
+        array(
+            'user_id'=>$user_id
+        ));
+    if($statuss){
+        $cart = $stmt->rowCount();
+    }
+     
     return $cart;
   }
 
@@ -310,6 +302,24 @@ function updateUser2($id,$firstname,$lastname,$address,$number,$code_postal,$vil
   return $statuss;
 }
 
+//creer une fonction addPoint qui execute la requete UPDATE users SET point = $points WHERE id = $user_id
+function addPoint($user_id,$points){
+  global $bdd;
+  $q = 'UPDATE users SET point = :points WHERE id = :user_id';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+          'user_id'=>$user_id,
+          'points'=>$points
+      ));
+  if($statuss){
+      echo' ';
+  }else {
+    echo' error id ';
+  }
+
+  return $statuss;
+}
 
 //creer une fonction qui query SELECT * FROM plan ORDER BY created_at DESC 
 function getPlan(){
@@ -321,5 +331,24 @@ function getPlan(){
       $plan = $stmt->fetchAll();
   }
   return $plan;
+}
+
+//creer une fonctoi PointUse qui execute la requete  UPDATE users SET point_use = $points_use WHERE id = $user_id
+function PointUse($user_id,$points_use){
+  global $bdd;
+  $q = 'UPDATE users SET point_use = :points_use WHERE id = :user_id';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+          'user_id'=>$user_id,
+          'points_use'=>$points_use
+      ));
+  if($statuss){
+      echo' ';
+  }else {
+    echo'error id ';
+  }
+
+  return $statuss;
 }
 
