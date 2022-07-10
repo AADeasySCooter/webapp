@@ -49,6 +49,21 @@ function getAllScooters(){
 }
 
 
+function getAllScootersByID($id){
+  global $bdd;
+  $q = 'SELECT * FROM scooter WHERE id = :id';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+          'id'=>$id
+      ));
+  if($statuss){
+      $scooter = $stmt->fetch();
+  }
+  return $scooter;
+}
+
+
 function getScootersByStatus($status){
   global $bdd;
   $q = 'SELECT * FROM scooter WHERE scooter_status = :status';
@@ -281,5 +296,15 @@ function updateUser2($id,$firstname,$lastname,$address,$number,$code_postal,$vil
 }
 
 
-
+//creer une fonction qui query SELECT * FROM plan ORDER BY created_at DESC 
+function getPlan(){
+  global $bdd;
+  $q = 'SELECT * FROM plan ORDER BY created_at DESC';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute();
+  if($statuss){
+      $plan = $stmt->fetchAll();
+  }
+  return $plan;
+}
 
