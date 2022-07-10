@@ -240,7 +240,7 @@ function getProductById($id){
 
 function getScooterById($id){
   global $bdd;
-  $q = 'SELECT * FROM users WHERE id= :id';
+  $q = 'SELECT * FROM scooter WHERE id= :id';
   $stmt = $bdd->prepare($q);
   $statuss = $stmt->execute(
       array(
@@ -302,7 +302,6 @@ function updateUser2($id,$firstname,$lastname,$address,$number,$code_postal,$vil
   return $statuss;
 }
 
-//creer une fonction addPoint qui execute la requete UPDATE users SET point = $points WHERE id = $user_id
 function addPoint($user_id,$points){
   global $bdd;
   $q = 'UPDATE users SET point = :points WHERE id = :user_id';
@@ -321,7 +320,6 @@ function addPoint($user_id,$points){
   return $statuss;
 }
 
-//creer une fonction qui query SELECT * FROM plan ORDER BY created_at DESC 
 function getPlan(){
   global $bdd;
   $q = 'SELECT * FROM plan ORDER BY created_at DESC';
@@ -333,7 +331,6 @@ function getPlan(){
   return $plan;
 }
 
-//creer une fonctoi PointUse qui execute la requete  UPDATE users SET point_use = $points_use WHERE id = $user_id
 function PointUse($user_id,$points_use){
   global $bdd;
   $q = 'UPDATE users SET point_use = :points_use WHERE id = :user_id';
@@ -351,4 +348,16 @@ function PointUse($user_id,$points_use){
 
   return $statuss;
 }
-
+function getScooterByUserId($id){
+  global $bdd;
+  $q = 'SELECT * FROM scooter WHERE user_id= :id';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+          'id'=>$id
+      ));
+  if($statuss){
+      $scooter = $stmt->fetchAll();
+  }
+  return $scooter;
+}

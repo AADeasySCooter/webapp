@@ -40,7 +40,7 @@ include('includes/header.php');
               </div>
             </div>
           </div> -->
-          <div class="col-md-3 mb-3">
+          <!-- <div class="col-md-3 mb-3">
             <div class="card bg-success text-white h-100">
               <div class="card-body py-5">Users connected</div>
               <div class="card-footer d-flex">
@@ -51,7 +51,7 @@ include('includes/header.php');
                 </span>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="col-md-3 mb-3">
             <div class="card bg-danger text-white h-100">
               <div class="card-body py-5">User blocked</div>

@@ -11,8 +11,8 @@ include "includes/function.php";
     //initaliser la fonction  getScooters() avant de l' utiliser
     $scooters = getScooters();
 
-
 ?>
+
 <script>
 
 
@@ -26,11 +26,26 @@ function googleMap() {
     var map=new google.maps.Map(document.getElementById("map"),mapProp);
     //recuperer pour chaque scooter la latitude et la longitude et les afficher sur la carte google
     <?php foreach($scooters as $scooter){ ?>
-    var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(<?php echo $scooter['lat']; ?>, <?php echo $scooter['lon']; ?>),
-        map: map,
-        title: '<?php echo $scooter['scooter_name']; ?>'
-    });
+        var image ="./images/scooter1.png";
+
+            if( <?php echo $scooter['scooter_status']; ?> ==1){
+                var marker = new google.maps.Marker({
+                    
+                    //onclick sur le marker  rediriger vers le scooter correspondant à l'id
+                    position: new google.maps.LatLng(<?php echo $scooter['lat']; ?>, <?php echo $scooter['lon']; ?>),
+                    map: map,
+                    title: '<?php echo $scooter['scooter_name']; ?>',
+                    //rediriger vers la page showtrot.php avec l'id du scooter
+                    url: 'showtrot.php?id=<?php echo $scooter['id']; ?>',
+
+                    icon : image 
+
+                    
+                });
+            }
+
+
+           
     <?php } ?>
 }
 </script>

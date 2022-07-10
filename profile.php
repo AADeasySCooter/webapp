@@ -7,6 +7,18 @@
     include('reduc.php');
     $user_id = user_id();
     $user = getUserById($user_id);
+    $recupScooter = getScooters();
+    $recupScooterByID = getScooterByUserId($user_id);
+
+
+    if ($recupScooter['user_id'] == $user_id) {
+     
+    }
+    else {
+
+    }
+    
+    
 
 
 
@@ -28,6 +40,8 @@
                 <?php
                 
                  if ( $user_id != 0 ) {
+                                    //var_dump($recupScooter);
+                                    //var_dump($recupScooterByID);
                                   
                                     ?>
                                     <div>
@@ -43,6 +57,18 @@
                                         point : <?= $user['point'] ?>
                                      </div>
                                      <?php
+                                         $recupScooterByID = getScooterByUserId($user_id);
+                                         foreach($recupScooterByID as $rec){
+                                                ?>
+                                                <div>
+                                                Scooter : <a href="showtrot.php?id=<?= $rec['id'];?>"  class="link-success" style="text-decoration:none">  <?= $rec['scooter_name'] ?> </a>
+                                                </div>
+                                            
+                                                <?php
+                                         }
+
+                                        
+
                                       if($user["role_id"] == 3){
 
 

@@ -48,6 +48,7 @@ include('includes/function.php');
         </button>
     </header>
     
+    
     <!-- end of header -->
 
     <!-- collection -->
@@ -364,7 +365,4 @@ include('includes/function.php');
 
 </body>
 </html>
-
-<?php 
-var_dump($_SESSION);
 

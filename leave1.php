@@ -15,7 +15,8 @@ include('includes/function.php');
           <div class="col-md-12">
             <?php
                 $id = $_GET['id'];
-                getScooterById($id);
+                $plan = getScooterById($id);
+
                 /* if(isset($_GET['id']) && !empty($_GET['id'])){
 
                     //recuperer toute les donners de la table scooter
