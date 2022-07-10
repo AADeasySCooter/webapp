@@ -207,14 +207,7 @@
                       <span>Edit Scooter</span>
                     </a>
                   </li>
-                  <li>
-                    <a href="DeleteScooter.php" class="nav-link px-3">
-                      <span class="me-2"
-                        ><i class="bi bi-speedometer2"></i
-                      ></span>
-                      <span>Delete Scooter</span>
-                    </a>
-                  </li>
+               
                 </ul>
               </div>
             </li>

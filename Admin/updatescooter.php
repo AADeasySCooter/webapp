@@ -14,27 +14,22 @@
             include('includes/db.php');
 
                 if(count($_POST)>0)  {
-                    $idd = $_GET['id'];
+                   $id = $_GET['id'];
                     $scooter_name = $_POST['scooter_name'];
                     $scooter_status = $_POST['scooter_status'];
                     $scooter_code = $_POST['scooter_code'];
                     $scooter_image = $_POST['scooter_image'];
                     $scooter_lat = $_POST['scooter_lat'];
                     $scooter_long = $_POST['scooter_long'];
-                    
-          
-                    $radmin = $bdd->query( "UPDATE scooter set scooter_name = '$scooter_name' , scooter_status = '$scooter_status'
-                    , lat = '$scooter_lat',
-                    lon = '$scooter_long',
-                    scooter_code = '$scooter_code',
-                    scooter_image = '$scooter_image'
-                    WHERE id = '$idd'  " );
+
+                    updateScooter($id, $scooter_name, $scooter_status, $scooter_code, $scooter_long, $scooter_long, $scooter_image);
+                  
                     $message[] = 'scooter update ';
 
                 }
                 $id = $_GET['id'];
-                $result = $bdd->query( "SELECT * FROM scooter WHERE id = $id " ) ;
-                $response = $result->fetch();
+                getScooterById($id);
+             
 
 
  ?>
@@ -49,18 +44,18 @@
                     <div class="card-body">
                         <div class="table-responsive">
                                 <form name="frmUser" method="post" action=""> 
-                                <input type="text" name="scooter_name" value="<?= $response['scooter_name'] ;?>">
+                                <input type="text" name="scooter_name" value="<?= getScooterById($id)['scooter_name'] ;?>">
                                 <br>
-                                <input type="text" name="scooter_status" value="<?= $response['scooter_status'] ;?>">
+                                <input type="text" name="scooter_status" value="<?= getScooterById($id)['scooter_status'] ;?>">
                                 
                                 <br>
-                                <input type="text" name="scooter_code" value="<?= $response['scooter_code'] ;?>">
+                                <input type="text" name="scooter_code" value="<?= getScooterById($id)['scooter_code'] ;?>">
                                 <br>
-                                <input type="number" step="any" name="scooter_lat" value="<?= $response['lat'] ;?>">
+                                <input type="number" step="any" name="scooter_lat" value="<?= getScooterById($id)['lat'] ;?>">
                                 <br>
-                                <input type="number" step="any" name="scooter_long" value="<?= $response['lon'] ;?>">
+                                <input type="number" step="any" name="scooter_long" value="<?= getScooterById($id)['lon'] ;?>">
                                 <br>
-                                <input type="file" name="scooter_image" value="<?= $response['scooter_image'] ;?>">        
+                                <input type="file" name="scooter_image" value="<?= getScooterById($id)['scooter_image'] ;?>">        
                                 <br>
                                 <input type="submit" class="btn btn-secondary" name="submit" value="submit" class="btn btn">
                                 <a href="editscooter.php" class="btn btn-primary">Scooter</a>
@@ -74,8 +69,7 @@
                 
         </div>
 
-      <?php var_dump($response); 
-      ?>
+ 
     </div>
     </main>
     

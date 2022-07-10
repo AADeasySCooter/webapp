@@ -204,7 +204,6 @@ function getPlanById($id){
 }
 
 
-//creer une fonction update le status de la trot à 1 enlever le user_id et done_at et take_at
 function updateStatus($id){
   global $bdd;
   $q = 'UPDATE scooter SET scooter_status= 1 , user_id= 0 , done_at= NULL, take_at= NULL WHERE id= :id';
@@ -218,7 +217,6 @@ function updateStatus($id){
 
 }
 
-//recuperer toute les données de la table user avec l'id du scooter
 function getScooterById($id){
   global $bdd;
   $q = 'SELECT * FROM users WHERE id= :id';

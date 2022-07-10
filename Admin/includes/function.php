@@ -185,3 +185,36 @@ function addScooter($name, $code, $lat, $long, $image){
       ));
   return $statuss;
 }
+
+//creer une fonction pour update un scooter
+function updateScooter($id, $name, $status, $code, $lat, $long, $image){
+  global $bdd;
+  $q = 'UPDATE scooter SET scooter_name = :scooter_name, scooter_status = :scooter_status , scooter_code = :scooter_code, lat = :lat, lon = :lon, scooter_image = :scooter_image WHERE id = :id';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+          'id'=>$id,
+          'scooter_name'=>$name,
+          'scooter_status'=>$status,
+          'scooter_code'=>$code,
+          'lat'=>$lat,
+          'lon'=>$long,
+          'scooter_image'=>$image
+      ));
+  return $statuss;
+}
+
+//creer une fonction pour recupere un scooter par son id
+function getScooterById($id){
+  global $bdd;
+  $q = 'SELECT * FROM scooter WHERE id= :id';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+          'id'=>$id
+      ));
+  if($statuss){
+      $scooter = $stmt->fetch();
+  }
+  return $scooter;
+}
