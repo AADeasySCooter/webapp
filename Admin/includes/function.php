@@ -187,7 +187,7 @@ function addScooter($name, $code, $lat, $long, $image){
 }
 
 //creer une fonction pour update un scooter
-function updateScooter($id, $name, $status, $code, $lat, $long, $image){
+function updateScooter($id, $name, $status, $code, $lat, $lon, $image){
   global $bdd;
   $q = 'UPDATE scooter SET scooter_name = :scooter_name, scooter_status = :scooter_status , scooter_code = :scooter_code, lat = :lat, lon = :lon, scooter_image = :scooter_image WHERE id = :id';
   $stmt = $bdd->prepare($q);
@@ -198,7 +198,7 @@ function updateScooter($id, $name, $status, $code, $lat, $long, $image){
           'scooter_status'=>$status,
           'scooter_code'=>$code,
           'lat'=>$lat,
-          'lon'=>$long,
+          'lon'=>$lon,
           'scooter_image'=>$image
       ));
   return $statuss;
@@ -217,4 +217,17 @@ function getScooterById($id){
       $scooter = $stmt->fetch();
   }
   return $scooter;
+}
+
+
+//creer une fonction pour supprimer un scooter par son id
+function deleteScooter($id){
+  global $bdd;
+  $q = 'DELETE FROM scooter WHERE id = :id';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+          'id'=>$id
+      ));
+  return $statuss;
 }

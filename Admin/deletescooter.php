@@ -11,8 +11,10 @@
             include('includes/head.php');
             include('includes/header.php');
             include('includes/db.php');
+            $id = $_GET['id'];
+            deleteScooter($id);
 
-            if(isset($_GET['id']) && !empty($_GET['id'])){
+            /* if(isset($_GET['id']) && !empty($_GET['id'])){
 
                 $q = 'DELETE FROM scooter WHERE id = :id;';
                 $stmt = $bdd->prepare($q);
@@ -27,7 +29,7 @@
             }else{
                 echo'scooter not deleted error id ';
             
-            }
+            } */
 
 
 

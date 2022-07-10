@@ -22,7 +22,7 @@
                     $scooter_lat = $_POST['scooter_lat'];
                     $scooter_long = $_POST['scooter_long'];
 
-                    updateScooter($id, $scooter_name, $scooter_status, $scooter_code, $scooter_long, $scooter_long, $scooter_image);
+                    updateScooter($id, $scooter_name, $scooter_status, $scooter_code, $scooter_lat, $scooter_long, $scooter_image);
                   
                     $message[] = 'scooter update ';
 
