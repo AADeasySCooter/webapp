@@ -11,7 +11,7 @@ function getUsers(){
   }
   return $users;
 }
-//creer une fonction pour update un user avec un id
+
 function updateUser($id, $email, $firstname, $lastname, $role_id , $status){
   global $bdd;
   $q = 'UPDATE users SET email = :email, firstname = :firstname, lastname = :lastname, role_id = :role_id , status = :status  WHERE id = :id';
@@ -95,7 +95,7 @@ function getArticleById($id){
   return $article;
 }
 
-//creer un fonction pour update un article
+
 function updateArticle($id, $title, $description, $autor, $image){
   global $bdd;
   $q = 'UPDATE articles SET title = :title, description = :description, autor = :autor, image = :image WHERE id = :id';
@@ -111,7 +111,7 @@ function updateArticle($id, $title, $description, $autor, $image){
   return $statuss;
 }
 
-//creer une fonction pour ajouter un product 
+
 function addProduct($name, $description, $price, $image, $code){
   global $bdd;
   $q = 'INSERT INTO product (product_name, product_description,  product_price , product_image, product_code) VALUES (:product_name , :product_description, :product_price  , :product_image, :product_code)';
@@ -127,7 +127,7 @@ function addProduct($name, $description, $price, $image, $code){
   return $statuss;
 }
 
-//creer une fonction update un product avec un id
+
 function updateProduct($id, $name, $description, $price, $image, $code){
   global $bdd;
   $q = 'UPDATE product SET product_name = :product_name, product_description = :product_description, product_price = :product_price, product_image = :product_image, product_code = :product_code WHERE id = :id';
@@ -143,7 +143,7 @@ function updateProduct($id, $name, $description, $price, $image, $code){
       ));
   return $statuss;
 }
-//creer une fonction qui récupère un product avec un id
+
 function getProductById($id){
   global $bdd;
   $q = 'SELECT * FROM product WHERE id= :id';
@@ -156,4 +156,16 @@ function getProductById($id){
       $product = $stmt->fetch();
   }
   return $product;
+}
+
+
+function deleteProduct($id){
+  global $bdd;
+  $q = 'DELETE FROM product WHERE id = :id';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+          'id'=>$id
+      ));
+  return $statuss;
 }

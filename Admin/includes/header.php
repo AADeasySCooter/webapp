@@ -133,14 +133,7 @@
                       <span>Edit article</span>
                     </a>
                   </li>
-                  <li>
-                    <a href="addArticle.php" class="nav-link px-3">
-                      <span class="me-2"
-                        ><i class="bi bi-speedometer2"></i
-                      ></span>
-                      <span>Delete article</span>
-                    </a>
-                  </li>
+               
                 </ul>
               </div>
             </li>
@@ -177,14 +170,7 @@
                       <span>Edit Product</span>
                     </a>
                   </li>
-                  <li>
-                    <a href="addArticle.php" class="nav-link px-3">
-                      <span class="me-2"
-                        ><i class="bi bi-speedometer2"></i
-                      ></span>
-                      <span>Delete Product</span>
-                    </a>
-                  </li>
+                
                 </ul>
               </div>
             </li>
