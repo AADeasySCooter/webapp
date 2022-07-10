@@ -232,7 +232,6 @@ function updateStatus($id){
 
 }
 
-//getProductById
 function getProductById($id){
   global $bdd;
   $q = 'SELECT * FROM product WHERE id= :id';
@@ -262,6 +261,7 @@ function getScooterById($id){
   }
   return $user;
 }
+
 //update pour le checkout
 function updateUser($id,$address,$number,$code_postal,$ville){
   global $bdd;

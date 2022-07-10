@@ -6,13 +6,6 @@ include('includes/function.php');
 
 
 
-
-
-
-
-
-
-
 ?>
 
 
