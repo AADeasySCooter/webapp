@@ -135,9 +135,7 @@
                                 }
                 ?>
               </div>
-              <?php
-                var_dump($user);
-              ?>
+         
               
               
               <br><br>

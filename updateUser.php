@@ -12,9 +12,10 @@
             include('includes/head.php');
             include('includes/header.php');
             include('includes/db.php');
+            include('includes/function.php');
 
                 if(count($_POST)>0)  {
-                    $idd = $_GET['id'];
+                    $id = $_GET['id'];
                     $firstname = $_POST['firstname'];
                     $lastname = $_POST['lastname'];
                     $address = $_POST['address'];
@@ -22,13 +23,9 @@
                     $ville = $_POST['ville'];
                     $code_postal = $_POST['code_postal'];
 
-                    $radmin = $bdd->query( "UPDATE users set firstname = '$firstname' , lastname = '$lastname'
-                    , address = '$address' , number = '$number' , ville = '$ville' , code_postal = '$code_postal'
-                    WHERE id = '$idd'  " );
-                    $message[] = 'data update ';
+                    updateUser2($id,$firstname,$lastname,$address,$number,$code_postal,$ville);
 
                 }
-                //recuperer l'id de l'utilisateur avec l'email de la session
                
 
 
@@ -41,10 +38,12 @@
 
         <form method="post" enctype="multipart/form-data" class="row g-3">
                  <?php include('includes/message.php');
-                  $email = $_SESSION['email'];
+                  /* $email = $_SESSION['email'];
                   $result = $bdd->query( "SELECT * FROM users WHERE email = '$email' " ) ;
                   $response = $result->fetch();
-                  $id = $response['id'];
+                  $id = $response['id']; */
+                  $id = user_id();
+                  $response = getUserById($id);
                   ?>
   
                     <div class="col-md-6">

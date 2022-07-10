@@ -48,7 +48,7 @@ if($date_creation < 3){
 
     
     if(isset($_POST['Apply'])) {
-       //recuperer le montant saisi par l'utilisateur et on le soustrait a son nombre de points
+       //recuperer le montant saisi par l'utilisateur et  le soustrait a son nombre de points
         $recupProfil =$bdd->prepare("SELECT * FROM users WHERE email= '".$_SESSION['email']."'");     
         $recupProfil->execute();
         $voirProfil =$recupProfil->fetch();
