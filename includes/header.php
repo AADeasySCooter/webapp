@@ -44,8 +44,6 @@
                        <span>
 
                         </span>
-
-                    
                     <button onclick="window.location.href=''" id="fr" type = "button" class = "btn position-relative">
                     🇫🇷  
                     </button>
@@ -167,6 +165,7 @@
     opacity: 0.5;
     }
     </style>
+
         <script>
                     jQuery(function(){
                         $(function () {
@@ -181,4 +180,6 @@
                         });
                     });
         </script>
+
+
   

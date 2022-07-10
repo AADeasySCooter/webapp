@@ -5,6 +5,8 @@ include('includes/header.php');
 include('includes/db.php');
 include('includes/function.php');
 
+/* translate($_SESSION['lang']);
+ */
 
 
 
@@ -362,4 +364,7 @@ include('includes/function.php');
 
 </body>
 </html>
+
+<?php 
+var_dump($_SESSION);
 

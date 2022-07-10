@@ -2,6 +2,30 @@
 include('db.php');
 
 
+/* function translate($langue){
+    if($langue == 'fr'){
+        $text = str_replace('home', 'Accueil', $text);
+        $text = str_replace('About', 'A propos', $text);
+        $text = str_replace('Contact', 'Contact', $text);
+        $text = str_replace('Login', 'Connexion', $text);
+        $text = str_replace('Register', 'Inscription', $text);
+        $text = str_replace('Logout', 'Déconnexion', $text);
+        $text = str_replace('Shop', 'Boutique', $text);
+        $text = str_replace('Game', 'Jeu', $text);
+        $text = str_replace('Sign up', 'Inscription', $text);
+        $text = str_replace('Sign in', 'Connexion', $text);
+        $text = str_replace('Sign out', 'Déconnexion', $text);
+        $text = str_replace('Cart', 'Panier', $text);
+        $text = str_replace('Checkout', 'Paiement', $text);
+        
+
+        return $text;
+    }else{
+        return 'en';
+    }
+} */
+
+
 function getScooters(){
   global $bdd;
   $q = 'SELECT * FROM scooter ';
@@ -164,4 +188,16 @@ function getAbout(){
   }
   return $about;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
