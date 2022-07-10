@@ -2,9 +2,7 @@
 session_start();
 include('includes/db.php');
 
-//add card product with session
-
- 
+//mettre les produits en  session
 
 if(isset($_POST["product_code"])) {
 	foreach($_POST as $key => $value){
@@ -30,7 +28,7 @@ if(isset($_POST["product_code"])) {
  	$total_product = count($_SESSION["products"]);
 	die(json_encode(array('products'=>$total_product)));
 }
-//Remove products from cart
+//Remove it
 
 
 
@@ -42,6 +40,7 @@ if(isset($_GET["remove_code"]) && isset($_SESSION["products"])) {
  	$total_product = count($_SESSION["products"]);
 	die(json_encode(array('products'=>$total_product)));
 }
+
 
 
 //Update cart product quantity

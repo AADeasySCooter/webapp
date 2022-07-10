@@ -189,6 +189,20 @@ function getAbout(){
   return $about;
 }
 
+//recuperer toutes les données de la table plan whereid = :id
+function getPlanById($id){
+  global $bdd;
+  $q = 'SELECT * FROM plan WHERE id= :id';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+          'id'=>$id
+      ));
+  if($statuss){
+      $plan = $stmt->fetch();
+  }
+  return $plan;
+}
 
 
 

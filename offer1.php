@@ -2,13 +2,15 @@
 include('includes/head.php');
 include('includes/header.php');
 include('includes/db.php');
+include('includes/function.php');
 
 //recuperer l'email dans la session et reuperer l'id de l'utilisateur par rapport a l'email
-$q = "SELECT * FROM users WHERE email= '".$_SESSION['email']."'";
+/* $q = "SELECT * FROM users WHERE email= '".$_SESSION['email']."'";
 $result = $bdd->prepare($q);
 $result->execute();
 $voirProfil =$result->fetch();
-$user_id = $voirProfil['id'];
+$user_id = $voirProfil['id']; */
+$user_id = user_id();
 
 
 ?>
@@ -19,8 +21,12 @@ $user_id = $voirProfil['id'];
          <!--add div here-->
         <div class="row">
           <div class="col-md-12">
-            <?php
-                if(isset($_GET['id']) && !empty($_GET['id'])){
+            <?php  
+                $id = $_GET['id'];
+                getPlanById($id);
+
+                
+              /*   if(isset($_GET['id']) && !empty($_GET['id'])){
 
                     //recuperer toute les donners de la table product
                     $q = 'SELECT * FROM plan WHERE id = :id;';
@@ -37,7 +43,7 @@ $user_id = $voirProfil['id'];
                     echo'Scooter not found error id ';
                 
                 
-                }
+                } */
 
 
 
@@ -104,7 +110,7 @@ $user_id = $voirProfil['id'];
                                                 
 
                                             return actions.order.create({
-                                                purchase_units: [{"amount":{"currency_code":"EUR","value": <?= $plan['plan_price'] ;?>}}]
+                                                purchase_units: [{"amount":{"currency_code":"EUR","value": <?= getPlanById($id)['plan_price'] ;?>}}]
                                             });
                                             },
 
