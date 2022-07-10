@@ -218,7 +218,22 @@ function updateStatus($id){
 
 }
 
-
+//recuperer toute les données de la table user avec l'id du scooter
+function getScooterById($id){
+  global $bdd;
+  $q = 'SELECT * FROM users WHERE id= :id';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+          'id'=>$id
+      ));
+  if($statuss){
+      $user = $stmt->fetch();
+  }else {
+    echo'Scooter not found error id ';
+  }
+  return $user;
+}
 
 
 
