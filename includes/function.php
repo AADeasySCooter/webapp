@@ -233,10 +233,27 @@ function getScooterById($id){
   return $user;
 }
 
+//fonction update user avec comme query UPDATE users set address = '$address' , number = '$number' , code_postal = '$code_postal', ville = '$ville  WHERE id = '$id' 
+function updateUser($id,$address,$number,$code_postal,$ville){
+  global $bdd;
+  $q = 'UPDATE users SET address = :address , number = :number , code_postal = :code_postal, ville = :ville WHERE id = :id';
+  $stmt = $bdd->prepare($q);
+  $statuss = $stmt->execute(
+      array(
+          'id'=>$id,
+          'address'=>$address,
+          'number'=>$number,
+          'code_postal'=>$code_postal,
+          'ville'=>$ville
+      ));
+  if($statuss){
+      echo'User updated ';
+  }else {
+    echo'User not updated error id ';
+  }
 
-
-
-
+  return $statuss;
+}
 
 
 

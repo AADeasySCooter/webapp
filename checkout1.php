@@ -1,18 +1,18 @@
 <?php 
+error_reporting(0);
 include('includes/head.php');
 include('includes/header.php');
 include('includes/db.php');
+include('includes/function.php');
 
     if(count($_POST)>0)  {
-        $idd = $_GET['id'];
+        $id = $_GET['id'];
         $address = $_POST['address'];
         $number = $_POST['number'];
         $code_postal = $_POST['code_postal'];
         $ville = $_POST['ville'];
-        $radmin = $bdd->query( "UPDATE users set address = '$address' , number = '$number'
-        , code_postal = '$code_postal',
-        ville = '$ville'
-        WHERE id = '$idd'  " );
+
+        updateUser($id,$address,$number,$code_postal,$ville);
         $message[] = 'checkout1 ok ';
 
             ?>
@@ -53,8 +53,7 @@ include('includes/db.php');
                         
                     <?php include('includes/message.php'); ?>
                     <?php $id = $_GET['id'];
-                        $result = $bdd->query( "SELECT * FROM users WHERE id = $id " ) ;
-                        $response = $result->fetch(); ?>
+                        $response = getUserById($id) ?>
                   
 
                             <h4>Delivery address</h4>
