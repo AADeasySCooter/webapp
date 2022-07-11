@@ -4,9 +4,14 @@ include('includes/header.php');
 include('includes/db.php');
 include('reduc.php');
 
-   
 
 
+$points_us = $_POST['reduc']; 
+
+//convertir en argent $points_use pour 10 points = 1€
+$points_us = $points_us / 10;
+$points_us = round($points_us);
+var_dump($points_us);
 
     
   
@@ -61,13 +66,13 @@ include('reduc.php');
                                             <th>Point of reduce</th>
                                         </thead>
                                         <tbody>
-                                            <form >
+                                            <form method="post">
                                                 <tr>
                                                 <td>
                                                     <input id ="quantity" type="number" name="reduc" placeholder="Enter your point of reduce">
                                                 </td>
                                                 <td>
-                                                    <input type="submit" value="Apply" name="Apply">
+                                                    <input class ="test" type="submit" value="Apply" name="Apply">
                                                 </td>
                                                 </tr>
                                             </form>
@@ -76,7 +81,7 @@ include('reduc.php');
                                     </table>
                                     <script>
                                         //faire un POST pour le formulaire Point de reduction quand on clique sur le bouton
-                                        $('#quantity').on('change', function(){
+                                        $('.test').on('change', function(){
                                             var quantity = $(this).val();
                                             var id = $(this).data('code');
                                             $.ajax({
@@ -146,6 +151,10 @@ include('reduc.php');
                                     if($reduction > 0){
 
                                         $total = ($total - $reduction) ;
+                                    }
+
+                                    if($points_us  > 0){
+                                        $total = ($total - $points_us) ;
                                     }
 
                                 ?>	
@@ -314,9 +323,8 @@ include('reduc.php');
         var_dump(json_encode(array('products'=>$total_product)));
 
 
-
-        var_dump($total_product);
-
+                
+       
 
 
 

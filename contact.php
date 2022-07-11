@@ -26,14 +26,15 @@ $user = getUserById($user_id);
             <?php include('includes/message.php');
              ?>
             <div class="course-col">
+                <div class="message"> </div>
                 <form class ="contact" action="#">
-                    <div class="mb-3">
+                    <div class=" mb-3 ">
                     <input class="form-control" type="text" name="name" placeholder="name" value="<?= $user['lastname']?>">
                     </div>
-                    <div class="mb-3">
+                    <div class=" mb-3">
                     <input class="form-control" type="email" name="email" placeholder="email" value="<?= $user['email']?>">
                     </div>
-                    <div class="mb-3">
+                    <div class="  mb-3">
                     <textarea class="form-control" cols="5" rows="5" name="message" placeholder="message"></textarea>
                     </div>
                     <input class ="btn btn-primary" type="submit" value="envoyer">
@@ -41,6 +42,7 @@ $user = getUserById($user_id);
             </div>
 
         </div>
+        
     </div>
 
 </body>
@@ -65,7 +67,10 @@ $user = getUserById($user_id);
                 Subject : "This is the subject",
                 Body : message.value
             }).then(
-            message => alert(message)
+                //afficher message dans la div message
+                message => {
+                    document.querySelector('.message').innerHTML = '<div class="alert alert-success" role="alert">email send</div>';
+                }
             );
                 }
 

@@ -47,21 +47,34 @@ if($date_creation > 3){
 
         
     }
-
+    /* if(isset($_POST['Apply'])) {
+        //recuperer le montant saisi par l'utilisateur et  le soustrait a son nombre de points
+         $recupProfil =$bdd->prepare("SELECT * FROM users WHERE email= '".$_SESSION['email']."'");     
+         $recupProfil->execute();
+         $voirProfil =$recupProfil->fetch();
+         $user_id = $voirProfil['id'];
+         $points_use = $voirProfil['point_use'];
+         $montant = $_POST['reduc']; 
+         $points_use = $points_use + $montant;
+         $updatePoints = $bdd->prepare("UPDATE users SET point_use = $points_use WHERE id = $user_id");
+         $updatePoints->execute();
+ 
+     } */
     
-    if(isset($_POST['Apply'])) {
-       //recuperer le montant saisi par l'utilisateur et  le soustrait a son nombre de points
+     if(isset($_POST['Apply'])) {
         
-        $user_id = user_id();
+        $id = user_id();
         $voirProfil = getUserById($user_id);
         $points_use = $voirProfil['point_use'];
         $montant = $_POST['reduc']; 
         $points_use = $points_use + $montant;
-        PointUse($user_id,$points_use);
+        
+        PointUse($id,$points_use);
 
      
 
-    }
+    } 
+    
 
     $products = getCart();
     count($products);
@@ -71,11 +84,11 @@ if($date_creation > 3){
     $count = round($count);
     //rajouter 25 points de fidélité  * $count
 
-    $user_id = user_id();
+    $id = user_id();
     $voirProfil = getUserById($user_id);
     $points = $voirProfil['point'];
-    $points = $points + ($count * 25);
-    addPoint($user_id,$points);
+    $points_use = $points + ($count * 25);
+    addPoint($id,$points_use);
 
   
   

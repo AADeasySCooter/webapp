@@ -331,23 +331,20 @@ function getPlan(){
   return $plan;
 }
 
-function PointUse($user_id,$points_use){
+function PointUse($id,$points_use){
   global $bdd;
-  $q = 'UPDATE users SET point_use = :points_use WHERE id = :user_id';
+  $q = 'UPDATE users SET point_use = :point_use WHERE id = :id';
   $stmt = $bdd->prepare($q);
   $statuss = $stmt->execute(
       array(
-          'user_id'=>$user_id,
-          'points_use'=>$points_use
+          'id'=>$id,
+          'point_use'=>$points_use
       ));
-  if($statuss){
-      echo' ';
-  }else {
-    echo'error id ';
-  }
 
   return $statuss;
 }
+
+
 function getScooterByUserId($id){
   global $bdd;
   $q = 'SELECT * FROM scooter WHERE user_id= :id';
