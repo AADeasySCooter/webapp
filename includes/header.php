@@ -76,28 +76,28 @@
                         // L'utilisateur est connecté
                         ?>
                         <li class = "nav-item px-2 py-2">
-                                <a class = "nav-link text-uppercase text-dark" href = "index.php"><?= _('home')?></a>
+                                <a class = "nav-link text-uppercase text-dark" href = "index.php">home</a>
                             </li>
                             <li class = "nav-item px-2 py-2 border-0">
-                                <a class = "nav-link text-uppercase text-dark" href = "./castle/Castle copy.html"><?= _('game')?></a>
+                                <a class = "nav-link text-uppercase text-dark" href = "./castle/Castle copy.html">game</a>
                             </li>
                             <li class = "nav-item px-2 py-2">
-                                <a class = "nav-link text-uppercase text-dark" href = "scooter_all.php"><?= _('map')?></a>
+                                <a class = "nav-link text-uppercase text-dark" href = "scooter_all.php">map</a>
                             </li>
                         <li class = "nav-item px-2 py-2">
-                                    <a class = "nav-link text-uppercase text-dark" href = "shop.php"><?= _('shop')?></a>
+                                    <a class = "nav-link text-uppercase text-dark" href = "shop.php">shop</a>
                              </li>
                          <li class = "nav-item px-2 py-2">
-                                    <a class = "nav-link text-uppercase text-dark" href = "trot.php"><?= _('scooter')?></a>
+                                    <a class = "nav-link text-uppercase text-dark" href = "trot.php">scooter</a>
                              </li>     
                         <li class = "nav-item px-2 py-2">
-                                <a class = "nav-link text-uppercase text-dark" href = "profile.php"><?= _('profile')?></a>
+                                <a class = "nav-link text-uppercase text-dark" href = "profile.php">profile</a>
                             </li>
                         <li class = "nav-item px-2 py-2">
-                                    <a class = "nav-link text-uppercase text-dark" href = "deconnexion.php"><?= _('Logout')?></a>
+                                    <a class = "nav-link text-uppercase text-dark" href = "deconnexion.php">Logout</a>
                              </li>
                          <li class = "nav-item px-2 py-2">
-                                    <a class = "nav-link text-uppercase text-dark" href = "contact.php"><?= _('contact')?></a>
+                                    <a class = "nav-link text-uppercase text-dark" href = "contact.php">contact</a>
                              </li>
                         <?php
 
@@ -110,7 +110,7 @@
 
                                         ?>
                                          <li class = "nav-item px-2 py-2">
-                                                <a class = "nav-link text-uppercase text-dark" href = "Admin/iindex.php"><?= _('Admin Panel')?></a>
+                                                <a class = "nav-link text-uppercase text-dark" href = "Admin/iindex.php">Admin Panel</a>
                                         </li>
                                         <?php
                                         
@@ -129,14 +129,14 @@
                     </li>
                    
                     <li class = "nav-item px-2 py-2 border-0">
-                        <a class = "nav-link text-uppercase text-dark" href = "shop.php"><?= _('shop')?></a>
+                        <a class = "nav-link text-uppercase text-dark" href = "shop.php">shop</a>
                     </li>
                     <li class = "nav-item px-2 py-2 border-0">
-                        <a class = "nav-link text-uppercase text-dark" href = "webgl.php"><?= _('game')?></a>
+                        <a class = "nav-link text-uppercase text-dark" href = "webgl.php">game</a>
                     </li>
                    
                     <li class = "nav-item px-2 py-2 border-0">
-                        <a class = "nav-link text-uppercase text-dark" href = "connexion.php"><?= _('sign up/in')?></a>
+                        <a class = "nav-link text-uppercase text-dark" href = "connexion.php">sign up/in</a>
                     </li>
                     <?php
                     }
