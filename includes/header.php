@@ -132,7 +132,7 @@
                         <a class = "nav-link text-uppercase text-dark" href = "shop.php">shop</a>
                     </li>
                     <li class = "nav-item px-2 py-2 border-0">
-                        <a class = "nav-link text-uppercase text-dark" href = "webgl.php">game</a>
+                        <a class = "nav-link text-uppercase text-dark" href = "./castle/Castle copy.html">game</a>
                     </li>
                    
                     <li class = "nav-item px-2 py-2 border-0">
