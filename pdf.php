@@ -15,9 +15,9 @@ function Header()
     // Move to the right
     $this->Cell(80);
     // Title
-    $this->Cell(30,10,'Title',1,0,'C');
+    $this->Cell(50,10,'ELECTRACKK',1,0,'C');
     // Line break
-    $this->Ln(20);
+    $this->Ln(25);
 }
 
 // Page footer
@@ -111,7 +111,7 @@ $pdf->SetFont('Times','',12);
 
                 $pdf->Ln(60);
 
-                $pdf->Cell(0,5," squad EASYSCOOTER."   ,0,3);
+                $pdf->Cell(0,5," squad ELECTRACKK."   ,0,3);
 
 
 

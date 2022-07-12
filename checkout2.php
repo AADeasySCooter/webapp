@@ -246,6 +246,13 @@ var_dump($points_us);
 
                                                 element.innerHTML = '';
                                                 element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                                                 
+
+
+
+
+
+
 
 
                                                 $.ajax({
@@ -255,6 +262,12 @@ var_dump($points_us);
                                                             //success code
                                                         }
                                                         });
+
+
+
+
+
+
 
  
 
