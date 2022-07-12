@@ -24,11 +24,19 @@ function Header()
 function Footer()
 {
     // Position at 1.5 cm from bottom
-    $this->SetY(-15);
+    $this->SetY(-40);
     // Arial italic 8
     $this->SetFont('Arial','I',8);
+    //rajouterune image en fond de page
+    $this->Image('./images/unnamed.png',10,255,300);
     // Page number
-    $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+    $this->Cell(0,5,'Electrack provides you with this receipt because it is necessary for us to offer you a service, i.e. to perform our ',0,1);
+    $this->Cell(0,5,'Terms and Conditions (article 6, paragraph 1, point b), of the general regulations of the EU Data Protection Regulation) .',0,1);
+    $this->Cell(0,5,'or to comply with legal obligations and relevant laws (Article 6(1)(c) EU General Data Protection Regulation). ',0,1);
+    $this->Cell(0,5,'To know your rights and obtain detailed information on the use we make of your personal data, we invite you to consult our Privacy Policy.',0,1);
+
+
+
 }
 function BasicTable($header, $data)
 {
