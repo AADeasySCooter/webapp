@@ -358,3 +358,14 @@ function getScooterByUserId($id){
   }
   return $scooter;
 }
+
+
+/* function getException($exception){
+  $message = $exception->getMessage();
+  $code = $exception->getCode();
+  $file = $exception->getFile();
+  $line = $exception->getLine();
+  $trace = $exception->getTraceAsString();
+  $error = "Message: $message\nCode: $code\nFile: $file\nLine: $line\nTrace: $trace";
+  return $error;
+} */

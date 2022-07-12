@@ -1,9 +1,23 @@
 <?php 
 error_reporting(0);
+/* ini_set("display_errors", "1");
+//creer une super globale error pour stocker error_reporting(E_ALL)
+ error_reporting(E_ALL);
+ $err =  error_reporting(E_ALL); */
+
+//récuperer les errors que error_reporting(0)cache 
+
+
+
+
+
+
 include('includes/head.php');
 include('includes/header.php');
 include('includes/db.php');
 include('reduc.php');
+//include('err.php');
+
 
 
 
@@ -12,7 +26,6 @@ $points_us = $_POST['reduc'];
 //convertir en argent $points_use pour 10 points = 1€
 $points_us = $points_us / 10;
 $points_us = round($points_us);
-var_dump($points_us);
 
     
   
@@ -48,7 +61,9 @@ var_dump($points_us);
                                 <?php
                                     $cart_box = '<ul class="cart-products-loaded">';
                                     $q =$bdd->query(" SELECT * FROM users  WHERE email= '".$_SESSION['email']."' ");
-                                    $response = $q->fetch(); ?>
+                                    $response = $q->fetch();
+
+                                     ?>
                                    
                                     
                                     <tr>
@@ -56,6 +71,7 @@ var_dump($points_us);
                                     <td><?= $response['number'] ;?></td>
                                     <td><?= $response['code_postal'] ;?></td>
                                     <td><?= $response['ville'] ;?></td>
+
 
                                    
                                     </tr>
