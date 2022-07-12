@@ -1,4 +1,5 @@
 <?php 
+error_reporting(0);
 include('includes/head.php');
 include('includes/header.php');
 include('includes/db.php');
@@ -251,10 +252,6 @@ var_dump($points_us);
 
 
 
-
-
-
-
                                                 $.ajax({
                                                         type: 'POST',
                                                         url: 'sve.php',
@@ -262,6 +259,15 @@ var_dump($points_us);
                                                             //success code
                                                         }
                                                         });
+
+
+                                                         const n = new Notification('you have your receipt in your profile tcheck it !!', {
+                                                    body: 'you have just purchased a product on electrackk',
+                                                    icon: '../images/notification.png'
+                                                    });
+                                                    n.onclick = function() {
+                                                        window.open('http://localhost:8888/Workflow2/webApp_style/profile.php');
+                                                    };      
 
 
 
