@@ -245,11 +245,14 @@ var_dump($points_us);
                                                 // Show a success message within this page, e.g.
                                                 const element = document.getElementById('paypal-button-container');
 
+
+
                                                 element.innerHTML = '';
                                                 element.innerHTML = '<h3>Thank you for your payment!</h3>';
                                                  
 
 
+                                                   
 
 
                                                 $.ajax({
@@ -261,7 +264,7 @@ var_dump($points_us);
                                                         });
 
 
-                                                         const n = new Notification('you have your receipt in your profile tcheck it !!', {
+                                                    const n = new Notification('you have your receipt in your profile tcheck it !!', {
                                                     body: 'you have just purchased a product on electrackk',
                                                     icon: '../images/notification.png'
                                                     });
