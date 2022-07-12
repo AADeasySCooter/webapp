@@ -300,7 +300,7 @@ include('includes/function.php');
             <div class = "row text-white g-4">
 
                 <div class = "col ">
-                    <h5 class = "fw-light mb-3">Contact Us</h5>
+                    <h5 class = "fw-light mb-3"><a href="contact.php" class="link-light" style="text-decoration: none ;">Contact Us</a></h5>
                     <div class = "d-flex justify-content-start align-items-start my-2 text-muted">
                         <span class = "me-3">
                             <i class = "fas fa-map-marked-alt"></i>
