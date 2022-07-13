@@ -50,7 +50,6 @@ include('includes/header.php');
                                             <input type="submit" class="btn btn-primary" value="sign in" >
                                             <hr />
                                             <a href="inscription.php">Sign up</a>
-                                            <button onclick="window.location.href='resetPassword.php'" type="button" class="btn btn-link">Reset Password</button>
                                         </form>
                                 <?php 
 
