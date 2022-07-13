@@ -338,7 +338,7 @@ include('includes/function.php');
                                 </a>
                             </li>
                             <li>
-                                <a href = "https://www.youtube.com/channel/UCW7ioNwh4u6hmQi61h5HNbg" class = "text-white text-decoration-none text-muted fs-4 me-4">
+                                <a href = "https://www.youtube.com/watch?v=gKiPY7ochxs&t=22s" class = "text-white text-decoration-none text-muted fs-4 me-4">
                                     <i class = "fab fa-youtube"></i>
                                 </a>
                             </li>
