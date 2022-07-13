@@ -331,26 +331,18 @@ include('includes/function.php');
                     <h5 class = "fw-light mb-3">Follow Us</h5>
                     <div>
                         <ul class = "list-unstyled d-flex">
-                            <li>
-                                <a href = "#" class = "text-white text-decoration-none text-muted fs-4 me-4">
-                                    <i class = "fab fa-facebook-f"></i>
-                                </a>
-                            </li>
+                         
                             <li>
                                 <a href = "https://twitter.com/MEB70_" class = "text-white text-decoration-none text-muted fs-4 me-4">
                                     <i class = "fab fa-twitter"></i>
                                 </a>
                             </li>
                             <li>
-                                <a href = "#" class = "text-white text-decoration-none text-muted fs-4 me-4">
-                                    <i class = "fab fa-instagram"></i>
+                                <a href = "https://www.youtube.com/channel/UCW7ioNwh4u6hmQi61h5HNbg" class = "text-white text-decoration-none text-muted fs-4 me-4">
+                                    <i class = "fab fa-youtube"></i>
                                 </a>
                             </li>
-                            <li>
-                                <a href = "#" class = "text-white text-decoration-none text-muted fs-4 me-4">
-                                    <i class = "fab fa-pinterest"></i>
-                                </a>
-                            </li>
+                         
                         </ul>
                     </div>
                 </div>
