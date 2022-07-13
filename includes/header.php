@@ -26,7 +26,7 @@
                     </i>
                 </button>
 
-                 <button id="notification" type = "button" class = "btn position-relative">
+                 <button onclick="askNotificationPermission()"  id="notif" type = "button" class = "btn position-relative">
                      <i class = "fa fa-bell" >
                     <span class="position-absolute top-0 start-100 translate-middle badge bg-light bg-dark" id=""><?php 
                    /*  if(isset($_SESSION["products"])){
@@ -190,8 +190,12 @@
 
 
 <script>
-//lancer la fonction askNotificationPermission () quand le bouton avec l'id notification est cliqué
-document.getElementById('notification').addEventListener('click', askNotificationPermission);
+//lancer la fonction askNotificationPermission () avec de l'ajax quand on click sur le bouton avec l'id notif
+/* $(document).ready(function(){
+    $("#notif").click(function(){
+        askNotificationPermission();
+    });
+}); */
 function askNotificationPermission() {
   // La fonction qui sert effectivement à demander la permission
   function handlePermission(permission) {

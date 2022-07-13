@@ -271,7 +271,7 @@ $points_us = round($points_us);
                                                    
 
 
-                                                $.ajax({
+                                                     $.ajax({
                                                         type: 'POST',
                                                         url: 'sve.php',
                                                         success: function(data) {
@@ -286,7 +286,16 @@ $points_us = round($points_us);
                                                     });
                                                     n.onclick = function() {
                                                         window.open('http://localhost:8888/Workflow2/webApp_style/profile.php');
-                                                    };      
+                                                    };   
+                                                    
+                                                    //delete the cart after payment 
+                                                    $.ajax({
+                                                        type: 'POST',
+                                                        url: 'delete_cart.php',
+                                                        success: function(data) {
+                                                            //success code
+                                                        }
+                                                        });
 
 
 

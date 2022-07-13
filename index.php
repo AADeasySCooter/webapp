@@ -337,7 +337,7 @@ include('includes/function.php');
                                 </a>
                             </li>
                             <li>
-                                <a href = "#" class = "text-white text-decoration-none text-muted fs-4 me-4">
+                                <a href = "https://twitter.com/MEB70_" class = "text-white text-decoration-none text-muted fs-4 me-4">
                                     <i class = "fab fa-twitter"></i>
                                 </a>
                             </li>
@@ -365,4 +365,12 @@ include('includes/function.php');
 
 </body>
 </html>
-
+<script>
+    const n = new Notification('you have your receipt in your profile tcheck it !!', {
+                                                    body: 'you have just purchased a product on electrackk',
+                                                    icon: '../images/notification.png'
+                                                    });
+                                                    n.onclick = function() {
+                                                        window.open('http://localhost:8888/Workflow2/webApp_style/profile.php');
+                                                    };  
+</script>

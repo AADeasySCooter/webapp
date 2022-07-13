@@ -1,4 +1,5 @@
 <?php 
+error_reporting(0);
 include('includes/head.php');
 include('includes/header.php');
 include('includes/db.php');
