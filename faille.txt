@@ -1,0 +1,19 @@
+fichier qui liste 10 des plus grandes failles de sécurité pour un site web
+#1 l'injection de code sql
+toutes les injection sql du site on été préparé avant de l'executé pour évité que quiconque puisse injecter du code sql
+#2 Gestion des erreurs
+les messages d'erreurs sur le site web ont été enlever de chaque
+ page pour eviter de renvoyer des erreurs utiles à l'utilisateur donc aux pirates
+#3 le chiffrement des données
+Pour enregistrer le mots de passe d'un utilisateur on utilise du sha256 pour chiffrer le mot de passe qui est stocké dans la base de données
+le sha256 est un vrai chiffrement qui permet de chiffrer des données sans avoir à les stocker en clair dans la base de données 
+#4 faille dans l'admin 
+l'admin du site permet de tout modifiers sur le site de bloquer des utilisateurs et de les rendre administrateur de CRUD tout ce qui est sur le site 
+en conséquence null autre qu'un administrateur n'a acces à cette partie du site c'est pourquoi nous avons résevvé l'accés à cette partie qu'aux utilisateurs ayant une donnée bien précise dans
+la base de données 
+#5 faille dans le formulaire de connexion
+il est important de vérifier que le formulaire de connexion est bien rempli avant de l'envoyer au serveur pour éviter les failles de sécurité et c'est pourquoidans notre vérification
+on verifie si l'utilisateur rentre bien le bon mots de passe lié à l'email de l'utilisateur 
+#6 Mauvaise gestion des sessions.
+les sessions sont utilisées pour stocker des données dans le navigateur de l'utilisateur et sont utilisées pour vérifier que l'utilisateur est bien connecté à son compte
+en ce cas à chaque fois qu'un utilisateur se déconnecte on supprime sa session
