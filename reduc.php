@@ -17,8 +17,9 @@ if($date_creation > 3){
 }else{
     //
     getCart();
-    //var_dump(getCart());
-    if(getCart() > 0){
+    var_dump(getCart());
+
+    if(getCart() == 'array(0) { }'){
         $reduction = 0;
     }else{
        $reduction = 2;
