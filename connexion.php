@@ -49,7 +49,7 @@ include('includes/header.php');
                                         </div>
                                             <input type="submit" class="btn btn-primary" value="sign in" >
                                             <hr />
-                                            <a href="inscription.php">Sign up</a>
+                                            <a href="inscription.php" style="text-decoration: none;">Sign up</a>
                                         </form>
                                 <?php 
 
