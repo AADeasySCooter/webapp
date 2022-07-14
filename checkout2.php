@@ -361,13 +361,13 @@ $points_us = round($points_us);
         </div>
         <?php 
         //var_dump($product);
-        echo "$user_id";
+       // echo "$user_id";
         $total_product = count($_SESSION["products"]);
         
   
         
        
-        var_dump(json_encode(array('products'=>$total_product)));
+       // var_dump(json_encode(array('products'=>$total_product)));
 
 
                 

@@ -18,7 +18,7 @@ if($date_creation > 3){
     //
     getCart();
     sizeof(getCart());
-    var_dump(sizeof(getCart()));
+    //var_dump(sizeof(getCart()));
 
     if(sizeof(getCart() ) == 0){
         $reduction = 2;

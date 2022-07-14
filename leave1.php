@@ -83,10 +83,11 @@ include('includes/function.php');
         </div>
     </div>
                 <?php 
-                 var_dump($date1);
+                /*  var_dump($date1);
                  var_dump($date2);
                  var_dump($diff);
-                 var_dump($prix);
+                 var_dump($prix); */
+               echo " you will pay $prix € " ;
 
 
 
