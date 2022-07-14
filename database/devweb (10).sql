@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Jul 12, 2022 at 06:14 PM
+-- Generation Time: Jul 14, 2022 at 08:41 AM
 -- Server version: 5.7.34
 -- PHP Version: 8.0.8
 
@@ -40,7 +40,7 @@ CREATE TABLE `About` (
 --
 
 INSERT INTO `About` (`id`, `title`, `image`, `description`, `description2`) VALUES
-(1, 'About Us', 'trottinette_about.jpg', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, ipsam.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem fuga blanditiis, modi exercitationem quae quam eveniet! Minus labore voluptatibus corporis recusandae accusantium velit, nemo, nobis, nulla ullam pariatur totam quos.');
+(1, 'About Us', 'trottinette_about.jpg', 'small quick presentation of everything there is to know about electrackk', 'We are very happy to be able to show you this completed project which took us so much work time and sleepless nights.\n');
 
 -- --------------------------------------------------------
 
@@ -62,8 +62,8 @@ CREATE TABLE `articles` (
 --
 
 INSERT INTO `articles` (`id`, `title`, `description`, `date_create`, `autor`, `image`) VALUES
-(2, 'testt', 'Footballeur professionnel à Brest, formé aux Girondins, Paul Lasne publie le 1er février “MurMures”, suite de courts textes sensibles et poétiques écrits pendant le confinement..', '2022-04-26 11:09:49', 'gavin', 'Logo_EASYSCOOTER-removebg-preview.png'),
-(3, 'LE FOOTBALL', 'Cristiano Ronaldo dos Santos Aveiro, couramment appelé Cristiano Ronaldo ou Ronaldo et surnommé CR7, né le 5 février 1985 à Funchal, est un footballeur international portugais qui évolue au poste d\'attaquant à Manchester United.', '2022-07-04 11:04:00', 'Arun', 'liberté.jpeg');
+(2, 'Logo', '\nThe Electrack logo was designed by the famous designer Dorian from esgi. He used all the knowledge he has with his great experience, knowing that he was the one who made the FIFA logo.', '2022-04-26 11:09:49', 'gavin', 'Logo_EASYSCOOTER-removebg-preview.png'),
+(3, 'Electrackk', 'why Electrackk as a name it comes to us from the programmer Arun who generated this name for us with a pyhton algorithm', '2022-07-04 11:04:00', 'gavin', 'logo.png');
 
 -- --------------------------------------------------------
 
@@ -83,15 +83,16 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `user_id`, `product_description`, `date`) VALUES
-(265, 31, '1,AAA111,casque-de-protection-urban-pour-trottinette-electrique-noir-tailles-s-m.jpeg,test,23', '2022-06-21 07:01:21'),
-(269, 31, '1,AAA111,,test,23', '2022-06-21 07:22:29'),
-(270, 31, '1,AAA111,casque-de-protection-urban-pour-trottinette-electrique-noir-tailles-s-m.jpeg,test,23', '2022-06-21 07:28:51'),
-(271, 31, '1,AAA111,casque-de-protection-urban-pour-trottinette-electrique-noir-tailles-s-m.jpeg,test,23', '2022-06-21 07:31:07'),
-(272, 31, '1,AAA100,casque-velo-trottinette-noir.jpeg,test213,0.01', '2022-07-09 17:23:05'),
 (273, 31, '1,AAA100,casque-velo-trottinette-noir.jpeg,test213,0.01', '2022-07-10 12:55:31'),
 (274, 31, '1,AAA100,casque-velo-trottinette-noir.jpeg,black helmet,0.01', '2022-07-12 08:20:36'),
 (275, 31, '1,AAA100,casque-velo-trottinette-noir.jpeg,black helmet,0.01', '2022-07-12 14:04:26'),
-(276, 31, '1,AAA100,casque-velo-trottinette-noir.jpeg,black helmet,0.01', '2022-07-12 14:05:16');
+(276, 31, '1,AAA100,casque-velo-trottinette-noir.jpeg,black helmet,0.01', '2022-07-12 14:05:16'),
+(277, 31, '1,AAA100,casque-velo-trottinette-noir.jpeg,black helmet,0.01', '2022-07-12 20:38:41'),
+(278, 31, '1,AAA100,casque-velo-trottinette-noir.jpeg,black helmet,0.01', '2022-07-12 20:39:19'),
+(279, 31, '1,AAA100,casque-velo-trottinette-noir.jpeg,black helmet,0.01', '2022-07-12 20:40:54'),
+(280, 31, '1,AAA100,casque-velo-trottinette-noir.jpeg,black helmet,0.01', '2022-07-12 20:48:49'),
+(281, 31, '1,AAAA88,casque-velo-trottinette-noir.jpeg,black helmet,0.01', '2022-07-13 15:32:09'),
+(282, 31, '1,AAA100,casque-velo-trottinette-noir.jpeg,black helmet,0.01', '2022-07-13 15:32:09');
 
 -- --------------------------------------------------------
 
@@ -205,8 +206,8 @@ INSERT INTO `product` (`id`, `product_name`, `product_description`, `product_pri
 (5, 'black helmet', 'protection for your head to go at full speed\n', 1, 'casque-velo-trottinette-noir.jpeg', '2022-04-18 16:18:21', 'AAAA42'),
 (6, 'black helmet', 'protection for your head to go at full speed\n', 2, 'casque-de-protection-urban-pour-trottinette-electrique-noir-tailles-s-m.jpeg', '2022-04-18 16:18:21', 'AAAA55'),
 (7, 'black helmet', 'protection for your head to go at full speed\n', 2, 'casque-velo-trottinette-noir.jpeg', '2022-04-18 16:18:21', 'AAAA66'),
-(8, 'black helmet', 'protection for your head to go at full speed', 1.01, 'trottinette-electrique-blaster.jpeg', '2022-04-18 16:18:21', 'AAAA77'),
-(9, 'black helmet', 'protection for your head to go at full speed', 0.01, 'trottinette-electrique-blaster.jpeg', '2022-04-18 16:18:21', 'AAAA88'),
+(8, 'black helmet', 'protection for your head to go at full speed', 1.01, 'casque-velo-trottinette-noir.jpeg', '2022-04-18 16:18:21', 'AAAA77'),
+(9, 'black helmet', 'protection for your head to go at full speed', 0.01, 'casque-velo-trottinette-noir.jpeg', '2022-04-18 16:18:21', 'AAAA88'),
 (24, 'black helmet', 'protection for your head to go at full speed\n', 123, 'casque-de-protection-urban-pour-trottinette-electrique-noir-tailles-s-m.jpeg', '2022-04-18 16:19:05', 'AAAA99'),
 (25, 'black helmet', 'protection for your head to go at full speed\n', 0.01, 'casque-velo-trottinette-noir.jpeg', '2022-05-23 10:22:56', 'AAA100');
 
@@ -328,7 +329,7 @@ INSERT INTO `users` (`id`, `email`, `firstname`, `lastname`, `password`, `role_i
 (22, 'audesan@icloud.com', 'hbfiz', 'jebr', 'be73eda70bc3e2b53e641a22606d1e66006713bdbe4d305ef2ff5b2f547c5244', 3, '::1', '2022-05-13 18:34:46', 3, NULL, NULL, NULL, NULL, 0, 0),
 (23, 'audesaddn@icloud.com', 'GAVINsvs', 'APERANO MOULOvUNGUI', 'decec1331842659e4448387694c54250015e73124bef178c7a5633f862b4aebd', 1, '::1', '2022-05-13 18:39:01', 1, NULL, NULL, NULL, NULL, 0, 0),
 (24, 'audesaddn@icFloud.com', 'GAVIN', 'APERANO MOULOUNGUI', 'bfe59019d932498ab1c4edc81a8bd52a8f6981224647891581751fb879a36bca', 3, '::1', '2022-05-13 18:39:40', 1, NULL, NULL, NULL, NULL, 0, 0),
-(31, 'aude1@gmail.com', 'GAVINNNN', 'APERANO MOULOUNGUI', 'bfe59019d932498ab1c4edc81a8bd52a8f6981224647891581751fb879a36bca', 3, '::1', '2022-06-15 19:47:55', 1, 'Avenue Émile Baudot', '0635963171', '91300', 'MASSY', 85, 30),
+(31, 'aude1@gmail.com', 'GAVIN', 'APERANO MOULOUNGUI', 'bfe59019d932498ab1c4edc81a8bd52a8f6981224647891581751fb879a36bca', 3, '::1', '2022-06-15 19:47:55', 1, 'Avenue Émile Baudot', '0635963171', '91300', 'MASSY', 85, 40),
 (33, 'gavi@gmail.com', 'GAVIN', 'APERANO MOULOUNGUI', 'bfe59019d932498ab1c4edc81a8bd52a8f6981224647891581751fb879a36bca', 3, '::1', '2022-05-24 12:48:06', 1, NULL, NULL, NULL, NULL, 0, 0),
 (34, 'gavo@gmail.com', 'GAVIN', 'APERANO MOULOUNGUI', 'bfe59019d932498ab1c4edc81a8bd52a8f6981224647891581751fb879a36bca', 3, '::1', '2022-05-26 15:58:03', 1, 'Avenue Émile Baudot', '0635963171', '91300', 'MASSY', 0, 0);
 
@@ -435,7 +436,7 @@ ALTER TABLE `articles`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=277;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=283;
 
 --
 -- AUTO_INCREMENT for table `notification`

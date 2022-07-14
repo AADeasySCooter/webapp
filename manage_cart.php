@@ -9,8 +9,10 @@ if(isset($_POST["product_code"])) {
 		$product[$key] = filter_var($value, FILTER_SANITIZE_STRING);
 	}	
 	$statement = $conn->prepare("SELECT product_name, product_price FROM product WHERE product_code=? LIMIT 1");
+	//recupère en type string le code du produit
 	$statement->bind_param('s', $product['product_code']);
 	$statement->execute();
+	//pour récup le nom et le prix du produit
 	$statement->bind_result($product_name, $product_price);
 	while($statement->fetch()){ 
 		$product["product_name"] = $product_name;

@@ -268,7 +268,7 @@ include('includes/function.php');
 
     
 
-    <!-- about
+   
     <section id = "about" class = "py-5">
         <div class = "container">
         <?php 
@@ -285,14 +285,14 @@ include('includes/function.php');
                     <p><?= $about['description2'] ;?></p>
                 </div>
                 <div class = "col-lg-6 order-lg-0">
-                    <?php echo '<img src="images/' . $about['image'] . '" alt="Image du produit" class = "img-fluid"  >' ?>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/gKiPY7ochxs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
             <?php
                  } ?>
         </div>
     </section>
-    of about us -->
+    
 
     <!-- footer -->
     <footer class = "bg-dark py-5">
