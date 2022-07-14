@@ -17,3 +17,6 @@ on verifie si l'utilisateur rentre bien le bon mots de passe lié à l'email de 
 #6 Mauvaise gestion des sessions.
 les sessions sont utilisées pour stocker des données dans le navigateur de l'utilisateur et sont utilisées pour vérifier que l'utilisateur est bien connecté à son compte
 en ce cas à chaque fois qu'un utilisateur se déconnecte on supprime sa session
+#7 mauvaise configuration du serveur web
+le serveur web est configuré pour que les utilisateurs ne puissent pas accéder à des pages qui n'existent pas
+en les redirigeant vers une page d'erreur 404 (page non trouvée)
