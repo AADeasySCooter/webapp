@@ -357,4 +357,13 @@ include('includes/function.php');
 
 </body>
 </html>
+<script>
+                                              /*   const n = new Notification('you have your receipt in your profile tcheck it !!', {
+                                                    body: 'you have just purchased a product on electrackk',
+                                                    icon: '../images/notification.png'
+                                                    });
+                                                    n.onclick = function() {
+                                                        window.open('http://localhost:8888/Workflow2/webApp_style/profile.php');
+                                                    };    */
+</script>
 
