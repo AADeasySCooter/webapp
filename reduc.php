@@ -17,12 +17,13 @@ if($date_creation > 3){
 }else{
     //
     getCart();
-    var_dump(getCart());
+    sizeof(getCart());
+    var_dump(sizeof(getCart()));
 
-    if(getCart() == 'array(0) { }'){
-        $reduction = 0;
+    if(sizeof(getCart() ) == 0){
+        $reduction = 2;
     }else{
-       $reduction = 2;
+       $reduction = 0;
     }
 }
 
