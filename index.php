@@ -21,7 +21,7 @@ include('includes/function.php');
 
     <!-- end of navbar -->
      <!-- Visible only if logged in -->
-     <?php include('includes/message.php'); ?>
+     
     
 
     <!-- header -->
