@@ -1,4 +1,4 @@
-fichier qui liste 10 des plus grandes failles de sécurité pour un site web
+fichier qui liste les plus grandes failles de sécurité pour un site web
 #1 l'injection de code sql
 toutes les injection sql du site on été préparé avant de l'executé pour évité que quiconque puisse injecter du code sql
 #2 Gestion des erreurs
