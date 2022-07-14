@@ -15,7 +15,14 @@ $date_creation = round($date_creation);
 if($date_creation > 3){
     $reduction = 0;
 }else{
-    $reduction = 2;
+    //
+    getCart();
+    //var_dump(getCart());
+    if(getCart() > 0){
+        $reduction = 0;
+    }else{
+       $reduction = 2;
+    }
 }
 
 
@@ -68,7 +75,7 @@ if($date_creation > 3){
         $points_use = $voirProfil['point_use'];
         $montant = $_POST['reduc']; 
         $points_use = $points_use + $montant;
-        
+
         PointUse($id,$points_use);
 
      
