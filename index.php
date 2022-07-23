@@ -142,7 +142,141 @@ include('includes/function.php');
     </section>
    
   
+ 
+    <section id = "blogs" class = "py-5">
+        <div class = "container">
+            <div class = "title text-center py-5">
+                <h2 class = "position-relative d-inline-block">Article</h2>
+            </div>
+
+            <div class = "collection-list mt-5 row gx-0 gy-3">
+
+                <?php 
+                
+                $Articles = getArticle();
+                foreach( $Articles as $article){
+                   ?>
+                  
+                  <div class = "col-md-6 ">
+                      <div class="mb-2">
+                        <div class = "card border-0 col-md-6 col-lg-4 bg-transparent my-3">
+                          <?php echo '<img src="images/' . $article['image'] . '" alt="Image du produit" style="height:200px;width:200px;" >' ?>
+                            <div class = "card-body px-0">
+                                <h4 class = "card-title"><?= $article['title'] ;?></h4>
+                                <p class = "card-text mt-3 text-muted"><?= $article['description'] ;?></p>
+                                <p class = "card-text">
+                                    <small class = "text-muted">
+                                        <span class = "fw-bold">Author: </span><?= $article['autor'] ;?>
+                                    </small>
+                                </p>
+                                <!--<a href = "#" class = "btn">Read More</a> -->
+                            </div>
+                      </div>
+                  </div>
+
+
+                </div>
+                    <?php
+                    } ?>
+
+            </div>
+        </div>
+    </section>
+
+   
+
+
+
+
     
+
+   
+    <section id = "about" class = "py-5">
+        <div class = "container">
+        <?php 
+                 $about = getAbout();
+                {
+               ?>
+
+            <div class = "row gy-lg-5 align-items-center">
+                <div class = "col-lg-6 order-lg-1 text-center text-lg-start">
+                    <div class = "title pt-3 pb-5">
+                        <h2 class = "position-relative d-inline-block ms-4"><?= $about['title'] ;?></h2>
+                    </div>
+                    <p class = "lead text-muted"><?= $about['description'] ;?></p>
+                    <p><?= $about['description2'] ;?></p>
+                </div>
+                <div class = "col-lg-6 order-lg-0">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/gKiPY7ochxs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+            <?php
+                 } ?>
+        </div>
+    </section>
+    
+    
+
+    <!-- footer -->
+    <footer class = "bg-dark py-5">
+        <div class = "container">
+            <div class = "row text-white g-4">
+
+                <div class = "col ">
+                    <h5 class = "fw-light mb-3"><a href="contact.php" class="link-light" style="text-decoration: none ;">Contact Us</a></h5>
+                    <div class = "d-flex justify-content-start align-items-start my-2 text-muted">
+                        <span class = "me-3">
+                            <i class = "fas fa-map-marked-alt"></i>
+                        </span>
+                        <span class = "fw-light">
+                            242 rue du faubourg saint-Antoine
+                        </span>
+                    </div>
+                    <div class = "d-flex justify-content-start align-items-start my-2 text-muted">
+                        <span class = "me-3">
+                            <i class = "fas fa-envelope"></i>
+                        </span>
+                        <span class = "fw-light">
+                            audesandrine6@gmail.com
+                        </span>
+                    </div>
+                    <div class = "d-flex justify-content-start align-items-start my-2 text-muted">
+                        <span class = "me-3">
+                            <i class = "fas fa-phone-alt"></i>
+                        </span>
+                        <span class = "fw-light">
+                            +33 0635963171
+                        </span>
+                    </div>
+                </div>
+
+                <div class = "col ">
+                    <h5 class = "fw-light mb-3">Follow Us</h5>
+                    <div>
+                        <ul class = "list-unstyled d-flex">
+                         
+                            <li>
+                                <a href = "https://twitter.com/MEB70_" class = "text-white text-decoration-none text-muted fs-4 me-4">
+                                    <i class = "fab fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href = "https://www.youtube.com/watch?v=gKiPY7ochxs&t=22s" class = "text-white text-decoration-none text-muted fs-4 me-4">
+                                    <i class = "fab fa-youtube"></i>
+                                </a>
+                            </li>
+                         
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="scrollUp">
+        <a href="#top"><img src="images/to_top.png"/></a>
+        </div>
+    </footer>
+    <!-- end of footer -->
+
   
     <!-- end of special products -->
 

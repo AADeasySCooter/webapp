@@ -187,7 +187,7 @@ function getScootersByStatus($status){
 
 function getAbout(){
   global $bdd;
-  $q = 'SELECT * FROM about';
+  $q = 'SELECT * FROM About';
   $stmt = $bdd->prepare($q);
   $statuss = $stmt->execute();
   if($statuss){
