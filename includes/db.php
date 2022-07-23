@@ -3,35 +3,34 @@ $currency = '€';
 // Connexion à la base de données
 
 
+         try{
+            $bdd = new PDO('mysql:host=db;dbname=devweb', 'root', 'notSecureChangeMe', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+        }
+        catch(Exception $e){
+            die('Erreur : ' . $e->getMessage());
+        } 
 
 
 
-
-try{
-    $bdd = new PDO('mysql:host=localhost:8889;dbname=devweb', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-}
-catch(Exception $e){
-    die('Erreur : ' . $e->getMessage());
-}
-
-
-
-$servername = "localhost";
+$servername = "db";
 $username = "root";
-$password = "root";
+$password = "notSecureChangeMe";
 $dbname = "devweb";
 $conn = mysqli_connect($servername, $username, $password, $dbname) or die("Connection failed: " . mysqli_connect_error());
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
-}
+} 
+
+
+
 //connexion a la base de données postgresql
 
 
-$host = 'localhost';
+/* $host = '46.226.107.16';
 $dbname = 'postgres';
-$username = 'postgres';
-$password = '';
+$username = 'some-postgres';
+$password = 'secret';
 
 $dsn = "pgsql:host=$host;port=5432;dbname=$dbname;user=$username;password=$password";
 
@@ -43,7 +42,7 @@ try{
  }
 }catch (PDOException $e){
  echo $e->getMessage();
-}
+} */
 
 
 

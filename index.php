@@ -147,7 +147,7 @@ include('includes/function.php');
     <!-- end of special products -->
 
     <!-- blogs -->
-    <section class="vh-40" style="background-color: #4B515D;">
+  <!--   <section class="vh-40" style="background-color: #4B515D;">
   <div class="container py-5 h-100">
 
         <?php 
@@ -163,7 +163,7 @@ include('includes/function.php');
             $weather_humidity = $weather_report['humidity'];
             $weather_wind_speed = $weather_report['wind_speed'];
 
-           ?>
+           ?> 
 
             <div class="row d-flex justify-content-center align-items-center h-100">
               <div class="col-md-8 col-lg-6 col-xl-4">
@@ -202,7 +202,7 @@ include('includes/function.php');
             </div>
 
   </div>
-</section>
+</section> -->
   
  
     <section id = "blogs" class = "py-5">

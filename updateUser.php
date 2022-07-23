@@ -1,14 +1,4 @@
-
-<!DOCTYPE html>
-
-<main class="mt-5 pt-3">
-     <div class="container-fluid">
-         <!--add div here-->
-        <div class="row">
-          <div class="col-md-12">
-            <h4>Dashboard</h4>
-
-            <?php
+<?php
             include('includes/head.php');
             include('includes/header.php');
             include('includes/db.php');
@@ -32,6 +22,16 @@
 
 
  ?>
+ <!DOCTYPE html>
+
+<main class="mt-5 pt-3">
+     <div class="container-fluid">
+         <!--add div here-->
+        <div class="row">
+          <div class="col-md-12">
+            <h4>Dashboard</h4>
+
+          
           </div>
         </div>
        <br> <br>

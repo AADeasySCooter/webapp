@@ -1,7 +1,3 @@
-
-<body>
-  <br><br><br><br>
-<div id="map" style="width:100%;height:700px;"></div>
 <?php 
 include "includes/head.php";
 include "includes/header.php";
@@ -12,6 +8,10 @@ include "includes/function.php";
     $scooters = getScooters();
 
 ?>
+<body>
+  <br><br><br><br>
+<div id="map" style="width:100%;height:700px;"></div>
+
 
 <script>
 

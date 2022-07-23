@@ -64,12 +64,7 @@ $pdf->SetFont('Times','',12);
 
 
     $getUsers = $bdd->query("SELECT * FROM users where email ='".$_SESSION['email']."'"); 
-    while($Users = $getUsers->fetch()){ ?>
-                            
-       
-                
-            
-        <?php
+    while($Users = $getUsers->fetch()){
         $pdf->Cell(0,5,$Users['lastname'],0,1);
         $pdf->Cell(0,5,$Users['firstname'],0,1);
         $pdf->Cell(0,5,$Users['number'],0,1);
@@ -83,15 +78,7 @@ $pdf->SetFont('Times','',12);
                       //recuperer l'id envoyer en post dans le champ hidden
 
             $getId = $bdd->query("SELECT * FROM cart where id ='".$_POST['id']."'");
-            while($id = $getId->fetch()){ 
-
-                
-                ?>
-                                    
-           
-                    
-                
-            <?php
+            while($id = $getId->fetch()){
             //$pdf->Cell(1,5,$id['product_description'],0,1);
             //recuperer le huit charactere de la description de la carte et le chercher dans la table product
             $getProduct = $bdd->query("SELECT * FROM product where product_code ='".substr($id['product_description'],2,6)."'");
@@ -129,27 +116,7 @@ $pdf->SetFont('Times','',12);
             }
         }
     }
-
-    
-
-
-           
-        
-        
-
-
-          
-
-
-        
     }
-    
-    
-
-
-
-    
-
 $pdf->Output();
 
 
