@@ -12,22 +12,41 @@
             include('includes/head.php');
             include('includes/header.php');
             include('includes/db.php');
-
             include('includes/message.php');
 
+            $old_Info = getProductById($_GET['id']);
+            var_dump($old_Info);
+
                 if(count($_POST)>0)  {
-                    $id = $_GET['id'];
-                    $product_name = $_POST['product_name'];
-                    $product_description = $_POST['product_description'];
-                    $product_price = $_POST['product_price'];
-                    $product_code = $_POST['product_code'];
-                    $product_image = $_POST['product_image'];
+
+                  if( ($_POST['product_image']) == '' ){
+
+                      $id = $_GET['id'];
+                      $product_name = $_POST['product_name'];
+                      $product_description = $_POST['product_description'];
+                      $product_price = $_POST['product_price'];
+                      $product_code = $_POST['product_code'];
+                      $product_image = $old_Info['product_image'];
+                      
+                      updateProduct($id,$product_name,$product_description,$product_price,$product_image,$product_code);
                     
-                    updateProduct($id,$product_name,$product_description,$product_price,$product_image,$product_code);
-                   
-                    $message[] = 'product update ';
+                      $message[] = 'product update ';
+
+                    }
+                    else{
+                      $id = $_GET['id'];
+                      $product_name = $_POST['product_name'];
+                      $product_description = $_POST['product_description'];
+                      $product_price = $_POST['product_price'];
+                      $product_code = $_POST['product_code'];
+                      $product_image = $_POST['product_image'];
+                      
+                      updateProduct($id,$product_name,$product_description,$product_price,$product_image,$product_code);
+                    
+                      $message[] = 'product update ';
 
                 }
+              }
                 $id = $_GET['id'];
                 $response = getProductById($id);
                 
