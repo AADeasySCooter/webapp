@@ -47,7 +47,9 @@ include('includes/function.php');
                 $diff = $date2 - $date1;
                 // pour 60 secondes on rajoute 0.25 pour le prix de la location  et calculer le prix total
                 $prix = ($diff/60) * 0.25;
-                $prix = (int)$prix;
+                //$prix = (int)$prix;
+                //convertir prix en float avec 2 chiffres après la virgule
+                $prix = number_format((float)$prix, 2, '.', '');
 
                 $test= 0.01;
 
@@ -94,7 +96,6 @@ include('includes/function.php');
                 ?>
 
                                      
-                                        
 
                                       
                                     <script src="https://www.paypal.com/sdk/js?client-id=AQ3NsNMK2ULmNXhPR8ndLJvL5yeXYqY6ibCb5GmgPZNoPpp9JJZOSvy_l_fuAGVQbV4HaYqr-BJCO8Fy&enable-funding=venmo&currency=EUR" data-sdk-integration-source="button-factory"></script>
@@ -129,7 +130,7 @@ include('includes/function.php');
                                                 
 
                                             return actions.order.create({
-                                                purchase_units: [{"amount":{"currency_code":"EUR","value": <?= $test ;?>}}]
+                                                purchase_units: [{"amount":{"currency_code":"EUR","value": <?= $prix ;?>}}]
                                             });
                                             },
 

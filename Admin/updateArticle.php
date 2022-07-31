@@ -12,18 +12,37 @@
             include('includes/head.php');
             include('includes/header.php');
             include('includes/db.php');
+    
+
+            $old_Info =getArticleById($_GET['id']);
+             var_dump( getArticleById($_GET['id']));
 
                 if(count($_POST)>0)  {
-                   $id = $_GET['id'];
+
+                  if( ($_POST['image']) == '' ){
+
+                    $id = $_GET['id'];
                     $title = $_POST['title'];
                     $description = $_POST['description'];
                     $autor = $_POST['autor'];
-                    $image = $_POST['image'];
+                    $image = $old_Info['image'];
 
                     updateArticle($id,$title,$description,$autor,$image);
                     $message[] = 'article update ';
 
+                  }else{
+
+                      $id = $_GET['id'];
+                        $title = $_POST['title'];
+                        $description = $_POST['description'];
+                        $autor = $_POST['autor'];
+                        $image = $_POST['image'];
+
+                        updateArticle($id,$title,$description,$autor,$image);
+                        $message[] = 'article update ';
+
                 }
+              }
                 $id = $_GET['id'];
                 $response = getArticleById($id);
               
@@ -49,7 +68,7 @@
                                 <input type="text" class="form-control"name="autor" value="<?= $response['autor'] ;?>">
                                 </div>
                                 <div class="mb-3">
-                                <input type="file"class="form-control" name="image" value="<?= $response['image'] ;?>">        
+                                <input type="file" class="form-control" name="image"  src="../images/<?= $response['image'] ;?>" >        
                                 </div>
                                 <div class="mb-3">
                                 <input type="submit" class="btn btn-primary"  name="submit" value="submit" class="btn btn">

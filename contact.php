@@ -65,7 +65,7 @@ $user = getUserById($user_id);
                 SecureToken : "8205c39e-b43b-4084-aeee-be8642ef5b0a",
                 To : email.value,
                 From : 'audesandrine6@gmail.com',
-                Subject : "This is the subject",
+                Subject : "your message",
                 Body : message.value
             }).then(
                 //afficher message dans la div message
