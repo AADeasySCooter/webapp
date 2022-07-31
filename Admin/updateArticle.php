@@ -15,7 +15,6 @@
     
 
             $old_Info =getArticleById($_GET['id']);
-             var_dump( getArticleById($_GET['id']));
 
                 if(count($_POST)>0)  {
 

@@ -12,21 +12,42 @@
             include('includes/head.php');
             include('includes/header.php');
             include('includes/db.php');
+            include('includes/message.php');
+
+            $old_Info = getScooterById($_GET['id']);
 
                 if(count($_POST)>0)  {
-                   $id = $_GET['id'];
-                    $scooter_name = $_POST['scooter_name'];
-                    $scooter_status = $_POST['scooter_status'];
-                    $scooter_code = $_POST['scooter_code'];
-                    $scooter_image = $_POST['scooter_image'];
-                    $scooter_lat = $_POST['scooter_lat'];
-                    $scooter_long = $_POST['scooter_long'];
 
-                    updateScooter($id, $scooter_name, $scooter_status, $scooter_code, $scooter_lat, $scooter_long, $scooter_image);
-                  
-                    $message[] = 'scooter update ';
+                    if( ($_POST['scooter_image']) == '')
+                    {
+                        $id = $_GET['id'];
+                        $scooter_name = $_POST['scooter_name'];
+                        $scooter_status = $_POST['scooter_status'];
+                        $scooter_code = $_POST['scooter_code'];
+                        $scooter_image = $old_Info['scooter_image'];
+                        $scooter_lat = $_POST['scooter_lat'];
+                        $scooter_long = $_POST['scooter_long'];
+
+                        updateScooter($id, $scooter_name, $scooter_status, $scooter_code, $scooter_lat, $scooter_long, $scooter_image);
+                    
+                        $message[] = 'scooter update ';
+
+                    }else{
+
+                       $id = $_GET['id'];
+                        $scooter_name = $_POST['scooter_name'];
+                        $scooter_status = $_POST['scooter_status'];
+                        $scooter_code = $_POST['scooter_code'];
+                        $scooter_image = $_POST['scooter_image'];
+                        $scooter_lat = $_POST['scooter_lat'];
+                        $scooter_long = $_POST['scooter_long'];
+
+                        updateScooter($id, $scooter_name, $scooter_status, $scooter_code, $scooter_lat, $scooter_long, $scooter_image);
+                    
+                        $message[] = 'scooter update ';
 
                 }
+            }
                 $id = $_GET['id'];
                 getScooterById($id);
              

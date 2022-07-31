@@ -15,7 +15,6 @@
             include('includes/message.php');
 
             $old_Info = getProductById($_GET['id']);
-            var_dump($old_Info);
 
                 if(count($_POST)>0)  {
 

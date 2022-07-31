@@ -49,6 +49,7 @@
                                 <td data-target="product_description"><?= $product['product_description'] ;?></td>
                                 <td data-target="product_code">><?= $product['product_code'] ;?></td>
                                 <td> <a type="submit" class="btn btn-primary" href="updateProduct.php?id=<?=$product['id'] ;?>" target="_blank"> UPDATE </td>
+                                <td> <a type="submit" class="btn btn-secondary" href="../show_product.php?id=<?=$product['id'] ;?>" target="_blank"> VIEW </td>
                                 <td> <a type="submit" class="btn btn-danger" href="DeleteProduct.php?id=<?=$product['id'] ;?>" target="_blank"> DELETE </td>
                                
                                
