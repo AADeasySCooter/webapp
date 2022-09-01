@@ -47,9 +47,3 @@ if (isset($_SESSION['email'])){
 
 
 </head>
-
-<script>
-  //afficher easyscooter sur la padge index.php pendant que la page se charge
-  
- 
-</script>

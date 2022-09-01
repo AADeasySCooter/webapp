@@ -238,21 +238,17 @@ $points_us = round($points_us);
                         
                                             createOrder: function(data, actions) {
 
-                                               
-
-                                                
+    
 
                                             return actions.order.create({
                                                 purchase_units: [{"amount":{"currency_code":"EUR","value": <?= $total ;?>}}]
                                             });
                                             },
+                                            
 
                                             onApprove: function(data, actions) {
-
-                                                
-
-                                               
-                                                         
+                                      
+          
                                             return actions.order.capture().then(function(orderData) {
                                                 
                                                 // Full available details
@@ -278,15 +274,7 @@ $points_us = round($points_us);
                                                             //success code
                                                         }
                                                         });
-
-
-                                                    const n = new Notification('you have your receipt in your profile tcheck it !!', {
-                                                    body: 'you have just purchased a product on electrackk',
-                                                    icon: '../images/notification.png'
-                                                    });
-                                                    n.onclick = function() {
-                                                        window.open('http://localhost:8888/Workflow2/webApp_style/profile.php');
-                                                    };   
+ 
                                                     
                                                     //delete the cart after payment 
                                                     $.ajax({
@@ -297,10 +285,15 @@ $points_us = round($points_us);
                                                         }
                                                         });
 
-
-
-
-
+                                                    //post le la variable $total dans la page reduc_ratr.php
+                                                    $.ajax({
+                                                        type: 'POST',
+                                                        url: 'reduc_ratr.php',
+                                                        data: {total: <?= $total ;?>},
+                                                        success: function(data){
+                                                           location.reload();
+                                                               }
+                                                        });
 
 
  
@@ -361,10 +354,10 @@ $points_us = round($points_us);
         </div>
         <?php 
         //var_dump($product);
+       
        // echo "$user_id";
         $total_product = count($_SESSION["products"]);
         
-  
         
        
        // var_dump(json_encode(array('products'=>$total_product)));

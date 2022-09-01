@@ -13,6 +13,8 @@ include('includes/function.php');
 
     $user_id = user_id();
 
+
+
 ?>
 
 <br><br><br><br>
@@ -99,7 +101,7 @@ include('includes/function.php');
                                              ?>
                                             <!--  afficher un boutton vert si status = 1 -->
 
-                                            <?php if($scooter["scooter_status"] == 1){ 
+                                            <?php if( ($scooter["scooter_status"] == 1 ) && ($scooter["km"] < 150) ){ 
                                                 echo" <a href='showtrot.php?id=".$scooter['id']."' class='btn btn-info'> Use</a> ";
                                                 //build a button with redirect page home with ajax
                                                 ?>

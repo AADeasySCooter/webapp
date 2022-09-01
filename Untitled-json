@@ -1,0 +1,692 @@
+{
+    "name": "mnh_docteur_maboule_participation",
+    "options": {
+        "display_step_in_url": true,
+        "first_step_name": "identity",
+        "final_destination": "/offers/{{ participation.offer.reference }}/participate?reset=1"
+    },
+    "steps": {
+        "identity": {
+            "type": "form",
+            "options": {
+                "title": "Vos coordonnées",
+                "attr": {
+                    "class": "identity",
+                    "id": "identityForm"
+                },
+                "display_title": false,
+                "previous_options": {
+                    "label": "Retour",
+                    "attr": {
+                        "class": "button prev"
+                    }
+                },
+                "@builder": {
+                    "worker": "extra_form_builder",
+                    "parameters": {
+                        "configuration": {
+                            "identity_subtitle": {
+                                "extra_form_type": "html",
+                                "options": {
+                                    "content": "<h2>Pour participer veuillez compléter <br/>les informations ci-dessous</h3>",
+                                    "attr": {
+                                        "class": "sub-title"
+                                    }
+                                }
+                            },
+                            "identity_gender": {
+                                "extra_form_type": "choice",
+                                "options": {
+                                    "label": false,
+                                    "expanded": 1,
+                                    "mapped": 1,
+                                    "required": 0,
+                                    "placeholder": false,
+                                    "choices": {
+                                        "F": "Mme<span class='required'>*</span>",
+                                        "M": "M.<span class='required'>*</span>"
+                                    },
+                                    "attr": {
+                                        "class": "civility"
+                                    }
+                                },
+                                "constraints": [
+                                    {
+                                        "extra_form_constraint": "not_blank",
+                                        "options": {
+                                            "message": "Merci de sélectionner votre civilité."
+                                        }
+                                    }
+                                ]
+                            },
+                            "identity_lastName": {
+                                "extra_form_type": "text",
+                                "options": {
+                                    "label": "Nom<span class='required'>*</span> :",
+                                    "max_length": 25,
+                                    "required": 0,
+                                    "pattern": "^[A-Za-z-àâäééèêëiîïoôöuùûüç'’‘’ ]{1,25}$",
+                                    "attr": {
+                                        "placeholder": ""
+                                    }
+                                },
+                                "constraints": [
+                                    {
+                                        "extra_form_constraint": "not_blank",
+                                        "options": {
+                                            "message": "* Nom obligatoire"
+                                        }
+                                    },
+                                    {
+                                        "extra_form_constraint": "regex",
+                                        "options": {
+                                            "pattern": "#^[A-Za-z-àâäééèêëiîïoôöuùûüç'’‘’ ]{1,25}$#",
+                                            "match": true,
+                                            "message": "* Le nom ne doit pas contenir de caractères numériques ou spéciaux"
+                                        }
+                                    }
+                                ]
+                            },
+                            "identity_firstName": {
+                                "extra_form_type": "text",
+                                "options": {
+                                    "label": "Prénom<span class='required'>*</span> :",
+                                    "max_length": 20,
+                                    "required": 0,
+                                    "pattern": "^[A-Za-z-àâäééèêëiîïoôöuùûüç'’‘’ ]{1,20}$",
+                                    "attr": {
+                                        "placeholder": ""
+                                    }
+                                },
+                                "constraints": [
+                                    {
+                                        "extra_form_constraint": "not_blank",
+                                        "options": {
+                                            "message": "* Prénom obligatoire"
+                                        }
+                                    },
+                                    {
+                                        "extra_form_constraint": "regex",
+                                        "options": {
+                                            "pattern": "#^[A-Za-z-àâäééèêëiîïoôöuùûüç'’‘’ ]{1,20}$#",
+                                            "match": true,
+                                            "message": "* Le prénom de doit pas contenir de caractères numériques ou spéciaux"
+                                        }
+                                    }
+                                ]
+                            },
+                            "identity_birthdate": {
+                                "extra_form_type": "tms_birthday",
+                                "constraints": [
+                                    {
+                                        "extra_form_constraint": "not_blank",
+                                        "options": {
+                                            "message": "Vous devez saisir la date de naissance."
+                                        }
+                                    },
+                                    {
+                                        "extra_form_constraint": "date_less_than_or_equal",
+                                        "options": {
+                                            "value": "{{ '{{ \'now\'|date(\'Y-m-d\\\\TH:i:sO\') }}' }}",
+                                            "message": "Votre date doit être inférieure ou égale à la date du jour."
+                                        }
+                                    }
+                                ],
+                                "options": {
+                                    "label": "Date de naissance<span class='required'>*</span> :",
+                                    "label_attr": {
+                                        "class": "birthday"
+                                    },
+                                    "widget": "single_text",
+                                    "input": "string",
+                                    "format": "dd/MM/yyyy",
+                                    "mapped": 1,
+                                    "attr": {
+                                        "class": "dateBirth",
+                                        "autocomplete": "off",
+                                        "placeholder": ""
+                                    }
+                                }
+                            },
+                            "identity_profession": {
+                                "extra_form_type": "choice",
+                                "constraints": [
+                                    {
+                                        "extra_form_constraint": "not_blank",
+                                        "options": {
+                                            "message": "veuillez sélectionner votre fonction"
+                                        }
+                                    }
+                                ],
+                                "options": {
+                                    "label": "Profession<span class='required'>*</span> :",
+                                    "required": 1,
+                                    "choices": {
+                                        "AGENT_SERV_HOSP": "Agent des services hospitaliers - ASH",
+                                        "AIDE_SOIGN": "Aide soignant - AS",
+                                        "AUTRE_TNS": "Autre TNS médical ou paramédical",
+                                        "CADRE_SANTE ": "Cadre de santé",
+                                        "ETUD_MEDIC": "Etudiant secteur médical",
+                                        "ETUD_PARAM": "Etudiant secteur paramédical",
+                                        "ETUD_SOC": "Etudiant secteur social",
+                                        "FCT_ADM": "Fonction administrative",
+                                        "FCT_DIR": "Fonction de direction",
+                                        "FCT_SOC_MED": "Fonction sociale et médico-sociale",
+                                        "FCT_TECH_MED": "Fonction technique et médico technique",
+                                        "INFIRMIER": "Infirmier - IDE (infirmière diplomé d'état)",
+                                        "PERS_MEDIC": "Personnel médical",
+                                        "SECT_SAN_SOC": "Secteur sanitaire et social",
+                                        "AUTRE": "Autre"
+                                    },
+                                    "invalid_message": "Veuillez sélectionner votre fonction",
+                                    "attr": {
+                                        "class": "puchaseProduct"
+                                    },
+                                    "empty_value": ""
+                                }
+                            },
+                            "identity_mobilePhone": {
+                                "extra_form_type": "text",
+                                "constraints": [
+                                    {
+                                        "extra_form_constraint": "regex",
+                                        "options": {
+                                            "pattern": "#^0[6|7][0-9]{8}$#",
+                                            "match": true,
+                                            "message": "* Le format de votre téléphone mobile est erroné. Il doit commencé par 06 ou 07 et doit contenir 10 chiffres."
+                                        }
+                                    }
+                                ],
+                                "options": {
+                                    "label": "Téléphone portable :",
+                                    "required": 0,
+                                    "pattern": "^0[6|7][0-9]{8}$",
+                                    "attr": {
+                                        "placeholder": "",
+                                        "autocomplete": "off",
+                                        "maxlength": 10,
+                                        "title": "Le format de votre téléphone mobile est erroné. Il doit commencé par 06 ou 07 et doit contenir 10 chiffres"
+                                    }
+                                }
+                            },
+                            "identity_email": {
+                                "extra_form_type": "email",
+                                "options": {
+                                    "label": "Email<span class='required'>*</span> :",
+                                    "required": 0,
+                                    "pattern": "^[A-Za-z0-9]{1,}([_|\\.|-]{1}[A-Za-z0-9]{1,})*@[A-Za-z0-9]{1,}([\\.|-]{1}[A-Za-z0-9]{1,})*[\\.]{1}[A-Za-z]{2,}$",
+                                    "attr": {
+                                        "class": "email",
+                                        "placeholder": ""
+                                    }
+                                },
+                                "constraints": [
+                                    {
+                                        "extra_form_constraint": "not_blank",
+                                        "options": {
+                                            "message": "* Email obligatoire"
+                                        }
+                                    },
+                                    {
+                                        "extra_form_constraint": "regex",
+                                        "options": {
+                                            "pattern": "#^[A-Za-z0-9]{1,}([_|\\.|-]{1}[A-Za-z0-9]{1,})*@[A-Za-z0-9]{1,}([\\.|-]{1}[A-Za-z0-9]{1,})*[\\.]{1}[A-Za-z]{2,}$#",
+                                            "match": true,
+                                            "message": "* Le format de l'email est erroné."
+                                        }
+                                    }
+                                ]
+                            },
+                            "identity_zipCode": {
+                                "extra_form_type": "text",
+                                "options": {
+                                    "label": "Code postal de résidence<span class='required'>*</span> :",
+                                    "required": 0,
+                                    "attr": {
+                                        "placeholder": "",
+                                        "maxlength": 5,
+                                        "pattern": "^([0-8][1-9][0-9]{3}|[1-8][0-9]{4}|9[0-5][0-9]{3}|(971|972|973|974|976)[0-9]{2})$"
+                                    }
+                                },
+                                "constraints": [
+                                    {
+                                        "extra_form_constraint": "not_blank",
+                                        "options": {
+                                            "message": "* Code postal obligatoire"
+                                        }
+                                    },
+                                    {
+                                        "extra_form_constraint": "regex",
+                                        "options": {
+                                            "pattern": "#^[0-9]{5}$#",
+                                            "match": true,
+                                            "message": "* Le format du code postal est eronné (5 caractères numériques)"
+                                        }
+                                    },
+                                    {
+                                        "extra_form_constraint": "regex",
+                                        "options": {
+                                            "pattern": "#^([0-8][1-9][0-9]{3}|[1-8][0-9]{4}|9[0-5][0-9]{3}|(971|972|973|974|976)[0-9]{2})$#",
+                                            "match": true,
+                                            "message": "Le jeu est ouvert à la France Métropolitaine, DOM inclus uniquement."
+                                        }
+                                    }
+                                ]
+                            },
+                            "extra_optinTelCommercialInformation": {
+                                "extra_form_type": "checkbox",
+                                "options": {
+                                    "label": "En cochant, j'accepte d'être rappelé(e) par la MNH / MNH Prévoyance.",
+                                    "error_bubbling": "0",
+                                    "required": 0,
+                                    "mapped": 1
+                                },
+                                "constraints": []
+                            },
+                            "identity_optinSmsCommercialInformation": {
+                                "extra_form_type": "checkbox",
+                                "options": {
+                                    "label": "En cochant, j'accepte de recevoir par SMS de l'actualité et les promotions de la part de la MNH / MNH Prévoyance.",
+                                    "error_bubbling": "0",
+                                    "required": 0,
+                                    "mapped": 1
+                                },
+                                "constraints": []
+                            },
+                            "identity_optinEmailCommercialInformation": {
+                                "extra_form_type": "checkbox",
+                                "options": {
+                                    "label": "En cochant, j'accepte de recevoir par email de l'actualité et les promotions de la part de la MNH / MNH Prévoyance.",
+                                    "error_bubbling": "0",
+                                    "required": 0,
+                                    "mapped": 1
+                                },
+                                "constraints": []
+                            },
+                            "identity_cguAccepted": {
+                                "extra_form_type": "checkbox",
+                                "options": {
+                                    "label": "Je reconnais avoir pris connaissance du <a href=\"/content/reglement\" target=\"_blank\">règlement du jeu </a> et je l’accepte.",
+                                    "error_bubbling": "0",
+                                    "required": 1,
+                                    "mapped": 1
+                                },
+                                "constraints": [
+                                    {
+                                        "extra_form_constraint": "not_blank",
+                                        "options": {
+                                            "message": "Veuillez cocher cette case si vous souhaitez continuer"
+                                        }
+                                    }
+                                ]
+                            },
+                            "mandatory": {
+                                "extra_form_type": "html",
+                                "options": {
+                                    "content": "<p>* Champs obligatoires</p>",
+                                    "attr": {
+                                        "class": "mandatory"
+                                    }
+                                }
+                            },
+                            "cnil": {
+                                "extra_form_type": "html",
+                                "options": {
+                                    "content": "<p>Les données personnelles recueillies dans ce formulaire font l’objet d’un traitement informatique par la MNH et MNH Prévoyance en qualité de responsable de traitement, afin de traiter votre demande de devis. Elles sont également utilisées afin de vous proposer des offres commerciales susceptibles de vous intéresser, sous réserve d’acceptation de votre part.<br/>Vous reconnaissez avoir informé vos éventuels ayants droit et bénéficiaires dont vous renseignez les données personnelles. Vous disposez de droits d’accès, de rectification, d’effacement, de limitation au traitement de vos données, de retrait de votre consentement à tout moment, et de définir vos directives post-mortem. Vous pouvez exercer ces droits via <a href='https://www.mnh.fr/ged-document/NTIX1X0002' target='_blank'>la rubrique des données personnelles</a><br/>ou en vous adressant par courrier à MNH – Service Satisfaction Client – Protection des données – 45213 Montargis Cedex.<br/>Pour plus d'informations, vous pouvez consulter la <a href='https://www.mnh.fr/ged-document/NOTX1X0003' target='_blank'>Notice d'information relative au traitement de vos données personnelles</a> et le site <a href='https://www.cnil.fr/' target='_blank'>cnil.fr</a>.</p>",
+                                    "attr": {
+                                        "class": "cnil"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "events": {}
+            }
+        },
+        "validation": {
+            "type": "form",
+            "options": {
+                "title": "Validation",
+                "display_title": false,
+                "previous_options": {
+                    "label": "Retour",
+                    "attr": {
+                        "class": "button back"
+                    }
+                },
+                "attr": {
+                    "class": "Validation",
+                    "id": "Validation"
+                },
+                "js": "$('.skip').on('click', function(){$('form#Validation').attr('novalidate', 'novalidate');}).parent().insertAfter($('.actions'));$(document).ready(function(){if($(window).width()<640){$('a.back').insertAfter('button.validate');}});",
+                "@builder": {
+                    "worker": "extra_form_builder",
+                    "parameters": {
+                        "configuration": {
+                            "header": {
+                                "extra_form_type": "html",
+                                "options": {
+                                    "content": "<p>Salon<br/>infirmier<span class='date'>du 17 au 19 mai 2022</span></p><img src='https://media-manager.digifid.fr/api/media/3079680921-1651763355-3f8c2732df0be893b902828b5627f2fd-376' />",
+                                    "attr": {
+                                        "class": "dr-img"
+                                    }
+                                }
+                            },
+                            "subtitle": {
+                                "extra_form_type": "html",
+                                "options": {
+                                    "content": "<h2>Avant de finaliser votre inscription... </h2><p class='pink-note'>Vous souhaitez en savoir plus sur les offres et services MNH&nbsp;?</p>",
+                                    "attr": {
+                                        "class": "sub-title"
+                                    }
+                                }
+                            },
+                            "extra_callAccepted": {
+                                "extra_form_type": "checkbox",
+                                "options": {
+                                    "label": "J'accepte d'être rappelé(e) par la MNH pour une étude personalisée.",
+                                    "error_bubbling": "0",
+                                    "required": 1,
+                                    "mapped": 1
+                                },
+                                "constraints": []
+                            },
+                            "extra_mobilePhone": {
+                                "extra_form_type": "text",
+                                "constraints": [
+                                    {
+                                        "extra_form_constraint": "regex",
+                                        "options": {
+                                            "pattern": "#^0[6|7][0-9]{8}$#",
+                                            "match": true,
+                                            "message": "* Le format de votre téléphone mobile est erroné. Il doit commencé par 06 ou 07 et doit contenir 10 chiffres."
+                                        }
+                                    }
+                                ],
+                                "options": {
+                                    "label": "Téléphone portable :",
+                                    "required": true,
+                                    "data": "{{ '{{ flow_data.data.identity.identity_mobilePhone}}' }}",
+                                    "pattern": "^0[6|7][0-9]{8}$",
+                                    "attr": {
+                                        "autocomplete": "off",
+                                        "maxlength": 10,
+                                        "title": "Le format de votre téléphone mobile est erroné. Il doit commencé par 06 ou 07 et doit contenir 10 chiffres"
+                                    }
+                                }
+                            },
+                            "cnil": {
+                                "extra_form_type": "html",
+                                "options": {
+                                    "content": "<p>Les données personnelles recueillies dans ce formulaire font l’objet d’un traitement informatique par la MNH et MNH Prévoyance en qualité de responsable de traitement, afin de traiter votre demande de devis. Elles sont également utilisées afin de vous proposer des offres commerciales susceptibles de vous intéresser, sous réserve d’acceptation de votre part.<br/>Vous reconnaissez avoir informé vos éventuels ayants droit et bénéficiaires dont vous renseignez les données personnelles. Vous disposez de droits d’accès, de rectification, d’effacement, de limitation au traitement de vos données, de retrait de votre consentement à tout moment, et de définir vos directives post-mortem. Vous pouvez exercer ces droits via <a href='https://www.mnh.fr/ged-document/NTIX1X0002' target='_blank'>la rubrique des données personnelles</a><br/>ou en vous adressant par courrier à MNH – Service Satisfaction Client – Protection des données – 45213 Montargis Cedex.<br/>Pour plus d'informations, vous pouvez consulter la <a href='https://www.mnh.fr/ged-document/NOTX1X0003' target='_blank'>Notice d'information relative au traitement de vos données personnelles</a> et le site <a href='https://www.cnil.fr/' target='_blank'>cnil.fr</a>.</p>",
+                                    "attr": {
+                                        "class": "cnil"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "events": {
+                    "form.pre_set_data": [
+                        {
+                            "action": "conditional_stop_navigation",
+                            "name": "is_dedo_participation",
+                            "parameters": {
+                                "final_destination": "/offers/{{ participation.offer.reference }}/participate?reset=1",
+                                "rules": {
+                                    "participation_limit": {
+                                        "limit": 1,
+                                        "query": {
+                                            "customer": "{{ participation.offer.customer.reference }}",
+                                            "offer": "{{ participation.offer.reference }}",
+                                            "status": "in~~unknown~~compliant",
+                                            "search": {
+                                                "identity_deduplicationKey": "{{ '{{ flow_data.data.identity.identity_lastName|lower ~ flow_data.data.identity.identity_email|lower }}' }}"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "action": "notify",
+                            "parameters": {
+                                "type": "modal",
+                                "logical_expression": "{{ '{{ flow_data.retrievedData.validation.is_dedo_participation ? 1 : 0 }}' }}",
+                                "options": {
+                                    "title": "Information !",
+                                    "message": "<p>Votre participation a déjà été enregistrée.</p>"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "confirmation": {
+            "type": "html",
+            "options": {
+                "attr": {
+                    "class": "confirmParticipation"
+                },
+                "prevent_previous": true,
+                "title": "confirmation",
+                "display_title": false,
+                "content": "<div class='dr-img'><p>Salon<br/>infirmier<span class='date'>du 17 au 19 mai 2022</span></p><img src='https://media-manager.digifid.fr/api/media/3079680921-1651763355-3f8c2732df0be893b902828b5627f2fd-376' /></div><h2>Votre inscription a bien été   prise en compte. </h2><p>Vous allez recevoir un email contenant le QR code à présenter à l'animateur présent sur le stand MNH pour participer.</p><p>Vous ne recevez pas l’émail ?<br>Pensez à vérifier dans vos spams !</p><hr><p>Retrouvez-nous sur <a href='https://www.mnh.fr/?utm_source=msg-tessi&utm_medium=email&utm_campaign=la-tisanerie&utm_term=brand&utm_content=autre' target='_blank'>mnh.fr</a><br/>et nos réseaux sociaux :</p><ul class='social-media-link'><li><a href='https://www.facebook.com/MutuelleNationaledesHospitaliers?utm_source=msg-tessi&utm_medium=email&utm_campaign=la-tisanerie&utm_term=brand&utm_content=autre' target='_blank' class='external'><i class='fa fa-facebook-f'></i></a></li><li><a href='https://twitter.com/MNHmutuelle?utm_source=msg-tessi&utm_medium=email&utm_campaign=la-tisanerie&utm_term=brand&utm_content=autre' target='_blank' class='external'><i class='fa fa-twitter'></i></a></li><li><a href='https://www.linkedin.com/company/mutuelle-nationale-des-hospitaliers/?utm_source=msg-tessi&utm_medium=email&utm_campaign=la-tisanerie&utm_term=brand&utm_content=autre' target='_blank' class='external'><i class='fa fa-linkedin' aria-hidden='true'></i></a></li><li><a href='https://www.youtube.com/user/MNH' target='_blank' class='external'><i class='fa fa-youtube' aria-hidden='true'></i></a></li></ul>"
+            }
+        }
+    },
+    "paths": [
+        {
+            "type": "single",
+            "options": {
+                "source": "identity",
+                "destination": "validation",
+                "next_options": {
+                    "label": "Je valide",
+                    "attr": {
+                        "class": "button"
+                    }
+                },
+                "events": {
+                    "form.post_bind": [
+                        {
+                            "action": "change_data",
+                            "parameters": {
+                                "fields": [
+                                    {
+                                        "target": {
+                                            "path": "identity.identity_deduplicationKey",
+                                            "types": [
+                                                "data"
+                                            ]
+                                        },
+                                        "value": "{{ '{{ flow_data.data.identity.identity_lastName|lower ~ flow_data.data.identity.identity_email|lower  }}' }}"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "single",
+            "options": {
+                "source": "validation",
+                "destination": "confirmation",
+                "next_options": {
+                    "label": "Je valide",
+                    "attr": {
+                        "class": "button"
+                    }
+                },
+                "events": {
+                    "form.post_bind": [
+                        {
+                            "action": "change_data",
+                            "parameters": {
+                                "fields": [
+                                    {
+                                        "target": {
+                                            "path": "identity.identity_mobilePhone",
+                                            "types": [
+                                                "data"
+                                            ]
+                                        },
+                                        "value": "{{ '{{ flow_data.data.validation.extra_mobilePhone|default(flow_data.data.identity.identity_mobilePhone) }}' }}"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "action": "create_participation",
+                            "name": "created_participation",
+                            "parameters": {
+                                "customer": "{{ participation.offer.customer.reference }}",
+                                "offer": "{{ participation.offer.reference }}",
+                                "operation": "{{ participation.offer.operation.reference }}",
+                                "source": "digifid - webConsumerApp - jeu-du-salon-infirmier.odr.fr",
+                                "status": "unknown",
+                                "processing_state": "N",
+                                "benefits": [
+                                    "{{ participation.offer.benefits.0.id }}"
+                                ],
+                                "exclude_data": [
+                                    "extra_mobilePhone"
+                                ]
+                            }
+                        },
+                        {
+                            "action": "retrieve_document",
+                            "name": "retrieved_document",
+                            "parameters": {
+                                "document_id": "jeu-salon-infirmier-docteur-maboul",
+                                "mode": "content",
+                                "data": {
+                                    "participation": "{{ '{{ flow_data.retrievedData.validation.created_participation.id|default(null) }}' }}"
+                                },
+                                "options": {
+                                    "format": "html"
+                                }
+                            }
+                        },
+                        {
+                            "action": "notify",
+                            "name": "notify",
+                            "parameters": {
+                                "type": "email",
+                                "options": {
+                                    "notifierAlias": "mnh",
+                                    "to": "{{ '{{ flow_data.data.identity.identity_email }}' }}",
+                                    "subject": "Votre participation au jeu \"MNH\"",
+                                    "htmlMessage": "{{ '{{ flow_data.retrievedData.validation.retrieved_document|raw }}' }}"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "single",
+            "options": {
+                "source": "validation",
+                "destination": "confirmation",
+                "next_options": {
+                    "label": "Passer cette étape",
+                    "attr": {
+                        "class": "button skip"
+                    }
+                },
+                "events": {
+                    "form.post_bind": [
+                        {
+                            "action": "create_participation",
+                            "name": "created_participation",
+                            "parameters": {
+                                "customer": "{{ participation.offer.customer.reference }}",
+                                "offer": "{{ participation.offer.reference }}",
+                                "operation": "{{ participation.offer.operation.reference }}",
+                                "source": "digifid - webConsumerApp - jeu-du-salon-infirmier.odr.fr",
+                                "status": "unknown",
+                                "processing_state": "N",
+                                "benefits": [
+                                    "{{ participation.offer.benefits.0.id }}"
+                                ]
+                            }
+                        },
+                        {
+                            "action": "retrieve_document",
+                            "name": "retrieved_document",
+                            "parameters": {
+                                "document_id": "jeu-salon-infirmier-docteur-maboul",
+                                "mode": "content",
+                                "data": {
+                                    "participation": "{{ '{{ flow_data.retrievedData.validation.created_participation.id|default(null) }}' }}"
+                                },
+                                "options": {
+                                    "format": "html"
+                                }
+                            }
+                        },
+                        {
+                            "action": "notify",
+                            "name": "notify",
+                            "parameters": {
+                                "type": "email",
+                                "options": {
+                                    "notifierAlias": "mnh",
+                                    "to": "{{ '{{ flow_data.data.identity.identity_email }}' }}",
+                                    "subject": "Votre participation au jeu \"MNH\"",
+                                    "htmlMessage": "{{ '{{ flow_data.retrievedData.validation.retrieved_document|raw }}' }}"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "end",
+            "options": {
+                "source": "confirmation",
+                "next_options": {
+                    "label": "Retour à l'accueil",
+                    "attr": {
+                        "class": "button prev"
+                    }
+                }
+            }
+        }
+    ],
+    "graphPositions": {
+        "steps": {
+            "identity": {
+                "x": 20,
+                "y": 20
+            },
+            "validation": {
+                "x": 220,
+                "y": 20
+            },
+            "confirmation": {
+                "x": 170,
+                "y": 120
+            }
+        },
+        "paths": [
+            {},
+            {},
+            {},
+            {
+                "endOfPath": {
+                    "x": 370,
+                    "y": 120
+                }
+            }
+        ]
+    }
+}

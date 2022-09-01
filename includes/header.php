@@ -44,12 +44,7 @@
                        <span>
 
                         </span>
-                    <button onclick="window.location.href=''" id="fr" type = "button" class = "btn position-relative">
-                    🇫🇷  
-                    </button>
-                    <button onclick="window.location.href=''" id="en" type = "button" class = "btn position-relative">
-                    🇺🇸
-                    </button>
+                   
 
                         
 
@@ -84,6 +79,12 @@
                             <li class = "nav-item px-2 py-2">
                                 <a class = "nav-link text-uppercase text-dark" href = "scooter_all.php">map</a>
                             </li>
+                            <li class = "nav-item px-2 py-2">
+                                <a class = "nav-link text-uppercase text-dark" href = "http://localhost:8888/Workflow2/webApp_style/google/Distance/">distance</a>
+                            </li>
+                            <li class = "nav-item px-2 py-2">
+                                    <a class = "nav-link text-uppercase text-dark" href = "abo1.php">Abo1</a>
+                             </li>
                         <li class = "nav-item px-2 py-2">
                                     <a class = "nav-link text-uppercase text-dark" href = "shop.php">shop</a>
                              </li>
@@ -189,45 +190,7 @@
         </script>
 
 
-<script>
-//lancer la fonction askNotificationPermission () avec de l'ajax quand on click sur le bouton avec l'id notif
-/* $(document).ready(function(){
-    $("#notif").click(function(){
-        askNotificationPermission();
-    });
-}); */
-function askNotificationPermission() {
-  // La fonction qui sert effectivement à demander la permission
-  function handlePermission(permission) {
-    // On affiche ou non le bouton en fonction de la réponse
-    if(Notification.permission === 'denied' || Notification.permission === 'default') {
-      notificationBtn.style.display = 'block';
-    } else {
-      notificationBtn.style.display = 'none';
-    }
-  }
 
-  // Vérifions si le navigateur prend en charge les notifications
-  if (!('Notification' in window)) {
-    console.log("Ce navigateur ne prend pas en charge les notifications.");
-  } else {
-    if(checkNotificationPromise()) {
-      Notification.requestPermission()
-      .then((permission) => {
-        handlePermission(permission);
-      })
-    } else {
-      Notification.requestPermission(function(permission) {
-        handlePermission(permission);
-      });
-    }
-  }
-}
-
-     
-
-
-</script>
 
 
   

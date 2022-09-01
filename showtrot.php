@@ -30,42 +30,69 @@ $user_id = user_id();
      height="500" alt="">
 
             </div>
-            <!--afficher les donners du produit à droite -->
-            <div class="col-md-3">
-                <h3><?php echo $scooter['scooter_name']; ?></h3>
-                <p>You can use the code of the scooter for unlock it</p>
-                <p>CODE:</p> 
+            <!--afficher les donners du produit  -->
+            <?php  
+               $q = "SELECT * FROM users WHERE id = $user_id";
+               $stmt = $bdd->prepare($q);
+               $reponse = $stmt->execute();
+               if($reponse == true ){
+                $trip = $stmt->fetchAll();
+               };
+
+            
+                                
 
 
-                <?php 
-                         if($scooter['user_id'] == $user_id){ 
-                             
-                            echo" <a href='leave1.php?id=".$scooter['id']."&user_id=$user_id' class='btn btn-danger'> Leave</a> ";
+                          
+                            
+
+            ?>
+                <div class="col-md-3">
+                    <h3><?php echo $scooter['scooter_name']; ?></h3>
+                    
 
 
-                         }else{
-                             ?>
-                              <form>
-                                <div class="form-group">
-                                    <input type="text" name="code_input" class="form-control" id="Input1" aria-describedby="code" placeholder="Enter code">
-                                    <input type="hidden" name="id" value="<?php echo $scooter['id']; ?>">
-                                    <input type="hidden" name="code" value="<?php echo $scooter['scooter_code']; ?>">
-                                </div>
-                                <div id="alert" style="display: none ;">
-                                </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
-                             <?php
+                    <?php 
+                            if($trip["trip_month"] = 1){ 
 
-                         } ?>
-                   
-          
+                                echo" louer pour 30 minutes ";
+                                echo" <a href='validabo1.php?id=".$scooter['id']."&user_id=$user_id' class='btn btn-danger'> valid</a> ";
 
-                <p>Status:  <?php  if ($scooter['scooter_status'] == 1) { 
-                    echo 'Available';
-                }
-                                    ?></p>
-            </div>    
+
+                            }
+
+                            elseif($scooter['user_id'] == $user_id){ 
+                                ?>
+                                <p>You can use the code of the scooter for unlock it</p>
+                                <p>CODE:</p> 
+                                <?php
+                                
+                                echo" <a href='leave1.php?id=".$scooter['id']."&user_id=$user_id' class='btn btn-danger'> Leave</a> ";
+
+
+                            }else{
+                                ?>
+                                <form>
+                                    <div class="form-group">
+                                        <input type="text" name="code_input" class="form-control" id="Input1" aria-describedby="code" placeholder="Enter code">
+                                        <input type="hidden" name="id" value="<?php echo $scooter['id']; ?>">
+                                        <input type="hidden" name="code" value="<?php echo $scooter['scooter_code']; ?>">
+                                    </div>
+                                    <div id="alert" style="display: none ;">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                                <?php
+
+                            } ?>
+                    
+            
+
+                    <p>Status:  <?php  if ($scooter['scooter_status'] == 1) { 
+                        echo 'Available';
+                    }
+                                        ?></p>
+                </div>    
             <!-- bouton retour au shop -->
             <div class="col-md-12">
                 <a href="trot.php" class="btn btn-primary">Back to scooter</a>
@@ -77,7 +104,7 @@ $user_id = user_id();
 
 
             <div id="test" style="display: none ;">
-            <div id="testt" style="display: none ;">
+          
 
 
 
@@ -85,8 +112,7 @@ $user_id = user_id();
                      
     /*    $getProduct = $bdd->query("SELECT * FROM plan ORDER BY created_at DESC ");
                             while($plan = $getProduct->fetch()){  */ 
-                         $getProduct =getPlan();
-                         foreach ($getProduct as $plan) {  
+                         $getProduct =getPlanById(2);
                                  ?>
             <section id = "newsletter" class = "py-5">
           
@@ -96,10 +122,10 @@ $user_id = user_id();
                     <div class="col-md-4">
                     <div class="card pricing-card">
                         <div class="card-body">
-                        <h3 class="pricing-plan-title d-flex align-items-center"><?=  $plan['plan_title'] ;?> <!--<span class="badge badge-pill offer-badge ml-auto">20% off</span>--></h3>
-                        <p class="h1 pricing-plan-original-cost">€<?=  $plan['plan_price'] ;?></p>
+                        <h3 class="pricing-plan-title d-flex align-items-center"><?=  $getProduct['plan_title'] ;?> <!--<span class="badge badge-pill offer-badge ml-auto">20% off</span>--></h3>
+                        <p class="h1 pricing-plan-original-cost">€<?=  $getProduct['plan_price'] ;?></p>
                         <ul class="pricing-plan-features">
-                            <li><?=  $plan['plan_description'] ;?></li>
+                            <li><?=  $getProduct['plan_description'] ;?></li>
                         </ul>
                         <?php 
                         //ouvrir une autre page avec le id du produit
@@ -118,7 +144,7 @@ $user_id = user_id();
             </div>
             </section>
 
-            <?php } ?>
+            <?php  ?>
             
 
 
@@ -184,7 +210,7 @@ $user_id = user_id();
             if(code == code_input){
                 //afficher la div test
                 $('#test').show();
-                $('#testt').show();
+             
                 
             }else{
                 //ajouter un message dans la div  class="col-md-3" et afficher le message d'erreur en rouge qui s'éfface au bout de 3 secondes

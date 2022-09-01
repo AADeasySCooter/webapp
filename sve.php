@@ -4,8 +4,10 @@ include('includes/header.php');
 include('includes/db.php');
 include('includes/function.php');
 
-
-
+?>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<?php
+    var_dump($_POST);
 
         $user_id = user_id();
         $product = $_SESSION['product'];

@@ -245,6 +245,40 @@ include('includes/function.php');
         </div>
     </section>
 
+
+   
+
+
+
+
+
+                 
+
+                                        
+                             <section id = "newsletter" class = "py-5">
+                                <div class = "container">
+                                    <div class = "collection-list mt-5 row gx-0 gy-3">
+                                        <div class = "col-md-10">
+                                            <div class="mb-2">
+
+                                                     
+                                                      
+                                                    
+                                                    
+                                                   
+                                                    </div>
+                                                    </div>
+                                            
+                                             
+                                             </div>
+                                        </div>    
+                                    </div>       
+                                </div>
+
+
+                             </section>
+                 
+
    
 
 
@@ -276,6 +310,8 @@ include('includes/function.php');
                  } ?>
         </div>
     </section>
+
+
     
     
 
@@ -336,6 +372,7 @@ include('includes/function.php');
         <div id="scrollUp">
         <a href="#top"><img src="images/to_top.png"/></a>
         </div>
+
     </footer>
     <!-- end of footer -->
 
@@ -343,12 +380,17 @@ include('includes/function.php');
 </body>
 </html>
 <script>
-                                              /*   const n = new Notification('you have your receipt in your profile tcheck it !!', {
-                                                    body: 'you have just purchased a product on electrackk',
-                                                    icon: '../images/notification.png'
-                                                    });
+
+                                               
+  /*  const n = new Notification('you have your receipt in your profile check it !!', {
+    body: 'you have just purchased a product on electrackk',
+    icon: '../webApp_style/images/notification.png'
+    });
                                                     n.onclick = function() {
                                                         window.open('http://localhost:8888/Workflow2/webApp_style/profile.php');
-                                                    };    */
+                                                    };    */ 
+
+
+//et si j
 </script>
 

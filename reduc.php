@@ -27,6 +27,15 @@ if($date_creation > 3){
     }
 }
 
+  
+ 
+
+
+
+
+
+
+
 
 
 
@@ -56,6 +65,7 @@ if($date_creation > 3){
 
         
     }
+
     /* if(isset($_POST['Apply'])) {
         //recuperer le montant saisi par l'utilisateur et  le soustrait a son nombre de points
          $recupProfil =$bdd->prepare("SELECT * FROM users WHERE email= '".$_SESSION['email']."'");     
