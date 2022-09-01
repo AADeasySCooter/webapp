@@ -162,6 +162,8 @@ $points_us = round($points_us);
                                     </form>
                                 </td>-->
                                 <?php 
+                           
+
                                 if(isset($total)) {
 
                                     //appliquer la reduction sur le total si reduction est supérieur à 0
@@ -174,6 +176,16 @@ $points_us = round($points_us);
                                         $total = ($total - $points_us) ;
                                     }
 
+                                         //recuperer la colone money_ratr de la table users
+                                    $q =$bdd->query(" SELECT * FROM users  WHERE email= '".$_SESSION['email']."' ");
+                                    $response = $q->fetch();
+                                    $money_ratr = $response['money_ratr'];
+                                    if($money_ratr > 0 && $money_ratr < $total){
+                                        $total = ($total - $money_ratr) ;
+                                        $check =1;
+                                    }else{
+                                        $check =0;
+                                    }
                                 ?>	
                                       
 
@@ -294,6 +306,16 @@ $points_us = round($points_us);
                                                            location.reload();
                                                                }
                                                         });
+                                                    //post le la variable $check
+                                                     $.ajax({
+                                                        type: 'POST',
+                                                        url: 'reduc_mon_ratr.php',
+                                                        data: {total: <?= $check ;?>},
+                                                        success: function(data){
+                                                           location.reload();
+                                                               }
+                                                        });    
+
 
 
  

@@ -56,6 +56,9 @@
                                      <div>
                                         point : <?= $user['point_ratr'] ?>
                                      </div>
+                                     <div>
+                                        Money : <?= $user['money_ratr'] ?>€
+                                     </div>
                                      <?php
                                          $recupScooterByID = getScooterByUserId($user_id);
                                          foreach($recupScooterByID as $rec){
