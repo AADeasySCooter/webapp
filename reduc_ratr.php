@@ -29,7 +29,7 @@ include('includes/function.php');
 
     }
     
-    if($total == 0.01){
+    if($total >= 100){
         $first_number = substr($total, 0, 1);
 
         $points = ($total * 0.3) + $first_number;
@@ -46,6 +46,21 @@ include('includes/function.php');
             http_response_code(500);
         }
     }
+
+   //recuperer le mois et le jour 
+    $date = date("Y-m-d");
+    $date_explode = explode("-", $date);
+    $year = $date_explode[0];
+    $month = $date_explode[1];
+    $day = $date_explode[2];
+    $date_month = $month;
+    $date_day = $day;
+
+    if ($date_month == 2 && $date_day == 15){
+        $succes = $bdd->exec( "UPDATE users SET point_ratr =0  WHERE id = $user_id ;" );
+
+    }
+
 
 
     
