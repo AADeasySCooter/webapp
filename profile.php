@@ -54,7 +54,7 @@
                                         email : <?= $user['email'] ?>
                                      </div>
                                      <div>
-                                        point : <?= $user['point'] ?>
+                                        point : <?= $user['point_ratr'] ?>
                                      </div>
                                      <?php
                                          $recupScooterByID = getScooterByUserId($user_id);
@@ -67,7 +67,38 @@
                                                 <?php
                                          }
 
-                                        
+                                        ?>
+                                         <form method="post">
+                                                <tr>
+                                                <td>
+                                                    <input id ="quantity" type="number" name="reduc" placeholder="Enter your point of reduce">
+                                                </td>
+                                                <td>
+                                                    <input class ="test" type="submit" value="Apply" name="Apply">
+                                                </td>
+                                                </tr>
+                                            </form> 
+                                        <script>
+                                        //faire un post en ajax avec la quantity entrer dans le formulaire
+                                        $(document).ready(function(){
+                                            $('.test').click(function(){
+                                                var quantity = $('#quantity').val();
+                                                $.ajax({
+                                                    url : 'reduc_convert_ratr.php',
+                                                    type : 'POST',
+                                                    data : {
+                                                        quantity : quantity
+                                                    },
+                                                    success : function(result){
+                                                        //alert(result);
+                                                    }
+                                                });
+                                            });});
+                                     
+
+                                         
+                                         </script>
+                                        <?php
 
                                       if($user["role_id"] == 3){
 
